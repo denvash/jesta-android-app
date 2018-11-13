@@ -1,0 +1,23 @@
+<resources>
+    <string name="jesta_app_name">Jesta</string>
+
+    <string name="jesta_hint_username">Username</string>
+    <string name="jesta_hint_password">Password</string>
+    <string name="jesta_button_next">Next</string>
+    <string name="jesta_button_cancel">Cancel</string>
+    <string name="jesta_error_password">Password must contain at least 8 characters.</string>
+    <string name="jesta_filter_title">Filter</string>
+    <string name="jesta_search_title">Search</string>
+    <string name="jesta_product_title">Title</string>
+    <string name="jesta_product_description">Secondary text</string>
+
+    <!-- Jesta backdrop menu labels -->
+    <string name="jesta_featured_label">Featured</string>
+    <string name="jesta_apartment_label">Apartment</string>
+    <string name="jesta_accessories_label">Accessories</string>
+    <string name="jesta_shoes_label">Shoes</string>
+    <string name="jesta_tops_label">Tops</string>
+    <string name="jesta_bottoms_label">Bottoms</string>
+    <string name="jesta_dresses_label">Dresses</string>
+    <string name="jesta_account_label">My Account</string>
+</resources>
