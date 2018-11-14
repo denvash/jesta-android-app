@@ -1,7 +1,7 @@
 package com.jesta
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.jesta_login_fragment.*
 import kotlinx.android.synthetic.main.jesta_login_fragment.view.*
 
-class LoginFragment : Fragment() {
+class LoginFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.jesta_login_fragment, container, false)
+
+        view.dev_button.setOnClickListener{
+            (activity as NavigationHost).navigateTo(PostGridFragment(),false)
+        }
 
         // Set an error if the password is less than 8 characters.
         view.next_button.setOnClickListener {
@@ -22,7 +26,7 @@ class LoginFragment : Fragment() {
                 password_text_input.error = getString(R.string.jesta_error_password)
             } else {
                 password_text_input.error = null // Clear the error
-                (activity as NavigationHost).navigateTo(JestaGridFragment(), false) // Navigate to the next Fragment
+                (activity as NavigationHost).navigateTo(PostGridFragment(), false) // Navigate to the next Fragment
             }
         }
 

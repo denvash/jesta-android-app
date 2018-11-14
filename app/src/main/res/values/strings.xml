@@ -3,6 +3,7 @@
 
     <string name="jesta_hint_username">Username</string>
     <string name="jesta_hint_password">Password</string>
+    <string name="jesta_button_dev">Developer</string>
     <string name="jesta_button_next">Next</string>
     <string name="jesta_button_cancel">Cancel</string>
     <string name="jesta_error_password">Password must contain at least 8 characters.</string>

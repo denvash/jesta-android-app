@@ -2,7 +2,7 @@ package com.jesta.application
 
 import android.app.Application
 import android.content.Context
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate
 
 class JestaApplication : Application() {
     companion object {

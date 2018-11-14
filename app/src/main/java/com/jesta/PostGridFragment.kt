@@ -1,11 +1,11 @@
 package com.jesta
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.*
 
 
-class JestaGridFragment : Fragment() {
+class PostGridFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,6 +14,10 @@ class JestaGridFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        // Inflate the layout for this fragment with the PostGrid theme
+        val view = inflater.inflate(R.layout.jesta_post_grid_fragment, container, false)
+
         return view
     }
 }
