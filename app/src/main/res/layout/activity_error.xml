@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/hotPink"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/logo_bar"/>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        app:fontFamily="@font/montserrat"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:context=".login.ErrorActivity"
+            >
+
+            <TextView
+                android:id="@+id/errorMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MESSAGE"
+                app:fontFamily="@font/marvel"
+                android:padding="25dp"
+                android:textColor="@color/white"
+                android:textSize="26dp"
+                />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

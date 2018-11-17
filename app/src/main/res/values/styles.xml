@@ -47,4 +47,36 @@
             @animator/jesta_next_button_state_list_anim
         </item>
     </style>
+
+
+
+    <style name="Theme.Jesta.Login" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Widget.Jesta.Login.RoundedButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/rounded_button</item>
+        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="Widget.Jesta.Login.RoundedEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:padding">18dp</item>
+        <item name="android:fontFamily">@font/marvel</item>
+        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="Widget.Jesta.Login.RoundedEditTextDigit" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/rounded_edit_text_digit</item>
+        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:padding">18dp</item>
+        <item name="android:textSize">18dp</item>
+    </style>
 </resources>

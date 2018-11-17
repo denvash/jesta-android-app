@@ -21,4 +21,33 @@
     <string name="jesta_bottoms_label">Bottoms</string>
     <string name="jesta_dresses_label">Dresses</string>
     <string name="jesta_account_label">My Account</string>
+
+    <!-- Added after login integration. TODO: unify duplicates-->
+    <string name="app_name">Jesta</string>
+    <string name="app_name_caps">JESTA</string>
+    <string name="email_hint">Enter email</string>
+    <string name="password_hint">Enter password</string>
+    <string name="password">Password</string>
+    <string name="register">REGISTER</string>
+    <string name="login">LOGIN</string>
+    <string name="sign_in">SIGN_IN</string>
+    <string name="welcome">WELCOME</string>
+    <string name="error">ERROR</string>
+    <string name="request_otp">REQUEST OTP</string>
+    <string name="sign_in_with">SIGN IN WITH:</string>
+    <string name="fullname_hint">Enter full name</string>
+    <string name="celluar_hint">Enter phone number</string>
+    <string name="logout">LOGOUT</string>
+    <string name="profile">PROFILE</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="google">Google</string>
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name="facebook">Facebook</string>
+    <string name="sign_in_with_email">sign in with Email</string>
+    <string name="email">Email</string>
+    <string name="create_account_link">Create account</string>
+
+    <string name="facebook_app_id">535928036830747</string>
+    <string name="fb_login_protocol_scheme">fb535928036830747</string>
+    <string name="leftArrow">←</string>
 </resources>
