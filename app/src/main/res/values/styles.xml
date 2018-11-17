@@ -51,9 +51,9 @@
 
 
     <style name="Theme.Jesta.Login" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/textColorPrimary</item>
+        <item name="colorPrimaryDark">@color/blue</item>
+        <item name="colorAccent">@color/blue</item>
     </style>
 
     <style name="Widget.Jesta.Login.RoundedButton" parent="Widget.MaterialComponents.Button">
@@ -62,15 +62,22 @@
         <item name="android:textSize">14dp</item>
     </style>
 
-    <style name="Widget.Jesta.Login.RoundedEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
-        <item name="android:padding">18dp</item>
-        <item name="android:fontFamily">@font/marvel</item>
+    <style name="Widget.Jesta.Login.RoundedEditText" parent="Widget.MaterialComponents.TextInputEditText.FilledBox.Dense">
+        <item name="boxBackgroundColor">@color/white</item>
         <item name="android:textColor">@color/darkGray</item>
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="android:layout_marginBottom">20dp</item>
-        <item name="android:layout_marginRight">20dp</item>
-        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:padding">18dp</item>
         <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/marvel</item>
+
+    </style>
+
+    <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.FilledBox.Dense">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:padding">18dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">@font/marvel</item>
+
     </style>
 
     <style name="Widget.Jesta.Login.RoundedEditTextDigit" parent="Widget.MaterialComponents.Button">

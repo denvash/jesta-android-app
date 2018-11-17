@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:theme="@style/Theme.Jesta.Login"
     android:background="@color/blue"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -28,7 +29,6 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                    style="@style/Widget.Jesta.Login.RoundedEditText"
                     app:fontFamily="@font/marvel"
                     android:hint="@string/email_hint"
                     android:layout_width="match_parent"
@@ -41,7 +41,6 @@
 
             <EditText
                 app:fontFamily="@font/marvel"
-                style="@style/Widget.Jesta.Login.RoundedEditText"
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
