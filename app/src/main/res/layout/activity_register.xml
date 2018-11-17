@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/blue"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/logo_bar"/>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        app:fontFamily="@font/montserrat"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:context=".login.RegisterActivity"
+            >
+
+            <EditText
+                app:fontFamily="@font/marvel"
+                style="@style/Widget.Jesta.Login.RoundedEditText"
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp"
+                />
+
+            <EditText
+                app:fontFamily="@font/marvel"
+                style="@style/Widget.Jesta.Login.RoundedEditText"
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp"
+                />
+
+            <EditText
+                app:fontFamily="@font/marvel"
+                style="@style/Widget.Jesta.Login.RoundedEditText"
+                android:id="@+id/fullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fullname_hint"
+                android:inputType="text"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp"
+                />
+
+            <EditText
+                app:fontFamily="@font/marvel"
+                style="@style/Widget.Jesta.Login.RoundedEditText"
+                android:id="@+id/celluar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/celluar_hint"
+                android:inputType="text"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp"
+                />
+
+            <Button
+                app:fontFamily="@font/montserrat"
+                style="@style/Widget.Jesta.Login.RoundedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="createUser"
+                android:layout_marginBottom="20dp"
+                android:text="@string/register" />
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
+

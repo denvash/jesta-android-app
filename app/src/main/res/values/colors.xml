@@ -8,4 +8,14 @@
     <color name="loginPageBackgroundColor">#FFFFFF</color>
     <color name="productGridBackgroundColor">#FFFBFA</color>
     <color name="colorControlActivated">#FBB8AC</color>
+
+    <color name="blue">#56CCF2</color>
+    <color name="hotPink">#FD3CB9</color>
+    <color name="green">#AFEFCA</color>
+    <color name="pink">#E4BCF3</color>
+    <color name="lightGray">#e0e0e0</color>
+    <color name="darkGray">#424242</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="semiTransparentWhite">#eeffffff</color>
 </resources>

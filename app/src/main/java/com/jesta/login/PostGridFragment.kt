@@ -1,8 +1,8 @@
-package com.jesta
+package com.jesta.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.*
+import com.jesta.R
 
 
 class PostGridFragment : androidx.fragment.app.Fragment() {

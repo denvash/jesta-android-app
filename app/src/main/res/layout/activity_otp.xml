@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/blue"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/logo_bar"/>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        app:fontFamily="@font/montserrat"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/displayName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:text="Hello "
+                app:fontFamily="@font/marvel"
+                />
+
+            <EditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:hint="Enter your phone number"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginBottom="37dp"
+                />
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    style="@style/Widget.Jesta.Login.RoundedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="60dp"
+                    android:onClick="sendSMS"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="SEND SMS"
+                    app:fontFamily="@font/montserrat" />
+
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:text="Enter the code you received:"
+                app:fontFamily="@font/marvel"
+                />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:context=".login.OTPActivity"
+                >
+
+                <EditText
+                    app:fontFamily="@font/montserrat"
+                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
+                    android:id="@+id/digit1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="_"
+                    android:imeOptions="actionNext"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:layout_margin="20dp"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    />
+                <EditText
+                    app:fontFamily="@font/montserrat"
+                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
+                    android:id="@+id/digit2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="_"
+                    android:imeOptions="actionDone"
+
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:layout_margin="20dp"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    />
+                <EditText
+                    app:fontFamily="@font/montserrat"
+                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
+                    android:id="@+id/digit3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="_"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:layout_margin="20dp"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    />
+                <EditText
+                    app:fontFamily="@font/montserrat"
+                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
+                    android:id="@+id/digit4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="_"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:layout_margin="20dp"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    />
+
+
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    app:fontFamily="@font/montserrat"
+                    style="@style/Widget.Jesta.Login.RoundedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="sendSMS"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="40dp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:layout_alignParentRight="true"
+                    android:text="CONTINUE" />
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </ScrollView>
+
+</LinearLayout>
