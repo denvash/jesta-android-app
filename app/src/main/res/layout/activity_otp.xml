@@ -18,14 +18,15 @@
         app:fontFamily="@font/montserrat"
         >
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:theme="@style/Theme.Jesta.Login"
+        >
+
             <TextView
                 android:id="@+id/displayName"
                 android:layout_width="match_parent"
@@ -34,20 +35,24 @@
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:text="Hello "
+                android:layout_marginBottom="15dp"
                 app:fontFamily="@font/marvel"
                 />
 
-            <EditText
-                android:id="@+id/phoneNumber"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:hint="Enter your phone number"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:fontFamily="@font/montserrat"
-                android:layout_marginBottom="37dp"
+            <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Theme.Jesta.Login.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/darkGray"
+                    android:hint="@string/phone_hint"
+            >
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phoneNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                 />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"

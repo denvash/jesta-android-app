@@ -50,4 +50,5 @@
     <string name="facebook_app_id">535928036830747</string>
     <string name="fb_login_protocol_scheme">fb535928036830747</string>
     <string name="leftArrow">←</string>
+    <string name="phone_hint">Enter your phone number</string>
 </resources>

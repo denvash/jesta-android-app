@@ -22,46 +22,42 @@
         android:paddingRight="110dp"
         android:paddingLeft="110dp"
         android:orientation="vertical"
+        android:theme="@style/Theme.Jesta.Login"
         >
-        <Button
-            style="@style/Widget.Jesta.Login.RoundedButton"
-            android:id="@+id/google_sign_in_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="25dp"
-            app:fontFamily="@font/montserrat"
-            android:drawableLeft="@drawable/googleg_standard_color_18"
-            android:drawablePadding="10dp"
-            android:text="@string/google" />
 
-
-        <Button
-            style="@style/Widget.Jesta.Login.RoundedButton"
-            android:id="@+id/facebook_sign_in_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_marginBottom="25dp"
-            app:fontFamily="@font/montserrat"
-            android:drawableLeft="@drawable/com_facebook_button_icon_blue"
-            android:drawablePadding="10dp"
-            android:text="@string/facebook" />
-
-
-        <Button
-            style="@style/Widget.Jesta.Login.RoundedButton"
-            android:id="@+id/email_sign_in_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:layout_marginBottom="25dp"
-            app:fontFamily="@font/montserrat"
-            android:drawableLeft="@drawable/email"
-            android:drawablePadding="10dp"
-            android:text="@string/email" />
-
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/google_sign_in_btn"
+                style="@style/Theme.Jesta.Login.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/google"
+                android:padding="20dp"
+                android:textColor="@color/darkGray"
+        />
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/facebook_sign_in_btn"
+                style="@style/Theme.Jesta.Login.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/facebook"
+                android:padding="20dp"
+                android:textColor="@color/darkGray"
+        />
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/email_sign_in_btn"
+                style="@style/Theme.Jesta.Login.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/email"
+                android:padding="20dp"
+                android:textColor="@color/darkGray"
+        />
     </LinearLayout>
 
 </LinearLayout>
