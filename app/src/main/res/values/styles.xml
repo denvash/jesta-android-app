@@ -49,35 +49,36 @@
     </style>
 
 
-
+    <!-- Login theme and widgets-->
 
     <style name="Theme.Jesta.Login" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/semiTransparentWhite</item>
         <item name="colorOnPrimary">@color/darkGray</item>
         <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorAccent">@color/blue</item>
+        <item name="android:statusBarColor">@color/blue</item>
     </style>
 
 
     <style name="HintText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/white</item>
-        <item name="android:editTextBackground">@color/white</item>
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="Theme.Jesta.Login.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:textSize">16dp</item>
+    <style name="Theme.Jesta.Login.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
         <item name="android:fontFamily">@font/marvel</item>
-        <item name="boxBackgroundColor">@color/semiTransparentWhite</item>
         <item name="boxStrokeColor">@color/pink</item>
         <item name="hintTextAppearance">@style/HintText</item>
     </style>
 
-    <style name="Theme.Jesta.Login.TextInputEditText" parent="Base.Widget.MaterialComponents.TextInputEditText">
-        <item name="android:textSize">20dp</item>
+    <style name="Theme.Jesta.Login.TextInputEditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
-
 
     <style name="Theme.Jesta.Login.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:textSize">14dp</item>
@@ -85,35 +86,4 @@
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
-
-
-
-
-
-
-    <style name="Widget.Jesta.Login.RoundedButton" parent="Widget.MaterialComponents.Button">
-        <item name="android:background">@drawable/rounded_button</item>
-        <item name="android:textColor">@color/darkGray</item>
-        <item name="android:textSize">14dp</item>
-    </style>
-
-    <style name="Widget.Jesta.Login.RoundedEditText" parent="Widget.MaterialComponents.TextInputEditText.FilledBox.Dense">
-        <item name="boxBackgroundColor">@color/white</item>
-        <item name="android:textColor">@color/darkGray</item>
-        <item name="android:layout_marginRight">15dp</item>
-        <item name="android:layout_marginLeft">15dp</item>
-        <item name="android:padding">18dp</item>
-        <item name="android:textSize">18dp</item>
-        <item name="android:fontFamily">@font/marvel</item>
-
-    </style>
-
-
-
-    <style name="Widget.Jesta.Login.RoundedEditTextDigit" parent="Widget.MaterialComponents.Button">
-        <item name="android:background">@drawable/rounded_edit_text_digit</item>
-        <item name="android:textColor">@color/darkGray</item>
-        <item name="android:padding">18dp</item>
-        <item name="android:textSize">18dp</item>
-    </style>
 </resources>

@@ -9,7 +9,8 @@
             android:label="@string/jesta_app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.Jesta">
+            android:theme="@style/Theme.Jesta"
+    >
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -47,7 +48,9 @@
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.ProfileActivity" />
         <activity android:name=".login.ErrorActivity" />
-        <activity android:name=".login.OTPActivity"></activity>
+        <activity android:name=".login.OTPActivity" />
+        <activity android:name=".PathActivity" />
+        <activity android:name=".AskJestaActivity" />
 
     </application>
 

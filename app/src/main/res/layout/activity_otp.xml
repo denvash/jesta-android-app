@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/blue"
+    android:theme="@style/Theme.Jesta.Login"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <include layout="@layout/logo_bar"/>
@@ -43,7 +44,6 @@
                     style="@style/Theme.Jesta.Login.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/darkGray"
                     android:hint="@string/phone_hint"
             >
                 <com.google.android.material.textfield.TextInputEditText
@@ -59,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    style="@style/Widget.Jesta.Login.RoundedButton"
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Theme.Jesta.Login.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -72,83 +72,19 @@
                     app:fontFamily="@font/montserrat" />
 
             </RelativeLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:text="Enter the code you received:"
-                app:fontFamily="@font/marvel"
+
+            <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Theme.Jesta.Login.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            >
+                <com.google.android.material.textfield.TextInputEditText
+                        style="@style/Theme.Jesta.Login.TextInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_otp"
                 />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:context=".login.OTPActivity"
-                >
-
-                <EditText
-                    app:fontFamily="@font/montserrat"
-                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
-                    android:id="@+id/digit1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="_"
-                    android:imeOptions="actionNext"
-                    android:maxLength="1"
-                    android:inputType="number"
-                    android:layout_margin="20dp"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    />
-                <EditText
-                    app:fontFamily="@font/montserrat"
-                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
-                    android:id="@+id/digit2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="_"
-                    android:imeOptions="actionDone"
-
-                    android:maxLength="1"
-                    android:inputType="number"
-                    android:layout_margin="20dp"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    />
-                <EditText
-                    app:fontFamily="@font/montserrat"
-                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
-                    android:id="@+id/digit3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="_"
-                    android:maxLength="1"
-                    android:inputType="number"
-                    android:layout_margin="20dp"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    />
-                <EditText
-                    app:fontFamily="@font/montserrat"
-                    style="@style/Widget.Jesta.Login.RoundedEditTextDigit"
-                    android:id="@+id/digit4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="_"
-                    android:maxLength="1"
-                    android:inputType="number"
-                    android:layout_margin="20dp"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp"
-                    />
-
-
-
-
-            </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -156,14 +92,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    app:fontFamily="@font/montserrat"
-                    style="@style/Widget.Jesta.Login.RoundedButton"
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Theme.Jesta.Login.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="sendSMS"
                     android:layout_marginBottom="40dp"
-                    android:layout_marginTop="40dp"
                     android:paddingRight="20dp"
                     android:paddingLeft="20dp"
                     android:layout_alignParentRight="true"

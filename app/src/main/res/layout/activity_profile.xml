@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/blue"
+              android:theme="@style/Theme.Jesta.Login"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <include layout="@layout/logo_bar"/>
@@ -76,9 +77,9 @@
                 />
 
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 app:fontFamily="@font/montserrat"
-                style="@style/Widget.Jesta.Login.RoundedButton"
+                style="@style/Theme.Jesta.Login.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

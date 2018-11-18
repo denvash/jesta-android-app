@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import com.jesta.PathActivity;
 import com.jesta.R;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -59,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         User user = sysManager.getCurrentUser();
         if(user == null || user.getPhone() == null) {
-            Intent i = new Intent(this,OTPActivity.class);
+            Intent i = new Intent(this,PathActivity.class);// todo go to OTPActivity
 //            finish();
             startActivity(i);
             return;

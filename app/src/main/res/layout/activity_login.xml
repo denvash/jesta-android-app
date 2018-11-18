@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-
-    android:background="@color/blue"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:theme="@style/Theme.Jesta.Login"
+        android:background="@color/blue">
 
     <include layout="@layout/logo_bar"/>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+    >
 
         <LinearLayout
-            app:theme="@style/Theme.Jesta.Login"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp"
-            android:theme="@style/Theme.Jesta.Login"
-            tools:context=".login.LoginActivity"
-            >
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingRight="@dimen/side_padding"
+                android:paddingLeft="@dimen/side_padding"
+                tools:context=".login.LoginActivity"
+        >
 
             <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Theme.Jesta.Login.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -44,24 +43,25 @@
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
             <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Theme.Jesta.Login.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
             >
                 <com.google.android.material.textfield.TextInputEditText
+                        style="@style/Theme.Jesta.Login.TextInputEditText"
                         android:id="@+id/password"
+                        android:hint="@string/password_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/password_hint"
                         android:inputType="textPassword"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.button.MaterialButton
+                    android:id="@+id/material_button"
+                    style="@style/Theme.Jesta.Login.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -70,20 +70,17 @@
                     android:text="@string/login"
             />
 
-
             <TextView
-                app:fontFamily="@font/marvel"
-                android:id="@+id/createAccountLink"
-                android:layout_marginTop="20dp"
-                android:textSize="28dp"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:onClick="openRegister"
-                android:text="@string/create_account_link"
-                />
-
-
+                    app:fontFamily="@font/marvel"
+                    android:id="@+id/createAccountLink"
+                    android:layout_marginTop="20dp"
+                    android:textSize="28dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:onClick="openRegister"
+                    android:text="@string/create_account_link"
+            />
         </LinearLayout>
 
 

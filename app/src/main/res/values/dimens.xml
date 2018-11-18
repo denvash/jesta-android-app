@@ -2,4 +2,5 @@
 <resources>
     <dimen name="roundRadius">15dp</dimen>
     <dimen name="logoSize">72sp</dimen>
+    <dimen name="side_padding">30dp</dimen>
 </resources>
