@@ -41,6 +41,25 @@ public class SysManager {
         fireBaseUser = auth.getCurrentUser();
         usersDatabase = FirebaseDatabase.getInstance().getReference("users");
 
+//        // TODO: get all users from db and implement getCurrentUser
+//        FirebaseDatabase.DefaultInstance
+//                .GetReference("Leaders")
+//                .GetValueAsync().ContinueWith(task => {
+//        if (task.IsFaulted) {
+//            // Handle the error...
+//        }
+//        else if (task.IsCompleted) {
+//            DataSnapshot snapshot = task.Result;
+//            // Do something with snapshot...
+//        }
+//      });
+//        for (int i = 0; i < usersList.size(); ++i) {
+//            if (usersList.get(i).getId().equals(fireBaseUser.getUid())) {
+//                currentUser = usersList.get(i);
+//                break;
+//            }
+//        }
+
         // todo firebase realtime db - change permission from public to private (only for app)
         // listen on data changes and updates the userList
         usersDatabase.addValueEventListener(new ValueEventListener() {
