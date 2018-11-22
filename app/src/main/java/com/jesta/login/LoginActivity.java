@@ -5,23 +5,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.jesta.MainActivity;
 import com.jesta.R;
 
-public class LoginActivity extends MainActivity {
-    EditText e1,e2;
-
+public class LoginActivity extends AppCompatActivity {
+    SysManager sysManager;
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
-        sysManager.getMenuManager().showBackButton();
-        sysManager.getMenuManager().setPageName(getString(R.string.login));
+        sysManager = new SysManager(this);
+        sysManager.setTitle(getString(R.string.login));
+        sysManager.showBackButton(true);
+        sysManager.showKeyboardAutomatically(false);
 
 //        // If the fireBaseUser is logged in, close this activity and go to profile
 //        if (sysManager.getCurrentFireBaseUser() != null) {
@@ -37,14 +38,8 @@ public class LoginActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
 
     public void openRegister(View v) {
         Intent i = new Intent(this,RegisterActivity.class);

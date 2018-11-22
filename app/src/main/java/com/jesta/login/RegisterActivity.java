@@ -1,19 +1,18 @@
 package com.jesta.login;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.jesta.MainActivity;
 import com.jesta.R;
 
-public class RegisterActivity extends MainActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     EditText e1,e2;
     FirebaseAuth auth;
@@ -21,11 +20,13 @@ public class RegisterActivity extends MainActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        sysManager.getMenuManager().showBackButton();
-        sysManager.getMenuManager().setPageName(getString(R.string.register));
+
+        SysManager sysManager = new SysManager(this);
+        sysManager.setTitle(getString(R.string.register));
+        sysManager.showBackButton(true);
 
         // If the fireBaseUser is logged in, close this activity and go to profile
-        if (sysManager.fireBaseUser != null) {
+        if (sysManager.getCurrentUser() != null) {
             finish();
             Intent i = new Intent(this,ProfileActivity.class);
             startActivity(i);

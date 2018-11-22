@@ -12,8 +12,8 @@ public class OTPActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        sysManager.setMenuManager(new MenuManager(getApplicationContext(), this, findViewById(R.id.logo_bar), getString(R.string.request_otp)));
-        sysManager.getMenuManager().showBackButton();
+        sysManager.setTitle(getString(R.string.request_otp));
+        sysManager.showBackButton(true);
     }
 
     @Override
@@ -21,14 +21,14 @@ public class OTPActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
 
-        sysManager = new SysManager();
+        sysManager = new SysManager(this);
 
         // don't show keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         TextView displayNameTV = (TextView)findViewById(R.id.displayName);
 //        String displayNameText = displayNameTV.getText().toString();
-        displayNameTV.setText("Welcome, " + sysManager.getCurrentFireBaseUser().getDisplayName() + "!\n\n" +
+        displayNameTV.setText("Welcome, " + sysManager.getCurrentUser().getDisplayName() + "!\n\n" +
                 "Please verify your phone number before start using our app:");
 
 

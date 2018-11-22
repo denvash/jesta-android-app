@@ -1,14 +1,15 @@
 package com.jesta.login;
 
+import android.net.Uri;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class User {
 
-    private String id;
+    private String id; // firebase UID
     private String email;
     private String displayName;
-    private String photoUrl;
+    private Uri photoUrl;
     private String phone;
 
     public User() {
@@ -44,19 +45,19 @@ public class User {
         this.displayName = displayName;
     }
 
-    public String getPhotoUrl() {
+    public Uri getPhotoUrl() {
         return photoUrl;
     }
 
-    public void setPhotoUrl(String photoUrl) {
+    public void setPhotoUrl(Uri photoUrl) {
         this.photoUrl = photoUrl;
     }
 
-    public String getPhone() {
+    public String getPhoneNumber() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhoneNumber(String phone) {
         this.phone = phone;
     }
 }

@@ -2,15 +2,17 @@ package com.jesta.login;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 import com.jesta.MainActivity;
 import com.jesta.R;
 
-public class ErrorActivity extends MainActivity {
+public class ErrorActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        sysManager.getMenuManager().showBackButton();
-        sysManager.getMenuManager().setPageName(getString(R.string.error));
+        SysManager sysManager = new SysManager(this);
+        sysManager.setTitle(getString(R.string.error));
+        sysManager.showBackButton(true);
     }
 
     @Override

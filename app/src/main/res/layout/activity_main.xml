@@ -13,7 +13,7 @@
     tools:context=".MainActivity">
 
 
-    <include layout="@layout/logo_bar"/>
+    <include android:id="@+id/logo_bar" layout="@layout/logo_bar"/>
 
 
     <LinearLayout

@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:660934427239:android:f4cf3917e98ca9c9",
+        "mobilesdk_app_id": "1:660934427239:android:9c2076fe8bace17c",
         "android_client_info": {
           "package_name": "com.jesta"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "660934427239-uj9p3cuniieuoi9n05bbmtqkiqoo3pnt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jesta",
+            "certificate_hash": "22bb22e703e90e2dca1aa27c312d689120c81310"
+          }
+        },
         {
           "client_id": "660934427239-ovaa8ntao1abp902ik0lerla73e6os22.apps.googleusercontent.com",
           "client_type": 3
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660934427239-ovaa8ntao1abp902ik0lerla73e6os22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
