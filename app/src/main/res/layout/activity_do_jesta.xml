@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    tools:context=".login.PostGridFragment">
+    tools:context=".doJesta.DoJestaActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/toolbar"
@@ -26,7 +26,7 @@
         </ScrollView>
 
         <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/appbar"
+            android:id="@+id/bottom_app_bar_do_jesta"
             style="@style/Widget.MaterialComponents.BottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,9 +38,10 @@
             app:fabCradleVerticalOffset="5dp"
             app:hideOnScroll="true"
             app:layout_scrollFlags="scroll|enterAlways"
+            app:menu="@menu/bottom_nav_drawer_menu"
             app:navigationIcon="@drawable/ic_menu_black_24dp"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+            app:theme="@style/ThemeOverlay.MaterialComponents.ActionBar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_bar"
@@ -49,7 +50,7 @@
             android:src="@drawable/jesta_logo"
             app:backgroundTint="@color/productGridBackgroundColor"
             app:fabCustomSize="50dp"
-            app:layout_anchor="@id/appbar" />
+            app:layout_anchor="@id/bottom_app_bar_do_jesta" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

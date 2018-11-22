@@ -52,4 +52,15 @@
     <string name="leftArrow">←</string>
     <string name="phone_hint">Enter your phone number</string>
     <string name="enter_otp">Enter the code you received</string>
+
+    <!-- Jesta navigation menu -->
+    <string name="nav_ask_jesta">Ask for a Jesta</string>
+    <string name="nav_profile">My Profile</string>
+    <string name="nav_map">Jestas Near Me</string>
+    <string name="nav_status">My Jestas status</string>
+    <string name="bottom_sheet_name">Max Chi</string>
+    <string name="bottom_sheet_email">maxchi@gmail.com</string>
+    <string name="fragment_bottomsheet_profile_description">Profile Picture</string>
+    <string name="fragment_bottomsheet_close_image_description">Close Menu</string>
+
 </resources>
