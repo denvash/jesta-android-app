@@ -19,59 +19,32 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        sysManager.setMenuManager(new MenuManager(getApplicationContext(), this, findViewById(R.id.logo_bar), getString(R.string.profile)));
-        sysManager.getMenuManager().hideBackButton();
-
-
-
-
-
-        // If the fireBaseUser isn't logged in, close this activity and do error
-        if (sysManager.getCurrentFireBaseUser() == null) {
-            sysManager.logAndGoToErrorActivity(getApplicationContext(), this, "User profile isn't ready");
-            finish();
-            return;
-        }
+        sysManager = new SysManager(this);
+        sysManager.setTitle(getString(R.string.profile));
+        sysManager.showBackButton(false);
+        sysManager.showKeyboardAutomatically(false);
 
         // don't show keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        String uid = sysManager.fireBaseUser.getUid();
-        String phoneNumber = sysManager.fireBaseUser.getPhoneNumber();
-        Uri photoUrl = sysManager.fireBaseUser.getPhotoUrl();
+        String uid = sysManager.getCurrentUser().getId();
+        String phoneNumber = sysManager.getCurrentUser().getPhoneNumber();
+        Uri photoUrl = sysManager.getCurrentUser().getPhotoUrl();
 
         email = (TextView)findViewById(R.id.email);
-        email.setText(sysManager.fireBaseUser.getEmail());
+        email.setText(sysManager.getCurrentUser().getEmail());
 
         displayName = (TextView)findViewById(R.id.displayName);
-        displayName.setText(sysManager.fireBaseUser.getDisplayName());
-
-
+        displayName.setText(sysManager.getCurrentUser().getDisplayName());
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        // Important: create here a new sysManager so we won't be depended on MainActivity as super class
-        sysManager = new SysManager();
-
-        User user = sysManager.getCurrentUser();
-        if(user == null || user.getPhone() == null) {
-            Intent i = new Intent(this,PathActivity.class);// todo go to OTPActivity
-//            finish();
-            startActivity(i);
-            return;
-        }
-
-
     }
 
     public void signOut(View v) {
-        sysManager.auth.signOut();
-        sysManager.afterLogout(getApplicationContext(), ProfileActivity.this);
-
+        sysManager.signOutUser(getApplicationContext(), ProfileActivity.this);
     }
 }

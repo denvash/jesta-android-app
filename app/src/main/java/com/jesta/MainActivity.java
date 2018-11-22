@@ -16,14 +16,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.*;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.jesta.login.LoginActivity;
-import com.jesta.login.MenuManager;
 import com.jesta.login.SysManager;
 import com.jesta.pathChoose.PathActivity;
 
@@ -39,102 +40,108 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        sysManager.setMenuManager(new MenuManager(getApplicationContext(), this, findViewById(R.id.logo_bar), getString(R.string.welcome)));
-        sysManager.getMenuManager().hideBackButton();
+        sysManager = new SysManager(this);
 
 
-        // todo check if user in db instead of in firebase
-        // If the fireBaseUser is logged in, close this activity and go to profile
-        if (sysManager.getCurrentFireBaseUser() != null) {
-            Intent i = new Intent(this,PathActivity.class); //todo go to OTPActivity
-//            Intent i = new Intent(this,OTPActivity.class);
-            finish();
-            startActivity(i);
-        }
+        // wait for async dbTask
+        Task<Void> allTask = Tasks.whenAll(sysManager.dbTask);
+        allTask.addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+//                DataSnapshot data = dbTask.getResult();
+
+                // user is logged in
+                if (sysManager.getCurrentUser() != null) {
+                    //todo go to OTPActivity or check for OTP and go to Path
+                    Intent i = new Intent(getApplicationContext(),PathActivity.class);
+                    finish();
+                    startActivity(i);
+                    return;
+                }
+
+                // otherwise, render ui
+                setContentView(R.layout.activity_main);
+                sysManager.setTitle(getString(R.string.welcome));
+                sysManager.showBackButton(false);
+
+                Button facebookSignInButton = (Button)findViewById(R.id.facebook_sign_in_btn);
+                Button googleSignInButton = (Button)findViewById(R.id.google_sign_in_btn);
+                Button emailSignInButton = (Button)findViewById(R.id.email_sign_in_btn);
+
+                // Facebook
+                callbackManager = CallbackManager.Factory.create();
+
+                LoginManager.getInstance().registerCallback(callbackManager,
+                        new FacebookCallback<LoginResult>() {
+                            @Override
+                            public void onSuccess(LoginResult loginResult) {
+                                handleFacebookToken(loginResult.getAccessToken());
+                            }
+
+                            @Override
+                            public void onCancel() {
+                                Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onError(FacebookException exception) {
+                                Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
+                facebookSignInButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("public_profile"));
+                    }
+                });
+
+
+                // Google
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+                mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
+
+
+                googleSignInButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                        startActivityForResult(signInIntent, 101);
+                    }
+                });
+
+                // Email
+                emailSignInButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent signInIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(signInIntent);
+                    }
+                });
+
+            }
+        });
+        allTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // todo: apologize profusely to the user!
+            }
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Important: create only one instance of sysManager for the whole runtime of the app
-        // This is the first time we call new SysManager()
-        sysManager = new SysManager();
-
-
-
-
-        Button facebookSignInButton = (Button)findViewById(R.id.facebook_sign_in_btn);
-        Button googleSignInButton = (Button)findViewById(R.id.google_sign_in_btn);
-        Button emailSignInButton = (Button)findViewById(R.id.email_sign_in_btn);
-
-        // Facebook
-
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-
-        callbackManager = CallbackManager.Factory.create();
-
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        handleFacebookToken(loginResult.getAccessToken());
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-
-
-        facebookSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("public_profile"));
-            }
-        });
-
-
-        // Google
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
-        googleSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, 101);
-            }
-        });
-
-        // Email
-        emailSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(signInIntent);
-            }
-        });
-
-
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == 101) {

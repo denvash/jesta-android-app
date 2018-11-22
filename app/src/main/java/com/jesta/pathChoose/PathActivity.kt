@@ -6,6 +6,8 @@ import android.os.Bundle
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.R
 import com.jesta.doJesta.DoJestaActivity
+import com.jesta.login.SysManager
+import com.jesta.login.User
 import kotlinx.android.synthetic.main.activity_path.*
 
 class PathActivity : AppCompatActivity() {
@@ -13,6 +15,10 @@ class PathActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_path)
+
+        // TODO: use current logged in user like this:
+        val sysManager = SysManager(this)
+        val currentUser = sysManager.currentUser
 
         ask_jesta_button.setOnClickListener {
             val intent = Intent(this, AskJestaActivity::class.java)

@@ -15,8 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.jesta.MainActivity;
-import com.jesta.PathActivity;
 import com.jesta.R;
+import com.jesta.pathChoose.PathActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +28,9 @@ import java.util.List;
 public class SysManager {
 
     // authentication
-    public static FirebaseAuth auth; // used only by MainActivity
+    public FirebaseAuth auth; // used only by MainActivity
     private static FirebaseUser fireBaseUser;
-    private static DatabaseReference usersDatabase;
+    public DatabaseReference usersDatabase;
     private static List<User> usersList;
     private static DataSnapshot usersListDataSnapshot;
     private static User currentUser;
@@ -92,7 +92,7 @@ public class SysManager {
 
     /**
      * User authentication
-     * TODO-MAX: updateUserInDB etc'...
+     * TODO-MAX: implement updateUserInDB etc'...
      */
 
     private User userExistsInDB(FirebaseUser firebaseUser) {
