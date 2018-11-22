@@ -11,10 +11,9 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Jesta"
     >
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:theme="@style/Theme.Jesta.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -44,13 +43,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.ProfileActivity" />
-        <activity android:name=".login.ErrorActivity" />
-        <activity android:name=".login.OTPActivity" />
-        <activity android:name=".PathActivity" />
-        <activity android:name=".AskJestaActivity" />
+        <activity android:name=".login.LoginActivity" android:theme="@style/Theme.Jesta.Login"/>
+        <activity android:name=".login.RegisterActivity" android:theme="@style/Theme.Jesta.Login"/>
+        <activity android:name=".login.ProfileActivity" android:theme="@style/Theme.Jesta.Login"/>
+        <activity android:name=".login.ErrorActivity" android:theme="@style/Theme.Jesta.Login"/>
+        <activity android:name=".login.OTPActivity" android:theme="@style/Theme.Jesta.Login"/>
+        <activity android:name=".pathChoose.PathActivity" />
+        <activity android:name=".askJesta.AskJestaActivity" />
+        <activity android:name=".doJesta.DoJestaActivity" />
 
     </application>
 

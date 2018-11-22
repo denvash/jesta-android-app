@@ -1,9 +1,12 @@
-package com.jesta
+package com.jesta.pathChoose
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import com.jesta.askJesta.AskJestaActivity
+import com.jesta.R
+import com.jesta.doJesta.DoJestaActivity
+import kotlinx.android.synthetic.main.activity_path.*
 
 class PathActivity : AppCompatActivity() {
 
@@ -11,16 +14,14 @@ class PathActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_path)
 
-        val ask_jesta: Button = findViewById(R.id.ask_jesta_button)
-        val do_jesta: Button = findViewById(R.id.do_jesta_button)
-
-        ask_jesta.setOnClickListener {
+        ask_jesta_button.setOnClickListener {
             val intent = Intent(this, AskJestaActivity::class.java)
             startActivity(intent)
         }
-            // go to do jesta activity
-//        do_jesta.setOnClickListener {
-//            val intent = Intent(this, PostGridFragment::class.java)
-//        }
+
+        do_jesta_button.setOnClickListener {
+            val intent = Intent(this, DoJestaActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -3,13 +3,10 @@ package com.jesta;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import com.facebook.*;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -27,8 +24,8 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.jesta.login.LoginActivity;
 import com.jesta.login.MenuManager;
-import com.jesta.login.ProfileActivity;
 import com.jesta.login.SysManager;
+import com.jesta.pathChoose.PathActivity;
 
 import java.util.Arrays;
 
@@ -53,18 +50,7 @@ public class MainActivity extends AppCompatActivity {
 //            Intent i = new Intent(this,OTPActivity.class);
             finish();
             startActivity(i);
-            return;
         }
-
-        Window window = this.getWindow();
-
-        // clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.blue));
-
     }
 
     @Override

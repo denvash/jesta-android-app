@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.jesta.PathActivity;
+import com.jesta.pathChoose.PathActivity;
 import com.jesta.R;
 
 public class ProfileActivity extends AppCompatActivity {

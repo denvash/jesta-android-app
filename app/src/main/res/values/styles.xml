@@ -4,12 +4,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
     <style name="TextAppearance.Jesta.Title" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">@font/marvel</item>
     </style>
 
     <style name="Widget.Jesta.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -36,7 +38,7 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="Widget.Shrine.Backdrop" parent="">
+    <style name="Widget.Jesta.Backdrop" parent="">
         <item name="android:background">?attr/colorAccent</item>
     </style>
 
