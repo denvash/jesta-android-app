@@ -1,4 +1,4 @@
-package com.jesta.login;
+package com.jesta.util;
 
 import android.net.Uri;
 import com.google.firebase.database.IgnoreExtraProperties;
