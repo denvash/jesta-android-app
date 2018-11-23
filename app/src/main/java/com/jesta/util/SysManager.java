@@ -129,7 +129,7 @@ public class SysManager {
                         user.setDisplayName(firebaseUser.getDisplayName());
                     }
                     if (firebaseUser.getPhotoUrl() != null) {
-//                        user.setPhotoUrl(firebaseUser.getPhotoUrl().toString());
+                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
                     }
                     usersDatabase.child(user.getId()).setValue(user);
                 }
