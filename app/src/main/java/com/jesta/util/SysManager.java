@@ -1,4 +1,4 @@
-package com.jesta.login;
+package com.jesta.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.jesta.MainActivity;
 import com.jesta.R;
+import com.jesta.login.ErrorActivity;
 import com.jesta.pathChoose.PathActivity;
-import com.jesta.util.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

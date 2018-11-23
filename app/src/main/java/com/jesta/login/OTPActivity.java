@@ -5,6 +5,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.jesta.R;
+import com.jesta.util.SysManager;
 
 public class OTPActivity extends AppCompatActivity {
     SysManager sysManager;

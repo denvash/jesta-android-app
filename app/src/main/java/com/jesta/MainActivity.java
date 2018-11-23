@@ -21,12 +21,9 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.jesta.login.LoginActivity;
-import com.jesta.login.SysManager;
 import com.jesta.pathChoose.PathActivity;
+import com.jesta.util.SysManager;
 
 import java.util.Arrays;
 

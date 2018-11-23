@@ -3,8 +3,8 @@ package com.jesta.login;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.jesta.MainActivity;
 import com.jesta.R;
+import com.jesta.util.SysManager;
 
 public class ErrorActivity extends AppCompatActivity {
     @Override

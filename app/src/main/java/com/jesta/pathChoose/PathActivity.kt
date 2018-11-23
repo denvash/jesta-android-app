@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.R
 import com.jesta.doJesta.DoJestaActivity
-import com.jesta.login.SysManager
+import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_path.*
 
 class PathActivity : AppCompatActivity() {
