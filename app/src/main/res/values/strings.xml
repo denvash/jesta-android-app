@@ -1,26 +1,7 @@
 <resources>
     <string name="jesta_app_name">Jesta</string>
-
-    <string name="jesta_hint_username">Username</string>
-    <string name="jesta_hint_password">Password</string>
-    <string name="jesta_button_dev">Developer</string>
-    <string name="jesta_button_next">Next</string>
-    <string name="jesta_button_cancel">Cancel</string>
-    <string name="jesta_error_password">Password must contain at least 8 characters.</string>
     <string name="jesta_filter_title">Filter</string>
     <string name="jesta_search_title">Search</string>
-    <string name="jesta_product_title">Title</string>
-    <string name="jesta_product_description">Secondary text</string>
-
-    <!-- Jesta backdrop menu labels -->
-    <string name="jesta_featured_label">Featured</string>
-    <string name="jesta_apartment_label">Apartment</string>
-    <string name="jesta_accessories_label">Accessories</string>
-    <string name="jesta_shoes_label">Shoes</string>
-    <string name="jesta_tops_label">Tops</string>
-    <string name="jesta_bottoms_label">Bottoms</string>
-    <string name="jesta_dresses_label">Dresses</string>
-    <string name="jesta_account_label">My Account</string>
 
     <!-- Added after login integration. TODO: unify duplicates-->
     <string name="app_name">Jesta</string>
@@ -55,12 +36,13 @@
 
     <!-- Jesta navigation menu -->
     <string name="nav_ask_jesta">Ask for a Jesta</string>
+    <string name="nav_do_jesta">Do a Jesta</string>
     <string name="nav_profile">My Profile</string>
     <string name="nav_map">Jestas Near Me</string>
     <string name="nav_status">My Jestas status</string>
-    <string name="bottom_sheet_name">Max Chi</string>
-    <string name="bottom_sheet_email">maxchi@gmail.com</string>
-    <string name="fragment_bottomsheet_profile_description">Profile Picture</string>
-    <string name="fragment_bottomsheet_close_image_description">Close Menu</string>
+    <string name="nav_bottom_sheet_name">Max Chi</string>
+    <string name="nav_bottom_sheet_email">maxchi@gmail.com</string>
+    <string name="nav_bottom_sheet_profile_description">Profile Picture</string>
+    <string name="nav_bottom_sheet_close_image_description">Close Menu</string>
 
 </resources>

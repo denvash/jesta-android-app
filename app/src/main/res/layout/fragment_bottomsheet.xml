@@ -28,7 +28,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/marvel"
-        android:text="@string/bottom_sheet_name"
+        android:text="@string/nav_bottom_sheet_name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:fontFamily="@font/montserrat"
-        android:text="@string/bottom_sheet_email"
+        android:text="@string/nav_bottom_sheet_email"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -52,7 +52,7 @@
         android:background="@drawable/ic_account_circle_black_48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView"
-        android:contentDescription="@string/fragment_bottomsheet_profile_description" />
+        android:contentDescription="@string/nav_bottom_sheet_profile_description" />
 
     <View
         android:id="@+id/view2"
@@ -73,7 +73,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_close_black_24dp"
-        android:contentDescription="@string/fragment_bottomsheet_close_image_description"
+        android:contentDescription="@string/nav_bottom_sheet_close_image_description"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"

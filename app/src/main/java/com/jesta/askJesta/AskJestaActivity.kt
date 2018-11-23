@@ -21,17 +21,16 @@ class AskJestaActivity : AppCompatActivity() {
         this.setSupportActionBar(jesta_top_bar)
         jesta_top_bar.setNavigationOnClickListener(NavigationIconClickListener(
             this@AskJestaActivity,
-            recycler_view,
+            ask_jesta_grid,
             AccelerateDecelerateInterpolator(),
-            ContextCompat.getDrawable(this, R.drawable.jesta_branded_menu),
-            ContextCompat.getDrawable(this, R.drawable.jesta_close_menu)))
+            ContextCompat.getDrawable(applicationContext, R.drawable.jesta_branded_menu),
+            ContextCompat.getDrawable(applicationContext, R.drawable.jesta_close_menu)))
 
         // Set cut corner background for API 23+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ask_jesta_grid.background = applicationContext?.getDrawable(R.drawable.jesta_product_grid_background_shape)
         }
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

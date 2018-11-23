@@ -7,7 +7,7 @@
     android:background="@color/hotPink"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/logo_bar"/>
+    <include layout="@layout/jesta_logo_bar"/>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
