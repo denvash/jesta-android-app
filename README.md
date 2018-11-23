@@ -12,3 +12,7 @@ Jesta is a Social app for posting and doing small jobs (*Jestas*).
 - Do a Jesta - choose a job for you.
   - Bring a milk from a store.
   - Earn cash.
+
+## Project Managment
+
+This projects uses [Zen Hub](https://www.zenhub.com/) _Agile Project Managment_, download [chrome-extension](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) and check **ZenHub tab**.
