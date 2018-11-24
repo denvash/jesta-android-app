@@ -45,4 +45,8 @@
     <string name="nav_bottom_sheet_profile_description">Profile Picture</string>
     <string name="nav_bottom_sheet_close_image_description">Close Menu</string>
 
+    <!-- Jesta Card -->
+    <string name="jesta_card_description">Jesta Description</string>
+    <string name="jesta_card_difficulty">Jesta Difficulty</string>
+
 </resources>

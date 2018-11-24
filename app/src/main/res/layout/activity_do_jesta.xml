@@ -9,21 +9,14 @@
     tools:context=".doJesta.DoJestaActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/toolbar"
+        android:id="@+id/do_jesta_coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/do_jesta_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            tools:ignore="PrivateResource">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </ScrollView>
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar_do_jesta"
@@ -44,13 +37,13 @@
             app:theme="@style/ThemeOverlay.MaterialComponents.ActionBar" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_bar"
+            android:id="@+id/do_jesta_fab_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/jesta_logo"
             app:backgroundTint="@color/productGridBackgroundColor"
             app:fabCustomSize="50dp"
-            app:layout_anchor="@id/bottom_app_bar_do_jesta" />
+            app:layout_anchor="@id/bottom_app_bar_do_jesta"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
