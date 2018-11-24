@@ -32,7 +32,7 @@ class NavigationIconClickListener @JvmOverloads internal constructor(
         animatorSet.cancel()
 
         updateIcon(view)
-        val translateY = height - context.resources.getDimensionPixelSize(R.dimen.design_navigation_icon_size)
+        val translateY = height - context.resources.getDimensionPixelSize(R.dimen._140sdp)
         val animator = ObjectAnimator.ofFloat(sheet, "translationY", (if (backdropShown) translateY else 0).toFloat())
         animator.duration = 500
         if (interpolator != null) {
