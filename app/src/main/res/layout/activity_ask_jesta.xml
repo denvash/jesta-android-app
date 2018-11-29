@@ -8,43 +8,11 @@
     android:clipToPadding="false"
     tools:context=".askJesta.AskJestaActivity">
 
-    <LinearLayout
-        style="@style/Widget.Jesta.Backdrop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingTop="88dp">
-
-        <include layout="@layout/jesta_backdrop" />
-    </LinearLayout>
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/jesta_top_bar"
-            style="@style/Widget.Jesta.Toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:paddingStart="12dp"
-            android:paddingLeft="12dp"
-            android:paddingEnd="12dp"
-            android:paddingRight="12dp"
-            app:contentInsetStart="0dp"
-            app:navigationIcon="@drawable/jesta_branded_menu"
-            app:title="@string/jesta_app_name" />
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/ask_jesta_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
         android:background="@color/productGridBackgroundColor"
-        android:elevation="8dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -54,4 +22,9 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <include
+        layout="@layout/fragment_bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
 </FrameLayout>

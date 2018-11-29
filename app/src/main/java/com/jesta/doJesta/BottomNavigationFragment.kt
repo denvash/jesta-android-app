@@ -29,8 +29,8 @@ class BottomNavigationFragment : BottomSheetDialogFragment() {
                     val intent = Intent(context, AskJestaActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.nav_profile -> {
-                    val intent = Intent(context, ProfileActivity::class.java)
+                R.id.nav_do_jesta -> {
+                    val intent = Intent(context, DoJestaActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.nav_map -> {
