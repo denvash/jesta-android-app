@@ -1,4 +1,4 @@
-package com.jesta.pathChoose
+package com.jesta.path
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,6 @@ import android.os.Bundle
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.R
 import com.jesta.doJesta.DoJestaActivity
-import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_path.*
 
 class PathActivity : AppCompatActivity() {

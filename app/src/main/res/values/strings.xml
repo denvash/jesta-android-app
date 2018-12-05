@@ -34,7 +34,7 @@
     <string name="phone_hint">Enter your phone number</string>
     <string name="enter_otp">Enter the code you received</string>
 
-    <!-- Jesta navigation menu -->
+    <!-- Mission navigation menu -->
     <string name="nav_ask_jesta">Ask for a Jesta</string>
     <string name="nav_do_jesta">Do a Jesta</string>
     <string name="nav_profile">My Profile</string>
@@ -45,8 +45,17 @@
     <string name="nav_bottom_sheet_profile_description">Profile Picture</string>
     <string name="nav_bottom_sheet_close_image_description">Close Menu</string>
 
-    <!-- Jesta Card -->
+    <!-- Mission Card -->
     <string name="jesta_card_description">Jesta Description</string>
     <string name="jesta_card_difficulty">Jesta Difficulty</string>
+
+    <!--Jesta Post-->
+    <string name="jesta_post_chip_price">Price</string>
+    <string name="jesta_post_chip_num_of_people">Num Of People</string>
+    <string name="jesta_post_chip_duration">Duration</string>
+    <string name="jesta_post_chip_location">Location</string>
+    <string name="jesta_post_button_accept">Accept</string>
+    <string name="jesta_path_do_jesta">Do a Jesta</string>
+    <string name="jesta_path_ask_a_jesta">Ask For Jesta</string>
 
 </resources>

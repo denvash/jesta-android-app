@@ -50,6 +50,10 @@
         </item>
     </style>
 
+    <style name="Widget.Jesta.Button.Fab" parent="Widget.Jesta.Button">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+    </style>
+
 
     <!-- Login theme and widgets-->
 

@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jesta.R
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.map.MapActivity
+import com.jesta.profile.ProfileActivity
 import com.jesta.status.StatusActivity
+import com.jesta.util.Mission
+import com.jesta.util.Post
 import kotlinx.android.synthetic.main.activity_do_jesta.*
 import kotlinx.android.synthetic.main.fragment_bottom_navigation_view.*
 
@@ -36,37 +39,40 @@ class DoJestaActivity : AppCompatActivity() {
         // prevent the loss of items
         do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
 
-        // initial adapter with jesta posts entries
-        val adapter = JestaCardRecyclerViewAdapter(JestaCard.initJestaCardList(resources))
+        // initial adapter with mission posts entries
+        // TODO: get resources from db
+        val adapter = JestaCardRecyclerViewAdapter(Mission.initJestaCardList(resources))
 
         do_jesta_recycle_view.adapter = adapter
 
-        // jesta cards padding
+        // mission cards padding
         val scale = resources.displayMetrics.density
         val spacing = (1 * scale + 2.5f).toInt()
         do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(spacing))
 
-        do_jesta_recycle_view
 
-        jesta_bottom_navigation.setOnNavigationItemReselectedListener {
+        jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
+        jesta_bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-//                R.id.nav_ask_jesta -> {
-//                    val intent = Intent(this@DoJestaActivity, AskJestaActivity::class.java)
-//                    startActivity(intent)
-//                }
-//                R.id.nav_do_jesta -> {
-//                    val intent = Intent(this@DoJestaActivity, DoJestaActivity::class.java)
-//                    startActivity(intent)
-//                }
-//                R.id.nav_map -> {
-//                    val intent = Intent(this@DoJestaActivity, MapActivity::class.java)
-//                    startActivity(intent)
-//                }
-//                R.id.nav_status -> {
-//                    val intent = Intent(this@DoJestaActivity, StatusActivity::class.java)
-//                    startActivity(intent)
-//                }
+                R.id.nav_ask_jesta -> {
+                    val intent = Intent(this@DoJestaActivity, AskJestaActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_map -> {
+                    val intent = Intent(this@DoJestaActivity, MapActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.nav_status -> {
+                    val intent = Intent(this@DoJestaActivity, StatusActivity::class.java)
+                    startActivity(intent)
+                }
+                // profile Activity
+                else -> {
+                    val intent = Intent(this@DoJestaActivity, ProfileActivity::class.java)
+                    startActivity(intent)
+                }
             }
+            true
         }
     }
 

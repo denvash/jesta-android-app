@@ -17,7 +17,7 @@ import com.google.firebase.database.*;
 import com.jesta.MainActivity;
 import com.jesta.R;
 import com.jesta.login.ErrorActivity;
-import com.jesta.pathChoose.PathActivity;
+import com.jesta.path.PathActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
