@@ -34,7 +34,7 @@
     <string name="phone_hint">Enter your phone number</string>
     <string name="enter_otp">Enter the code you received</string>
 
-    <!-- Mission navigation menu -->
+    <!--Navigation Menu  -->
     <string name="nav_ask_jesta">Ask for a Jesta</string>
     <string name="nav_do_jesta">Do a Jesta</string>
     <string name="nav_profile">My Profile</string>
@@ -57,5 +57,22 @@
     <string name="jesta_post_button_accept">Accept</string>
     <string name="jesta_path_do_jesta">Do a Jesta</string>
     <string name="jesta_path_ask_a_jesta">Ask For Jesta</string>
+
+    <!--Jesta Settings-->
+    <string name="jesta_settings_first_name_hint">First Name</string>
+    <string name="jesta_settings_last_name_hint">Last Name</string>
+    <string name="jesta_settings_phone_number_default">+972 54–000–0000</string>
+    <string name="jesta_settings_full_name_default">Full Name</string>
+    <string name="jesta_settings_another_line">Another Setting</string>
+    <string name="jesta_settings_edit_profile_icon_description">Edit Profile Icon</string>
+    <string name="jesta_settings_default_values">Ask a Jesta Default Values</string>
+
+    <!--Jesta Profile-->
+    <string name="jesta_profile_first_name_default">First-name</string>
+    <string name="jesta_profile_last_name_default">Last-name</string>
+    <string name="jesta_profile_change_number">Change Number</string>
+    <string name="jesta_profile_phone_number_hint">@string/jesta_settings_phone_number_default</string>
+    <string name="jesta_profile_change_email">Change Email</string>
+    <string name="jesta_profile_email_hint">default@email</string>
 
 </resources>

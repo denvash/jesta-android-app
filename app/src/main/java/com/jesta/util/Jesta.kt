@@ -34,7 +34,7 @@ data class Mission(
 }
 
 // TODO: tweak to use Post and not Mission
-data class Post(val user: JestaUser, val mission: Mission) {
+data class Post(val user: User, val mission: Mission) {
 
     companion object {
         fun initJestaCardList(resources: Resources): List<Post> {
@@ -47,4 +47,8 @@ data class Post(val user: JestaUser, val mission: Mission) {
     }
 }
 
-data class JestaUser(val id: String, val email: String, val displayName: String, val photoUrl: Uri, val phoneNumber: String)
+data class User(val id: String, val email: String) {
+    var displayName: String = "emptyName"
+    var photoUrl: String = "emptyPhoto"
+    var phoneNumber: String = "emptyNumber"
+}

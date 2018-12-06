@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 //        // If the fireBaseUser is logged in, close this activity and go to profile
 //        if (sysManager.getCurrentFireBaseUser() != null) {
 //            finish();
-//            Intent i = new Intent(this,ProfileActivity.class);
+//            Intent i = new Intent(this,SettingsActivity.class);
 //            startActivity(i);
 //            return;
 //        }

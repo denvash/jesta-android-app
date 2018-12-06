@@ -1,4 +1,5 @@
 package com.jesta.util;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -58,10 +59,15 @@ public class SysManager {
                 }
                 usersListDataSnapshot = dataSnapshot;
                 for (DataSnapshot ds : usersListDataSnapshot.getChildren()) {
-                    HashMap dbUser = (HashMap)ds.getValue();
+                    HashMap dbUser = (HashMap) ds.getValue();
 
                     // todo create a constructor for User
-                    User user = new User((String)dbUser.get("id"), (String)dbUser.get("email"));
+
+                    // TODO: too much null need to be fixed
+                    String userId = dbUser.get("id") == null ? "null" : (String) dbUser.get("id");
+                    String email = dbUser.get("email") == null ? "null" : (String) dbUser.get("email");
+
+                    User user = new User(userId,email);
                     usersList.add(user);
 
                     if (fireBaseUser != null && ds.getKey().equals(fireBaseUser.getUid())) {
@@ -70,6 +76,7 @@ public class SysManager {
                 }
                 dbSource.setResult(usersListDataSnapshot);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 dbSource.setException(databaseError.toException());
@@ -77,7 +84,7 @@ public class SysManager {
         });
 
         // Set listener if back button is available
-        backButtonTv = (TextView)activity.findViewById(R.id.back_button);
+        backButtonTv = (TextView) activity.findViewById(R.id.back_button);
         if (backButtonTv != null) {
             backButtonTv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,14 +129,13 @@ public class SysManager {
                 User user = userExistsInDB(firebaseUser);
                 if (user != null) {// user exists in db
 
-                }
-                else {// create new user and store in DB
+                } else {// create new user and store in DB
                     user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
                     if (firebaseUser.getDisplayName() != null) {
                         user.setDisplayName(firebaseUser.getDisplayName());
                     }
                     if (firebaseUser.getPhotoUrl() != null) {
-                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
+                        user.setPhotoUrl(firebaseUser.getPhotoUrl().toString());
                     }
                     usersDatabase.child(user.getId()).setValue(user);
                 }
@@ -165,12 +171,12 @@ public class SysManager {
      */
 
     public void setTitle(String title) {
-        TextView pageNameTv = (TextView)activity.findViewById(R.id.page_name);
+        TextView pageNameTv = (TextView) activity.findViewById(R.id.page_name);
         pageNameTv.setText(title);
     }
 
     public void showBackButton(Boolean flag) {
-        backButtonTv = (TextView)activity.findViewById(R.id.back_button);
+        backButtonTv = (TextView) activity.findViewById(R.id.back_button);
         if (backButtonTv == null)
             return;
         backButtonTv.setText(flag ? activity.getResources().getString(R.string.leftArrow) : "");
@@ -180,8 +186,7 @@ public class SysManager {
 
         if (flag) {
             activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
-        else {// don't show keyboard
+        } else {// don't show keyboard
             activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
     }

@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         // If the fireBaseUser is logged in, close this activity and go to profile
         if (sysManager.getCurrentUser() != null) {
             finish();
-            Intent i = new Intent(this,ProfileActivity.class);
+            Intent i = new Intent(this,LoginProfileActivity.class);
             startActivity(i);
             return;
         }
