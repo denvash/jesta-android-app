@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jesta.R
 import com.jesta.util.Mission
-import kotlinx.android.synthetic.main.activity_jesta_post_view.*
+import kotlinx.android.synthetic.main.activity_post_view.*
 import kotlinx.android.synthetic.main.jesta_card.*
 
 class JestaPostViewActivity : AppCompatActivity() {
@@ -16,7 +16,7 @@ class JestaPostViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_jesta_post_view)
+        setContentView(R.layout.activity_post_view)
 
         val mission = intent.getParcelableExtra(extra) as Mission
         jesta_card_description.text = mission.description

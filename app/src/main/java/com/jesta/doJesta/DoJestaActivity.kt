@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jesta.R
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.map.MapActivity
-import com.jesta.profile.ProfileActivity
+import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
-import com.jesta.util.Post
 import kotlinx.android.synthetic.main.activity_do_jesta.*
 import kotlinx.android.synthetic.main.fragment_bottom_navigation_view.*
 
@@ -53,25 +52,23 @@ class DoJestaActivity : AppCompatActivity() {
 
         jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
         jesta_bottom_navigation.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
+
+            val intent = when (it.itemId) {
                 R.id.nav_ask_jesta -> {
-                    val intent = Intent(this@DoJestaActivity, AskJestaActivity::class.java)
-                    startActivity(intent)
+                    Intent(this@DoJestaActivity, AskJestaActivity::class.java)
                 }
                 R.id.nav_map -> {
-                    val intent = Intent(this@DoJestaActivity, MapActivity::class.java)
-                    startActivity(intent)
+                    Intent(this@DoJestaActivity, MapActivity::class.java)
                 }
                 R.id.nav_status -> {
-                    val intent = Intent(this@DoJestaActivity, StatusActivity::class.java)
-                    startActivity(intent)
+                    Intent(this@DoJestaActivity, StatusActivity::class.java)
                 }
-                // profile Activity
+                // Settings Activity
                 else -> {
-                    val intent = Intent(this@DoJestaActivity, ProfileActivity::class.java)
-                    startActivity(intent)
+                    Intent(this@DoJestaActivity, SettingsActivity::class.java)
                 }
             }
+            startActivity(intent)
             true
         }
     }

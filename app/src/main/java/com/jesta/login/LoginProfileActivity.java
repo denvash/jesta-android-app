@@ -1,6 +1,5 @@
 package com.jesta.login;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -9,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jesta.util.SysManager;
 import com.jesta.R;
 
-public class ProfileActivity extends AppCompatActivity {
+public class LoginProfileActivity extends AppCompatActivity {
     TextView email;
     TextView displayName;
 
@@ -28,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         String uid = sysManager.getCurrentUser().getId();
         String phoneNumber = sysManager.getCurrentUser().getPhoneNumber();
-        Uri photoUrl = sysManager.getCurrentUser().getPhotoUrl();
+//        Uri photoUrl = sysManager.getCurrentUser().getPhotoUrl();
 
         email = (TextView)findViewById(R.id.email);
         email.setText(sysManager.getCurrentUser().getEmail());
@@ -40,10 +39,10 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_login_profile);
     }
 
     public void signOut(View v) {
-        sysManager.signOutUser(getApplicationContext(), ProfileActivity.this);
+        sysManager.signOutUser(getApplicationContext(), LoginProfileActivity.this);
     }
 }
