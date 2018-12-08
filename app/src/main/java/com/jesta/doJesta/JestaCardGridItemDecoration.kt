@@ -3,12 +3,20 @@ package com.jesta.doJesta
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-class JestaCardGridItemDecoration(private val largePadding: Int, private val smallPadding: Int) : RecyclerView.ItemDecoration() {
+
+class JestaCardGridItemDecoration internal constructor(private val space: Int) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        outRect.left = smallPadding
-        outRect.right = smallPadding
-        outRect.top = largePadding
-        outRect.bottom = largePadding
+
+        outRect.left = space/2
+        outRect.right = space/2
+        outRect.bottom = space
+
+        // Add top margin only for the first item to avoid double space between items
+        if (parent.getChildLayoutPosition(view) == 0) {
+            outRect.top = space
+        } else {
+            outRect.top = 0
+        }
     }
 }

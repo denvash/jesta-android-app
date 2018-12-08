@@ -22,7 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.jesta.login.LoginActivity;
-import com.jesta.pathChoose.PathActivity;
+import com.jesta.path.PathActivity;
 import com.jesta.util.SysManager;
 import com.jesta.util.User;
 

@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jesta.R
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.map.MapActivity
-import com.jesta.profile.ProfileActivity
 import com.jesta.status.StatusActivity
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
 
@@ -29,8 +27,8 @@ class BottomNavigationFragment : BottomSheetDialogFragment() {
                     val intent = Intent(context, AskJestaActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.nav_profile -> {
-                    val intent = Intent(context, ProfileActivity::class.java)
+                R.id.nav_do_jesta -> {
+                    val intent = Intent(context, DoJestaActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.nav_map -> {

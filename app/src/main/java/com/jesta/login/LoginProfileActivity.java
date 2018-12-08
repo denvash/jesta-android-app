@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.jesta.util.SysManager;
 import com.jesta.R;
 
-public class ProfileActivity extends AppCompatActivity {
+public class LoginProfileActivity extends AppCompatActivity {
     TextView email;
     TextView displayName;
 
@@ -40,10 +40,10 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_login_profile);
     }
 
     public void signOut(View v) {
-        sysManager.signOutUser(getApplicationContext(), ProfileActivity.this);
+        sysManager.signOutUser(getApplicationContext(), LoginProfileActivity.this);
     }
 }

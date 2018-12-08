@@ -1,13 +1,18 @@
 package com.jesta.doJesta
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jesta.R
+import com.jesta.askJesta.AskJestaActivity
+import com.jesta.map.MapActivity
+import com.jesta.settings.SettingsActivity
+import com.jesta.status.StatusActivity
+import com.jesta.util.Mission
 import kotlinx.android.synthetic.main.activity_do_jesta.*
+import kotlinx.android.synthetic.main.fragment_bottom_navigation_view.*
 
 
 class DoJestaActivity : AppCompatActivity() {
@@ -25,36 +30,47 @@ class DoJestaActivity : AppCompatActivity() {
         // late init
         instance = this@DoJestaActivity
 
-        // activity with bottom action bar
-        setSupportActionBar(bottom_app_bar_do_jesta)
-
         // set recycle view layout
+        val column = if (resources.configuration.orientation == 2) 3 else 2
         do_jesta_recycle_view.layoutManager =
-                GridLayoutManager(this@DoJestaActivity, 2, RecyclerView.VERTICAL, false)
+                StaggeredGridLayoutManager(column, RecyclerView.VERTICAL)
 
-        // initial adapter with jesta posts entries
-        val adapter = JestaCardRecyclerViewAdapter(JestaCard.initJestaCardList(resources))
+        // prevent the loss of items
+        do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
+
+        // initial adapter with mission posts entries
+        // TODO: get resources from db
+        val adapter = JestaCardRecyclerViewAdapter(Mission.initJestaCardList(resources))
 
         do_jesta_recycle_view.adapter = adapter
 
-        // jesta cards padding
-        val largePadding = resources.getDimensionPixelSize(R.dimen._16sdp)
-        val smallPadding = resources.getDimensionPixelSize(R.dimen._4sdp)
+        // mission cards padding
+        val scale = resources.displayMetrics.density
+        val spacing = (1 * scale + 2.5f).toInt()
+        do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(spacing))
 
-        do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(largePadding, smallPadding))
 
-        do_jesta_fab_button.setOnClickListener {
-            Toast.makeText(this@DoJestaActivity,"fab clicked",Toast.LENGTH_SHORT).show()
-        }
-    }
+        jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
+        jesta_bottom_navigation.setOnNavigationItemSelectedListener {
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            android.R.id.home -> {
-                val bottomNavDrawerFragment = BottomNavigationFragment()
-                bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
+            val intent = when (it.itemId) {
+                R.id.nav_ask_jesta -> {
+                    Intent(this@DoJestaActivity, AskJestaActivity::class.java)
+                }
+                R.id.nav_map -> {
+                    Intent(this@DoJestaActivity, MapActivity::class.java)
+                }
+                R.id.nav_status -> {
+                    Intent(this@DoJestaActivity, StatusActivity::class.java)
+                }
+                // Settings Activity
+                else -> {
+                    Intent(this@DoJestaActivity, SettingsActivity::class.java)
+                }
             }
+            startActivity(intent)
+            true
         }
-        return super.onOptionsItemSelected(item)
     }
+
 }

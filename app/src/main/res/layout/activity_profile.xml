@@ -1,100 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/blue"
-              android:theme="@style/Theme.Jesta.Login"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
-    <include layout="@layout/jesta_logo_bar"/>
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:id="@+id/profile_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:gravity="start"
+        android:orientation="horizontal">
 
-        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_marginStart="@dimen/_4sdp"
+            android:id="@+id/imageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_account_circle_black_48dp"
+            android:contentDescription="@string/nav_bottom_sheet_profile_description" />
 
-        <LinearLayout
-            app:fontFamily="@font/montserrat"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
-            tools:context=".login.LoginActivity"
-            >
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_4sdp">
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:text="Your email address:"
-                app:fontFamily="@font/marvel"
-                />
-
-            <EditText
-                android:id="@id/email"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-
-                android:hint="email"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:fontFamily="@font/montserrat"
-                android:layout_marginBottom="37dp"
-                />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:text="Your display name:"
-                app:fontFamily="@font/marvel"
-                />
-
-            <EditText
-                android:id="@+id/displayName"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-
-                android:hint="Display name"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:fontFamily="@font/montserrat"
-                />
-
-
-            <com.google.android.material.button.MaterialButton
-                app:fontFamily="@font/montserrat"
-                style="@style/Theme.Jesta.Login.Button"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/jesta_profile_first_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:onClick="signOut"
-                android:layout_marginBottom="20dp"
-                android:text="@string/logout" />
+                android:text="@string/jesta_profile_first_name_default"/>
 
-            <!--<com.google.android.gms.common.SignInButton-->
-            <!--android:id="@+id/google_sign_in_btn"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-        </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/jesta_profile_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jesta_profile_last_name_default"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </ScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginStart="4dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_contact_phone_black_24dp"/>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/jesta_profile_change_number"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/jesta_profile_phone_number_hint"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginStart="4dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_email_black_24dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/jesta_profile_change_email"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/jesta_profile_email_hint"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
