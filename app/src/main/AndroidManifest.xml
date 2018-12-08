@@ -48,7 +48,7 @@
         <activity android:name=".login.LoginProfileActivity" android:theme="@style/Theme.Jesta.Login"/>
         <activity android:name=".login.ErrorActivity" android:theme="@style/Theme.Jesta.Login"/>
         <activity android:name=".login.OTPActivity" android:theme="@style/Theme.Jesta.Login"/>
-        <activity android:name=".path.PathActivity" />
+        <activity android:name=".pathChoose.PathActivity" />
         <activity android:name=".askJesta.AskJestaActivity" />
         <activity android:name=".doJesta.DoJestaActivity" />
         <activity android:name=".doJesta.JestaPostViewActivity" />

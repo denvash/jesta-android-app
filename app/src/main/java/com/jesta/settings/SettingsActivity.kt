@@ -15,7 +15,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         val sysManager = SysManager(this@SettingsActivity)
-        val currentUser = sysManager.currentUser
+        val currentUser = sysManager.currentUserFromDB
 
         jesta_settings_profile_full_name.text = currentUser.displayName
         jesta_settings_profile_phone_number.text = currentUser.phoneNumber

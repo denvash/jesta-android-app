@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".path.PathActivity">
+    tools:context=".pathChoose.PathActivity">
 
     <ImageView
         android:layout_width="64dp"

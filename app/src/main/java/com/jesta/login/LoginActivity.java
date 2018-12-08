@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            sysManager.afterLogin(task, getApplicationContext(), LoginActivity.this);
+                            sysManager.signInUser(task, getApplicationContext(), LoginActivity.this);
                         }
                     });
         }

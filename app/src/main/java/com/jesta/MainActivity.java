@@ -22,7 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.jesta.login.LoginActivity;
-import com.jesta.path.PathActivity;
+import com.jesta.pathChoose.PathActivity;
 import com.jesta.util.SysManager;
 import com.jesta.util.User;
 
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        sysManager.afterLogin(task, getApplicationContext(), MainActivity.this);
+                        sysManager.signInUser(task, getApplicationContext(), MainActivity.this);
                     }
                 });
     }
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        sysManager.afterLogin(task, getApplicationContext(), MainActivity.this);
+                        sysManager.signInUser(task, getApplicationContext(), MainActivity.this);
                     }
                 });
     }

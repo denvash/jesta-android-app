@@ -46,9 +46,3 @@ data class Post(val user: User, val mission: Mission) {
         }
     }
 }
-
-data class User(val id: String, val email: String) {
-    var displayName: String = "emptyName"
-    var photoUrl: String = "emptyPhoto"
-    var phoneNumber: String = "emptyNumber"
-}

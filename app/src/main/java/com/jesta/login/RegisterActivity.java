@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                                sysManager.afterLogin(task, getApplicationContext(), RegisterActivity.this);
+                                                sysManager.signInUser(task, getApplicationContext(), RegisterActivity.this);
                                                 finish();
                                                 // redirect to main activity, so we'll have the new user in db
                                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);

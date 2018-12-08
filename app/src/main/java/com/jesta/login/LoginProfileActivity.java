@@ -40,7 +40,7 @@ public class LoginProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_profile);
+        setContentView(R.layout.activity_profile);
     }
 
     public void signOut(View v) {

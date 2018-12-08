@@ -102,7 +102,15 @@ public class SysManager {
         return _auth;
     }
 
-    public void afterLogin(@NonNull Task<AuthResult> task, Context context, Activity previousActivity) {
+    /**
+     * Called when user authenticated against firebase auth.
+     * Sets the currentUser of the system, with the user's data got from DB.
+     * If user isn't on DB yet, it will insert a new entry for him at the DB.
+     * @param task
+     * @param context
+     * @param previousActivity
+     */
+    public void signInUser(@NonNull Task<AuthResult> task, Context context, Activity previousActivity) {
         if (task.isSuccessful()) {
             try {
                 // Sign in success, update UI with the signed-in fireBaseUser's information
@@ -150,10 +158,7 @@ public class SysManager {
         Toast.makeText(context, "User logged out successfully", Toast.LENGTH_LONG).show();
     }
 
-    /**
-     *
-     * @return the currentUser (From DB) which is logged in.
-     */
+
     public User getCurrentUserFromDB() {
         if (_currentUser != null) {
             return _currentUser;
