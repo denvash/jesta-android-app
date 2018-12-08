@@ -33,7 +33,7 @@ import static com.jesta.util.SysManager.DBTask.*;
 
 public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
-    CallbackManager callbackManager;
+    CallbackManager fbCallbackManager;
     LoginButton loginButton;
 
     public SysManager sysManager;
@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         sysManager = new SysManager(this);
 
         // wait for async dbTask
-        // INIT_USERS_LIST will reload the userList in sysManager
+        // RELOAD_USERS will reload the userList in sysManager
         // and update the currentUser (if logged in)
-        final Task<List<User>> getAllUsers = sysManager.createDBTask(INIT_USERS_LIST);
+        final Task<List<User>> getAllUsers = sysManager.createDBTask(RELOAD_USERS);
 
         getAllUsers.addOnCompleteListener(new OnCompleteListener<List<User>>() {
             @Override
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 // user is logged in
                 User currentUser = sysManager.getCurrentUserFromDB();
                 if (currentUser != null) {
+                    // todo example of changing an user on DB
                     currentUser.setDisplayName("Pachka hagever :)");
                     sysManager.setUserOnDB(currentUser);
 
@@ -78,9 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 Button emailSignInButton = (Button) findViewById(R.id.email_sign_in_btn);
 
                 // Facebook
-                callbackManager = CallbackManager.Factory.create();
-
-                LoginManager.getInstance().registerCallback(callbackManager,
+                fbCallbackManager = CallbackManager.Factory.create();
+                LoginManager.getInstance().registerCallback(fbCallbackManager,
                         new FacebookCallback<LoginResult>() {
                             @Override
                             public void onSuccess(LoginResult loginResult) {
@@ -97,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });
-
-
                 facebookSignInButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -112,8 +110,6 @@ public class MainActivity extends AppCompatActivity {
                         .requestEmail()
                         .build();
                 mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
-
-
                 googleSignInButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -132,22 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
-
-//        allTask.addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//
-//               DataSnapshot ss = getAllUsers.getResult();
-//
-
-//        });
-//        allTask.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                // todo: apologize profusely to the user!
-//            }
-//        });
     }
 
     @Override
@@ -172,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == 64206) { // facebook
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+            fbCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 

@@ -8,11 +8,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jesta.R
-import com.jesta.util.Mission
+import com.jesta.util.Jesta
 import kotlinx.android.synthetic.main.jesta_card.view.*
 
 class JestaCardRecyclerViewAdapter internal constructor(
-    private val postList: List<Mission>
+    private val postList: List<Jesta>
 ) : RecyclerView.Adapter<JestaCardRecyclerViewAdapter.JestaCardViewHolder>() {
 
     inner class JestaCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +40,9 @@ class JestaCardRecyclerViewAdapter internal constructor(
             )
                 .show()
             val intent = Intent(it.context, JestaPostViewActivity::class.java)
-            intent.putExtra(JestaPostViewActivity.extra, postList[position])
+            // TODO-DENNIS
+            // what the fuck is he yelling about?
+            // intent.putExtra(JestaPostViewActivity.extra, postList[position])
             it.context.startActivity(intent)
         }
 

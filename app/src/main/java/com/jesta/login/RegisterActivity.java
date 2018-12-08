@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         sysManager.setTitle(getString(R.string.register));
         sysManager.showBackButton(true);
 
-        // If the fireBaseUser is logged in, close this activity and go to profile
+        // If user logged in, close this activity and go to profile
         if (sysManager.getCurrentUserFromDB() != null) {
             finish();
             Intent i = new Intent(this,LoginProfileActivity.class);

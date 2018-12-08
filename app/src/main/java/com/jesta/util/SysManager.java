@@ -21,7 +21,7 @@ import com.jesta.pathChoose.PathActivity;
 
 import java.util.*;
 
-import static com.jesta.util.SysManager.DBTask.INIT_USERS_LIST;
+import static com.jesta.util.SysManager.DBTask.*;
 
 /**
  * System manager
@@ -32,7 +32,9 @@ public class SysManager {
 
     // users db and management
     private DatabaseReference _usersDatabase = FirebaseDatabase.getInstance().getReference("users");
-    private List<User> _usersList = new ArrayList<>();
+    private DatabaseReference _jestasDatabase = FirebaseDatabase.getInstance().getReference("jestas");
+    private static HashMap<String, User> _usersDict = new HashMap<String, User>();
+    private static HashMap<String, Jesta> _jestasDict = new HashMap<String, Jesta>();
     private User _currentUser = null;
 
     // layout and _activity
@@ -61,29 +63,29 @@ public class SysManager {
 
     public enum DBTask
     {
-        INIT_USERS_LIST // init usersList and currentUser
+        RELOAD_USERS, // update _usersDict
+        RELOAD_JESTAS // update _jestasDict
     }
 
     public Task createDBTask(DBTask taskName) {
         // todo firebase realtime db - change permission from public to private (only for app)
-        if (taskName == INIT_USERS_LIST) {
+        if (taskName == RELOAD_USERS) {
             final TaskCompletionSource<List<User>> source = new TaskCompletionSource<>();
-
-            // Set listeners
-            // Update currentUser and usersList
-            _usersDatabase.addValueEventListener(new ValueEventListener() {
+            _usersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (_usersDict.size() > 0) {
+                        return; // avoid Task already completed exception
+                    }
                     List<User> usersList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         HashMap dbUser = (HashMap)ds.getValue();
 
                         // todo create a constructor for User
                         User user = new User((String)dbUser.get("id"), (String)dbUser.get("email"));
+                        _usersDict.put((String)dbUser.get("id"), user);
                         usersList.add(user);
-                        _usersList.add(user);
                     }
-
                     source.setResult(usersList);
                 }
                 @Override
@@ -91,11 +93,40 @@ public class SysManager {
                     source.setException(databaseError.toException());
                 }
             });
-
             // return the task so it could be waited on the caller
             return source.getTask();
         }
-        return null;
+        else if (taskName == RELOAD_JESTAS) {
+            final TaskCompletionSource<List<Jesta>> source = new TaskCompletionSource<>();
+            _jestasDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (_jestasDict.size() > 0) {
+                        return; // avoid Task already completed exception
+                    }
+                    List<Jesta> jestasList = new ArrayList<>();
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        HashMap dbJesta = (HashMap)ds.getValue();
+
+                        // todo create a constructor for User
+                        Jesta jesta = new Jesta(dbJesta);
+                        // todo: use randomUUID() when storing jestas in db
+                        // here: use (String)dbJesta.get("id")
+                        _jestasDict.put(UUID.randomUUID().toString(), jesta);
+                        jestasList.add(jesta);
+                    }
+
+                    source.setResult(jestasList);
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    source.setException(databaseError.toException());
+                }
+            });
+            // return the task so it could be waited on the caller
+            return source.getTask();
+        }
+       return null;
     };
 
     public FirebaseAuth getFirebaseAuth() {
@@ -128,13 +159,15 @@ public class SysManager {
                 }
                 else {// create new user and store in DB
                     user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
-                    if (firebaseUser.getDisplayName() != null) {
-                        user.setDisplayName(firebaseUser.getDisplayName());
-                    }
-                    if (firebaseUser.getPhotoUrl() != null) {
-                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
-                    }
+//                    if (firebaseUser.getDisplayName() != null) {
+//                        user.setDisplayName(firebaseUser.getDisplayName());
+//                    }
+//                    if (firebaseUser.getPhotoUrl() != null) {
+//                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
+//                    }
+//                    setUserOnDB(user);
                     _usersDatabase.child(user.getId()).setValue(user);
+
                 }
 
                 _currentUser = user;
@@ -158,22 +191,17 @@ public class SysManager {
         Toast.makeText(context, "User logged out successfully", Toast.LENGTH_LONG).show();
     }
 
-
+    /**
+     * Note: RELOAD_USERS should be called before using this function at the first time
+     * Call RELOAD_USERS every time you need the users list to be updated from DB
+     * @return
+     */
     public User getCurrentUserFromDB() {
-        if (_currentUser != null) {
-            return _currentUser;
-        }
-
         FirebaseUser firebaseUser = _auth.getCurrentUser();
-        User user = null;
-        for (int i = 0; i < _usersList.size() && firebaseUser != null; ++i) {
-            if (_usersList.get(i).getId().equals(firebaseUser.getUid())) {
-                user = _usersList.get(i);
-                break;
-            }
+        if (firebaseUser == null) {
+            return null;
         }
-        _currentUser = user;
-        return user;
+        return _usersDict.get(firebaseUser.getUid());
     }
 
     public void setUserOnDB(User user) {

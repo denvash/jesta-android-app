@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.jesta.util.SysManager;
 import com.jesta.R;
+import com.jesta.util.User;
 
 public class LoginProfileActivity extends AppCompatActivity {
     TextView email;
@@ -26,15 +27,16 @@ public class LoginProfileActivity extends AppCompatActivity {
         // don't show keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        String uid = sysManager.getCurrentUserFromDB().getId();
-        String phoneNumber = sysManager.getCurrentUserFromDB().getPhoneNumber();
-        Uri photoUrl = sysManager.getCurrentUserFromDB().getPhotoUrl();
+        User currentUser = sysManager.getCurrentUserFromDB();
+        String uid = currentUser.getId();
+        String phoneNumber = currentUser.getPhoneNumber();
+        Uri photoUrl = currentUser.getPhotoUrl();
 
         email = (TextView)findViewById(R.id.email);
-        email.setText(sysManager.getCurrentUserFromDB().getEmail());
+        email.setText(currentUser.getEmail());
 
         displayName = (TextView)findViewById(R.id.displayName);
-        displayName.setText(sysManager.getCurrentUserFromDB().getDisplayName());
+        displayName.setText(currentUser.getDisplayName());
     }
 
     @Override
