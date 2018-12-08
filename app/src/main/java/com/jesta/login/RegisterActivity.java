@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         sysManager.showBackButton(true);
 
         // If the fireBaseUser is logged in, close this activity and go to profile
-        if (sysManager.getCurrentUser() != null) {
+        if (sysManager.getCurrentUserFromDB() != null) {
             finish();
             Intent i = new Intent(this,ProfileActivity.class);
             startActivity(i);
@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 // TODO loading-animation here
                                 // sign in the user with firebase
-                                sysManager.auth.signInWithEmailAndPassword(email, password)
+                                sysManager.getFirebaseAuth().signInWithEmailAndPassword(email, password)
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {

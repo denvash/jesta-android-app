@@ -16,8 +16,8 @@ class PathActivity : AppCompatActivity() {
         setContentView(R.layout.activity_path)
 
         // TODO: use current logged in user like this:
-//        val sysManager = SysManager(this)
-//        val currentUser = sysManager.currentUser
+        val sysManager = SysManager(this)
+        val currentUser = sysManager.currentUserFromDB
 
         ask_jesta_button.setOnClickListener {
             val intent = Intent(this, AskJestaActivity::class.java)

@@ -24,8 +24,12 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.jesta.login.LoginActivity;
 import com.jesta.pathChoose.PathActivity;
 import com.jesta.util.SysManager;
+import com.jesta.util.User;
 
 import java.util.Arrays;
+import java.util.List;
+
+import static com.jesta.util.SysManager.DBTask.*;
 
 public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
@@ -39,31 +43,39 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         sysManager = new SysManager(this);
 
-
         // wait for async dbTask
-        Task<Void> allTask = Tasks.whenAll(sysManager.dbTask);
-        allTask.addOnSuccessListener(new OnSuccessListener<Void>() {
+        // INIT_USERS_LIST will reload the userList in sysManager
+        // and update the currentUser (if logged in)
+        final Task<List<User>> getAllUsers = sysManager.createDBTask(INIT_USERS_LIST);
+
+        getAllUsers.addOnCompleteListener(new OnCompleteListener<List<User>>() {
             @Override
-            public void onSuccess(Void aVoid) {
-//                DataSnapshot data = dbTask.getResult();
+            public void onComplete(@NonNull Task<List<User>> task) {
+                if (!task.isSuccessful()) {
+                    // todo some error
+                }
 
                 // user is logged in
-                if (sysManager.getCurrentUser() != null) {
+                User currentUser = sysManager.getCurrentUserFromDB();
+                if (currentUser != null) {
+                    currentUser.setDisplayName("Pachka hagever :)");
+                    sysManager.setUserOnDB(currentUser);
+
                     //todo go to OTPActivity or check for OTP and go to Path
-                    Intent i = new Intent(getApplicationContext(),PathActivity.class);
+                    Intent i = new Intent(getApplicationContext(), PathActivity.class);
                     finish();
                     startActivity(i);
                     return;
                 }
 
-                // otherwise, render ui
+                // otherwise (user isn't logged in), render ui
                 setContentView(R.layout.activity_main);
                 sysManager.setTitle(getString(R.string.welcome));
                 sysManager.showBackButton(false);
 
-                Button facebookSignInButton = (Button)findViewById(R.id.facebook_sign_in_btn);
-                Button googleSignInButton = (Button)findViewById(R.id.google_sign_in_btn);
-                Button emailSignInButton = (Button)findViewById(R.id.email_sign_in_btn);
+                Button facebookSignInButton = (Button) findViewById(R.id.facebook_sign_in_btn);
+                Button googleSignInButton = (Button) findViewById(R.id.google_sign_in_btn);
+                Button emailSignInButton = (Button) findViewById(R.id.email_sign_in_btn);
 
                 // Facebook
                 callbackManager = CallbackManager.Factory.create();
@@ -94,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
                 // Google
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestIdToken(getString(R.string.default_web_client_id))
@@ -119,15 +130,24 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(signInIntent);
                     }
                 });
+            }
+        });
 
-            }
-        });
-        allTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // todo: apologize profusely to the user!
-            }
-        });
+
+//        allTask.addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//
+//               DataSnapshot ss = getAllUsers.getResult();
+//
+
+//        });
+//        allTask.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                // todo: apologize profusely to the user!
+//            }
+//        });
     }
 
     @Override
@@ -158,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        sysManager.auth.signInWithCredential(credential)
+        sysManager.getFirebaseAuth().signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -169,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleFacebookToken(AccessToken accessToken) {
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
-        sysManager.auth.signInWithCredential(credential)
+        sysManager.getFirebaseAuth().signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

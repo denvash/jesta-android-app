@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Blank not allowed", Toast.LENGTH_SHORT).show();
         }
         else {
-            sysManager.auth.signInWithEmailAndPassword(email, password)
+            sysManager.getFirebaseAuth().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

@@ -25,36 +25,36 @@ public class User {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getDisplayName() {
+        return displayName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public Uri getPhotoUrl() {
+        return photoUrl;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getPhoneNumber() {
+        return phone;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
 
-    public Uri getPhotoUrl() {
-        return photoUrl;
-    }
-
     public void setPhotoUrl(Uri photoUrl) {
         this.photoUrl = photoUrl;
-    }
-
-    public String getPhoneNumber() {
-        return phone;
     }
 
     public void setPhoneNumber(String phone) {

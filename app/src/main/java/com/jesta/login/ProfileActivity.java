@@ -26,15 +26,15 @@ public class ProfileActivity extends AppCompatActivity {
         // don't show keyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        String uid = sysManager.getCurrentUser().getId();
-        String phoneNumber = sysManager.getCurrentUser().getPhoneNumber();
-        Uri photoUrl = sysManager.getCurrentUser().getPhotoUrl();
+        String uid = sysManager.getCurrentUserFromDB().getId();
+        String phoneNumber = sysManager.getCurrentUserFromDB().getPhoneNumber();
+        Uri photoUrl = sysManager.getCurrentUserFromDB().getPhotoUrl();
 
         email = (TextView)findViewById(R.id.email);
-        email.setText(sysManager.getCurrentUser().getEmail());
+        email.setText(sysManager.getCurrentUserFromDB().getEmail());
 
         displayName = (TextView)findViewById(R.id.displayName);
-        displayName.setText(sysManager.getCurrentUser().getDisplayName());
+        displayName.setText(sysManager.getCurrentUserFromDB().getDisplayName());
     }
 
     @Override
