@@ -14,7 +14,7 @@ import com.jesta.MainActivity;
 import com.jesta.R;
 import com.jesta.util.SysManager;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends LoginActivitiesWrapper {
 
     EditText e1,e2;
     FirebaseAuth auth;
@@ -52,41 +52,24 @@ public class RegisterActivity extends AppCompatActivity {
         final String email = e1.getText().toString();
         final String password = e2.getText().toString();
 
-        if (email.equals("") || password.equals("")) {
-            Toast.makeText(getApplicationContext(), "Blank not allowed", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
-                                // user created in firebase only
-                                Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
-
-                                // TODO loading-animation here
-                                // sign in the user with firebase
-                                sysManager.getFirebaseAuth().signInWithEmailAndPassword(email, password)
-                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                sysManager.signInUser(task, getApplicationContext(), RegisterActivity.this);
-
-                                                // redirect to main activity and clear activity stack
-                                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(i);
-                                            }
-                                        });
-
-
-                            }
-                            else {
-                                String reason = task.getException().getMessage();
-                                Toast.makeText(getApplicationContext(), "User couldn't be created: " + reason, Toast.LENGTH_LONG).show();
-                            }
+        // todo-optional: do some email and password validation on client's side
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            Intent i = new Intent(getApplicationContext(), ErrorActivity.class);
+                            Bundle b = new Bundle();
+                            b.putString("exception", task.getException().getMessage());
+                            i.putExtras(b);
+                            startActivity(i);
+                            return;
                         }
-                    });
-        }
+                        // user created in firebase only
+                        Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
+                        // TODO loading-animation here
+                        loginWithCredentials(email, password);
+                    }
+                });
     }
 }

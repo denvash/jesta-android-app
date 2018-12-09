@@ -14,8 +14,7 @@ import com.jesta.MainActivity;
 import com.jesta.R;
 import com.jesta.util.SysManager;
 
-public class LoginActivity extends AppCompatActivity {
-    SysManager sysManager;
+public class LoginActivity extends LoginActivitiesWrapper {
 
     @Override
     protected void onResume()
@@ -49,12 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginUser(View v) {
-
         EditText e1 = (EditText)findViewById(R.id.email);
         EditText e2 = (EditText)findViewById(R.id.password);
-
-
-
 
         String email = e1.getText().toString();
         String password = e2.getText().toString();
@@ -63,18 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Blank not allowed", Toast.LENGTH_SHORT).show();
         }
         else {
-            sysManager.getFirebaseAuth().signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            sysManager.signInUser(task, getApplicationContext(), LoginActivity.this);
-
-                            // redirect to main activity and clear activity stack
-                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
-                        }
-                    });
+            loginWithCredentials(email, password);
         }
     }
 }

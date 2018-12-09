@@ -17,10 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.*;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FacebookAuthProvider;
-import com.google.firebase.auth.GoogleAuthProvider;
+import com.jesta.login.LoginActivitiesWrapper;
 import com.jesta.login.LoginActivity;
 import com.jesta.pathChoose.PathActivity;
 import com.jesta.util.SysManager;
@@ -31,12 +28,10 @@ import java.util.List;
 
 import static com.jesta.util.SysManager.DBTask.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends LoginActivitiesWrapper {
     GoogleSignInClient mGoogleSignInClient;
     CallbackManager fbCallbackManager;
     LoginButton loginButton;
-
-    public SysManager sysManager;
 
     @Override
     protected void onResume() {
@@ -136,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -156,29 +150,4 @@ public class MainActivity extends AppCompatActivity {
             fbCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        sysManager.getFirebaseAuth().signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        sysManager.signInUser(task, getApplicationContext(), MainActivity.this);
-                        onResume();
-                    }
-                });
-    }
-
-    private void handleFacebookToken(AccessToken accessToken) {
-        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
-        sysManager.getFirebaseAuth().signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        sysManager.signInUser(task, getApplicationContext(), MainActivity.this);
-                        onResume();
-                    }
-                });
-    }
-
 }

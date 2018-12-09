@@ -143,38 +143,31 @@ public class SysManager {
      * @param context
      * @param previousActivity
      */
-    public void signInUser(@NonNull Task<AuthResult> task, Context context, Activity previousActivity) {
-        if (task.isSuccessful()) {
-            try {
-                // Sign in success, update UI with the signed-in fireBaseUser's information
-                FirebaseUser firebaseUser = _auth.getCurrentUser();
+    public void signInUser(@NonNull Task<AuthResult> task, Context context, Activity previousActivity) throws Exception {
+        if (!task.isSuccessful()) {
+            throw new Exception(task.getException());
+        }
 
-                Toast.makeText(context, "User logged in successfully", Toast.LENGTH_SHORT).show();
+        // Sign in success, update UI with the signed-in fireBaseUser's information
+        FirebaseUser firebaseUser = _auth.getCurrentUser();
 
-                User user = getCurrentUserFromDB();
-                if (user != null) {// user exists in db
+        Toast.makeText(context, "User logged in successfully", Toast.LENGTH_SHORT).show();
 
-                }
-                else {// create new user and store in DB
-                    user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
-                    if (firebaseUser.getDisplayName() != null) {
-                        user.setDisplayName(firebaseUser.getDisplayName());
-                    }
-                    // todo: the following causing a bug (possible too big data to store on db)
+        User user = getCurrentUserFromDB();
+        if (user != null) {// user exists in db
+
+        } else {// create new user and store in DB
+            user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
+            if (firebaseUser.getDisplayName() != null) {
+                user.setDisplayName(firebaseUser.getDisplayName());
+            }
+            // todo: the following causing a bug (possible too big data to store on db)
 //                    if (firebaseUser.getPhotoUrl() != null) {
 //                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
 //                    }
-                    setUserOnDB(user);
-                }
-
-                _currentUser = user;
-            } catch (Exception e) {
-                logAndGoToErrorActivity(context, previousActivity, e.getMessage());
-            }
-        } else {
-            String reason = task.getException().getMessage();
-            logAndGoToErrorActivity(context, previousActivity, "Failed to login: " + reason);
+            setUserOnDB(user);
         }
+        _currentUser = user;
     }
 
     public void signOutUser(Context context) {
@@ -220,23 +213,12 @@ public class SysManager {
     }
 
     public void showKeyboardAutomatically(Boolean flag) {
-
         if (flag) {
             _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
         else {// don't show keyboard
             _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
-    }
-
-    public void logAndGoToErrorActivity(Context context, Activity previousActivity, String errorMessage) {
-        Intent i = new Intent(context, ErrorActivity.class);
-        Bundle b = new Bundle();
-        b.putString("exception", errorMessage);
-        i.putExtras(b);
-        context.startActivity(i);
-        // todo write to errorlog
-//        previousActivity.finish(); // Uncomment if can't return back after error
     }
 
 }
