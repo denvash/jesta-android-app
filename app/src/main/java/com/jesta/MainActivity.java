@@ -71,6 +71,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                 sysManager.showBackButton(false);
 
                 Button facebookSignInButton = (Button) findViewById(R.id.facebook_sign_in_btn);
+
                 Button googleSignInButton = (Button) findViewById(R.id.google_sign_in_btn);
                 Button emailSignInButton = (Button) findViewById(R.id.email_sign_in_btn);
 
@@ -96,7 +97,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                 facebookSignInButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("public_profile"));
+                        LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("email", "public_profile"));
                     }
                 });
 
