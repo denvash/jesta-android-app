@@ -46,10 +46,10 @@ public class LoginActivitiesWrapper extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
-            } catch (Exception exception) {
+            } catch (Exception e) {
                 Intent i = new Intent(getApplicationContext(), ErrorActivity.class);
                 Bundle b = new Bundle();
-                b.putString("exception", task.getException().getMessage());
+                b.putString("exception", e.getMessage());
                 i.putExtras(b);
                 startActivity(i);
             }
