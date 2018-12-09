@@ -14,7 +14,7 @@ data class Payment(val visible: Boolean, val price: Int)
 
 @Parcelize
 data class Mission(
-//    var id: String = "emptyID",
+    var id: String = "emptyID",
     var difficulty: String = "emptyDifficulty",
     var description: String = "emptyDescription",
     var imageUrl: String = "emptyImageUrl",
@@ -25,7 +25,7 @@ data class Mission(
 ) : Parcelable {
 
     constructor(dbJesta: Map<String, String>) : this() {
-//        id = dbJesta["id"]!!
+        id = dbJesta["id"].toString()
         difficulty = dbJesta["difficulty"].toString()
         description = dbJesta["description"].toString()
         imageUrl = dbJesta["imageUrl"].toString()

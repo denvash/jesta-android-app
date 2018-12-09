@@ -193,8 +193,8 @@ public class SysManager {
         _usersDatabase.child(user.getId()).setValue(user);
     }
 
-    public void setJestaOnDB(Jesta jesta) {
-        _jestasDatabase.child(jesta.getId()).setValue(jesta);
+    public void setMissionOnDB(Mission mission) {
+        _jestasDatabase.child(mission.getId()).setValue(mission);
     }
 
 
