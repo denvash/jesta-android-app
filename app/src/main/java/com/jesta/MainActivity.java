@@ -46,21 +46,22 @@ public class MainActivity extends AppCompatActivity {
         // wait for async dbTask
         // RELOAD_USERS will reload the userList in sysManager
         // and update the currentUser (if logged in)
-        final Task<List<User>> getAllUsers = sysManager.createDBTask(RELOAD_USERS);
+        Task<List<User>> getAllUsers = sysManager.createDBTask(RELOAD_USERS);
 
         getAllUsers.addOnCompleteListener(new OnCompleteListener<List<User>>() {
             @Override
             public void onComplete(@NonNull Task<List<User>> task) {
                 if (!task.isSuccessful()) {
                     // todo some error
+                    return;
                 }
 
                 // user is logged in
                 User currentUser = sysManager.getCurrentUserFromDB();
                 if (currentUser != null) {
                     // todo example of changing an user on DB
-                    currentUser.setDisplayName("Pachka hagever :)");
-                    sysManager.setUserOnDB(currentUser);
+//                    currentUser.setDisplayName("Pachka hagever :)");
+//                    sysManager.setUserOnDB(currentUser);
 
                     //todo go to OTPActivity or check for OTP and go to Path
                     Intent i = new Intent(getApplicationContext(), PathActivity.class);

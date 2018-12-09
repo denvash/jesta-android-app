@@ -75,8 +75,10 @@ public class SysManager {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (_usersDict.size() > 0) {
-                        return; // avoid Task already completed exception
+//                        return; // avoid Task already completed exception
+
                     }
+
                     List<User> usersList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         HashMap dbUser = (HashMap)ds.getValue();
@@ -102,7 +104,7 @@ public class SysManager {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (_jestasDict.size() > 0) {
-                        return; // avoid Task already completed exception
+//                        return; // avoid Task already completed exception
                     }
                     List<Jesta> jestasList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -171,7 +173,7 @@ public class SysManager {
                 }
 
                 _currentUser = user;
-                Intent i = new Intent(context, PathActivity.class);
+                Intent i = new Intent(context, MainActivity.class);
                 context.startActivity(i);
             } catch (Exception e) {
                 logAndGoToErrorActivity(context, previousActivity, e.getMessage());
