@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".path.PathActivity">
+    tools:context=".pathChoose.PathActivity">
 
     <ImageView
         android:layout_width="64dp"
@@ -35,4 +35,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/jesta_path_ask_a_jesta" />
+
+    <!--TODO DEBUG-->
+    <TextView
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:textAlignment="center"
+        android:layout_height="match_parent"
+        android:text="Logout"/>
 </LinearLayout>

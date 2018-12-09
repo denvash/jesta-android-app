@@ -142,4 +142,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Jesta.Button"
+        android:id="@+id/jesta_profile_log_out_button"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/jesta_profile_logout"
+        />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -30,5 +30,5 @@
         style="@style/Widget.Jesta.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nav_profile" />
+        android:text="@string/nav_settings" />
 </merge>

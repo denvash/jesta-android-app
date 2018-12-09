@@ -1,5 +1,4 @@
 package com.jesta.util;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,84 +17,43 @@ import com.google.firebase.database.*;
 import com.jesta.MainActivity;
 import com.jesta.R;
 import com.jesta.login.ErrorActivity;
-import com.jesta.path.PathActivity;
+import com.jesta.pathChoose.PathActivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
+import static com.jesta.util.SysManager.DBTask.*;
 
 /**
  * System manager
  */
 public class SysManager {
-
     // authentication
-    public FirebaseAuth auth; // used only by MainActivity
-    private static FirebaseUser fireBaseUser;
-    public DatabaseReference usersDatabase;
-    private static List<User> usersList;
-    private static DataSnapshot usersListDataSnapshot;
-    private static User currentUser;
-    private static TaskCompletionSource<DataSnapshot> dbSource = new TaskCompletionSource<>();
-    public Task dbTask = dbSource.getTask();
+    private FirebaseAuth _auth = FirebaseAuth.getInstance();
 
-    // layout and activity
-    private Activity activity;
-    private TextView backButtonTv;
+    // users db and management
+    private DatabaseReference _usersDatabase = FirebaseDatabase.getInstance().getReference("users");
+    private DatabaseReference _jestasDatabase = FirebaseDatabase.getInstance().getReference("jestas");
+    private static HashMap<String, User> _usersDict = new HashMap<>();
+    private static HashMap<String, Mission> _jestasDict = new HashMap<>();
+    private User _currentUser = null;
+
+    // layout and _activity
+    private Activity _activity;
+    private TextView _backButtonTv;
 
     public SysManager(Activity currentActivity) {
-        activity = currentActivity;
-        auth = FirebaseAuth.getInstance();
-        usersList = new ArrayList<>();
-        fireBaseUser = auth.getCurrentUser();
-        usersDatabase = FirebaseDatabase.getInstance().getReference("users");
-
-        // Get current user from DB
-        usersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (usersListDataSnapshot != null) {
-                    return;
-                }
-                usersListDataSnapshot = dataSnapshot;
-                for (DataSnapshot ds : usersListDataSnapshot.getChildren()) {
-                    HashMap dbUser = (HashMap) ds.getValue();
-
-                    // todo create a constructor for User
-
-                    // TODO: too much null need to be fixed
-                    String userId = dbUser.get("id") == null ? "null" : (String) dbUser.get("id");
-                    String email = dbUser.get("email") == null ? "null" : (String) dbUser.get("email");
-
-                    User user = new User(userId,email);
-                    usersList.add(user);
-
-                    if (fireBaseUser != null && ds.getKey().equals(fireBaseUser.getUid())) {
-                        currentUser = user;
-                    }
-                }
-                dbSource.setResult(usersListDataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                dbSource.setException(databaseError.toException());
-            }
-        });
+        _activity = currentActivity;
 
         // Set listener if back button is available
-        backButtonTv = (TextView) activity.findViewById(R.id.back_button);
-        if (backButtonTv != null) {
-            backButtonTv.setOnClickListener(new View.OnClickListener() {
+        _backButtonTv = (TextView) _activity.findViewById(R.id.back_button);
+        if (_backButtonTv != null) {
+            _backButtonTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.finish();
+                    _activity.finish();
                 }
             });
         }
-
-
-        // todo firebase realtime db - change permission from public to private (only for app)
     }
 
     /**
@@ -103,66 +61,138 @@ public class SysManager {
      * TODO-MAX: implement updateUserInDB etc'...
      */
 
-    private User userExistsInDB(FirebaseUser firebaseUser) {
-        User user = null;
-        for (int i = 0; i < usersList.size(); ++i) {
-            if (usersList.get(i).getId().equals(firebaseUser.getUid())) {
-                user = usersList.get(i);
-                break;
-            }
-        }
-        return user;
+    public enum DBTask
+    {
+        RELOAD_USERS, // update _usersDict
+        RELOAD_JESTAS // update _jestasDict
     }
 
-    public void afterLogin(@NonNull Task<AuthResult> task, Context context, Activity previousActivity) {
-        if (task.isSuccessful()) {
-            try {
-                // Sign in success, update UI with the signed-in fireBaseUser's information
-                FirebaseUser firebaseUser = auth.getCurrentUser();
+    public Task createDBTask(DBTask taskName) {
+        // todo firebase realtime db - change permission from public to private (only for app)
+        if (taskName == RELOAD_USERS) {
+            final TaskCompletionSource<List<User>> source = new TaskCompletionSource<>();
+            _usersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (_usersDict.size() > 0) {
+//                        return; // avoid Task already completed exception
 
-                Toast.makeText(context, "User logged in successfully", Toast.LENGTH_SHORT).show();
-
-                // Note: after we do finish() there is no activities waiting to pop
-                // Therefore we should end the next piece of code with startActivity!
-                previousActivity.finish();
-
-                User user = userExistsInDB(firebaseUser);
-                if (user != null) {// user exists in db
-
-                } else {// create new user and store in DB
-                    user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
-                    if (firebaseUser.getDisplayName() != null) {
-                        user.setDisplayName(firebaseUser.getDisplayName());
                     }
-                    if (firebaseUser.getPhotoUrl() != null) {
-                        user.setPhotoUrl(firebaseUser.getPhotoUrl().toString());
+
+                    List<User> usersList = new ArrayList<>();
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        HashMap dbUser = (HashMap)ds.getValue();
+
+                        // todo create a constructor for User
+                        User user = new User((String)dbUser.get("id"), (String)dbUser.get("email"));
+                        _usersDict.put((String)dbUser.get("id"), user);
+                        usersList.add(user);
                     }
-                    usersDatabase.child(user.getId()).setValue(user);
+                    source.setResult(usersList);
                 }
-
-                currentUser = user;
-                Intent i = new Intent(context, PathActivity.class);
-                context.startActivity(i);
-            } catch (Exception e) {
-                logAndGoToErrorActivity(context, previousActivity, e.getMessage());
-            }
-        } else {
-            String reason = task.getException().getMessage();
-            logAndGoToErrorActivity(context, previousActivity, "Failed to login: " + reason);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    source.setException(databaseError.toException());
+                }
+            });
+            // return the task so it could be waited on the caller
+            return source.getTask();
         }
+        else if (taskName == RELOAD_JESTAS) {
+            final TaskCompletionSource<List<Mission>> source = new TaskCompletionSource<>();
+            _jestasDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (_jestasDict.size() > 0) {
+//                        return; // avoid Task already completed exception
+                    }
+                    List<Mission> jestasList = new ArrayList<>();
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        HashMap dbJesta = (HashMap)ds.getValue();
+
+                        // todo create a constructor for User
+                        Mission jesta = new Mission(dbJesta);
+                        // todo: use randomUUID() when storing jestas in db
+                        // here: use (String)dbJesta.get("id")
+                        _jestasDict.put(UUID.randomUUID().toString(), jesta);
+                        jestasList.add(jesta);
+                    }
+
+                    source.setResult(jestasList);
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    source.setException(databaseError.toException());
+                }
+            });
+            // return the task so it could be waited on the caller
+            return source.getTask();
+        }
+       return null;
+    };
+
+    public FirebaseAuth getFirebaseAuth() {
+        return _auth;
     }
 
-    public void signOutUser(Context context, Activity previousActivity) {
-        auth.signOut();
-        currentUser = null;
-        previousActivity.finish();
+    /**
+     * Called when user authenticated against firebase auth.
+     * Sets the currentUser of the system, with the user's data got from DB.
+     * If user isn't on DB yet, it will insert a new entry for him at the DB.
+     * @param task
+     * @param context
+     * @param previousActivity
+     */
+    public void signInUser(@NonNull Task<AuthResult> task, Context context, Activity previousActivity) throws Exception {
+        if (!task.isSuccessful()) {
+            throw new Exception(task.getException());
+        }
+
+        // Sign in success, update UI with the signed-in fireBaseUser's information
+        FirebaseUser firebaseUser = _auth.getCurrentUser();
+
+        Toast.makeText(context, "User logged in successfully", Toast.LENGTH_SHORT).show();
+
+        User user = getCurrentUserFromDB();
+        if (user != null) {// user exists in db
+
+        } else {// create new user and store in DB
+            user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
+            if (firebaseUser.getDisplayName() != null) {
+                user.setDisplayName(firebaseUser.getDisplayName());
+            }
+            // todo: the following causing a bug (possible too big data to store on db)
+//                    if (firebaseUser.getPhotoUrl() != null) {
+//                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
+//                    }
+            setUserOnDB(user);
+        }
+        _currentUser = user;
+    }
+
+    public void signOutUser(Context context) {
+        _auth.signOut();
+        _currentUser = null;
         Intent i = new Intent(context, MainActivity.class);
         context.startActivity(i);
         Toast.makeText(context, "User logged out successfully", Toast.LENGTH_LONG).show();
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    /**
+     * Note: RELOAD_USERS should be called before using this function at the first time
+     * Call RELOAD_USERS every time you need the users list to be updated from DB
+     * @return
+     */
+    public User getCurrentUserFromDB() {
+        FirebaseUser firebaseUser = _auth.getCurrentUser();
+        if (firebaseUser == null) {
+            return null;
+        }
+        return _usersDict.get(firebaseUser.getUid());
+    }
+
+    public void setUserOnDB(User user) {
+        _usersDatabase.child(user.getId()).setValue(user);
     }
 
 
@@ -171,34 +201,24 @@ public class SysManager {
      */
 
     public void setTitle(String title) {
-        TextView pageNameTv = (TextView) activity.findViewById(R.id.page_name);
+        TextView pageNameTv = (TextView) _activity.findViewById(R.id.page_name);
         pageNameTv.setText(title);
     }
 
     public void showBackButton(Boolean flag) {
-        backButtonTv = (TextView) activity.findViewById(R.id.back_button);
-        if (backButtonTv == null)
+        _backButtonTv = (TextView) _activity.findViewById(R.id.back_button);
+        if (_backButtonTv == null)
             return;
-        backButtonTv.setText(flag ? activity.getResources().getString(R.string.leftArrow) : "");
+        _backButtonTv.setText(flag ? _activity.getResources().getString(R.string.leftArrow) : "");
     }
 
     public void showKeyboardAutomatically(Boolean flag) {
-
         if (flag) {
-            activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        } else {// don't show keyboard
-            activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+            _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
-    }
-
-    public void logAndGoToErrorActivity(Context context, Activity previousActivity, String errorMessage) {
-        Intent i = new Intent(context, ErrorActivity.class);
-        Bundle b = new Bundle();
-        b.putString("exception", errorMessage);
-        i.putExtras(b);
-        context.startActivity(i);
-        // todo write to errorlog
-//        previousActivity.finish(); // Uncomment if can't return back after error
+        else {// don't show keyboard
+            _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
     }
 
 }

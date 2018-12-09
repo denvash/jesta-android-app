@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.jesta.MainActivity;
 import com.jesta.R;
 import com.jesta.util.SysManager;
 
-public class LoginActivity extends AppCompatActivity {
-    SysManager sysManager;
+public class LoginActivity extends LoginActivitiesWrapper {
 
     @Override
     protected void onResume()
@@ -48,12 +48,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginUser(View v) {
-
         EditText e1 = (EditText)findViewById(R.id.email);
         EditText e2 = (EditText)findViewById(R.id.password);
-
-
-
 
         String email = e1.getText().toString();
         String password = e2.getText().toString();
@@ -62,13 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Blank not allowed", Toast.LENGTH_SHORT).show();
         }
         else {
-            sysManager.auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            sysManager.afterLogin(task, getApplicationContext(), LoginActivity.this);
-                        }
-                    });
+            loginWithCredentials(email, password);
         }
     }
 }

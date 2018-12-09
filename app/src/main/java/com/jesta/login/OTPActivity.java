@@ -29,7 +29,7 @@ public class OTPActivity extends AppCompatActivity {
 
         TextView displayNameTV = (TextView)findViewById(R.id.displayName);
 //        String displayNameText = displayNameTV.getText().toString();
-        displayNameTV.setText("Welcome, " + sysManager.getCurrentUser().getDisplayName() + "!\n\n" +
+        displayNameTV.setText("Welcome, " + sysManager.getCurrentUserFromDB().getDisplayName() + "!\n\n" +
                 "Please verify your phone number before start using our app:");
 
 

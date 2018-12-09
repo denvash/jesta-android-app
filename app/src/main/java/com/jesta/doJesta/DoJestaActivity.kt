@@ -11,6 +11,7 @@ import com.jesta.map.MapActivity
 import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
+import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_do_jesta.*
 import kotlinx.android.synthetic.main.fragment_bottom_navigation_view.*
 
@@ -40,9 +41,23 @@ class DoJestaActivity : AppCompatActivity() {
 
         // initial adapter with mission posts entries
         // TODO: get resources from db
-        val adapter = JestaCardRecyclerViewAdapter(Mission.initJestaCardList(resources))
 
-        do_jesta_recycle_view.adapter = adapter
+        val sysManager = SysManager(this@DoJestaActivity)
+        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
+
+        getAllJestas.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Task completed successfully
+                val result: List<Mission> = task.result as List<Mission>
+
+                val adapter = JestaCardRecyclerViewAdapter(result)
+
+                do_jesta_recycle_view.adapter = adapter
+            } else {
+                // Task failed with an exception
+                val exception = task.exception
+            }
+        }
 
         // mission cards padding
         val scale = resources.displayMetrics.density
@@ -71,6 +86,7 @@ class DoJestaActivity : AppCompatActivity() {
             startActivity(intent)
             true
         }
+
     }
 
 }

@@ -10,18 +10,31 @@ import kotlinx.android.parcel.Parcelize
 import java.io.BufferedReader
 import java.util.ArrayList
 
-data class Payment (val visible: Boolean, val price: Int)
+data class Payment(val visible: Boolean, val price: Int)
 
 @Parcelize
 data class Mission(
-    val difficulty: String,
-    val description: String,
-    val imageUrl: String,
-    val payment: Int,
-    val numOfPeople: Int,
-    val duration: Int,
-    val location: String
+//    var id: String = "emptyID",
+    var difficulty: String = "emptyDifficulty",
+    var description: String = "emptyDescription",
+    var imageUrl: String = "emptyImageUrl",
+    var payment: Int = -1,
+    var numOfPeople: Int = -1,
+    var duration: Int = -1,
+    var location: String = "emptyLocation"
 ) : Parcelable {
+
+    constructor(dbJesta: Map<String, String>) : this() {
+//        id = dbJesta["id"]!!
+        difficulty = dbJesta["difficulty"].toString()
+        description = dbJesta["description"].toString()
+        imageUrl = dbJesta["imageUrl"].toString()
+        payment = dbJesta["payment"].toString().toInt()
+        numOfPeople = dbJesta["numOfPeople"].toString().toInt()
+        duration = dbJesta["duration"].toString().toInt()
+        location = dbJesta["location"].toString()
+    }
+
     companion object {
         fun initJestaCardList(resources: Resources): List<Mission> {
             val inputStream = resources.openRawResource(R.raw.jesta_posts)

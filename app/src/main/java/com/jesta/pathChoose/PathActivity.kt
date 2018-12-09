@@ -1,13 +1,16 @@
-package com.jesta.path
+package com.jesta.pathChoose
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.jesta.MainActivity
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.R
 import com.jesta.doJesta.DoJestaActivity
+import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_path.*
 
+@Deprecated(message = "We use bottom-navigation for, there is no need for path-choose, will be deleted.")
 class PathActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,5 +26,14 @@ class PathActivity : AppCompatActivity() {
             val intent = Intent(this, DoJestaActivity::class.java)
             startActivity(intent)
         }
+
+        logout_button.setOnClickListener {
+            val sysManager = SysManager(this)
+            sysManager.signOutUser(this@PathActivity)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
     }
 }

@@ -5,26 +5,26 @@
         <item
             android:id="@+id/nav_ask_jesta"
             android:icon="@drawable/ic_note_add_black_24dp"
-            android:title="" />
+            android:title="@string/nav_ask_jesta" />
 
         <item
             android:id="@+id/nav_do_jesta"
             android:icon="@drawable/ic_assignment_black_24dp"
-            android:title="" />
+            android:title="@string/nav_do_jesta" />
 
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_map_black_24dp"
-            android:title="" />
+            android:title="@string/nav_map" />
 
         <item
             android:id="@+id/nav_status"
             android:icon="@drawable/ic_storage_black_24dp"
-            android:title="" />
+            android:title="@string/nav_status" />
 
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:title="" />
+            android:title="@string/nav_settings" />
     </group>
 </menu>

@@ -45,17 +45,15 @@
 
         <activity android:name=".login.LoginActivity" android:theme="@style/Theme.Jesta.Login"/>
         <activity android:name=".login.RegisterActivity" android:theme="@style/Theme.Jesta.Login"/>
-        <activity android:name=".login.LoginProfileActivity" android:theme="@style/Theme.Jesta.Login"/>
         <activity android:name=".login.ErrorActivity" android:theme="@style/Theme.Jesta.Login"/>
         <activity android:name=".login.OTPActivity" android:theme="@style/Theme.Jesta.Login"/>
-        <activity android:name=".path.PathActivity" />
+        <activity android:name=".pathChoose.PathActivity" />
+
         <activity android:name=".askJesta.AskJestaActivity" />
         <activity android:name=".doJesta.DoJestaActivity" />
         <activity android:name=".doJesta.JestaPostViewActivity" />
-
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".settings.profile.ProfileActivity"/>
-
         <activity android:name=".map.MapActivity" />
         <activity android:name=".status.StatusActivity" />
         <activity android:name=".chat.ChatActivity" />
