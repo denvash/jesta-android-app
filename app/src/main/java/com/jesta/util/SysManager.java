@@ -173,8 +173,6 @@ public class SysManager {
     public void signOutUser(Context context) {
         _auth.signOut();
         _currentUser = null;
-        Intent i = new Intent(context, MainActivity.class);
-        context.startActivity(i);
         Toast.makeText(context, "User logged out successfully", Toast.LENGTH_LONG).show();
     }
 
@@ -193,6 +191,10 @@ public class SysManager {
 
     public void setUserOnDB(User user) {
         _usersDatabase.child(user.getId()).setValue(user);
+    }
+
+    public void setJestaOnDB(Jesta jesta) {
+        _jestasDatabase.child(jesta.getId()).setValue(jesta);
     }
 
 

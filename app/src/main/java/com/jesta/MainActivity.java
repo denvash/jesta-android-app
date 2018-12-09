@@ -105,6 +105,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                         .requestIdToken(getString(R.string.default_web_client_id))
                         .requestEmail()
                         .build();
+
                 mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
                 googleSignInButton.setOnClickListener(new View.OnClickListener() {
                     @Override
