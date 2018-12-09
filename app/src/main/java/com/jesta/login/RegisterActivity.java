@@ -16,11 +16,12 @@ public class RegisterActivity extends LoginActivitiesWrapper {
 
     EditText e1,e2;
     FirebaseAuth auth;
-    SysManager sysManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sysManager = new SysManager(this);
+
         setContentView(R.layout.activity_register);
 
         e1 = (EditText)findViewById(R.id.email);
@@ -33,23 +34,34 @@ public class RegisterActivity extends LoginActivitiesWrapper {
         final String password = e2.getText().toString();
 
         // todo-optional: do some email and password validation on client's side
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-                            Intent i = new Intent(getApplicationContext(), ErrorActivity.class);
-                            Bundle b = new Bundle();
-                            b.putString("exception", task.getException().getMessage());
-                            i.putExtras(b);
-                            startActivity(i);
-                            return;
+        try {
+            auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                Intent i = new Intent(getApplicationContext(), ErrorActivity.class);
+                                Bundle b = new Bundle();
+                                b.putString("exception", task.getException().getMessage());
+                                i.putExtras(b);
+                                startActivity(i);
+                                return;
+                            }
+                            // user created in firebase only
+                            Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
+                            // TODO loading-animation here
+                            loginWithCredentials(email, password);
                         }
-                        // user created in firebase only
-                        Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
-                        // TODO loading-animation here
-                        loginWithCredentials(email, password);
-                    }
-                });
+                    });
+        }
+        catch (Exception e) {
+            Intent i = new Intent(getApplicationContext(), ErrorActivity.class);
+            Bundle b = new Bundle();
+            b.putString("exception", e.getMessage());
+            i.putExtras(b);
+            startActivity(i);
+            return;
+        }
+
     }
 }

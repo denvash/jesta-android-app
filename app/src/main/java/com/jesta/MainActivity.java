@@ -2,8 +2,10 @@ package com.jesta;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.facebook.*;
@@ -17,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.*;
 import com.jesta.doJesta.DoJestaActivity;
+import com.jesta.login.ErrorActivity;
 import com.jesta.login.LoginActivitiesWrapper;
 import com.jesta.login.LoginActivity;
 import com.jesta.pathChoose.PathActivity;
@@ -34,9 +37,12 @@ public class MainActivity extends LoginActivitiesWrapper {
     LoginButton loginButton;
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         sysManager = new SysManager(this);
+        sysManager.startLoadingAnim();
+
 
         // wait for async dbTask
         // RELOAD_USERS will reload the userList in sysManager
@@ -46,10 +52,14 @@ public class MainActivity extends LoginActivitiesWrapper {
         getAllUsers.addOnCompleteListener(new OnCompleteListener<List<User>>() {
             @Override
             public void onComplete(@NonNull Task<List<User>> task) {
+                sysManager.stopLoadingAnim();
+
                 if (!task.isSuccessful()) {
                     // todo some error
                     return;
                 }
+
+
 
                 // user is logged in
                 User currentUser = sysManager.getCurrentUserFromDB();
@@ -86,12 +96,19 @@ public class MainActivity extends LoginActivitiesWrapper {
 
                             @Override
                             public void onCancel() {
-                                Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
+                                // todo
+                                // there is nothing todo here really...
+//                                Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
                             public void onError(FacebookException exception) {
-                                Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(getApplicationContext(), ErrorActivity.class);
+                                Bundle b = new Bundle();
+                                b.putString("exception", exception.getMessage());
+                                i.putExtras(b);
+                                startActivity(i);
+                                return;
                             }
                         });
                 facebookSignInButton.setOnClickListener(new View.OnClickListener() {
@@ -126,11 +143,6 @@ public class MainActivity extends LoginActivitiesWrapper {
                 });
             }
         });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
