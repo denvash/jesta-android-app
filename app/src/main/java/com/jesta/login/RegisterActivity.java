@@ -71,9 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 sysManager.signInUser(task, getApplicationContext(), RegisterActivity.this);
-                                                finish();
-                                                // redirect to main activity, so we'll have the new user in db
+
+                                                // redirect to main activity and clear activity stack
                                                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 startActivity(i);
                                             }
                                         });

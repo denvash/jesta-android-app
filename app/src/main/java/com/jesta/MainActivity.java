@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //todo go to OTPActivity or check for OTP and go to Path
                     Intent i = new Intent(getApplicationContext(), PathActivity.class);
-                    finish();
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
                     return;
                 }
@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         sysManager.signInUser(task, getApplicationContext(), MainActivity.this);
+                        onResume();
                     }
                 });
     }
@@ -175,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         sysManager.signInUser(task, getApplicationContext(), MainActivity.this);
+                        onResume();
                     }
                 });
     }

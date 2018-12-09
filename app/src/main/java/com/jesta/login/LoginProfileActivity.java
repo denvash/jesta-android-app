@@ -46,6 +46,6 @@ public class LoginProfileActivity extends AppCompatActivity {
     }
 
     public void signOut(View v) {
-        sysManager.signOutUser(getApplicationContext(), LoginProfileActivity.this);
+        sysManager.signOutUser(getApplicationContext());
     }
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.jesta.MainActivity;
 import com.jesta.R;
 import com.jesta.util.SysManager;
 
@@ -67,6 +68,11 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             sysManager.signInUser(task, getApplicationContext(), LoginActivity.this);
+
+                            // redirect to main activity and clear activity stack
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
                         }
                     });
         }

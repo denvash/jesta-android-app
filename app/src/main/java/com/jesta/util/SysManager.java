@@ -151,30 +151,23 @@ public class SysManager {
 
                 Toast.makeText(context, "User logged in successfully", Toast.LENGTH_SHORT).show();
 
-                // Note: after we do finish() there is no activities waiting to pop
-                // Therefore we should end the next piece of code with startActivity!
-                previousActivity.finish();
-
                 User user = getCurrentUserFromDB();
                 if (user != null) {// user exists in db
 
                 }
                 else {// create new user and store in DB
                     user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
-//                    if (firebaseUser.getDisplayName() != null) {
-//                        user.setDisplayName(firebaseUser.getDisplayName());
-//                    }
+                    if (firebaseUser.getDisplayName() != null) {
+                        user.setDisplayName(firebaseUser.getDisplayName());
+                    }
+                    // todo: the following causing a bug (possible too big data to store on db)
 //                    if (firebaseUser.getPhotoUrl() != null) {
 //                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
 //                    }
-//                    setUserOnDB(user);
-                    _usersDatabase.child(user.getId()).setValue(user);
-
+                    setUserOnDB(user);
                 }
 
                 _currentUser = user;
-                Intent i = new Intent(context, MainActivity.class);
-                context.startActivity(i);
             } catch (Exception e) {
                 logAndGoToErrorActivity(context, previousActivity, e.getMessage());
             }
@@ -184,10 +177,9 @@ public class SysManager {
         }
     }
 
-    public void signOutUser(Context context, Activity previousActivity) {
+    public void signOutUser(Context context) {
         _auth.signOut();
         _currentUser = null;
-        previousActivity.finish();
         Intent i = new Intent(context, MainActivity.class);
         context.startActivity(i);
         Toast.makeText(context, "User logged out successfully", Toast.LENGTH_LONG).show();
