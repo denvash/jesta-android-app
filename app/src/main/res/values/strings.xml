@@ -35,11 +35,11 @@
     <string name="enter_otp">Enter the code you received</string>
 
     <!--Navigation Menu  -->
-    <string name="nav_ask_jesta">Ask for a Jesta</string>
-    <string name="nav_do_jesta">Do a Jesta</string>
-    <string name="nav_profile">My Profile</string>
-    <string name="nav_map">Jestas Near Me</string>
-    <string name="nav_status">My Jestas status</string>
+    <string name="nav_ask_jesta">ASK</string>
+    <string name="nav_do_jesta">DO</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_map">Near Me</string>
+    <string name="nav_status">Status</string>
     <string name="nav_bottom_sheet_name">Max Chi</string>
     <string name="nav_bottom_sheet_email">maxchi@gmail.com</string>
     <string name="nav_bottom_sheet_profile_description">Profile Picture</string>
@@ -74,5 +74,6 @@
     <string name="jesta_profile_phone_number_hint">@string/jesta_settings_phone_number_default</string>
     <string name="jesta_profile_change_email">Change Email</string>
     <string name="jesta_profile_email_hint">default@email</string>
+    <string name="jesta_profile_logout">Log out</string>
 
 </resources>

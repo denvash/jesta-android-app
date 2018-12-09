@@ -5,11 +5,11 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        style="@style/Widget.Design.BottomNavigationView"
         android:id="@+id/jesta_bottom_navigation"
+        style="@style/Widget.Design.BottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:labelVisibilityMode="unlabeled"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_drawer_menu" />
 </FrameLayout>

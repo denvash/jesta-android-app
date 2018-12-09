@@ -10,15 +10,12 @@ import com.jesta.doJesta.DoJestaActivity
 import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_path.*
 
+@Deprecated(message = "We use bottom-navigation for, there is no need for path-choose, will be deleted.")
 class PathActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_path)
-
-        // TODO: use current logged in user like this:
-//        val sysManager = SysManager(this)
-//        val currentUser = sysManager.currentUserFromDB()
 
         ask_jesta_button.setOnClickListener {
             val intent = Intent(this, AskJestaActivity::class.java)
@@ -32,9 +29,9 @@ class PathActivity : AppCompatActivity() {
 
         logout_button.setOnClickListener {
             val sysManager = SysManager(this)
-            sysManager.signOutUser(applicationContext)
+            sysManager.signOutUser(this@PathActivity)
             val intent = Intent(this, MainActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
 

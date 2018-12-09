@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import com.facebook.*;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -17,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.*;
+import com.jesta.doJesta.DoJestaActivity;
 import com.jesta.login.LoginActivitiesWrapper;
 import com.jesta.login.LoginActivity;
 import com.jesta.pathChoose.PathActivity;
@@ -59,7 +59,7 @@ public class MainActivity extends LoginActivitiesWrapper {
 //                    sysManager.setUserOnDB(currentUser);
 
                     //todo go to OTPActivity or check for OTP and go to Path
-                    Intent i = new Intent(getApplicationContext(), PathActivity.class);
+                    Intent i = new Intent(getApplicationContext(), DoJestaActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
                     return;

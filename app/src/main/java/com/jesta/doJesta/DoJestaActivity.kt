@@ -2,22 +2,16 @@ package com.jesta.doJesta
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.jesta.R
 import com.jesta.askJesta.AskJestaActivity
 import com.jesta.map.MapActivity
 import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
-import com.jesta.util.Jesta
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
-import com.jesta.util.User
 import kotlinx.android.synthetic.main.activity_do_jesta.*
 import kotlinx.android.synthetic.main.fragment_bottom_navigation_view.*
 
@@ -49,55 +43,49 @@ class DoJestaActivity : AppCompatActivity() {
         // TODO: get resources from db
 
         val sysManager = SysManager(this@DoJestaActivity)
-        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS);
+        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
 
-        getAllJestas.addOnCompleteListener(object:OnCompleteListener<List<Jesta>> {
-            // todo: loading animation while waiting to onComplete to fire
-            override fun onComplete(@NonNull task: Task<List<Jesta>>) {
-                if (task.isSuccessful())
-                {
-                    // Task completed successfully
-                    val result: List<Jesta> = task.getResult() as List<Jesta>
+        getAllJestas.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Task completed successfully
+                val result: List<Mission> = task.result as List<Mission>
 
-                    val adapter = JestaCardRecyclerViewAdapter(result)
+                val adapter = JestaCardRecyclerViewAdapter(result)
 
-                    do_jesta_recycle_view.adapter = adapter
+                do_jesta_recycle_view.adapter = adapter
+            } else {
+                // Task failed with an exception
+                val exception = task.exception
+            }
+        }
 
-                    // mission cards padding
-                    val scale = resources.displayMetrics.density
-                    val spacing = (1 * scale + 2.5f).toInt()
-                    do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(spacing))
+        // mission cards padding
+        val scale = resources.displayMetrics.density
+        val spacing = (1 * scale + 2.5f).toInt()
+        do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(spacing))
 
 
-                    jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
-                    jesta_bottom_navigation.setOnNavigationItemSelectedListener {
+        jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
+        jesta_bottom_navigation.setOnNavigationItemSelectedListener {
 
-                        val intent = when (it.itemId) {
-                            R.id.nav_ask_jesta -> {
-                                Intent(this@DoJestaActivity, AskJestaActivity::class.java)
-                            }
-                            R.id.nav_map -> {
-                                Intent(this@DoJestaActivity, MapActivity::class.java)
-                            }
-                            R.id.nav_status -> {
-                                Intent(this@DoJestaActivity, StatusActivity::class.java)
-                            }
-                            // Settings Activity
-                            else -> {
-                                Intent(this@DoJestaActivity, SettingsActivity::class.java)
-                            }
-                        }
-                        startActivity(intent)
-                        true
-                    }
+            val intent = when (it.itemId) {
+                R.id.nav_ask_jesta -> {
+                    Intent(this@DoJestaActivity, AskJestaActivity::class.java)
                 }
-                else
-                {
-                    // Task failed with an exception
-                    val exception = task.getException()
+                R.id.nav_map -> {
+                    Intent(this@DoJestaActivity, MapActivity::class.java)
+                }
+                R.id.nav_status -> {
+                    Intent(this@DoJestaActivity, StatusActivity::class.java)
+                }
+                // Settings Activity
+                else -> {
+                    Intent(this@DoJestaActivity, SettingsActivity::class.java)
                 }
             }
-        })
+            startActivity(intent)
+            true
+        }
 
     }
 

@@ -33,8 +33,8 @@ public class SysManager {
     // users db and management
     private DatabaseReference _usersDatabase = FirebaseDatabase.getInstance().getReference("users");
     private DatabaseReference _jestasDatabase = FirebaseDatabase.getInstance().getReference("jestas");
-    private static HashMap<String, User> _usersDict = new HashMap<String, User>();
-    private static HashMap<String, Jesta> _jestasDict = new HashMap<String, Jesta>();
+    private static HashMap<String, User> _usersDict = new HashMap<>();
+    private static HashMap<String, Mission> _jestasDict = new HashMap<>();
     private User _currentUser = null;
 
     // layout and _activity
@@ -99,19 +99,19 @@ public class SysManager {
             return source.getTask();
         }
         else if (taskName == RELOAD_JESTAS) {
-            final TaskCompletionSource<List<Jesta>> source = new TaskCompletionSource<>();
+            final TaskCompletionSource<List<Mission>> source = new TaskCompletionSource<>();
             _jestasDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (_jestasDict.size() > 0) {
 //                        return; // avoid Task already completed exception
                     }
-                    List<Jesta> jestasList = new ArrayList<>();
+                    List<Mission> jestasList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         HashMap dbJesta = (HashMap)ds.getValue();
 
                         // todo create a constructor for User
-                        Jesta jesta = new Jesta(dbJesta);
+                        Mission jesta = new Mission(dbJesta);
                         // todo: use randomUUID() when storing jestas in db
                         // here: use (String)dbJesta.get("id")
                         _jestasDict.put(UUID.randomUUID().toString(), jesta);

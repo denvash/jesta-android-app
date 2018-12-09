@@ -21,24 +21,6 @@ public class RegisterActivity extends LoginActivitiesWrapper {
     SysManager sysManager;
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        sysManager = new SysManager(this);
-        sysManager.setTitle(getString(R.string.register));
-        sysManager.showBackButton(true);
-
-        // If user logged in, close this activity and go to profile
-        if (sysManager.getCurrentUserFromDB() != null) {
-            finish();
-            Intent i = new Intent(this,LoginProfileActivity.class);
-            startActivity(i);
-            return;
-        }
-    }
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
