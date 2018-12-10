@@ -1,30 +1,32 @@
 package com.jesta.util;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
+import android.net.Uri;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
-import com.jesta.MainActivity;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
-import com.jesta.login.ErrorActivity;
-import com.jesta.pathChoose.PathActivity;
-
-import java.nio.file.Path;
-import java.util.*;
-
-import static com.jesta.util.SysManager.DBTask.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+import static com.jesta.util.SysManager.DBTask.RELOAD_JESTAS;
+import static com.jesta.util.SysManager.DBTask.RELOAD_USERS;
 
 /**
  * System manager
@@ -39,6 +41,10 @@ public class SysManager {
     private static HashMap<String, User> _usersDict = new HashMap<>();
     private static HashMap<String, Mission> _jestasDict = new HashMap<>();
     private User _currentUser = null;
+
+    // storage
+    private StorageReference _storage = FirebaseStorage.getInstance().getReference();
+
 
     // layout and _activity
     private Activity _activity;
@@ -89,25 +95,21 @@ public class SysManager {
             final TaskCompletionSource<List<User>> source = new TaskCompletionSource<>();
             _usersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (_usersDict.size() > 0) {
-//                        return; // avoid Task already completed exception
-
-                    }
-
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<User> usersList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         HashMap dbUser = (HashMap)ds.getValue();
-
-                        // todo create a constructor for User
-                        User user = new User((String)dbUser.get("id"), (String)dbUser.get("email"));
+                        if (dbUser == null) {
+                            throw new NullPointerException("dbUser is null");
+                        }
+                        User user = new User(dbUser);
                         _usersDict.put((String)dbUser.get("id"), user);
                         usersList.add(user);
                     }
                     source.setResult(usersList);
                 }
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                     source.setException(databaseError.toException());
                 }
             });
@@ -118,15 +120,13 @@ public class SysManager {
             final TaskCompletionSource<List<Mission>> source = new TaskCompletionSource<>();
             _jestasDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (_jestasDict.size() > 0) {
-//                        return; // avoid Task already completed exception
-                    }
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<Mission> jestasList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         HashMap dbJesta = (HashMap)ds.getValue();
-
-                        // todo create a constructor for User
+                        if (dbJesta == null) {
+                            throw new NullPointerException("dbJesta is null");
+                        }
                         Mission jesta = new Mission(dbJesta);
                         // todo: use randomUUID() when storing jestas in db
                         // here: use (String)dbJesta.get("id")
@@ -137,7 +137,7 @@ public class SysManager {
                     source.setResult(jestasList);
                 }
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
                     source.setException(databaseError.toException());
                 }
             });
@@ -164,25 +164,25 @@ public class SysManager {
             throw new Exception(task.getException());
         }
 
-        // Sign in success, update UI with the signed-in fireBaseUser's information
+        // Sign in via firebaseAuth success
         FirebaseUser firebaseUser = _auth.getCurrentUser();
+
+        if (firebaseUser == null || firebaseUser.getEmail() == null) {
+            throw new NullPointerException("firebaseUser or email is null");
+        }
 
         Toast.makeText(context, "User logged in successfully", Toast.LENGTH_SHORT).show();
 
         User user = getCurrentUserFromDB();
         if (user != null) {// user exists in db
-
+            // todo: store login time
         } else {// create new user and store in DB
-            user = new User(firebaseUser.getUid(), firebaseUser.getEmail());
-            if (firebaseUser.getDisplayName() != null) {
-                user.setDisplayName(firebaseUser.getDisplayName());
-            }
-            // todo: the following causing a bug (possible too big data to store on db)
-//                    if (firebaseUser.getPhotoUrl() != null) {
-//                        user.setPhotoUrl(firebaseUser.getPhotoUrl());
-//                    }
+            user = new User(firebaseUser);
             setUserOnDB(user);
         }
+
+        // todo debug
+//        uploadUriToStorage(Uri.parse(firebaseUser.getPhotoUrl().toString()));
         _currentUser = user;
     }
 
@@ -213,6 +213,29 @@ public class SysManager {
         _jestasDatabase.child(mission.getId()).setValue(mission);
     }
 
+    // todo debug
+    public void uploadUriToStorage(Uri filePath) {
+        _storage.child("images/pic.png").putFile(filePath)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(_activity, "Uploaded", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(_activity, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                .getTotalByteCount());
+                    }
+                });
+    }
 
     /**
      * Layout, UI and system settings and logs

@@ -3,6 +3,7 @@ package com.jesta.util
 import android.content.res.Resources
 import android.net.Uri
 import android.os.Parcelable
+import com.google.firebase.auth.FirebaseUser
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.jesta.R
@@ -60,8 +61,27 @@ data class Post(val user: User, val mission: Mission) {
     }
 }
 
-data class User(val id: String, val email: String) {
-    var displayName: String = "emptyName"
-    var photoUrl: String = "emptyPhoto"
+data class User(
+    var id: String = "emptyID",
+    var email: String = "emptyEmail",
+    var displayName: String = "emptyName",
+    var photoUrl: String = "emptyPhoto",
     var phoneNumber: String = "emptyNumber"
+) {
+
+    constructor(firebaseUser: FirebaseUser) : this() {
+        id = firebaseUser.uid
+        email = firebaseUser.email.toString()
+        photoUrl = firebaseUser.photoUrl.toString()
+        displayName = firebaseUser.displayName.toString()
+        phoneNumber = firebaseUser.phoneNumber.toString()
+    }
+
+    constructor(dbUser: Map<String, String>) : this() {
+        id = dbUser["id"].toString();
+        email = dbUser["email"].toString();
+        photoUrl = dbUser["photoUrl"].toString();
+        displayName = dbUser["displayName"].toString();
+        phoneNumber = dbUser["phoneNumber"].toString();
+    }
 }
