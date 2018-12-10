@@ -49,16 +49,24 @@ class DoJestaActivity : AppCompatActivity() {
             // prevent the loss of items
             do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
 
-            if (!task.isSuccessful) {
-                // todo error here! e.g. start ErrorActivity here
-                return@addOnCompleteListener
+        // initial adapter with mission posts entries
+        val sysManager = SysManager(this@DoJestaActivity)
+        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
+
+        getAllJestas.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Task completed successfully
+                    val result: List<Mission> = task.result as List<Mission>
+
+                    val adapter = JestaCardRecyclerViewAdapter(result)
+
+                    do_jesta_recycle_view.adapter = adapter
+
+            } else {
+                // Task failed with an exception
+                val exception = task.exception
             }
-
-            // Task completed successfully
-            val result: List<Mission> = task.result as List<Mission>
-
-            val adapter = JestaCardRecyclerViewAdapter(result)
-
+        }
             do_jesta_recycle_view.adapter = adapter
 
             // mission cards padding
