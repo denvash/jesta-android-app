@@ -45,10 +45,7 @@ public class SysManager {
     private TextView _backButtonTv;
 
     // loading animation
-    private ProgressBar pgsBar;
-    private static int i = 0;
-    private static Handler hdlr = new Handler();
-    private static boolean _stopAnimation = false;
+    private ProgressBar _pgsBar;
 
     public SysManager(Activity currentActivity) {
         _activity = currentActivity;
@@ -67,49 +64,12 @@ public class SysManager {
 
     public void startLoadingAnim() {
         _activity.setContentView(R.layout.loading);
-        pgsBar = (ProgressBar)_activity.findViewById(R.id.pBar);
-        pgsBar.setVisibility(View.VISIBLE);
-        i = pgsBar.getProgress();
-
-        new Thread(new Runnable() {
-            public void run() {
-                _stopAnimation = false;
-                boolean reset = false;
-                while (i <= 101) {
-                    if (_stopAnimation) {
-                        return;
-                    }
-                    if (i == 101) {
-                        reset = true;
-                    }
-                    else if (i == 0) {
-                        reset = false;
-                    }
-                    if (reset) {
-                        i -= 1;
-                    }
-                    else {
-                        i += 1;
-                    }
-                    // Update the progress bar and display the current value in text view
-                    hdlr.post(new Runnable() {
-                        public void run() {
-                            pgsBar.setProgress(i);
-                        }
-                    });
-                    try {
-                        Thread.sleep(50);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+        _pgsBar = (ProgressBar)_activity.findViewById(R.id.pBar);
+        _pgsBar.setVisibility(View.VISIBLE);
     }
 
     public void stopLoadingAnim() {
-        pgsBar.setVisibility(View.INVISIBLE);
-        _stopAnimation = true;
+        _pgsBar.setVisibility(View.INVISIBLE);
     }
 
     /**

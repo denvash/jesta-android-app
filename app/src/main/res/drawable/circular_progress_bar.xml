@@ -7,17 +7,13 @@
     android:toDegrees="360">
 
     <shape
-        android:innerRadiusRatio="3"
         android:shape="ring"
         android:thicknessRatio="7.0">
 
         <gradient
-            android:centerColor="@color/pink"
-            android:endColor="@color/hotPink"
-            android:startColor="@color/semiTransparentWhite"
             android:angle="90"
             android:type="linear"
-            android:useLevel="false" />
+            android:useLevel="true" />
     </shape>
 
 </rotate>
