@@ -29,4 +29,7 @@
       </value>
     </option>
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
 </project>
