@@ -49,14 +49,16 @@
     <string name="jesta_card_description">Jesta Description</string>
     <string name="jesta_card_difficulty">Jesta Difficulty</string>
 
+    <!--Jesta Path-->
+    <string name="jesta_path_do_jesta">Do a Jesta</string>
+    <string name="jesta_path_ask_a_jesta">Ask For Jesta</string>
+
     <!--Jesta Post-->
     <string name="jesta_post_chip_price">Price</string>
     <string name="jesta_post_chip_num_of_people">Num Of People</string>
     <string name="jesta_post_chip_duration">Duration</string>
     <string name="jesta_post_chip_location">Location</string>
     <string name="jesta_post_button_accept">Accept</string>
-    <string name="jesta_path_do_jesta">Do a Jesta</string>
-    <string name="jesta_path_ask_a_jesta">Ask For Jesta</string>
 
     <!--Jesta Settings-->
     <string name="jesta_settings_first_name_hint">First Name</string>
@@ -75,5 +77,8 @@
     <string name="jesta_profile_change_email">Change Email</string>
     <string name="jesta_profile_email_hint">default@email</string>
     <string name="jesta_profile_logout">Log out</string>
+
+    <string name="jesta_settings_default_page">Start Page</string>
+    <string name="jesta_settings_default_page_do_jesta">Do Jesta</string>
 
 </resources>

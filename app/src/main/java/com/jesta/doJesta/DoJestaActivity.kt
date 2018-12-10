@@ -40,19 +40,18 @@ class DoJestaActivity : AppCompatActivity() {
         do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
 
         // initial adapter with mission posts entries
-        // TODO: get resources from db
-
         val sysManager = SysManager(this@DoJestaActivity)
         val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
 
         getAllJestas.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 // Task completed successfully
-                val result: List<Mission> = task.result as List<Mission>
+                    val result: List<Mission> = task.result as List<Mission>
 
-                val adapter = JestaCardRecyclerViewAdapter(result)
+                    val adapter = JestaCardRecyclerViewAdapter(result)
 
-                do_jesta_recycle_view.adapter = adapter
+                    do_jesta_recycle_view.adapter = adapter
+
             } else {
                 // Task failed with an exception
                 val exception = task.exception
