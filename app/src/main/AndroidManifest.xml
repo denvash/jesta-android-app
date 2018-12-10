@@ -63,7 +63,6 @@
         <activity android:name=".doJesta.JestaPostViewActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".settings.profile.ProfileActivity" />
-        <activity android:name=".map.MapActivity" />
         <activity android:name=".status.StatusActivity" />
         <activity android:name=".chat.ChatActivity" />
 

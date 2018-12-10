@@ -5,6 +5,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Widget.Jesta.BottomNavigationView" parent="Theme.Jesta">
+        <item name="android:color">@color/colorPrimary</item>
     </style>
 
     <style name="TextAppearance.Jesta.Title" parent="TextAppearance.MaterialComponents.Headline4">
@@ -43,8 +49,8 @@
     </style>
 
     <style name="Widget.Jesta.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="backgroundTint">?attr/colorPrimaryDark</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="backgroundTint">@color/colorPrimaryLight</item>
         <item name="android:stateListAnimator" tools:ignore="NewApi">
             @animator/jesta_next_button_state_list_anim
         </item>
