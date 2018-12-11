@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jesta.R
 import com.jesta.askJesta.AskJestaActivity
-import com.jesta.map.MapActivity
 import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
@@ -55,11 +54,13 @@ class DoJestaActivity : AppCompatActivity() {
             }
 
             // Task completed successfully
-            val result: List<Mission> = task.result as List<Mission>
+            val result: List<*> = task.result as List<*>
 
-            val adapter = JestaCardRecyclerViewAdapter(result)
+            // initial adapter with mission posts entries
+            val adapter = JestaCardRecyclerViewAdapter(result.filterIsInstance<Mission>())
 
             do_jesta_recycle_view.adapter = adapter
+
 
             // mission cards padding
             val scale = resources.displayMetrics.density
@@ -73,9 +74,6 @@ class DoJestaActivity : AppCompatActivity() {
                 val intent = when (it.itemId) {
                     R.id.nav_ask_jesta -> {
                         Intent(this@DoJestaActivity, AskJestaActivity::class.java)
-                    }
-                    R.id.nav_map -> {
-                        Intent(this@DoJestaActivity, MapActivity::class.java)
                     }
                     R.id.nav_status -> {
                         Intent(this@DoJestaActivity, StatusActivity::class.java)
@@ -91,5 +89,4 @@ class DoJestaActivity : AppCompatActivity() {
 
         }
     }
-
 }

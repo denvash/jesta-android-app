@@ -105,28 +105,42 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="4dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_tune_black_24dp"/>
+                android:src="@drawable/ic_pageview_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_marginStart="@dimen/_4sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/jesta_settings_another_line"/>
+                android:text="@string/jesta_settings_default_page"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <ImageView
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
-            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/jesta_settings_default_page_do_jesta"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

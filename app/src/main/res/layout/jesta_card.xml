@@ -4,7 +4,7 @@
     android:id="@+id/jesta_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@android:color/transparent"
+    app:cardBackgroundColor="@color/colorPrimaryLight"
     app:cardPreventCornerOverlap="true"
     app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true">
@@ -12,8 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorAccent">
+        android:orientation="vertical">
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/jesta_card_image"
