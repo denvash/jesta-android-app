@@ -80,5 +80,11 @@
 
     <string name="jesta_settings_default_page">Start Page</string>
     <string name="jesta_settings_default_page_do_jesta">Do Jesta</string>
+    <string name="jesta_card_tag_1">Tag1</string>
+    <string name="jesta_card_tag_2">Tag2</string>
+    <string name="jesta_card_title">Jesta Title</string>
+    <string name="jesta_card_reward">30,000</string>
+    <string name="jesta_card_profile_description">Profile avatar</string>
+    <string name="jesta_card_icon_reward_description">Diamond color icon</string>
 
 </resources>
