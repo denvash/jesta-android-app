@@ -43,4 +43,6 @@
     <color name="tag">#EBE7DA</color>
     <color name="tag_text_color">#262323</color>
     <color name="tag_reward_text_color">#A16FD0</color>
+    <color name="tag_reward_text_color_dark">#7600FE</color>
+    <color name="tag_reward_background">#DADADA</color>
 </resources>

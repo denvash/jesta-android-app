@@ -54,6 +54,7 @@
         <item name="android:stateListAnimator" tools:ignore="NewApi">
             @animator/jesta_next_button_state_list_anim
         </item>
+        <item name="android:fontFamily">@font/montserrat_light</item>
     </style>
 
     <style name="Widget.Jesta.Tag" parent="">
@@ -73,6 +74,17 @@
         <item name="android:paddingStart">@dimen/_10dp</item>
         <item name="android:paddingEnd">@dimen/_10dp</item>
         <item name="android:textColor">@color/tag_reward_text_color</item>
+    </style>
+
+    <style name="Widget.Jesta.Tag.Data" parent="Widget.Jesta.Tag.Reward">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/tag_text_color</item>
+    </style>
+
+    <style name="Widget.Jesta.Tag.Reward.Inner" parent="Widget.Jesta.Tag.Reward">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/tag_reward_text_color_dark</item>
+        <item name="android:background">@drawable/rounded_corner_dark</item>
     </style>
 
     <style name="Widget.Jesta.Button.Fab" parent="Widget.Jesta.Button">

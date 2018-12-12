@@ -22,7 +22,6 @@ import com.jesta.doJesta.DoJestaActivity;
 import com.jesta.login.ErrorActivity;
 import com.jesta.login.LoginActivitiesWrapper;
 import com.jesta.login.LoginActivity;
-import com.jesta.pathChoose.PathActivity;
 import com.jesta.util.SysManager;
 import com.jesta.util.User;
 

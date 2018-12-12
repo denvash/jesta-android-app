@@ -56,11 +56,11 @@
         <activity
             android:name=".login.OTPActivity"
             android:theme="@style/Theme.Jesta.Login" />
-        <activity android:name=".pathChoose.PathActivity" />
 
         <activity android:name=".askJesta.AskJestaActivity" />
         <activity android:name=".doJesta.DoJestaActivity" />
         <activity android:name=".doJesta.JestaPostViewActivity" />
+        <activity android:name=".doJesta.JestaCardReviewActivity" />
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".settings.profile.ProfileActivity" />
         <activity android:name=".status.StatusActivity" />

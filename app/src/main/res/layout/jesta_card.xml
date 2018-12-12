@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="@dimen/_4dp">
+            android:padding="@dimen/_10dp">
 
             <TextView
                 android:id="@+id/jesta_card_difficulty"
@@ -89,15 +89,6 @@
                 android:text="@string/jesta_card_tag_2"
                 />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/jesta_card_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_light"
-            android:textAlignment="center"
-            android:text="@string/jesta_card_description"
-            android:padding="@dimen/_10dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
