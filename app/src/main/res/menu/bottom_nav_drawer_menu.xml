@@ -14,7 +14,7 @@
 
         <item
             android:id="@+id/nav_status"
-            android:icon="@drawable/ic_analysis"
+            android:icon="@drawable/ic_jesta_status"
             android:title="@string/nav_status" />
 
         <item
