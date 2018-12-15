@@ -4,7 +4,7 @@
     <dimen name="logoSize">72sp</dimen>
     <dimen name="side_padding">30dp</dimen>
     <dimen name="_140sdp">140.00dp</dimen>
-    <dimen name="_16sdp">16.00dp</dimen>
+    <dimen name="_16dp">16.00dp</dimen>
     <dimen name="_4dp">4.00dp</dimen>
     <dimen name="_40dp">40.00dp</dimen>
     <dimen name="_10dp">10dp</dimen>
