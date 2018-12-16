@@ -61,11 +61,12 @@
             android:padding="@dimen/_10dp">
 
             <TextView
-                android:id="@+id/jesta_card_difficulty"
+                android:id="@+id/jesta_card_tag_difficulty"
                 style="@style/Widget.Jesta.Tag.Difficulty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/jesta_card_difficulty"
+                android:background="@drawable/rounded_corner_tag_yellow"
                 />
 
             <TextView
@@ -76,7 +77,8 @@
                 android:padding="@dimen/_4dp"
                 android:text="@string/jesta_card_tag_1"
                 android:layout_marginEnd="@dimen/_4dp"
-                android:layout_marginStart="@dimen/_4dp"/>
+                android:layout_marginStart="@dimen/_4dp"
+                android:background="@drawable/rounded_corner_tag"/>
 
             <TextView
                 android:id="@+id/jesta_card_tag_2"
@@ -85,6 +87,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_4dp"
                 android:text="@string/jesta_card_tag_2"
+                android:background="@drawable/rounded_corner_tag"
                 />
         </LinearLayout>
 

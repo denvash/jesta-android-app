@@ -24,18 +24,18 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="8dp">
 
                 <include
-                    android:id="@+id/include"
-                    android:layout_margin="@dimen/_4dp"
                     layout="@layout/jesta_card_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"/>
 
                 <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/jesta_card_image"
-                    android:layout_width="match_parent"
+                    android:id="@+id/jesta_card_preview_mission_image"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@color/colorAccent"
@@ -75,6 +75,7 @@
                     android:contentDescription="@string/jesta_card_review_icon"
                     android:layout_marginBottom="@dimen/_4dp"/>
                 <TextView
+                    android:id="@+id/jesta_card_preview_chip_cash"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/jesta_card_review_cash"

@@ -53,14 +53,16 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/jesta_card_difficulty"
+        android:id="@+id/jesta_card_description_tag_difficulty"
         style="@style/Widget.Jesta.Tag.Difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/jesta_card_description_material_card"
         android:layout_alignParentStart="true"
         android:layout_marginTop="-10dp"
+        android:layout_marginStart="@dimen/_10dp"
         android:text="@string/jesta_card_difficulty"
+        android:background="@drawable/rounded_corner_tag_yellow"
         android:elevation="@dimen/_4dp"/>
 
 </RelativeLayout>

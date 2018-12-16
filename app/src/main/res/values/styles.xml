@@ -67,6 +67,7 @@
     <style name="Widget.Jesta.Tag.Difficulty" parent="Widget.Jesta.Tag">
         <item name="android:background">@color/colorAccent</item>
         <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:radius">8dp</item>
     </style>
 
     <style name="Widget.Jesta.Tag.Reward" parent="Widget.Jesta.Tag">
@@ -88,7 +89,7 @@
     </style>
 
     <style name="Widget.Jesta.Button.Fab" parent="Widget.Jesta.Button">
-        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorAccent</item>
     </style>
 
 
