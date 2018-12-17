@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/colorAccent"
+                    android:background="@drawable/rounded_corner_tag_yellow"
                     android:src="@drawable/com_facebook_profile_picture_blank_portrait" />
             </LinearLayout>
         </RelativeLayout>
@@ -62,20 +62,21 @@
             android:layout_gravity="center">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables"
                 android:padding="@dimen/_10dp">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_cash_circle"
                     android:contentDescription="@string/jesta_card_review_icon"
                     android:layout_marginBottom="@dimen/_4dp"/>
                 <TextView
-                    android:id="@+id/jesta_card_preview_chip_cash"
+                    android:id="@+id/jesta_card_preview_chip_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/jesta_card_review_cash"
@@ -83,59 +84,66 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables"
-                android:padding="@dimen/_10dp">
+                android:padding="@dimen/_10dp"
+                >
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_total_people_circle"
                     android:contentDescription="@string/jesta_card_review_icon"
                     android:layout_marginBottom="@dimen/_4dp"/>
                 <TextView
+                    android:id="@+id/jesta_card_preview_chip_crew"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/jesta_card_review_people"
+                    android:text="@string/jesta_card_review_crew"
                     style="@style/Widget.Jesta.Tag.Data"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables"
                 android:padding="@dimen/_10dp">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_total_time_circle"
                     android:contentDescription="@string/jesta_card_review_icon"
                     android:layout_marginBottom="@dimen/_4dp"/>
                 <TextView
+                    android:id="@+id/jesta_card_preview_chip_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/jesta_card_review_time"
+                    android:text="@string/jesta_card_review_duration"
                     style="@style/Widget.Jesta.Tag.Data"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
                 tools:ignore="UseCompoundDrawables"
                 android:padding="@dimen/_10dp">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_location_circle"
                     android:contentDescription="@string/jesta_card_review_icon"
                     android:layout_marginBottom="@dimen/_4dp"/>
                 <TextView
+                    android:id="@+id/jesta_card_preview_chip_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/jesta_card_review_location"
@@ -179,6 +187,7 @@
                         android:paddingBottom="@dimen/_10dp"/>
 
                     <TextView
+                        android:id="@+id/jesta_card_preview_chip_diamonds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

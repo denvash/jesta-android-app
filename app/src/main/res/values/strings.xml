@@ -86,12 +86,12 @@
     <string name="jesta_card_reward">30,000</string>
     <string name="jesta_card_profile_description">Profile avatar</string>
     <string name="jesta_card_icon_reward_description">Diamond color icon</string>
-    <string name="jesta_card_review_cash">Cash</string>
+    <string name="jesta_card_review_cash">Payment</string>
     <string name="jesta_card_review_icon">Card review icon</string>
-    <string name="jesta_card_review_people">People</string>
-    <string name="jesta_card_review_time">Time</string>
+    <string name="jesta_card_review_crew">Crew</string>
+    <string name="jesta_card_review_duration">Time</string>
     <string name="jesta_card_review_location">Location</string>
     <string name="jesta_card_diamonds_text">Total Diamonds</string>
-    <string name="jesta_card_review_diamonds_amount">Diamonds</string>
+    <string name="jesta_card_review_diamonds_amount">Diamonds Amount</string>
 
 </resources>

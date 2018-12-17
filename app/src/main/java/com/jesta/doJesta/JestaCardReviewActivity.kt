@@ -24,6 +24,15 @@ class JestaCardReviewActivity : AppCompatActivity() {
         jesta_card_description_tag_difficulty.text = mission.difficulty
         ImageReq.setImageFromUrl(jesta_card_preview_mission_image, mission.imageUrl)
 
+        jesta_card_description_main_text.text = mission.description
+        jesta_card_preview_chip_payment.text = mission.payment.toString()
+        jesta_card_preview_chip_crew.text = mission.numOfPeople.toString()
+        jesta_card_preview_chip_duration.text = mission.duration.toString()
+        jesta_card_preview_chip_location.text = mission.location
+        jesta_card_preview_chip_diamonds.text = mission.diamonds.toString()
+
+        jesta_card_description_tag_1.text = mission.tags.first()
+        jesta_card_description_tag_2.text = mission.tags.last()
 
         jesta_card_review_button_accept.setOnClickListener {
             Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
