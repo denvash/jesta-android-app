@@ -7,8 +7,8 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginBottom="@dimen/_16dp"
         android:id="@+id/profile_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4dp"
             android:id="@+id/imageView"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -29,7 +29,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/_4sdp">
+            android:layout_marginStart="@dimen/_4dp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/jesta_profile_first_name"
@@ -52,7 +52,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -62,7 +62,7 @@
                 android:src="@drawable/ic_contact_phone_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -78,7 +78,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -100,7 +100,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -110,7 +110,7 @@
                 android:src="@drawable/ic_email_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -126,7 +126,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -145,7 +145,7 @@
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Jesta.Button"
         android:id="@+id/jesta_profile_log_out_button"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

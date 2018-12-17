@@ -27,9 +27,11 @@ class JestaCardRecyclerViewAdapter internal constructor(
     override fun onBindViewHolder(holder: JestaCardViewHolder, position: Int) {
         if (position < postList.size) {
             val jestaPost = postList[position]
-            holder.jestaCard.jesta_card_difficulty.text = jestaPost.difficulty
-            holder.jestaCard.jesta_card_description.text = jestaPost.description
             ImageReq.setImageFromUrl(holder.jestaCard.jesta_card_image, jestaPost.imageUrl)
+            holder.jestaCard.jesta_card_tag_difficulty.text = jestaPost.difficulty
+            holder.jestaCard.jesta_card_tag_1.text = jestaPost.tags.first()
+            holder.jestaCard.jesta_card_tag_2.text = jestaPost.tags.last()
+            holder.jestaCard.jesta_card_total_reward.text = jestaPost.diamonds.toString()
         }
 
         holder.jestaCard.setOnClickListener {
@@ -39,8 +41,8 @@ class JestaCardRecyclerViewAdapter internal constructor(
                 Toast.LENGTH_LONG
             )
                 .show()
-            val intent = Intent(it.context, JestaPostViewActivity::class.java)
-            intent.putExtra(JestaPostViewActivity.extra, postList[position])
+            val intent = Intent(it.context, JestaCardReviewActivity::class.java)
+            intent.putExtra(JestaCardReviewActivity.extra, postList[position])
             it.context.startActivity(intent)
         }
 

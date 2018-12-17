@@ -54,10 +54,42 @@
         <item name="android:stateListAnimator" tools:ignore="NewApi">
             @animator/jesta_next_button_state_list_anim
         </item>
+        <item name="android:fontFamily">@font/montserrat_light</item>
+    </style>
+
+    <style name="Widget.Jesta.Tag" parent="">
+        <item name="android:background">@color/tag</item>
+        <item name="android:padding">@dimen/_4dp</item>
+        <item name="android:textColor">@color/tag_text_color</item>
+        <item name="android:fontFamily">@font/montserrat_light_italic</item>
+    </style>
+
+    <style name="Widget.Jesta.Tag.Difficulty" parent="Widget.Jesta.Tag">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:radius">8dp</item>
+    </style>
+
+    <style name="Widget.Jesta.Tag.Reward" parent="Widget.Jesta.Tag">
+        <item name="android:background">@drawable/rounded_corner</item>
+        <item name="android:paddingStart">@dimen/_10dp</item>
+        <item name="android:paddingEnd">@dimen/_10dp</item>
+        <item name="android:textColor">@color/tag_reward_text_color</item>
+    </style>
+
+    <style name="Widget.Jesta.Tag.Data" parent="Widget.Jesta.Tag.Reward">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/tag_text_color</item>
+    </style>
+
+    <style name="Widget.Jesta.Tag.Reward.Inner" parent="Widget.Jesta.Tag.Reward">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/tag_reward_text_color_dark</item>
+        <item name="android:background">@drawable/rounded_corner_dark</item>
     </style>
 
     <style name="Widget.Jesta.Button.Fab" parent="Widget.Jesta.Button">
-        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorAccent</item>
     </style>
 
 
@@ -97,5 +129,4 @@
         <item name="android:padding">14dp</item>
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
-
 </resources>

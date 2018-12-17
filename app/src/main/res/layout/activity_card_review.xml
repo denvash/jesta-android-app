@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/jesta_post_view_nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_4dp">
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/jesta_card_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/jesta_card_review_button_accept"
+                style="@style/Widget.Jesta.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jesta_post_button_accept"
+                app:icon="@drawable/ic_normal_diamond"
+                app:iconTint="@color/black"
+                android:layout_marginTop="@dimen/_40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/jesta_card_preview_profile_avatar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginBottom="497dp"
+        android:src="@drawable/ic_account_circle_black_48dp"
+        android:background="@drawable/ic_profile"
+        android:contentDescription="@string/jesta_card_profile_description"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/jesta_card_preview_button_fab"
+        style="@style/Widget.Jesta.Button.Fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="16dp"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_jesta_back" />
+</RelativeLayout>

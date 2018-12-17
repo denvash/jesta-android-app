@@ -22,7 +22,9 @@ data class Mission(
     var payment: Int = -1,
     var numOfPeople: Int = -1,
     var duration: Int = -1,
-    var location: String = "emptyLocation"
+    var location: String = "emptyLocation",
+    var diamonds: Int = -1,
+    var tags: List<String> = listOf("Tag1","Tag2")
 ) : Parcelable {
 
     constructor(dbJesta: Map<String, String>) : this() {
@@ -34,6 +36,12 @@ data class Mission(
         numOfPeople = dbJesta["numOfPeople"].toString().toInt()
         duration = dbJesta["duration"].toString().toInt()
         location = dbJesta["location"].toString()
+
+        // TODO add diamonds prop
+//        diamonds = dbJesta["diamonds"].toString().toInt()
+
+        // TODO write initializer from JSON
+//        tags = dbJesta["tags"]
     }
 
     companion object {
@@ -78,10 +86,10 @@ data class User(
     }
 
     constructor(dbUser: Map<String, String>) : this() {
-        id = dbUser["id"].toString();
-        email = dbUser["email"].toString();
-        photoUrl = dbUser["photoUrl"].toString();
-        displayName = dbUser["displayName"].toString();
-        phoneNumber = dbUser["phoneNumber"].toString();
+        id = dbUser["id"].toString()
+        email = dbUser["email"].toString()
+        photoUrl = dbUser["photoUrl"].toString()
+        displayName = dbUser["displayName"].toString()
+        phoneNumber = dbUser["phoneNumber"].toString()
     }
 }

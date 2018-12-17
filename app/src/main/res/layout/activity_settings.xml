@@ -10,8 +10,8 @@
         android:id="@+id/profile_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_40sdp">
+        android:layout_marginTop="@dimen/_16dp"
+        android:layout_marginBottom="@dimen/_40dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/profile_layout"
@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:id="@+id/imageView"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="@dimen/_4sdp">
+                android:layout_marginStart="@dimen/_4dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/jesta_settings_profile_full_name"
@@ -67,17 +67,17 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_settings_applications_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -101,7 +101,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -111,7 +111,7 @@
                 android:src="@drawable/ic_pageview_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -127,7 +127,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -149,17 +149,17 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_tune_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -180,21 +180,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16sdp">
+        android:layout_marginBottom="@dimen/_16dp">
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_tune_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -218,17 +218,17 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_tune_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -251,17 +251,17 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_40dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_tune_black_24dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
