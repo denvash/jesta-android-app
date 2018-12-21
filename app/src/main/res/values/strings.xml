@@ -58,16 +58,16 @@
     <string name="jesta_post_chip_num_of_people">Num Of People</string>
     <string name="jesta_post_chip_duration">Duration</string>
     <string name="jesta_post_chip_location">Location</string>
-    <string name="jesta_post_button_accept">Accept</string>
+    <string name="jesta_post_button_accept">Accept Jesta</string>
 
     <!--Jesta Settings-->
-    <string name="jesta_settings_first_name_hint">First Name</string>
-    <string name="jesta_settings_last_name_hint">Last Name</string>
-    <string name="jesta_settings_phone_number_default">+972 54–000–0000</string>
+    <string name="jesta_settings_phone_number_default">example@gmail.com</string>
     <string name="jesta_settings_full_name_default">Full Name</string>
-    <string name="jesta_settings_another_line">Another Setting</string>
     <string name="jesta_settings_edit_profile_icon_description">Edit Profile Icon</string>
-    <string name="jesta_settings_default_values">Ask a Jesta Default Values</string>
+    <string name="jesta_settings_default_values">Jesta Default Values</string>
+    <string name="jesta_settings_diamond_amount">Diamonds Amount</string>
+    <string name="jesta_settings_account">Account</string>
+    <string name="jesta_settings_chat">Chat</string>
 
     <!--Jesta Profile-->
     <string name="jesta_profile_first_name_default">First-name</string>
@@ -80,8 +80,7 @@
 
     <string name="jesta_settings_default_page">Start Page</string>
     <string name="jesta_settings_default_page_do_jesta">Do Jesta</string>
-    <string name="jesta_card_tag_1">Tag1</string>
-    <string name="jesta_card_tag_2">Tag2</string>
+    <string name="jesta_card_tag">Tag</string>
     <string name="jesta_card_title">Jesta Title</string>
     <string name="jesta_card_reward">30,000</string>
     <string name="jesta_card_profile_description">Profile avatar</string>
@@ -89,9 +88,21 @@
     <string name="jesta_card_review_cash">Payment</string>
     <string name="jesta_card_review_icon">Card review icon</string>
     <string name="jesta_card_review_crew">Crew</string>
-    <string name="jesta_card_review_duration">Time</string>
-    <string name="jesta_card_review_location">Location</string>
-    <string name="jesta_card_diamonds_text">Total Diamonds</string>
+    <string name="jesta_review_duration">Duration</string>
+    <string name="jesta_review_location">Location</string>
+    <string name="jesta_diamonds_text">Diamonds Worth</string>
     <string name="jesta_card_review_diamonds_amount">Diamonds Amount</string>
 
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="jesta_settings_button_log_out">LOG OUT</string>
+    <string name="jesta_accept_difficulty">Difficulty</string>
+    <string name="jesta_value">Value</string>
 </resources>

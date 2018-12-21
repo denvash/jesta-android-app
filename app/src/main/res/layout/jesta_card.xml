@@ -3,117 +3,181 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/jesta_card"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/colorPrimaryLight"
-    app:cardCornerRadius="5dp"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardBackgroundColor="@color/colorPrimaryDark"
+    app:cardCornerRadius="@dimen/_16dp"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="0.75dp">
 
-
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/_10dp">
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/jesta_card_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/colorAccent"
-            android:src="@drawable/com_facebook_profile_picture_blank_portrait" />
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_below="@id/jesta_card_image"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="-35dp"
-                android:background="@drawable/ic_profile"
-                android:src="@drawable/ic_account_circle_black_48dp"
-                android:contentDescription="@string/jesta_card_profile_description"/>
-        </RelativeLayout>
-
-
-        <TextView
-            android:id="@+id/jesta_card_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/marvel"
-            android:padding="@dimen/_10dp"
-            android:text="@string/jesta_card_title"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textStyle="bold" />
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/_16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/_10dp">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.android.volley.toolbox.NetworkImageView
+                    android:id="@+id/jesta_card_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/avatar" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.75dp"
+                    android:layout_below="@id/jesta_card_image"
+                    android:background="@color/colorPrimaryDark" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/jesta_card_review_avatar_icon"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_below="@id/jesta_card_image"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/avatar"
+                    android:layout_marginTop="-25dp"
+                    android:layout_centerHorizontal="true"
+                    app:civ_border_width="0.75dp"
+                    app:civ_border_color="@color/colorPrimaryDark"/>
+
+
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/jesta_card_tag_difficulty"
-                style="@style/Widget.Jesta.Tag.Difficulty"
+                style="@style/TextAppearance.Jesta.Type"
+                android:textSize="25sp"
+                android:id="@+id/jesta_card_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jesta_card_title"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    app:cardBackgroundColor="@color/black"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="0.75dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/jesta_card_tag_1"
+                            style="@style/Widget.Jesta.Tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_4dp"
+                            android:text="@string/jesta_card_tag" />
+                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    app:cardBackgroundColor="@color/black"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="0.75dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/jesta_card_tag_2"
+                            style="@style/Widget.Jesta.Tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_4dp"
+                            android:text="@string/jesta_card_tag" />
+                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10dp"
+                    app:cardBackgroundColor="@color/black"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="0.75dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/jesta_card_tag_3"
+                            style="@style/Widget.Jesta.Tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_4dp"
+                            android:text="@string/jesta_card_tag" />
+                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/jesta_card_difficulty"
-                android:background="@drawable/rounded_corner_tag_yellow"
-                />
-
-            <TextView
-                android:id="@+id/jesta_card_tag_1"
-                style="@style/Widget.Jesta.Tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_4dp"
-                android:text="@string/jesta_card_tag_1"
-                android:layout_marginEnd="@dimen/_4dp"
-                android:layout_marginStart="@dimen/_4dp"
-                android:background="@drawable/rounded_corner_tag"/>
-
-            <TextView
-                android:id="@+id/jesta_card_tag_2"
-                style="@style/Widget.Jesta.Tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_4dp"
-                android:text="@string/jesta_card_tag_2"
-                android:background="@drawable/rounded_corner_tag"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_card_diamond"
-                android:contentDescription="@string/jesta_card_icon_reward_description"/>
+                tools:ignore="UseCompoundDrawables">
 
-            <TextView
-                android:id="@+id/jesta_card_total_reward"
-                style="@style/Widget.Jesta.Tag.Reward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/jesta_card_reward"
-                android:layout_marginStart="@dimen/_10dp"
-                />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_4dp"
+                    android:src="@drawable/ic_card_diamond"
+                    android:contentDescription="@string/jesta_card_icon_reward_description"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/jesta_card_difficulty"
+                        style="@style/TextAppearance.Jesta.Type.Purple"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/jesta_value" />
+
+                    <TextView
+                        android:id="@+id/jesta_card_diamonds"
+                        style="@style/Widget.Jesta.Tag"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/jesta_value"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </com.google.android.material.card.MaterialCardView>

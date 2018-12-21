@@ -16,6 +16,7 @@ data class Payment(val visible: Boolean, val price: Int)
 @Parcelize
 data class Mission(
     var id: String = "emptyID",
+    var title: String = "emptyTitle",
     var difficulty: String = "emptyDifficulty",
     var description: String = "emptyDescription",
     var imageUrl: String = "emptyImageUrl",
@@ -39,6 +40,7 @@ data class Mission(
 
         // TODO add diamonds prop
 //        diamonds = dbJesta["diamonds"].toString().toInt()
+//        title = dbJesta["title"].toString()
 
         // TODO write initializer from JSON
 //        tags = dbJesta["tags"]

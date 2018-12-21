@@ -78,11 +78,11 @@
       android:strokeLineCap="round"/>
   <path
       android:pathData="M13.5,41C13.225,41 13,40.5859 13,40.0797V28.9203C13,28.4141 13.225,28 13.5,28C13.775,28 14,28.4141 14,28.9203V40.0797C14,40.5859 13.775,41 13.5,41Z"
-      android:fillColor="#29F036"
+      android:fillColor="#000000"
       android:fillType="evenOdd"/>
   <path
       android:pathData="M52.5,38C52.2252,38 52,37.6629 52,37.2502V32.7498C52,32.3371 52.2252,32 52.5,32C52.7748,32 53,32.3371 53,32.7498V37.2502C53,37.6629 52.7748,38 52.5,38Z"
-      android:fillColor="#29F036"
+      android:fillColor="#000000"
       android:fillType="evenOdd"/>
   <path
       android:strokeWidth="1"

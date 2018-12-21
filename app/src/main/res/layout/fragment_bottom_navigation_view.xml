@@ -11,8 +11,8 @@
         android:layout_height="44dp"
         android:layout_gravity="bottom"
         app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/bottom_navigation_colors"
-        app:itemTextColor="@drawable/bottom_navigation_colors"
+        app:itemIconTint="@drawable/jesta_bottom_navigation_colors"
+        app:itemTextColor="@drawable/jesta_bottom_navigation_colors"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_drawer_menu" />
 </FrameLayout>

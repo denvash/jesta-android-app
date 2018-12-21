@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_16dp"
         android:text="@string/jesta_app_name"
-        android:textAppearance="@style/TextAppearance.Jesta.Title" />
+        android:textAppearance="@style/TextAppearance.Jesta.Type.Purple" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/do_jesta_button"

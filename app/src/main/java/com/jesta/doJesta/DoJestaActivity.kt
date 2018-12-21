@@ -61,12 +61,11 @@ class DoJestaActivity : AppCompatActivity() {
 
             do_jesta_recycle_view.adapter = adapter
 
-
-            // mission cards padding
-            val scale = resources.displayMetrics.density
-            val spacing = (1 * scale + 2.5f).toInt()
-            do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(spacing))
-
+            // Note: The layout has internal spacing;
+            // mission cards padding example.
+            // val scale = resources.displayMetrics.density
+            // val spacing = (1 * scale + 2.0f).toInt()
+            //do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(0))
 
             jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
             jesta_bottom_navigation.setOnNavigationItemSelectedListener {

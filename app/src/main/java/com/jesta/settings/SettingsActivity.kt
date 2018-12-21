@@ -3,6 +3,7 @@ package com.jesta.settings
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.jesta.MainActivity
 import com.jesta.R
 import com.jesta.settings.profile.ProfileActivity
 import com.jesta.util.SysManager
@@ -22,6 +23,13 @@ class SettingsActivity : AppCompatActivity() {
 
         profile_constraint_layout.setOnClickListener {
             val intent = Intent(this@SettingsActivity, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        jesta_settings_button_log_out.setOnClickListener {
+            sysManager.signOutUser(this@SettingsActivity)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
     }
