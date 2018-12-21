@@ -8,7 +8,7 @@
         android:id="@+id/jesta_bottom_navigation"
         style="@style/Widget.Jesta.BottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="@dimen/bottom_bar"
         android:layout_gravity="bottom"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/jesta_bottom_navigation_colors"

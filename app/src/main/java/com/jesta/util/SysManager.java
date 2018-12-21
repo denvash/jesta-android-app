@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -16,17 +17,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.storage.*;
 import com.jesta.R;
+
+import java.io.*;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import static com.jesta.util.SysManager.DBTask.RELOAD_JESTAS;
 import static com.jesta.util.SysManager.DBTask.RELOAD_USERS;
+import static com.jesta.util.SysManager.DBTask.UPLOAD_FILE;
 
 /**
  * System manager
@@ -53,6 +55,10 @@ public class SysManager {
     // loading animation
     private ProgressBar _pgsBar;
 
+    public SysManager(Fragment fragment) {
+
+    }
+
     public SysManager(Activity currentActivity) {
         _activity = currentActivity;
 
@@ -78,6 +84,14 @@ public class SysManager {
         _pgsBar.setVisibility(View.INVISIBLE);
     }
 
+    public void startLoadingAnim(ProgressBar pgsBar) {
+        pgsBar.setVisibility(View.VISIBLE);
+    }
+
+    public void stopLoadingAnim(ProgressBar pgsBar) {
+        pgsBar.setVisibility(View.INVISIBLE);
+    }
+
     /**
      * User authentication
      * TODO-MAX: implement updateUserInDB etc'...
@@ -86,7 +100,47 @@ public class SysManager {
     public enum DBTask
     {
         RELOAD_USERS, // update _usersDict
-        RELOAD_JESTAS // update _jestasDict
+        RELOAD_JESTAS, // update _jestasDict
+        UPLOAD_FILE
+    }
+
+    public Task createDBTask(DBTask taskName, Uri uri) {
+        if (taskName == UPLOAD_FILE) {
+            final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+            final String randomFileName = "images/" + UUID.randomUUID().toString();
+            _storage.child(randomFileName).putFile(uri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            _storage.child(randomFileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                            {
+                                @Override
+                                public void onSuccess(Uri downloadUrl)
+                                {
+                                    source.setResult(downloadUrl.toString());
+                                }
+                                public void onFailure(@NonNull Exception e) {
+                                    source.setException(e);
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            source.setException(e);
+                        }
+                    });
+//                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+//                                    .getTotalByteCount());
+//                        }
+//                    });
+            return source.getTask();
+        }
+        return null;
     }
 
     public Task createDBTask(DBTask taskName) {
@@ -144,7 +198,7 @@ public class SysManager {
             // return the task so it could be waited on the caller
             return source.getTask();
         }
-       return null;
+        return null;
     };
 
     public FirebaseAuth getFirebaseAuth() {
@@ -181,8 +235,6 @@ public class SysManager {
             setUserOnDB(user);
         }
 
-        // todo debug
-//        uploadUriToStorage(Uri.parse(firebaseUser.getPhotoUrl().toString()));
         _currentUser = user;
     }
 
@@ -211,30 +263,6 @@ public class SysManager {
 
     public void setMissionOnDB(Mission mission) {
         _jestasDatabase.child(mission.getId()).setValue(mission);
-    }
-
-    // todo debug
-    public void uploadUriToStorage(Uri filePath) {
-        _storage.child("images/pic.png").putFile(filePath)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(_activity, "Uploaded", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(_activity, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                .getTotalByteCount());
-                    }
-                });
     }
 
     /**

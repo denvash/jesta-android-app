@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_ask_jesta"
+            android:id="@+id/nav_do_jesta"
             android:icon="@drawable/ic_take_diamond"
             android:title="@string/nav_ask_jesta" />
 
         <item
-            android:id="@+id/nav_do_jesta"
+            android:id="@+id/nav_ask_jesta"
             android:icon="@drawable/ic_ask_jesta"
             android:title="@string/nav_do_jesta" />
 

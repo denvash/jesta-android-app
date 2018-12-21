@@ -39,8 +39,8 @@ data class Mission(
         location = dbJesta["location"].toString()
 
         // TODO add diamonds prop
-//        diamonds = dbJesta["diamonds"].toString().toInt()
-//        title = dbJesta["title"].toString()
+        diamonds = dbJesta["diamonds"].toString().toInt()
+        title = dbJesta["title"].toString()
 
         // TODO write initializer from JSON
 //        tags = dbJesta["tags"]

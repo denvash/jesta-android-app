@@ -20,6 +20,7 @@ class JestaCardReviewActivity : AppCompatActivity() {
 
         val mission = intent.getParcelableExtra(extra) as Mission
 
+        jesta_preview_title.text = mission.title
         jesta_preview_difficulty.text = mission.difficulty
         ImageReq.setImageFromUrl(jesta_card_preview_mission_image, mission.imageUrl)
 

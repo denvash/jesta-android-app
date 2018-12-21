@@ -27,6 +27,18 @@
         <item name="android:fontFamily">@font/marvel</item>
     </style>
 
+    <style name="Widget.Jesta.EditText" parent="TextAppearance.Jesta.Type">
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:background">@drawable/rounded_corner_tag</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingStart">@dimen/_10dp</item>
+        <item name="android:paddingEnd">@dimen/_10dp</item>
+
+        <item name="android:textAlignment">center</item>
+    </style>
+
     <style name="TextAppearance.Jesta.Type.Purple" parent="TextAppearance.Jesta.Type">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
@@ -66,9 +78,7 @@
     <style name="Widget.Jesta.Button.Special" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:background">@color/white</item>
-
         <item name="textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/marvel</item>
     </style>
@@ -76,8 +86,13 @@
     <style name="Widget.Jesta.Tag" parent="">
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/montserrat_light_italic</item>
+    </style>
+
+    <style name="Widget.Jesta.Chip" parent="Widget.Jesta.Tag">
+        <item name="android:fontFamily">@font/marvel</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="Widget.Jesta.Tag.Difficulty" parent="Widget.Jesta.Tag">

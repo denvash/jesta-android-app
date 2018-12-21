@@ -17,6 +17,7 @@
         android:id="@+id/jesta_post_view_nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="40dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/include"
                 app:rippleColor="@color/primaryLightColor"
                 app:strokeColor="@color/black"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="0.75dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
