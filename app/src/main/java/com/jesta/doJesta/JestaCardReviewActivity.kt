@@ -1,9 +1,11 @@
 package com.jesta.doJesta
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jesta.R
+import com.jesta.chat.ChatActivity
 import com.jesta.util.ImageReq
 import com.jesta.util.Mission
 import kotlinx.android.synthetic.main.jesta_preview_accept.*
@@ -42,13 +44,8 @@ class JestaCardReviewActivity : AppCompatActivity() {
 
         jesta_preview_accept_button.setOnClickListener {
             Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
-//            val intent = Intent(this@JestaCardReviewActivity, Main2Activity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this@JestaCardReviewActivity, ChatActivity::class.java)
+            startActivity(intent)
         }
-
-//        jesta_card_preview_button_fab.setOnClickListener{
-//            finish()
-//        }
-
     }
 }
