@@ -30,6 +30,7 @@ class AskJestaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ask_jesta)
 
         jesta_post_title.filters = jesta_post_title.filters + InputFilter.AllCaps()
+        jesta_post_location.filters = jesta_post_location.filters + InputFilter.AllCaps()
         jesta_post_button_browse.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)

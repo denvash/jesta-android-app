@@ -30,25 +30,24 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/marvel"
                 android:textAllCaps="true"
-                android:inputType="textCapCharacters"/>
+                android:inputType="textCapCharacters" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Theme.Jesta.TextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_16dp"
-            android:hint="@string/jesta_post_description"
-            >
+            android:fontFamily="@font/montserrat_light"
+            android:hint="@string/jesta_post_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/jesta_post_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAllCaps="true"
-                android:fontFamily="@font/montserrat"
-                android:inputType="textCapSentences|textCapCharacters"
-                />
+                android:fontFamily="@font/montserrat_light"
+                android:inputType="textCapSentences|textCapCharacters" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <GridLayout
@@ -162,7 +161,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="horizontal">
@@ -170,7 +169,8 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_16dp"
+            android:layout_columnWeight="1"
+            android:layout_marginEnd="@dimen/_16dp"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_16dp"
             app:cardUseCompatPadding="true"
@@ -181,20 +181,10 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_16dp">
 
-                <ProgressBar
-                    android:id="@+id/jesta_post_image_view_pbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:progress="0"
-                    android:indeterminate="true"
-                    android:visibility="invisible"
-                    android:progressDrawable="@drawable/circular_progress_bar" />
-
                 <ImageView
                     android:id="@+id/jesta_post_preview_mission_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_jesta_default_image"
                     tools:ignore="ContentDescription" />
@@ -274,19 +264,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/_10dp"
                         android:text="@string/jesta_post_pay"
                         android:textAlignment="center" />
 
-                    <EditText
-                        android:id="@+id/jesta_post_payment"
-                        style="@style/Widget.Jesta.EditText"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:autofillHints="numberSigned"
-                        android:hint="@string/jesta_post_fill_amount"
-                        android:inputType="numberSigned" />
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
+                        android:gravity="center"
+                        app:boxBackgroundColor="@color/transparent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/jesta_post_payment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned"
+                            android:fontFamily="@font/marvel"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -311,25 +308,33 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
                         style="@style/TextAppearance.Jesta.Type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10dp"
                         android:text="@string/jesta_post_location"
                         android:textAlignment="center" />
 
-                    <EditText
-                        android:id="@+id/jesta_post_location"
-                        style="@style/Widget.Jesta.EditText"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:autofillHints="numberSigned"
-                        android:hint="@string/jesta_post_fill_location"
-                        android:inputType="text" />
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
+                        android:gravity="center"
+                        app:boxBackgroundColor="@color/transparent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/jesta_post_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textCapCharacters"
+                            android:fontFamily="@font/marvel"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -362,19 +367,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/_10dp"
                         android:text="@string/jesta_post_crew"
                         android:textAlignment="center" />
 
-                    <EditText
-                        android:id="@+id/jesta_post_num_of_people"
-                        style="@style/Widget.Jesta.EditText"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:autofillHints="numberSigned"
-                        android:hint="@string/jesta_post_fill_amount"
-                        android:inputType="numberSigned" />
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
+                        android:gravity="center"
+                        app:boxBackgroundColor="@color/transparent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/jesta_post_num_of_people"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned"
+                            android:fontFamily="@font/marvel"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -405,20 +418,26 @@
                         style="@style/TextAppearance.Jesta.Type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10dp"
                         android:text="@string/jesta_post_duration"
                         android:textAlignment="center" />
 
-                    <EditText
-                        android:id="@+id/jesta_post_duration"
-                        style="@style/Widget.Jesta.EditText"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:autofillHints="numberSigned"
+                        app:hintEnabled="false"
+                        app:hintAnimationEnabled="false"
                         android:gravity="center"
-                        android:hint="@string/jesta_post_fill_amount"
-                        android:inputType="numberSigned" />
+                        app:boxBackgroundColor="@color/transparent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/jesta_post_duration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberSigned"
+                            android:fontFamily="@font/marvel"
+                            android:textColor="@color/colorPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
         </GridLayout>

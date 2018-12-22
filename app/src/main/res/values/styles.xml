@@ -5,7 +5,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">#D6BAF5</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
