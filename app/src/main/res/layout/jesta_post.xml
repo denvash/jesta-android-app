@@ -17,29 +17,38 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/jesta_post_title"
-            app:hintEnabled="true">
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="0.1dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/jesta_post_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:fontFamily="@font/marvel"
+                android:textAllCaps="true"
+                android:inputType="textCapCharacters"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Theme.Jesta.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_16dp"
-            android:hint="@string/jesta_post_description">
+            android:hint="@string/jesta_post_description"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/jesta_post_description"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textAllCaps="true"
+                android:fontFamily="@font/montserrat"
+                android:inputType="textCapSentences|textCapCharacters"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <GridLayout
@@ -124,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginEnd="40dp"
-        app:cardBackgroundColor="@color/colorPrimaryDark"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:cardUseCompatPadding="true"
         app:contentPadding="0.75dp">
 
@@ -149,7 +158,7 @@
         android:layout_marginTop="-20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@color/colorPrimary" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -162,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/_16dp"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
+            app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_16dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="0.75dp">
@@ -229,7 +238,7 @@
             android:layout_width="1dp"
             android:layout_height="100dp"
             android:layout_centerInParent="true"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimary" />
 
         <GridLayout
             android:layout_width="match_parent"

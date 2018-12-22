@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--Old colors backup-->
-    <!--<color name="colorPrimary">#E0E0E0</color>-->
-    <!--<color name="colorPrimaryDark">#FBB8AC</color>-->
-    <!--<color name="colorAccent">#FEDBD0</color>-->
-    <!--<color name="textColorPrimary">#442C2E</color>-->
-    <!--<color name="toolbarIconColor">@color/textColorPrimary</color>-->
-    <!--<color name="loginPageBackgroundColor">#FFFFFF</color>-->
-    <!--<color name="productGridBackgroundColor">#FFFBFA</color>-->
-    <!--<color name="colorControlActivated">#FBB8AC</color>    -->
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <color name="colorPrimary">#e1bee7</color>
-    <color name="colorPrimaryDark">#7600FE</color>
-    <color name="colorAccent">#FDECB9</color>
+    <color name="colorPrimary">#7600FE</color>
+    <color name="colorAccent">#29F036</color>
 
     <color name="primaryLightColor">#e6ceff</color>
 
@@ -25,4 +15,6 @@
     <color name="semiTransparentWhite">#eeffffff</color>
 
     <color name="hint_color">#979797</color>
+
+    <!--<color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorAccent</color>-->
 </resources>

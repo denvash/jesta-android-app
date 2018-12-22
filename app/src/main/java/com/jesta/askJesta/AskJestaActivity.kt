@@ -3,12 +3,12 @@ package com.jesta.askJesta
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputFilter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.jesta.R
-import com.jesta.R.id.pBar
 import com.jesta.doJesta.DoJestaActivity
 import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
@@ -17,7 +17,6 @@ import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_ask_jesta.*
 import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 import kotlinx.android.synthetic.main.jesta_post.*
-import kotlinx.android.synthetic.main.jesta_loading.*
 import java.util.*
 
 class AskJestaActivity : AppCompatActivity() {
@@ -30,6 +29,7 @@ class AskJestaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ask_jesta)
 
+        jesta_post_title.filters = jesta_post_title.filters + InputFilter.AllCaps()
         jesta_post_button_browse.setOnClickListener {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)
@@ -43,6 +43,10 @@ class AskJestaActivity : AppCompatActivity() {
             }
             val sysManager = SysManager(this@AskJestaActivity)
 
+            if (isInvalidInput()) {
+                Toast.makeText(this@AskJestaActivity, "Fill all fields", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             //val currentUser = sysManager.getCurrentUserFromDB()
             val jesta = Mission(
                 id = UUID.randomUUID().toString(),
@@ -92,13 +96,25 @@ class AskJestaActivity : AppCompatActivity() {
         }
     }
 
+    private fun isInvalidInput(): Boolean {
+        return jesta_post_title.text.isNullOrEmpty() ||
+                jesta_post_difficulty.text.isNullOrEmpty() ||
+                jesta_post_description.text.isNullOrEmpty() ||
+                jesta_post_payment.text.isNullOrEmpty() ||
+                jesta_post_num_of_people.text.isNullOrEmpty() ||
+                jesta_post_duration.text.isNullOrEmpty() ||
+                jesta_post_location.text.isNullOrEmpty() ||
+                jesta_preview_tag_1.text.isNullOrEmpty() ||
+                jesta_preview_tag_2.text.isNullOrEmpty() ||
+                jesta_preview_tag_3.text.isNullOrEmpty()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
             filePath = data.data
 
             jesta_post_preview_mission_image.setImageURI(filePath)
-//            sharedViewModel?.image_uri?.postValue(data.data)
 
             val sysManager = SysManager(this@AskJestaActivity)
             val uploadAndGetUrl = sysManager.createDBTask(SysManager.DBTask.UPLOAD_FILE, filePath)
@@ -106,13 +122,10 @@ class AskJestaActivity : AppCompatActivity() {
             // note: async function, therefore it is in the end of current function
             uploadAndGetUrl.addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    // todo error here! e.g. start ErrorActivity here
+                    // Todo error here! e.g. start ErrorActivity here
                     return@addOnCompleteListener
                 }
 
-                // Task completed successfully
-                // todo use url (string)
-//                sharedViewModel?.image_url?.postValue(task.result.toString())
                 imageResult = task.result.toString()
             }
 
