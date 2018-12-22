@@ -13,7 +13,6 @@
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profile_constraint_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -21,19 +20,17 @@
             android:layout_marginBottom="30dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/profile_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/jesta_settings_avatar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/nav_bottom_sheet_profile_description"
-                    android:src="@drawable/avatar"
+                    android:src="@drawable/jesta_default_avatar"
                     app:civ_border_color="@color/colorPrimaryDark"
                     app:civ_border_width="0.5dp" />
 
@@ -44,7 +41,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/jesta_settings_profile_full_name"
                         style="@style/TextAppearance.Jesta.Type.Purple"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -54,7 +50,6 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/jesta_settings_profile_phone_number"
                         style="@style/TextAppearance.Jesta.Type.Purple"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -71,11 +66,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_4dp"
-                            android:src="@drawable/ic_diamond_normal"
+                            android:src="@drawable/ic_jesta_diamond_normal"
                             tools:ignore="ContentDescription" />
 
                         <TextView
-                            android:id="@+id/jesta_settings_diamond_amount"
                             style="@style/TextAppearance.Jesta.Type.Purple"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -164,7 +158,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_jesta_default"
+                android:src="@drawable/ic_jesta_default_values"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -184,7 +178,6 @@
         </GridLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/jesta_settings_button_log_out"
             style="@style/Widget.Jesta.Button.Special"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
@@ -199,7 +192,7 @@
     </LinearLayout>
 
     <include
-        layout="@layout/fragment_bottom_navigation_view"
+        layout="@layout/frame_bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"/>

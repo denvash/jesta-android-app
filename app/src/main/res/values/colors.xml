@@ -11,40 +11,18 @@
     <!--<color name="colorControlActivated">#FBB8AC</color>    -->
 
     <color name="colorPrimary">#e1bee7</color>
-    <color name="colorPrimaryLight">#e9d0ed</color>
     <color name="colorPrimaryDark">#7600FE</color>
     <color name="colorAccent">#FDECB9</color>
-    <color name="textColorPrimary">@color/black</color>
-    <color name="toolbarIconColor">@color/textColorPrimary</color>
-    <color name="loginPageBackgroundColor">#FFFFFF</color>
-    <color name="productGridBackgroundColor">@color/white</color>
-    <color name="colorControlActivated">#FBB8AC</color>
 
-    <color name="primaryColor">#b39ddb</color>
     <color name="primaryLightColor">#e6ceff</color>
-    <color name="primaryDarkColor">#836fa9</color>
-    <color name="secondaryColor">#ffffff</color>
-    <color name="secondaryLightColor">#ffffcf</color>
-    <color name="secondaryDarkColor">#cbc26d</color>
-    <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#000000</color>
 
     <color name="blue">#56CCF2</color>
     <color name="hotPink">#FD3CB9</color>
-    <color name="green">#AFEFCA</color>
     <color name="pink">#E4BCF3</color>
-    <color name="lightGray">#e0e0e0</color>
     <color name="darkGray">#424242</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="semiTransparentWhite">#eeffffff</color>
 
-    <color name="medium">@color/colorAccent</color>
-    <color name="tag">#EBE7DA</color>
-    <color name="tag_text_color">#262323</color>
-    <color name="tag_reward_text_color">#A16FD0</color>
-    <color name="tag_reward_text_color_dark">#7600FE</color>
-    <color name="tag_reward_background">#DADADA</color>
-    <color name="black_overlay">#66000000</color>
     <color name="hint_color">#979797</color>
 </resources>

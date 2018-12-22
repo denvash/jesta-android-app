@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jesta.R
+import com.jesta.util.ImageReq
 import com.jesta.util.Mission
 import kotlinx.android.synthetic.main.jesta_card.view.*
 

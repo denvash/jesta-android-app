@@ -1,11 +1,9 @@
-package com.jesta;
+package com.jesta.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.facebook.*;
@@ -18,10 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.*;
+import com.jesta.R;
 import com.jesta.doJesta.DoJestaActivity;
-import com.jesta.login.ErrorActivity;
-import com.jesta.login.LoginActivitiesWrapper;
-import com.jesta.login.LoginActivity;
 import com.jesta.util.SysManager;
 import com.jesta.util.User;
 
@@ -76,7 +72,7 @@ public class MainActivity extends LoginActivitiesWrapper {
 
                 // otherwise (user isn't logged in), render ui
                 setContentView(R.layout.activity_main);
-                sysManager.setTitle(getString(R.string.welcome));
+                sysManager.setTitle(getString(R.string.jesta_login_welcome));
                 sysManager.showBackButton(false);
 
                 Button facebookSignInButton = (Button) findViewById(R.id.facebook_sign_in_btn);

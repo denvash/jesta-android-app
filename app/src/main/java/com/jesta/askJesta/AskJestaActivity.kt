@@ -10,11 +10,14 @@ import android.widget.Toast
 import com.jesta.R
 import com.jesta.R.id.pBar
 import com.jesta.doJesta.DoJestaActivity
+import com.jesta.settings.SettingsActivity
+import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_ask_jesta.*
+import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 import kotlinx.android.synthetic.main.jesta_post.*
-import kotlinx.android.synthetic.main.loading.*
+import kotlinx.android.synthetic.main.jesta_loading.*
 import java.util.*
 
 class AskJestaActivity : AppCompatActivity() {
@@ -65,6 +68,27 @@ class AskJestaActivity : AppCompatActivity() {
 
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+        }
+
+        jesta_bottom_navigation.selectedItemId = R.id.nav_ask_jesta
+        jesta_bottom_navigation.setOnNavigationItemSelectedListener {
+
+            val intent = when (it.itemId) {
+                R.id.nav_do_jesta -> {
+                    Intent(this@AskJestaActivity, DoJestaActivity::class.java)
+                }
+                R.id.nav_status -> {
+                    Intent(this@AskJestaActivity, StatusActivity::class.java)
+                }
+                // Settings Activity
+                else -> {
+                    Intent(this@AskJestaActivity, SettingsActivity::class.java)
+                }
+            }
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            finish()
+            startActivity(intent)
+            true
         }
     }
 

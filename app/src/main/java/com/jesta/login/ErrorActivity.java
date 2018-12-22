@@ -11,7 +11,7 @@ public class ErrorActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         SysManager sysManager = new SysManager(this);
-        sysManager.setTitle(getString(R.string.error));
+        sysManager.setTitle(getString(R.string.jesta_login_error));
         sysManager.showBackButton(true);
     }
 

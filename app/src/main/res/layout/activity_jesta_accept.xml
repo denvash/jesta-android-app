@@ -6,7 +6,6 @@
     android:layout_height="wrap_content">
 
     <ImageButton
-        android:id="@+id/jesta_accept_back_button"
         style="@style/Widget.Jesta.Toolbar"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -14,7 +13,6 @@
         android:src="@drawable/ic_jesta_back" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/jesta_post_view_nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -32,7 +30,6 @@
                 android:layout_height="wrap_content" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/jesta_accept_button"
                 style="@style/Widget.Jesta.Button.Special"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"

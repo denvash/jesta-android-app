@@ -1,4 +1,4 @@
-package com.jesta.doJesta
+package com.jesta.util
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
 import com.android.volley.toolbox.Volley
+import com.jesta.doJesta.DoJestaActivity
 
 object ImageReq {
     private val requestQueue: RequestQueue
@@ -20,7 +21,7 @@ object ImageReq {
         requestQueue.start()
         maxByteSize = calculateMaxByteSize(context)
         imageLoader = ImageLoader(
-                requestQueue,
+            requestQueue,
                 object : ImageLoader.ImageCache {
                     private val lruCache = object : LruCache<String, Bitmap>(maxByteSize) {
                         override fun sizeOf(url: String, bitmap: Bitmap): Int {

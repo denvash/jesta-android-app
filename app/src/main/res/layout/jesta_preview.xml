@@ -42,7 +42,6 @@
                     android:src="@drawable/ic_jesta_cash" />
 
                 <TextView
-                    android:id="@+id/jesta_preview_payment"
                     style="@style/TextAppearance.Jesta.Type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,7 +68,6 @@
                     android:src="@drawable/ic_jesta_team" />
 
                 <TextView
-                    android:id="@+id/jesta_preview_crew"
                     style="@style/TextAppearance.Jesta.Type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,11 +93,10 @@
                     android:src="@drawable/ic_jesta_time" />
 
                 <TextView
-                    android:id="@+id/jesta_preview_duration"
                     style="@style/TextAppearance.Jesta.Type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/jesta_review_duration" />
+                    android:text="@string/jesta_preview_duration" />
             </LinearLayout>
 
             <LinearLayout
@@ -121,11 +118,10 @@
                     android:src="@drawable/ic_jesta_location" />
 
                 <TextView
-                    android:id="@+id/jesta_preview_location"
                     style="@style/TextAppearance.Jesta.Type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/jesta_review_location" />
+                    android:text="@string/jesta_preview_location" />
             </LinearLayout>
         </GridLayout>
 
@@ -145,11 +141,10 @@
                 app:cardCornerRadius="@dimen/_16dp">
 
                 <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/jesta_card_preview_mission_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_default_image" />
+                    android:src="@drawable/ic_jesta_default_image" />
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.card.MaterialCardView>
 
@@ -170,7 +165,6 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/jesta_preview_title"
                 style="@style/Widget.Jesta.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -196,12 +190,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_marginStart="@dimen/_40dp"
-            android:id="@+id/jesta_card_review_avatar_icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginEnd="@dimen/_10dp"
             android:contentDescription="@string/jesta_card_profile_description"
-            android:src="@drawable/avatar"
+            android:src="@drawable/jesta_default_avatar"
             app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="0.75dp" />
 
@@ -212,7 +205,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/jesta_preview_description"
                 style="@style/TextAppearance.Jesta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -239,7 +231,6 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/jesta_preview_tag_1"
                             style="@style/Widget.Jesta.Tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -263,7 +254,6 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/jesta_preview_tag_2"
                             style="@style/Widget.Jesta.Tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -286,7 +276,6 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/jesta_preview_tag_3"
                             style="@style/Widget.Jesta.Tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -320,7 +309,7 @@
             android:layout_marginBottom="@dimen/_4dp"
             android:contentDescription="@string/jesta_card_review_icon"
             android:padding="@dimen/_10dp"
-            android:src="@drawable/ic_wanted_jesta" />
+            android:src="@drawable/ic_jesta_wanted" />
 
         <FrameLayout
             android:layout_width="170dp"
@@ -333,10 +322,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="@string/jesta_diamonds_text" />
+                android:text="@string/jesta_preview_diamonds_text" />
 
             <TextView
-                android:id="@+id/jesta_preview_diamonds"
                 style="@style/TextAppearance.Jesta.Type.Purple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -354,10 +342,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="@string/jesta_accept_difficulty" />
+                android:text="@string/jesta_preview_difficulty_text" />
 
             <TextView
-                android:id="@+id/jesta_preview_difficulty"
                 style="@style/TextAppearance.Jesta.Type.Purple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

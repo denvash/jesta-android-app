@@ -7,7 +7,7 @@
     tools:context=".askJesta.AskJestaActivity">
 
     <include
-        layout="@layout/fragment_bottom_navigation_view"
+        layout="@layout/frame_bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -18,7 +18,6 @@
         android:layout_height="wrap_content">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/jesta_post_view_nested_scroll_view"
             android:layout_marginBottom="@dimen/bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -29,7 +28,6 @@
                 android:orientation="vertical">
 
                 <include
-                    android:id="@+id/jesta_ask_include_post"
                     layout="@layout/jesta_post"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -41,7 +39,6 @@
                     android:layout_gravity="center">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/jesta_post_button_accept"
                         style="@style/Widget.Jesta.Button.Special"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
@@ -55,7 +52,6 @@
                         app:strokeWidth="0.75dp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/jesta_post_button_preview"
                         style="@style/Widget.Jesta.Button.Special"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"

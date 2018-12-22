@@ -9,17 +9,17 @@
 
         <item
             android:id="@+id/nav_ask_jesta"
-            android:icon="@drawable/ic_ask_jesta"
+            android:icon="@drawable/ic_jesta_nav_ask"
             android:title="@string/nav_do_jesta" />
 
         <item
             android:id="@+id/nav_status"
-            android:icon="@drawable/ic_jesta_status"
+            android:icon="@drawable/ic_jesta_nav_status"
             android:title="@string/nav_status" />
 
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings"
+            android:icon="@drawable/ic_jesta_nav_settings"
             android:title="@string/nav_settings" />
     </group>
 </menu>

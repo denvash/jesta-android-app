@@ -10,10 +10,10 @@
     android:gravity="center"
     android:orientation="vertical"
 
-    tools:context=".MainActivity">
+    tools:context=".login.MainActivity">
 
 
-    <include android:id="@+id/logo_bar" layout="@layout/jesta_logo_bar"/>
+    <include layout="@layout/jesta_logo_bar"/>
 
 
     <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/google"
+                android:text="@string/jesta_login_google"
                 android:padding="20dp"
                 android:textColor="@color/darkGray"
         />
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/facebook"
+                android:text="@string/jesta_login_facebook"
                 android:padding="20dp"
                 android:textColor="@color/darkGray"
         />
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="@string/email"
+                android:text="@string/jesta_login_email"
                 android:padding="20dp"
                 android:textColor="@color/darkGray"
         />

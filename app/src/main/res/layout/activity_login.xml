@@ -36,7 +36,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
                         android:id="@+id/email"
-                        android:hint="@string/email_hint"
+                        android:hint="@string/jesta_login_email_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
@@ -52,7 +52,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
                         android:id="@+id/password"
-                        android:hint="@string/password_hint"
+                        android:hint="@string/jesta_login_password_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -60,26 +60,24 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                    android:id="@+id/material_button"
-                    style="@style/Theme.Jesta.Login.Button"
+                style="@style/Theme.Jesta.Login.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:onClick="loginUser"
                     android:layout_marginBottom="20dp"
-                    android:text="@string/login"
+                    android:text="@string/jesta_login_login"
             />
 
             <TextView
                     app:fontFamily="@font/marvel"
-                    android:id="@+id/createAccountLink"
-                    android:layout_marginTop="20dp"
+                android:layout_marginTop="20dp"
                     android:textSize="28dp"
                     android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:onClick="openRegister"
-                    android:text="@string/create_account_link"
+                    android:text="@string/jesta_login_create_account_link"
             />
         </LinearLayout>
 

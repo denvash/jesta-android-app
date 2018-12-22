@@ -15,7 +15,7 @@ public class LoginActivity extends LoginActivitiesWrapper {
     {
         super.onResume();
         sysManager = new SysManager(this);
-        sysManager.setTitle(getString(R.string.login));
+        sysManager.setTitle(getString(R.string.jesta_login_login));
         sysManager.showBackButton(true);
         sysManager.showKeyboardAutomatically(false);
 

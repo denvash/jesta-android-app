@@ -3,11 +3,15 @@ package com.jesta.settings
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jesta.MainActivity
+import com.jesta.login.MainActivity
 import com.jesta.R
+import com.jesta.askJesta.AskJestaActivity
+import com.jesta.doJesta.DoJestaActivity
 import com.jesta.settings.profile.ProfileActivity
+import com.jesta.status.StatusActivity
 import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -31,6 +35,26 @@ class SettingsActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+        }
+
+        jesta_bottom_navigation.selectedItemId = R.id.nav_settings
+        jesta_bottom_navigation.setOnNavigationItemSelectedListener {
+
+            val intent = when (it.itemId) {
+                R.id.nav_do_jesta -> {
+                    Intent(this@SettingsActivity, DoJestaActivity::class.java)
+                }
+                R.id.nav_status -> {
+                    Intent(this@SettingsActivity, StatusActivity::class.java)
+                }
+                else -> {
+                    Intent(this@SettingsActivity, AskJestaActivity::class.java)
+                }
+            }
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            finish()
+            startActivity(intent)
+            true
         }
     }
 }

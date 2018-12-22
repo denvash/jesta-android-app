@@ -44,11 +44,10 @@
                     style="@style/Theme.Jesta.Login.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/phone_hint"
+                    android:hint="@string/jesta_login_phone_hint"
             >
                 <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/phoneNumber"
-                        android:layout_width="match_parent"
+                    android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                 />
             </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +81,7 @@
                         style="@style/Theme.Jesta.Login.TextInputEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/enter_otp"
+                        android:hint="@string/jesta_login_enter_otp"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 

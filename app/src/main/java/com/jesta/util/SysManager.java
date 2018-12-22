@@ -20,8 +20,6 @@ import com.google.firebase.database.*;
 import com.google.firebase.storage.*;
 import com.jesta.R;
 
-import java.io.*;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +50,7 @@ public class SysManager {
     private Activity _activity;
     private TextView _backButtonTv;
 
-    // loading animation
+    // jesta_loading animation
     private ProgressBar _pgsBar;
 
     public SysManager(Fragment fragment) {
@@ -75,7 +73,7 @@ public class SysManager {
     }
 
     public void startLoadingAnim() {
-        _activity.setContentView(R.layout.loading);
+        _activity.setContentView(R.layout.jesta_loading);
         _pgsBar = (ProgressBar)_activity.findViewById(R.id.pBar);
         _pgsBar.setVisibility(View.VISIBLE);
     }
@@ -278,7 +276,7 @@ public class SysManager {
         _backButtonTv = (TextView) _activity.findViewById(R.id.back_button);
         if (_backButtonTv == null)
             return;
-        _backButtonTv.setText(flag ? _activity.getResources().getString(R.string.leftArrow) : "");
+        _backButtonTv.setText(flag ? _activity.getResources().getString(R.string.jesta_login_leftArrow) : "");
     }
 
     public void showKeyboardAutomatically(Boolean flag) {

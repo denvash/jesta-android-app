@@ -12,7 +12,7 @@ import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_do_jesta.*
-import kotlinx.android.synthetic.main.fragment_bottom_navigation_view.*
+import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 
 
 class DoJestaActivity : AppCompatActivity() {
@@ -82,10 +82,11 @@ class DoJestaActivity : AppCompatActivity() {
                         Intent(this@DoJestaActivity, SettingsActivity::class.java)
                     }
                 }
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                finish()
                 startActivity(intent)
                 true
             }
-
         }
     }
 }

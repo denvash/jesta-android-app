@@ -12,7 +12,6 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.jesta.MainActivity;
 import com.jesta.util.SysManager;
 
 public class LoginActivitiesWrapper extends AppCompatActivity {

@@ -1,114 +1,50 @@
 <resources>
+
+    <!--Util-->
+    <string name="jesta_value">Value</string>
     <string name="jesta_app_name">Jesta</string>
-    <string name="jesta_filter_title">Filter</string>
-    <string name="jesta_search_title">Search</string>
 
-    <!-- Added after login integration. TODO: unify duplicates-->
-    <string name="app_name">Jesta</string>
-    <string name="app_name_caps">JESTA</string>
-    <string name="email_hint">Enter email</string>
-    <string name="password_hint">Enter password</string>
-    <string name="password">Password</string>
-    <string name="register">REGISTER</string>
-    <string name="login">LOGIN</string>
-    <string name="sign_in">SIGN_IN</string>
-    <string name="welcome">WELCOME</string>
-    <string name="error">ERROR</string>
-    <string name="request_otp">REQUEST OTP</string>
-    <string name="sign_in_with">SIGN IN WITH:</string>
-    <string name="fullname_hint">Enter full name</string>
-    <string name="celluar_hint">Enter phone number</string>
-    <string name="logout">LOGOUT</string>
-    <string name="profile">PROFILE</string>
-    <string name="sign_in_with_google">Sign in with Google</string>
-    <string name="google">Google</string>
-    <string name="sign_in_with_facebook">Sign in with Facebook</string>
-    <string name="facebook">Facebook</string>
-    <string name="sign_in_with_email">sign in with Email</string>
-    <string name="email">Email</string>
-    <string name="create_account_link">Create account</string>
-
-    <string name="facebook_app_id">535928036830747</string>
-    <string name="fb_login_protocol_scheme">fb535928036830747</string>
-    <string name="leftArrow">←</string>
-    <string name="phone_hint">Enter your phone number</string>
-    <string name="enter_otp">Enter the code you received</string>
+    <!--Jesta Login-->
+    <string name="jesta_login_email_hint">Enter email</string>
+    <string name="jesta_login_password_hint">Enter password</string>
+    <string name="jesta_login_register">REGISTER</string>
+    <string name="jesta_login_login">LOGIN</string>
+    <string name="jesta_login_welcome">WELCOME</string>
+    <string name="jesta_login_error">ERROR</string>
+    <string name="jesta_login_request_otp">REQUEST OTP</string>
+    <string name="jesta_login_full_name_hint">Enter full name</string>
+    <string name="jesta_login_cellular_hint">Enter phone number</string>
+    <string name="jesta_login_google">Google</string>
+    <string name="jesta_login_facebook">Facebook</string>
+    <string name="jesta_login_email">Email</string>
+    <string name="jesta_login_create_account_link">Create account</string>
+    <string name="jesta_login_facebook_app_id">535928036830747</string>
+    <string name="jesta_login_fb_login_protocol_scheme">fb535928036830747</string>
+    <string name="jesta_login_leftArrow">←</string>
+    <string name="jesta_login_phone_hint">Enter your phone number</string>
+    <string name="jesta_login_enter_otp">Enter the code you received</string>
 
     <!--Navigation Menu  -->
     <string name="nav_ask_jesta">ASK</string>
     <string name="nav_do_jesta">DO</string>
     <string name="nav_settings">Settings</string>
-    <string name="nav_map">Near Me</string>
     <string name="nav_status">Status</string>
-    <string name="nav_bottom_sheet_name">Max Chi</string>
-    <string name="nav_bottom_sheet_email">maxchi@gmail.com</string>
     <string name="nav_bottom_sheet_profile_description">Profile Picture</string>
-    <string name="nav_bottom_sheet_close_image_description">Close Menu</string>
 
     <!-- Mission Card -->
     <string name="jesta_card_description">Jesta Description</string>
-    <string name="jesta_card_difficulty">Jesta Difficulty</string>
-
-    <!--Jesta Path-->
-    <string name="jesta_path_do_jesta">Do a Jesta</string>
-    <string name="jesta_path_ask_a_jesta">Ask For Jesta</string>
-
-    <!--Jesta Post-->
-    <string name="jesta_post_chip_price">Price</string>
-    <string name="jesta_post_chip_num_of_people">Num Of People</string>
-    <string name="jesta_post_chip_duration">Duration</string>
-    <string name="jesta_post_chip_location">Location</string>
-    <string name="jesta_post_button_accept">Accept Jesta</string>
-
-    <!--Jesta Settings-->
-    <string name="jesta_settings_phone_number_default">example@gmail.com</string>
-    <string name="jesta_settings_full_name_default">Full Name</string>
-    <string name="jesta_settings_edit_profile_icon_description">Edit Profile Icon</string>
-    <string name="jesta_settings_default_values">Jesta Default Values</string>
-    <string name="jesta_settings_diamond_amount">Diamonds Amount</string>
-    <string name="jesta_settings_account">Account</string>
-    <string name="jesta_settings_chat">Chat</string>
-
-    <!--Jesta Profile-->
-    <string name="jesta_profile_first_name_default">First-name</string>
-    <string name="jesta_profile_last_name_default">Last-name</string>
-    <string name="jesta_profile_change_number">Change Number</string>
-    <string name="jesta_profile_phone_number_hint">@string/jesta_settings_phone_number_default</string>
-    <string name="jesta_profile_change_email">Change Email</string>
-    <string name="jesta_profile_email_hint">default@email</string>
-    <string name="jesta_profile_logout">Log out</string>
-
-    <string name="jesta_settings_default_page">Start Page</string>
-    <string name="jesta_settings_default_page_do_jesta">Do Jesta</string>
     <string name="jesta_card_tag">Tag</string>
     <string name="jesta_card_title">Jesta Title</string>
-    <string name="jesta_card_reward">30,000</string>
     <string name="jesta_card_profile_description">Profile avatar</string>
     <string name="jesta_card_icon_reward_description">Diamond color icon</string>
     <string name="jesta_card_review_cash">Payment</string>
     <string name="jesta_card_review_icon">Card review icon</string>
     <string name="jesta_card_review_crew">Crew</string>
-    <string name="jesta_review_duration">Duration</string>
-    <string name="jesta_review_location">Location</string>
-    <string name="jesta_diamonds_text">Diamonds Worth</string>
-    <string name="jesta_card_review_diamonds_amount">Diamonds Amount</string>
 
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_settings">Settings</string>
-
-    <string name="jesta_settings_button_log_out">LOG OUT</string>
-    <string name="jesta_accept_difficulty">Difficulty</string>
-    <string name="jesta_value">Value</string>
-    <string name="jesta_preview_title">Jesta Title</string>
+    <!--Jesta Post-->
+    <string name="jesta_post_button_accept">Accept Jesta</string>
     <string name="jesta_post_description">Description</string>
     <string name="jesta_post_title">Jesta Title</string>
-    <string name="jesta_post_difficulty">Choose Difficulty Level</string>
     <string name="jesta_post_photo">Jesta Photo</string>
     <string name="jesta_post_browse">Browse</string>
     <string name="jesta_post_fill_amount">FILL AMOUNT</string>
@@ -120,4 +56,22 @@
     <string name="jesta_post_accept">Post a Jesta</string>
     <string name="jesta_post_preview">Preview</string>
     <string name="jesta_post_difficulty_medium">Medium</string>
+
+    <!--Jesta Settings-->
+    <string name="jesta_settings_phone_number_default">example@gmail.com</string>
+    <string name="jesta_settings_full_name_default">Full Name</string>
+    <string name="jesta_settings_edit_profile_icon_description">Edit Profile Icon</string>
+    <string name="jesta_settings_default_values">Jesta Default Values</string>
+    <string name="jesta_settings_diamond_amount">Diamonds Amount</string>
+    <string name="jesta_settings_account">Account</string>
+    <string name="jesta_settings_chat">Chat</string>
+    <string name="jesta_settings_button_log_out">Log Out</string>
+
+    <!--Jesta Preview-->
+    <string name="jesta_preview_title">Jesta Title</string>
+    <string name="jesta_preview_duration">Duration</string>
+    <string name="jesta_preview_location">Location</string>
+    <string name="jesta_preview_diamonds_text">Diamonds Worth</string>
+    <string name="jesta_preview_difficulty_text">Difficulty</string>
+
 </resources>

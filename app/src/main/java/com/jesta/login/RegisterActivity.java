@@ -49,7 +49,7 @@ public class RegisterActivity extends LoginActivitiesWrapper {
                             }
                             // user created in firebase only
                             Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
-                            // TODO loading-animation here
+                            // TODO jesta_loading-animation here
                             loginWithCredentials(email, password);
                         }
                     });

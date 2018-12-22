@@ -39,7 +39,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
                         android:id="@+id/email"
-                        android:hint="@string/email_hint"
+                        android:hint="@string/jesta_login_email_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
@@ -56,7 +56,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
                         android:id="@+id/password"
-                        android:hint="@string/password_hint"
+                        android:hint="@string/jesta_login_password_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -72,8 +72,7 @@
             >
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
-                        android:id="@+id/fullName"
-                        android:hint="@string/fullname_hint"
+                    android:hint="@string/jesta_login_full_name_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
@@ -88,8 +87,7 @@
             >
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
-                        android:id="@+id/celluar"
-                        android:hint="@string/celluar_hint"
+                    android:hint="@string/jesta_login_cellular_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
@@ -103,7 +101,7 @@
                 android:layout_marginTop="20dp"
                 android:onClick="createUser"
                 android:layout_marginBottom="20dp"
-                android:text="@string/register" />
+                android:text="@string/jesta_login_register" />
 
 
 
