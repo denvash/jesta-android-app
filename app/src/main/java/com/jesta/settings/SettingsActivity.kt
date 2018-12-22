@@ -40,6 +40,8 @@ class SettingsActivity : AppCompatActivity() {
         jesta_bottom_navigation.selectedItemId = R.id.nav_settings
         jesta_bottom_navigation.setOnNavigationItemSelectedListener {
 
+            if (it.itemId == jesta_bottom_navigation.selectedItemId) return@setOnNavigationItemSelectedListener true
+
             val intent = when (it.itemId) {
                 R.id.nav_do_jesta -> {
                     Intent(this@SettingsActivity, DoJestaActivity::class.java)

@@ -16,5 +16,4 @@ class JestaApplication : Application() {
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }
-
 }

@@ -18,6 +18,8 @@ class StatusActivity : AppCompatActivity() {
         jesta_bottom_navigation.selectedItemId = R.id.nav_status
         jesta_bottom_navigation.setOnNavigationItemSelectedListener {
 
+            if (it.itemId == jesta_bottom_navigation.selectedItemId) return@setOnNavigationItemSelectedListener true
+
             val intent = when (it.itemId) {
                 R.id.nav_do_jesta -> {
                     Intent(this@StatusActivity, DoJestaActivity::class.java)
