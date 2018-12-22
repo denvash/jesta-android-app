@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageButton
+        android:id="@+id/jesta_preview_accept_back_button"
         style="@style/Widget.Jesta.Toolbar"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -30,6 +31,7 @@
                 android:layout_height="wrap_content" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/jesta_preview_accept_button"
                 style="@style/Widget.Jesta.Button.Special"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"

@@ -38,28 +38,29 @@
                     android:layout_below="@id/jesta_card_image"
                     android:background="@color/colorPrimaryDark" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/jesta_card_review_avatar_icon"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_below="@id/jesta_card_image"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/jesta_default_avatar"
-                    android:layout_marginTop="-25dp"
                     android:layout_centerHorizontal="true"
-                    app:civ_border_width="0.75dp"
-                    app:civ_border_color="@color/colorPrimaryDark"/>
+                    android:layout_marginTop="-25dp"
+                    android:src="@drawable/jesta_default_avatar"
+                    app:civ_border_color="@color/colorPrimaryDark"
+                    app:civ_border_width="0.75dp" />
 
 
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/jesta_card_title"
                 style="@style/TextAppearance.Jesta.Type"
-                android:textSize="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/jesta_card_title"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="25sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,6 +81,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/jesta_card_tag_1"
                             style="@style/Widget.Jesta.Tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -101,6 +103,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/jesta_card_tag_2"
                             style="@style/Widget.Jesta.Tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -122,6 +125,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/jesta_card_tag_3"
                             style="@style/Widget.Jesta.Tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -134,8 +138,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_gravity="center"
+                android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -143,8 +147,8 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/_4dp"
-                    android:src="@drawable/ic_jesta_card_diamond"
-                    android:contentDescription="@string/jesta_card_icon_reward_description"/>
+                    android:contentDescription="@string/jesta_card_icon_reward_description"
+                    android:src="@drawable/ic_jesta_card_diamond" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -152,7 +156,9 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <TextView
+                        android:id="@+id/jesta_card_difficulty"
                         style="@style/TextAppearance.Jesta.Type.Purple"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -160,13 +166,13 @@
                         android:text="@string/jesta_value" />
 
                     <TextView
+                        android:id="@+id/jesta_card_diamonds"
                         style="@style/Widget.Jesta.Tag"
-                        android:textSize="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/jesta_value"
-                        />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>

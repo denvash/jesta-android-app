@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jesta.R
 import com.jesta.util.ImageReq
 import com.jesta.util.Mission
-import kotlinx.android.synthetic.main.activity_jesta_accept.*
+import kotlinx.android.synthetic.main.jesta_preview_accept.*
 import kotlinx.android.synthetic.main.jesta_preview.*
 
 class JestaCardReviewActivity : AppCompatActivity() {
@@ -17,7 +17,7 @@ class JestaCardReviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_jesta_accept)
+        setContentView(R.layout.jesta_preview_accept)
 
         val mission = intent.getParcelableExtra(extra) as Mission
 
@@ -35,12 +35,12 @@ class JestaCardReviewActivity : AppCompatActivity() {
         jesta_preview_tag_1.text = mission.tags.first()
         jesta_preview_tag_2.text = mission.tags.last()
 
-        jesta_accept_back_button.setOnClickListener {
+        jesta_preview_accept_back_button.setOnClickListener {
             finish()
         }
 
 
-        jesta_post_button_accept_view.setOnClickListener {
+        jesta_preview_accept_button.setOnClickListener {
             Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
 //            val intent = Intent(this@JestaCardReviewActivity, Main2Activity::class.java)
 //            startActivity(intent)
