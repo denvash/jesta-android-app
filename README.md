@@ -1,6 +1,4 @@
-# Jesta 
-
-![LOGO](https://svgshare.com/i/9NW.svg)
+# ![jesta banner](https://user-images.githubusercontent.com/27515937/50377070-4c938580-061f-11e9-980f-10ad8cfede1a.png)
 
 *"Tase li Jesta"* - Typical Israeli **asking for a favor**
 
@@ -12,6 +10,8 @@ Jesta is a Social app for posting and doing small jobs (*Jestas*).
 - Do a Jesta - choose a job for you.
   - Bring a milk from a store.
   - Earn cash.
+  
+Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) for **User** and **Developer** guides.
 
 ## Project Managment
 
