@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -36,26 +37,36 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        String title = null, body = null;
+        String title = null, body = null, jestaId = null, sender = null;
         try {
             title = remoteMessage.getData().get("title");
             body = remoteMessage.getData().get("body");
+            jestaId = remoteMessage.getData().get("jesta");
+            sender = remoteMessage.getData().get("sender");
         }
         catch (Exception e) {
             // todo open error activity
         }
 
         Boolean isPrompt = false;
-        if (title != null && title.contains("asked to do a jesta")) {
+        if (title != null && (
+                title.contains("asked to do a jesta") ||
+                title.contains("answered to your request")))
+        {
             isPrompt = true;
         }
 
         if (isPrompt) {
+            // opens a dialog
             Intent i = new Intent(getApplicationContext(), InboxMessageActivity.class);
             Bundle b = new Bundle();
             b.putString("title", title);
+            b.putString("body", body);
+            b.putString("jesta", jestaId);
+            b.putString("sender", sender);
             i.putExtras(b);
             startActivity(i);
+            return;
         }
         showNotification(title, body);
 

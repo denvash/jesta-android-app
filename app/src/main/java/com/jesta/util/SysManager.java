@@ -67,13 +67,16 @@ public class SysManager {
 
 
     // layout and _activity
-    private Activity _activity;
+    private static Activity _activity;
     private TextView _backButtonTv;
 
     // loading animation
     private ProgressBar _pgsBar;
 
 
+    public SysManager() {
+
+    }
 
     public SysManager(Fragment fragment) {
 
@@ -92,6 +95,10 @@ public class SysManager {
                 }
             });
         }
+    }
+
+    public Activity getActivity() {
+        return _activity;
     }
 
     public void startLoadingAnim() {
@@ -204,7 +211,12 @@ public class SysManager {
                         Mission jesta = new Mission(dbJesta);
                         // todo: use randomUUID() when storing jestas in db
                         // here: use (String)dbJesta.get("id")
-                        _jestasDict.put(UUID.randomUUID().toString(), jesta);
+                        if ((String)dbJesta.get("id") != null) {
+                            _jestasDict.put((String)dbJesta.get("id"), jesta);
+                        }
+                        else {
+                            _jestasDict.put(UUID.randomUUID().toString(), jesta);
+                        }
                         jestasList.add(jesta);
                     }
 
@@ -305,6 +317,10 @@ public class SysManager {
         return _usersDict.get(id);
     }
 
+    public Mission getMissionByID(String id) {
+        return _jestasDict.get(id);
+    }
+
     /**
      * Messaging and push notifications
      *
@@ -369,9 +385,19 @@ public class SysManager {
         if (authorId.equals("null")) {
             authorId = getCurrentUserFromDB().getId();
         }
+        User author = null;
 
-        User author = getUserByID(authorId);
+        try {
+            author = getUserByID(authorId);
+
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
         String receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
+
 
         String receiver = author.getId();
         String sender = getCurrentUserFromDB().getId();
@@ -379,7 +405,7 @@ public class SysManager {
         String jestaId = jesta.getId();
 
         String title = author.getDisplayName() + " asked to do a jesta for you!";
-        String body = "Jesta title: " + jesta.getTitle();
+        String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
 
         try {
             // TODO change to post request to avoid this shit
@@ -394,6 +420,72 @@ public class SysManager {
                 "&title=" + title +
                 "&body=" + body +
                 "&receiver=" + receiver +
+                "&sender=" + sender +
+                "&jesta=" + jestaId;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        source.setResult(response);
+                        System.out.println(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        source.setException(error);
+                        System.out.println(error.getMessage());
+                    }
+                });
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+        return source.getTask();
+    }
+
+    public Task answerTodoJestaForUser(User receiver, Mission jesta) {
+        final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+        RequestQueue queue = Volley.newRequestQueue(_activity.getApplicationContext());
+        final String PROJECT_ID = "jesta-42";
+
+        final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/askTodoJestaForUser";
+        // TODO add authorization header
+
+
+//        // TODO Remove this debugging hack
+//        String authorId = null;
+//        authorId = jesta.getAuthorId();
+//        if (authorId.equals("null")) {
+//            authorId = getCurrentUserFromDB().getId();
+//        }
+
+        User author = receiver;
+        String receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
+
+        String receiverId = author.getId();
+        String sender = getCurrentUserFromDB().getId();
+
+        String jestaId = jesta.getId();
+
+        String title = author.getDisplayName() + " answered to your request!";
+        String body = "He's accepted you to do him the following jesta\n" +
+                "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
+
+        try {
+            // TODO change to post request to avoid this shit
+            title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
+            body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
+        }
+        catch (Exception e) {
+            // todo handle it
+        }
+
+        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
+                "&title=" + title +
+                "&body=" + body +
+                "&receiver=" + receiverId +
                 "&sender=" + sender +
                 "&jesta=" + jestaId;
 
