@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.jesta.R;
+import com.jesta.chat.ChatActivity;
 import com.jesta.doJesta.DoJestaActivity;
 import com.jesta.login.ErrorActivity;
 import com.jesta.login.LoginActivity;
@@ -102,11 +103,13 @@ public class InboxMessageActivity extends AppCompatActivity {
                             }
 
                             Toast.makeText(activity,"A message was sent to " + senderWhichBecomesReceiver.getDisplayName(), Toast.LENGTH_LONG).show();
-
+                            Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                            startActivity(i);
 
                         }
                     });
                 }
+
             });
             builder.setNegativeButton("Deny", null);
         }
