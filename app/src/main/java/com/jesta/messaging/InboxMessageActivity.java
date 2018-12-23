@@ -22,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.jesta.R;
+import com.jesta.chat.ChatActivity;
 import com.jesta.doJesta.DoJestaActivity;
 import com.jesta.login.ErrorActivity;
 import com.jesta.login.LoginActivity;
@@ -86,6 +87,8 @@ public class InboxMessageActivity extends AppCompatActivity {
             builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                    startActivity(i);
 
                     final User senderWhichBecomesReceiver = sysManager.getUserByID(sender);
                     sysManager.answerTodoJestaForUser(senderWhichBecomesReceiver, mission).addOnCompleteListener(new OnCompleteListener<List<User>>() {
