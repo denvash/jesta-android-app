@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.jesta.R;
 import com.jesta.chat.ChatActivity;
 import com.jesta.doJesta.DoJestaActivity;
@@ -57,7 +58,7 @@ public class InboxMessageActivity extends AppCompatActivity {
         if (b == null) {
             // todo error
         }
-        final String jestaId = b.getString("jesta");
+
         final String body = b.getString("body");
         final String title = b.getString("title");
         final String sender = b.getString("sender");
@@ -75,7 +76,11 @@ public class InboxMessageActivity extends AppCompatActivity {
             return;
         }
 
+        final String jestaId = b.getString("jesta");
         final Mission mission = sysManager.getMissionByID(jestaId);
+        if (mission == null) {
+            return;
+        }
         // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
@@ -87,8 +92,6 @@ public class InboxMessageActivity extends AppCompatActivity {
             builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent i = new Intent(getApplicationContext(), ChatActivity.class);
-                    startActivity(i);
 
                     final User senderWhichBecomesReceiver = sysManager.getUserByID(sender);
                     sysManager.answerTodoJestaForUser(senderWhichBecomesReceiver, mission).addOnCompleteListener(new OnCompleteListener<List<User>>() {
@@ -100,11 +103,13 @@ public class InboxMessageActivity extends AppCompatActivity {
                             }
 
                             Toast.makeText(activity,"A message was sent to " + senderWhichBecomesReceiver.getDisplayName(), Toast.LENGTH_LONG).show();
-
+                            Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                            startActivity(i);
 
                         }
                     });
                 }
+
             });
             builder.setNegativeButton("Deny", null);
         }
@@ -115,6 +120,7 @@ public class InboxMessageActivity extends AppCompatActivity {
 
         // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
         AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         finish();
 //

@@ -48,7 +48,7 @@ class JestaCardReviewActivity : AppCompatActivity() {
         jesta_preview_accept_button.setOnClickListener {
 
             val sysManager = SysManager(this@JestaCardReviewActivity)
-            var jestaAuthor = mission.authorId
+            var jestaAuthor = sysManager.getUserByID(mission.authorId)
 
 
 
@@ -56,7 +56,7 @@ class JestaCardReviewActivity : AppCompatActivity() {
                 if (!task.isSuccessful) {
                     // todo some error
                 }
-                Toast.makeText(this@JestaCardReviewActivity,"A message was sent to " + jestaAuthor, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@JestaCardReviewActivity,"A message was sent to " + jestaAuthor.displayName, Toast.LENGTH_LONG).show()
 
             }
 

@@ -276,6 +276,7 @@ public class SysManager {
         }
 
         // subscribe to inbox for receiving system messages from other devices
+        // todo wait for task
         subscribeToTopic(new Topic(TopicDescriptor.USER_INBOX, user, null));
 
         // update the current user in the system
@@ -310,7 +311,7 @@ public class SysManager {
     }
 
     public void setMissionOnDB(Mission mission) {
-        _jestasDatabase.child(mission.getJestaId()).setValue(mission);
+        _jestasDatabase.child(mission.getId()).setValue(mission);
     }
 
     public User getUserByID(String id) {
@@ -318,6 +319,9 @@ public class SysManager {
     }
 
     public Mission getMissionByID(String id) {
+        if (id == null || id.equals("null")) {
+            return null;
+        }
         return _jestasDict.get(id);
     }
 
@@ -373,55 +377,47 @@ public class SysManager {
     public Task askTodoJestaForUser(Mission jesta) {
         final TaskCompletionSource<String> source = new TaskCompletionSource<>();
         RequestQueue queue = Volley.newRequestQueue(_activity.getApplicationContext());
-        final String PROJECT_ID = "jesta-42";
 
         final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/askTodoJestaForUser";
         // TODO add authorization header
 
-
         // TODO Remove this debugging hack
-        String authorId = null;
-        authorId = jesta.getAuthorId();
+        String authorId = jesta.getAuthorId();
         if (authorId.equals("null")) {
             authorId = getCurrentUserFromDB().getId();
         }
-        User author = null;
 
+        String url = null;
         try {
-            author = getUserByID(authorId);
+            User author = getUserByID(authorId);
+            String  receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
+
+            String receiver = author.getId();
+            String sender = getCurrentUserFromDB().getId();
+
+            String jestaId = jesta.getId();
+
+            String title = author.getDisplayName() + " asked to do a jesta for you!";
+            String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
+            title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
+            body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
+            jestaId = URLEncoder.encode(jestaId, StandardCharsets.UTF_8.toString());
+            sender = URLEncoder.encode(sender, StandardCharsets.UTF_8.toString());
+            receiver = URLEncoder.encode(receiver, StandardCharsets.UTF_8.toString());
+
+
+            url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
+                    "&title=" + title +
+                    "&body=" + body +
+                    "&receiver=" + receiver +
+                    "&sender=" + sender +
+                    "&jesta=" + jestaId;
+
 
         }
         catch (Exception e){
-            System.out.println(e.getMessage());
+            source.setException(e);
         }
-
-
-        String receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
-
-
-        String receiver = author.getId();
-        String sender = getCurrentUserFromDB().getId();
-
-        String jestaId = jesta.getJestaId();
-
-        String title = author.getDisplayName() + " asked to do a jesta for you!";
-        String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
-
-        try {
-            // TODO change to post request to avoid this shit
-            title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
-            body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
-        }
-        catch (Exception e) {
-            // todo handle it
-        }
-
-        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
-                "&title=" + title +
-                "&body=" + body +
-                "&receiver=" + receiver +
-                "&sender=" + sender +
-                "&jesta=" + jestaId;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -438,8 +434,7 @@ public class SysManager {
                         System.out.println(error.getMessage());
                     }
                 });
-
-// Add the request to the RequestQueue.
+        // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
         return source.getTask();
@@ -461,15 +456,13 @@ public class SysManager {
 //            authorId = getCurrentUserFromDB().getId();
 //        }
 
-        User author = receiver;
-        String receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
-
-        String receiverId = author.getId();
+        String receiverId = receiver.getId();
+        String receiverInbox = receiverId + "_" + TopicDescriptor.USER_INBOX;
         String sender = getCurrentUserFromDB().getId();
+        String jestaId = jesta.getId();
 
-        String jestaId = jesta.getJestaId();
 
-        String title = author.getDisplayName() + " answered to your request!";
+        String title = receiver.getDisplayName() + " answered to your request!";
         String body = "He's accepted you to do him the following jesta\n" +
                 "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
 

@@ -2,14 +2,20 @@
 
 *"Tase li Jesta"* - Typical Israeli **asking for a favor**
 
-Jesta is a Social app for posting and doing small jobs (*Jestas*).
+Jesta is a Social app where can find people who are willing to take up your tasks (*Jestas*) for money and pleasure.
+Earn **Cash** and **Diamonds** exchange them for rewards.
 
 - Ask for a Jesta - post a job for people around you.
   - Moving apartment and need help?
   - Feeling sick and need someone to bring you medications?
-- Do a Jesta - choose a job for you.
-  - Bring a milk from a store.
+  - Want someone to bring you cigarettes? 
+
+- Do a Jesta - choose a task for you.
   - Earn cash.
+  - Choose the difficulty level that suits you.
+  - Tags for fast searching.
+  - Find the nearest tasks.
+  - Earn diamonds exchange to rewards. 
   
 Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) for **User** and **Developer** guides.
 
@@ -18,10 +24,6 @@ Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki
 This projects uses [Zen Hub](https://www.zenhub.com/) _Agile Project Managment_, download [chrome-extension](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) and check **ZenHub tab**.
 
 ## UI Design
-
-![Presentation-gif](https://media.giphy.com/media/8m8xRpeF738buF2emZ/giphy.gif)
-
-It's a _freestyle_ design, the final application uses [material design](https://material.io/) patterns on same frames as on figma object.
 
 - Designed with [Figma](http://figma.com/).
 - [Presentation](https://www.figma.com/proto/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=55%3A458&scaling=scale-down&redirected=1).
