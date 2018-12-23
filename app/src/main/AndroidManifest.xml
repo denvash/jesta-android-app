@@ -44,6 +44,31 @@
                 <data android:scheme="@string/jesta_login_fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+
+
+        <service android:name=".util.MessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!--&lt;!&ndash; Set custom default icon. This is used when no icon is set for incoming notification messages.-->
+     <!--See README(https://goo.gl/l4GJaQ) for more. &ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="com.google.firebase.messaging.default_notification_icon"-->
+            <!--android:resource="@drawable/ic_stat_ic_notification" />-->
+        <!--&lt;!&ndash; Set color used with incoming notification messages. This is used when no color is set for the incoming-->
+             <!--notification message. See README(https://goo.gl/6BKBk7) for more. &ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="com.google.firebase.messaging.default_notification_color"-->
+            <!--android:resource="@color/colorAccent" />-->
+
+
+
+
+
+
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/Theme.Jesta.Login" />
@@ -60,6 +85,7 @@
         <activity android:name=".doJesta.DoJestaActivity" />
         <activity android:name=".doJesta.JestaCardReviewActivity" />
         <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".messaging.InboxMessageActivity" />
         <activity android:name=".settings.profile.ProfileActivity" />
         <activity android:name=".status.StatusActivity" />
         <activity android:name=".chat.ChatActivity" />
