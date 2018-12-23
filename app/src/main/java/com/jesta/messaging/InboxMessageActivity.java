@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.jesta.R;
 import com.jesta.doJesta.DoJestaActivity;
 import com.jesta.login.ErrorActivity;
@@ -56,7 +57,7 @@ public class InboxMessageActivity extends AppCompatActivity {
         if (b == null) {
             // todo error
         }
-        final String jestaId = b.getString("jesta");
+
         final String body = b.getString("body");
         final String title = b.getString("title");
         final String sender = b.getString("sender");
@@ -74,7 +75,11 @@ public class InboxMessageActivity extends AppCompatActivity {
             return;
         }
 
+        final String jestaId = b.getString("jesta");
         final Mission mission = sysManager.getMissionByID(jestaId);
+        if (mission == null) {
+            return;
+        }
         // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
@@ -112,6 +117,7 @@ public class InboxMessageActivity extends AppCompatActivity {
 
         // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
         AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         finish();
 //
