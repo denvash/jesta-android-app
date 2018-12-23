@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:clipToPadding="false"
-              android:focusableInTouchMode="true"
-              tools:context=".chat.ChatActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:focusableInTouchMode="true"
+    tools:context=".chat.ChatActivity">
 
     <ListView
             android:layout_width="match_parent"
@@ -43,4 +44,19 @@
                 android:background="@drawable/ic_send_black_24dp"
                 android:onClick="sendMessage"/>
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/chat_end_button"
+        style="@style/Widget.Jesta.Button.Special"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Finish Chat"
+        android:textSize="15sp"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="14dp"
+        app:rippleColor="@color/primaryLightColor"
+        app:strokeColor="@color/black"
+        app:strokeWidth="0.75dp" />
 </LinearLayout>

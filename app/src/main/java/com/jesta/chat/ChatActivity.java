@@ -1,10 +1,12 @@
 package com.jesta.chat;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -37,6 +39,14 @@ public class ChatActivity extends AppCompatActivity implements RoomListener {
 
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
+
+
+        findViewById(R.id.chat_end_button).setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                finish();
+                Toast.makeText(getApplicationContext(), "You made a mess", Toast.LENGTH_LONG).show();
+            }
+        });
         messagesView.setAdapter(messageAdapter);
 
         MemberData data = new MemberData(getRandomName(), getRandomColor());
