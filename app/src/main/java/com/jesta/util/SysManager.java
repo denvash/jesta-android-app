@@ -211,7 +211,7 @@ public class SysManager {
                         Mission jesta = new Mission(dbJesta);
                         // todo: use randomUUID() when storing jestas in db
                         // here: use (String)dbJesta.get("id")
-                        if ((String)dbJesta.get("jestaId") != null) {
+                        if ((String)dbJesta.get("id") != null) {
                             _jestasDict.put((String)dbJesta.get("id"), jesta);
                         }
                         else {

@@ -62,7 +62,7 @@ public class InboxMessageActivity extends AppCompatActivity {
         final String body = b.getString("body");
         final String title = b.getString("title");
         final String sender = b.getString("sender");
-
+        final String jestaId = b.getString("jesta");
 
 
         final SysManager sysManager = new SysManager();
@@ -76,7 +76,7 @@ public class InboxMessageActivity extends AppCompatActivity {
             return;
         }
 
-        final String jestaId = b.getString("jesta");
+
         final Mission mission = sysManager.getMissionByID(jestaId);
         if (mission == null) {
             return;
