@@ -310,7 +310,7 @@ public class SysManager {
     }
 
     public void setMissionOnDB(Mission mission) {
-        _jestasDatabase.child(mission.getId()).setValue(mission);
+        _jestasDatabase.child(mission.getJestaId()).setValue(mission);
     }
 
     public User getUserByID(String id) {
@@ -402,7 +402,7 @@ public class SysManager {
         String receiver = author.getId();
         String sender = getCurrentUserFromDB().getId();
 
-        String jestaId = jesta.getId();
+        String jestaId = jesta.getJestaId();
 
         String title = author.getDisplayName() + " asked to do a jesta for you!";
         String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
@@ -467,7 +467,7 @@ public class SysManager {
         String receiverId = author.getId();
         String sender = getCurrentUserFromDB().getId();
 
-        String jestaId = jesta.getId();
+        String jestaId = jesta.getJestaId();
 
         String title = author.getDisplayName() + " answered to your request!";
         String body = "He's accepted you to do him the following jesta\n" +

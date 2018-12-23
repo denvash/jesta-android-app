@@ -20,7 +20,7 @@ public class Topic
 
         String delimiter = "_";
         String name = sender.getId() + delimiter + topicDescriptor.toString();
-        this.name = jesta != null ? (name + delimiter + jesta.getId()) : name;
+        this.name = jesta != null ? (name + delimiter + jesta.getJestaId()) : name;
 
     }
 
@@ -29,7 +29,7 @@ public class Topic
     public String toString() {
         String delimiter = "_";
         String str = sender.getId() + delimiter + topicDescriptor.toString();
-        return jesta != null ? (str + delimiter + jesta.getId()) : str;
+        return jesta != null ? (str + delimiter + jesta.getJestaId()) : str;
     }
 
     public String topicName() {
