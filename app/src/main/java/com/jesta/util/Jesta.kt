@@ -6,8 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Mission(
-    var jestaId: String = "emptyJestaID",
-    var authorId: String = "emptyAuthorID",
+    var id: String = "emptyID",
+    var authorId: String = "emptyID",
     var title: String = "emptyTitle",
     var difficulty: String = "emptyDifficulty",
     var description: String = "emptyDescription",
@@ -21,7 +21,7 @@ data class Mission(
 ) : Parcelable {
 
     constructor(dbJesta: Map<String, String>) : this() {
-        jestaId = dbJesta["jestaId"].toString()
+        id = dbJesta["jestaId"].toString()
         authorId = dbJesta["authorId"].toString()
         difficulty = dbJesta["difficulty"].toString()
         description = dbJesta["description"].toString()
