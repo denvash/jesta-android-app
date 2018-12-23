@@ -65,6 +65,7 @@ public class MessagingService extends FirebaseMessagingService {
             b.putString("jesta", jestaId);
             b.putString("sender", sender);
             i.putExtras(b);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             return;
         }
