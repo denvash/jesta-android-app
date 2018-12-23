@@ -383,7 +383,7 @@ public class SysManager {
 
         // TODO Remove this debugging hack
         String authorId = jesta.getAuthorId();
-        if (authorId.equals("null")) {
+        if (authorId.equals("null") || authorId == null) {
             authorId = getCurrentUserFromDB().getId();
         }
 
@@ -416,7 +416,7 @@ public class SysManager {
 
         }
         catch (Exception e){
-            source.setException(e);
+            System.out.println(e.getMessage());
         }
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -462,7 +462,7 @@ public class SysManager {
         String jestaId = jesta.getId();
 
 
-        String title = receiver.getDisplayName() + " answered to your request!";
+        String title = getCurrentUserFromDB().getDisplayName() + " answered to your request!";
         String body = "He's accepted you to do him the following jesta\n" +
                 "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
 
