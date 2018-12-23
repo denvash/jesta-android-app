@@ -63,8 +63,8 @@ class JestaCardReviewActivity : AppCompatActivity() {
             }
 
 //            Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
-            val intent = Intent(this@JestaCardReviewActivity, ChatActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this@JestaCardReviewActivity, ChatActivity::class.java)
+//            startActivity(intent)
         }
     }
 }

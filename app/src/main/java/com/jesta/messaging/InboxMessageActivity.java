@@ -66,7 +66,7 @@ public class InboxMessageActivity extends AppCompatActivity {
 
 
         final SysManager sysManager = new SysManager();
-        final Activity activity = sysManager.getActivity();
+        Activity activity = sysManager.getActivity();
 //        activity = null;
         if (activity == null) {
 //            super.onCreate(savedInstanceState);
@@ -81,6 +81,12 @@ public class InboxMessageActivity extends AppCompatActivity {
         if (mission == null) {
             return;
         }
+
+        if (activity == null) {
+            System.out.println("SHITTTTTT");
+        }
+
+        activity = this;
         // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
@@ -101,12 +107,15 @@ public class InboxMessageActivity extends AppCompatActivity {
                                 // todo some error
                                 return;
                             }
-                            Intent i = new Intent(getApplicationContext(), ChatActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
+                            Toast.makeText(getBaseContext(),"A message was sent to " + senderWhichBecomesReceiver.getDisplayName(), Toast.LENGTH_LONG).show();
 
-                            Toast.makeText(activity,"A message was sent to " + senderWhichBecomesReceiver.getDisplayName(), Toast.LENGTH_LONG).show();
+                            // currentUser asked to do a jesta TODO DENNIS
+//                            User userSender = sysManager.getCurrentUserFromDB();
+//                            User userReceiver = senderWhichBecomesReceiver;
 
+//                            finish();
+//                            Intent i = new Intent(getBaseContext(), ChatActivity.class);
+//                            startActivity(i);
 
                         }
                     });
@@ -125,10 +134,10 @@ public class InboxMessageActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            finish();
+//            finish();
         }
         catch(Exception e) {
-            System.out.println(e.getMessage());
+            throw(e);
         }
 
 //

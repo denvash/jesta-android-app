@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jesta.util.SysManager;
 import com.scaledrone.lib.Listener;
 import com.scaledrone.lib.Member;
 import com.scaledrone.lib.Room;
@@ -34,6 +35,8 @@ public class ChatActivity extends AppCompatActivity implements RoomListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        SysManager sysManager = new SysManager(this);
 
         editText = (EditText) findViewById(R.id.editText);
 

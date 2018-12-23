@@ -397,7 +397,7 @@ public class SysManager {
 
             String jestaId = jesta.getId();
 
-            String title = author.getDisplayName() + " asked to do a jesta for you!";
+            String title = getCurrentUserFromDB().getDisplayName() + " asked to do a jesta for you!";
             String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
             title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
