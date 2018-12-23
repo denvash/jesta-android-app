@@ -49,8 +49,7 @@ class AskJestaActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val jesta = Mission(
-                jestaId = UUID.randomUUID().toString(),
-                authorId = sysManager.getCurrentUserFromDB().id,
+                id = UUID.randomUUID().toString(),
                 title = jesta_post_title.text.toString(),
                 difficulty = jesta_post_difficulty.text.toString(),
                 description = jesta_post_description.text.toString(),
