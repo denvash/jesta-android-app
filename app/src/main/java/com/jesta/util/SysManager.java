@@ -212,7 +212,7 @@ public class SysManager {
                         // todo: use randomUUID() when storing jestas in db
                         // here: use (String)dbJesta.get("id")
                         if ((String)dbJesta.get("jestaId") != null) {
-                            _jestasDict.put((String)dbJesta.get("jestaId"), jesta);
+                            _jestasDict.put((String)dbJesta.get("id"), jesta);
                         }
                         else {
                             _jestasDict.put(UUID.randomUUID().toString(), jesta);
