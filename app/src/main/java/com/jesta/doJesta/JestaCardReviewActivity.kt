@@ -59,10 +59,8 @@ class JestaCardReviewActivity : AppCompatActivity() {
                 jestaAuthor = currentUser; // todo remove this debug hack - when all missions will have jestaAuthor!
             }
 
-            // create a new topic on which currentUser asking to do a mission
-            val topic = Topic(TopicDescriptor.USER_INBOX, jestaAuthor, null)
 
-            sysManager.sendMessageToTopic(topic, currentUser.displayName + " wants to do you a jesta: ", mission.title).addOnCompleteListener { task ->
+            sysManager.askTodoJestaForUser(mission).addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     // todo some error
                 }

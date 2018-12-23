@@ -354,22 +354,79 @@ public class SysManager {
         return stringBuilder.toString();
     }
 
+    public Task askTodoJestaForUser(Mission jesta) {
+        final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+        RequestQueue queue = Volley.newRequestQueue(_activity.getApplicationContext());
+        final String PROJECT_ID = "jesta-42";
 
+        final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/askTodoJestaForUser";
+        // TODO add authorization header
+
+
+        // TODO Remove this debugging hack
+        String authorId = null;
+        authorId = jesta.getAuthorId();
+        if (authorId.equals("null")) {
+            authorId = getCurrentUserFromDB().getId();
+        }
+
+        User author = getUserByID(authorId);
+        String receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
+
+        String receiver = author.getId();
+        String sender = getCurrentUserFromDB().getId();
+
+        String jestaId = jesta.getId();
+
+        String title = author.getDisplayName() + " asked to do a jesta for you!";
+        String body = "Jesta title: " + jesta.getTitle();
+
+        try {
+            // TODO change to post request to avoid this shit
+            title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
+            body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
+        }
+        catch (Exception e) {
+            // todo handle it
+        }
+
+        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
+                "&title=" + title +
+                "&body=" + body +
+                "&receiver=" + receiver +
+                "&sender=" + sender +
+                "&jesta=" + jestaId;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        source.setResult(response);
+                        System.out.println(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        source.setException(error);
+                        System.out.println(error.getMessage());
+                    }
+                });
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+        return source.getTask();
+    }
 
     public Task sendMessageToTopic(Topic topic, String title, String body) throws JSONException, MalformedURLException, IOException {
         final TaskCompletionSource<String> source = new TaskCompletionSource<>();
-
-
-// Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(_activity.getApplicationContext());
         final String PROJECT_ID = "jesta-42";
-        final String BASE_URL = "https://fcm.googleapis.com";
-        final String FCM_SEND_ENDPOINT = "/v1/projects/" + PROJECT_ID + "/messages:send";
 
         final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/sendMessage";
         // TODO add authorization header
 
-//        String url = SEND_MESSAGE_ENDPOINT;
         String topicName = topic.topicName();
 
         if (title == null || body == null) {
@@ -381,8 +438,6 @@ public class SysManager {
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
         }
 
-//        title = "title";
-//        body = "body";
         String url = SEND_MESSAGE_ENDPOINT + "?topic=" + topicName + "&title=" + title + "&body=" + body;
 
 // Request a string response from the provided URL.

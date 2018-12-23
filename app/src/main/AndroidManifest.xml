@@ -85,6 +85,7 @@
         <activity android:name=".doJesta.DoJestaActivity" />
         <activity android:name=".doJesta.JestaCardReviewActivity" />
         <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".messaging.InboxMessageActivity" />
         <activity android:name=".settings.profile.ProfileActivity" />
         <activity android:name=".status.StatusActivity" />
         <activity android:name=".chat.ChatActivity" />

@@ -10,11 +10,15 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
+import com.jesta.login.ErrorActivity;
+import com.jesta.login.RegisterActivity;
+import com.jesta.messaging.InboxMessageActivity;
 
 import java.util.Random;
 
@@ -32,8 +36,28 @@ public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
+        String title = null, body = null;
+        try {
+            title = remoteMessage.getData().get("title");
+            body = remoteMessage.getData().get("body");
+        }
+        catch (Exception e) {
+            // todo open error activity
+        }
 
-        showNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"));
+        Boolean isPrompt = false;
+        if (title != null && title.contains("asked to do a jesta")) {
+            isPrompt = true;
+        }
+
+        if (isPrompt) {
+            Intent i = new Intent(getApplicationContext(), InboxMessageActivity.class);
+            Bundle b = new Bundle();
+            b.putString("title", title);
+            i.putExtras(b);
+            startActivity(i);
+        }
+        showNotification(title, body);
 
 //        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
 //        Log.d(TAG, "From: " + remoteMessage.getFrom());
