@@ -48,9 +48,9 @@ class AskJestaActivity : AppCompatActivity() {
                 Toast.makeText(this@AskJestaActivity, "Fill all fields", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            //val currentUser = sysManager.getCurrentUserFromDB()
             val jesta = Mission(
-                id = UUID.randomUUID().toString(),
+                jestaId = UUID.randomUUID().toString(),
+                authorId = sysManager.getCurrentUserFromDB().id,
                 title = jesta_post_title.text.toString(),
                 difficulty = jesta_post_difficulty.text.toString(),
                 description = jesta_post_description.text.toString(),

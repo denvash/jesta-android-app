@@ -46,27 +46,23 @@ class JestaCardReviewActivity : AppCompatActivity() {
 
 
         jesta_preview_accept_button.setOnClickListener {
-//            Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
-//            val intent = Intent(this@JestaCardReviewActivity, ChatActivity::class.java)
-//            startActivity(intent)
 
             val sysManager = SysManager(this@JestaCardReviewActivity)
-            var currentUser = sysManager.currentUserFromDB
+            var jestaAuthor = mission.authorId
 
-            var jestaAuthor = sysManager.getUserByID(mission.authorId);
-
-            if (jestaAuthor == null) {
-                jestaAuthor = currentUser; // todo remove this debug hack - when all missions will have jestaAuthor!
-            }
 
 
             sysManager.askTodoJestaForUser(mission).addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     // todo some error
                 }
-                Toast.makeText(this@JestaCardReviewActivity,"A message was sent to " + jestaAuthor.displayName, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@JestaCardReviewActivity,"A message was sent to " + jestaAuthor, Toast.LENGTH_LONG).show()
 
             }
+
+//            Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
+//            val intent = Intent(this@JestaCardReviewActivity, ChatActivity::class.java)
+//            startActivity(intent)
         }
     }
 }
