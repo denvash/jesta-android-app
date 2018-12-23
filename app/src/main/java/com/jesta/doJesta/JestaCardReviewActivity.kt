@@ -50,7 +50,9 @@ class JestaCardReviewActivity : AppCompatActivity() {
             val sysManager = SysManager(this@JestaCardReviewActivity)
             var jestaAuthor = sysManager.getUserByID(mission.authorId)
 
-
+            if(jestaAuthor == null) {
+                jestaAuthor = sysManager.currentUserFromDB
+            }
 
             sysManager.askTodoJestaForUser(mission).addOnCompleteListener { task ->
                 if (!task.isSuccessful) {

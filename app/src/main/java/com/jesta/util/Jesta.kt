@@ -21,7 +21,7 @@ data class Mission(
 ) : Parcelable {
 
     constructor(dbJesta: Map<String, String>) : this() {
-        id = dbJesta["jestaId"].toString()
+        id = dbJesta["id"].toString()
         authorId = dbJesta["authorId"].toString()
         difficulty = dbJesta["difficulty"].toString()
         description = dbJesta["description"].toString()

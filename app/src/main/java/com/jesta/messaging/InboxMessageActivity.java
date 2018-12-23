@@ -62,7 +62,7 @@ public class InboxMessageActivity extends AppCompatActivity {
         final String body = b.getString("body");
         final String title = b.getString("title");
         final String sender = b.getString("sender");
-
+        final String jestaId = b.getString("jesta");
 
 
         final SysManager sysManager = new SysManager();
@@ -76,7 +76,7 @@ public class InboxMessageActivity extends AppCompatActivity {
             return;
         }
 
-        final String jestaId = b.getString("jesta");
+
         final Mission mission = sysManager.getMissionByID(jestaId);
         if (mission == null) {
             return;
@@ -101,10 +101,12 @@ public class InboxMessageActivity extends AppCompatActivity {
                                 // todo some error
                                 return;
                             }
+                            Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
 
                             Toast.makeText(activity,"A message was sent to " + senderWhichBecomesReceiver.getDisplayName(), Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(getApplicationContext(), ChatActivity.class);
-                            startActivity(i);
+
 
                         }
                     });
@@ -118,11 +120,17 @@ public class InboxMessageActivity extends AppCompatActivity {
         }
 
 
-        // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
-        AlertDialog dialog = builder.create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-        finish();
+        try {
+            // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
+            AlertDialog dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+            finish();
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+
 //
 //        TextView errMsgTV = findViewById(R.id.errorMessage);
 //        errMsgTV.setText(body);
