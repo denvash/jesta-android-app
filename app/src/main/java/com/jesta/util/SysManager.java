@@ -2,6 +2,7 @@ package com.jesta.util;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -9,38 +10,57 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.android.volley.*;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.*;
+import com.google.firebase.auth.*;
 import com.google.firebase.database.*;
-import com.google.firebase.storage.*;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
+import com.jesta.messaging.Topic;
+import com.jesta.messaging.TopicDescriptor;
+import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-import static com.jesta.util.SysManager.DBTask.RELOAD_JESTAS;
-import static com.jesta.util.SysManager.DBTask.RELOAD_USERS;
-import static com.jesta.util.SysManager.DBTask.UPLOAD_FILE;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
+import static com.jesta.util.SysManager.DBTask.*;
+
+
 
 /**
  * System manager
  */
 public class SysManager {
+    private static final String ACCESS_TOKEN = "AIzaSyDsS65FgkAHOS-eeb8iiYN1mF6bLqt_3rE";
     // authentication
     private FirebaseAuth _auth = FirebaseAuth.getInstance();
+    private FirebaseInstanceId _firebaseInstance = FirebaseInstanceId.getInstance();
 
-    // users db and management
-    private DatabaseReference _usersDatabase = FirebaseDatabase.getInstance().getReference("users");
-    private DatabaseReference _jestasDatabase = FirebaseDatabase.getInstance().getReference("jestas");
+    // users management
     private static HashMap<String, User> _usersDict = new HashMap<>();
     private static HashMap<String, Mission> _jestasDict = new HashMap<>();
     private User _currentUser = null;
+
+    // db
+    private static DatabaseReference _usersDatabase = FirebaseDatabase.getInstance().getReference("users");
+    private static DatabaseReference _jestasDatabase = FirebaseDatabase.getInstance().getReference("jestas");
+
+    // messaging
+    private static FirebaseMessaging _messaging = FirebaseMessaging.getInstance();
 
     // storage
     private StorageReference _storage = FirebaseStorage.getInstance().getReference();
@@ -50,8 +70,10 @@ public class SysManager {
     private Activity _activity;
     private TextView _backButtonTv;
 
-    // jesta_loading animation
+    // loading animation
     private ProgressBar _pgsBar;
+
+
 
     public SysManager(Fragment fragment) {
 
@@ -196,7 +218,7 @@ public class SysManager {
             // return the task so it could be waited on the caller
             return source.getTask();
         }
-        return null;
+       return null;
     };
 
     public FirebaseAuth getFirebaseAuth() {
@@ -233,7 +255,20 @@ public class SysManager {
             setUserOnDB(user);
         }
 
+        // unsubscribe from all system messages topics
+        try {
+            _firebaseInstance.deleteInstanceId();
+        }
+        catch (IOException ioException) {
+            // todo activityError
+        }
+
+        // subscribe to inbox for receiving system messages from other devices
+        subscribeToTopic(new Topic(TopicDescriptor.USER_INBOX, user, null));
+
+        // update the current user in the system
         _currentUser = user;
+
     }
 
     public void signOutUser(Context context) {
@@ -252,7 +287,10 @@ public class SysManager {
         if (firebaseUser == null) {
             return null;
         }
-        return _usersDict.get(firebaseUser.getUid());
+
+        // get the currently logged in user based on firebase Auth and users db
+        User currentUser = _usersDict.get(firebaseUser.getUid());
+        return currentUser;
     }
 
     public void setUserOnDB(User user) {
@@ -261,6 +299,124 @@ public class SysManager {
 
     public void setMissionOnDB(Mission mission) {
         _jestasDatabase.child(mission.getId()).setValue(mission);
+    }
+
+    public User getUserByID(String id) {
+        return _usersDict.get(id);
+    }
+
+    /**
+     * Messaging and push notifications
+     *
+     */
+
+    public Task subscribeToTopic(Topic topic) {
+        final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+        _messaging.subscribeToTopic(topic.toString())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        source.setResult("msg_subscribed");
+
+                        if (!task.isSuccessful()) {
+                           source.setException(task.getException());
+                        }
+
+                    }
+                });
+        return source.getTask();
+    }
+
+    public Task unsubscribeFromTopic(Topic topic) {
+        final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+        _messaging.unsubscribeFromTopic(topic.toString())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        source.setResult("msg_unsubscribed");
+
+                        if (!task.isSuccessful()) {
+                           source.setException(task.getException());
+                        }
+
+                    }
+                });
+        return source.getTask();
+    }
+
+    private static String inputstreamToString(InputStream inputStream) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        Scanner scanner = new Scanner(inputStream);
+        while (scanner.hasNext()) {
+            stringBuilder.append(scanner.nextLine());
+        }
+        return stringBuilder.toString();
+    }
+
+
+
+    public Task sendMessageToTopic(Topic topic, String title, String body) throws JSONException, MalformedURLException, IOException {
+        final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+
+
+// Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(_activity.getApplicationContext());
+        final String PROJECT_ID = "jesta-42";
+        final String BASE_URL = "https://fcm.googleapis.com";
+        final String FCM_SEND_ENDPOINT = "/v1/projects/" + PROJECT_ID + "/messages:send";
+
+        final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/sendMessage";
+        // TODO add authorization header
+
+//        String url = SEND_MESSAGE_ENDPOINT;
+        String topicName = topic.topicName();
+
+        if (title == null || body == null) {
+            // TODO throw exception
+        }
+        else {
+            // TODO change to post request to avoid this shit
+            title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
+            body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
+        }
+
+//        title = "title";
+//        body = "body";
+        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + topicName + "&title=" + title + "&body=" + body;
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        source.setResult(response);
+                        System.out.println(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        source.setException(error);
+                        System.out.println(error.getMessage());
+                    }
+                })
+        {
+//            /** Passing some request headers* */
+//            @Override
+//            public Map getHeaders() throws AuthFailureError {
+//                HashMap headers = new HashMap();
+//                String serverToken = "AAAAmeLDAmc:APA91bGuE2bU4eLT-uLnEVSUpp2eGhxzeKZ0rzK-uGRiGm2hUQmsnFvRc888uPTL9JLKl5t4qU9kGvWycfFs503FHhufWHWswHkLf2Wz7QtdRPwSvztk4XH38fXIBHXFUc_AeSY4mM8B";
+//                headers.put("Content-Type", "application/json; UTF-8");
+//                headers.put("Authorization", "Bearer " + serverToken);
+//                return headers;
+//            }
+        };
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
+        return source.getTask();
     }
 
     /**

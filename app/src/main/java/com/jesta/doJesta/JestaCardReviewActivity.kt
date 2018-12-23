@@ -6,8 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.jesta.R
 import com.jesta.chat.ChatActivity
+import com.jesta.messaging.Topic
+import com.jesta.messaging.TopicDescriptor
 import com.jesta.util.ImageReq
 import com.jesta.util.Mission
+import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.jesta_preview_accept.*
 import kotlinx.android.synthetic.main.jesta_preview.*
 
@@ -43,9 +46,29 @@ class JestaCardReviewActivity : AppCompatActivity() {
 
 
         jesta_preview_accept_button.setOnClickListener {
-            Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
-            val intent = Intent(this@JestaCardReviewActivity, ChatActivity::class.java)
-            startActivity(intent)
+//            Toast.makeText(this@JestaCardReviewActivity,"Jesta Accepted!", Toast.LENGTH_LONG).show()
+//            val intent = Intent(this@JestaCardReviewActivity, ChatActivity::class.java)
+//            startActivity(intent)
+
+            val sysManager = SysManager(this@JestaCardReviewActivity)
+            var currentUser = sysManager.currentUserFromDB
+
+            var jestaAuthor = sysManager.getUserByID(mission.authorId);
+
+            if (jestaAuthor == null) {
+                jestaAuthor = currentUser; // todo remove this debug hack - when all missions will have jestaAuthor!
+            }
+
+            // create a new topic on which currentUser asking to do a mission
+            val topic = Topic(TopicDescriptor.USER_INBOX, jestaAuthor, null)
+
+            sysManager.sendMessageToTopic(topic, currentUser.displayName + " wants to do you a jesta: ", mission.title).addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    // todo some error
+                }
+                Toast.makeText(this@JestaCardReviewActivity,"A message was sent to " + jestaAuthor.displayName, Toast.LENGTH_LONG).show()
+
+            }
         }
     }
 }

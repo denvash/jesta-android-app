@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Mission(
     var id: String = "emptyID",
+    var authorId: String = "emptyID",
     var title: String = "emptyTitle",
     var difficulty: String = "emptyDifficulty",
     var description: String = "emptyDescription",
@@ -21,6 +22,7 @@ data class Mission(
 
     constructor(dbJesta: Map<String, String>) : this() {
         id = dbJesta["id"].toString()
+        authorId = dbJesta["authorId"].toString()
         difficulty = dbJesta["difficulty"].toString()
         description = dbJesta["description"].toString()
         imageUrl = dbJesta["imageUrl"].toString()
