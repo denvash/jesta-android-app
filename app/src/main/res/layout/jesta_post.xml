@@ -160,6 +160,8 @@
         android:background="@color/colorPrimary" />
 
     <LinearLayout
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -170,21 +172,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
-            android:layout_marginEnd="@dimen/_16dp"
+            android:layout_marginEnd="10dp"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_16dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="0.75dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_16dp">
 
                 <ImageView
                     android:id="@+id/jesta_post_preview_mission_image"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_jesta_default_image"
                     tools:ignore="ContentDescription" />
