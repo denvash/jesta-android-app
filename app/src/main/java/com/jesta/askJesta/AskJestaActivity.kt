@@ -1,28 +1,36 @@
 package com.jesta.askJesta
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.InputFilter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.jesta.R
 import com.jesta.doJesta.DoJestaActivity
 import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_ask_jesta.*
 import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 import kotlinx.android.synthetic.main.jesta_post.*
+import java.io.File
 import java.util.*
 
 
 class AskJestaActivity : AppCompatActivity() {
 
     private val RESULT_LOAD_IMAGE: Int = 1
+    private val REQUEST_STORAGE_PERMISSION = 100
     private var filePath: Uri? = null
 
 
@@ -33,8 +41,7 @@ class AskJestaActivity : AppCompatActivity() {
         jesta_post_title.filters = jesta_post_title.filters + InputFilter.AllCaps()
         jesta_post_location.filters = jesta_post_location.filters + InputFilter.AllCaps()
         jesta_post_button_browse.setOnClickListener {
-            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)
+            requestPermission(this)
         }
         jesta_post_button_accept.setOnClickListener {
 
@@ -140,12 +147,50 @@ class AskJestaActivity : AppCompatActivity() {
                 jesta_preview_tag_3.text.isNullOrEmpty()
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
-            filePath = data.data
 
+            val cursor = MediaStore.Images.Media.query(contentResolver,  data.data, arrayOf(MediaStore.Images.Media.DATA))
+            cursor.moveToFirst()
+            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            val comp = Compressor(this)
+            val file = comp.compressToFile(File(cursor.getString(idx)))
+
+            filePath = Uri.fromFile(file)
             jesta_post_preview_mission_image.setImageURI(filePath)
         }
+    }
+
+    fun requestPermission(activity: Activity) {
+
+        if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    activity,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                ActivityCompat.requestPermissions(
+                    activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    REQUEST_STORAGE_PERMISSION
+                )
+            } else {
+                //Yeah! I want both block to do the same thing, you can write your own logic, but this works for me.
+                ActivityCompat.requestPermissions(
+                    activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    REQUEST_STORAGE_PERMISSION
+                )
+            }
+        } else {
+            //Permission Granted, lets go pick photo
+            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)
+        }
+
     }
 }
