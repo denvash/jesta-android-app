@@ -12,14 +12,14 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:weightSum="2"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
 
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="40dp"
             android:columnCount="2"
             android:rowCount="2">
 
@@ -133,22 +133,19 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="0.75dp"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_16dp"
-            app:cardUseCompatPadding="true"
             app:contentPadding="0.75dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_16dp">
 
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/jesta_card_preview_mission_image"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_jesta_default_image" />
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.card.MaterialCardView>

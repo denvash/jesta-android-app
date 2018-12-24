@@ -195,6 +195,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -217,6 +218,32 @@
                 app:rippleColor="@color/primaryLightColor"
                 app:strokeColor="@color/black"
                 app:strokeWidth="0.75dp" />
+
+            <FrameLayout
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <!--<TextView-->
+                    <!--style="@style/TextAppearance.Jesta.Type"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_gravity="start"-->
+                    <!--android:text="@string/jesta_preview_diamonds_text" />-->
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/jesta_post_check_box"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jesta_post_check_box_text"
+                    android:fontFamily="@font/marvel"
+                    android:textAllCaps="true"
+                    app:useMaterialThemeColors="false"/>
+            </FrameLayout>
+
         </LinearLayout>
     </LinearLayout>
 

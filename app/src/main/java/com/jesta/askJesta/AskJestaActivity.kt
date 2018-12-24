@@ -18,7 +18,6 @@ import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
-import kotlinx.android.synthetic.main.abc_activity_chooser_view.view.*
 import kotlinx.android.synthetic.main.activity_ask_jesta.*
 import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 import kotlinx.android.synthetic.main.jesta_post.*
@@ -84,6 +83,11 @@ class AskJestaActivity : AppCompatActivity() {
 //                jesta_preview_tag_2.text.toString(),
 //                jesta_preview_tag_3.text.toString()
 //            )
+
+//            "https://firebasestorage.googleapis.com/v0/b/jesta-42.appspot.com/o/images%2F9c8ceb9d-6218-418d-be3c-ff15fa7945df?alt=media&token=4179cce6-6cdd-4017-88d5-5c44ae0aa7a4"
+            // TODO: Pachka check this out
+//            val isUploadedImageToDB = jesta_post_check_box.isChecked
+//            sysManager.setMissionOnDB(jesta,isUploadedImageToDB)
             sysManager.setMissionOnDB(jesta)
 
             Toast.makeText(this@AskJestaActivity, "Jesta posted", Toast.LENGTH_LONG).show()

@@ -81,5 +81,6 @@
     <string name="toast_message">Hurra!</string>
     <string name="input_placeholder">Write a message</string>
     <string name="jesta_inbox_message">MESSAGE</string>
+    <string name="jesta_post_check_box_text">[dev] Upload to DB</string>
 
 </resources>
