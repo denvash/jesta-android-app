@@ -1,38 +1,20 @@
 package com.jesta.messaging;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
 import com.jesta.R;
-import com.jesta.chat.ChatActivity;
-import com.jesta.doJesta.DoJestaActivity;
-import com.jesta.login.ErrorActivity;
-import com.jesta.login.LoginActivity;
-import com.jesta.login.MainActivity;
 import com.jesta.util.Mission;
 import com.jesta.util.SysManager;
 import com.jesta.util.User;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class InboxMessageActivity extends AppCompatActivity {
@@ -51,7 +33,7 @@ public class InboxMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-//        setContentView(R.layout.activity_error);
+        setContentView(R.layout.activity_notification);
 
         Bundle b = getIntent().getExtras();
 
@@ -67,7 +49,6 @@ public class InboxMessageActivity extends AppCompatActivity {
 
         final SysManager sysManager = new SysManager();
         Activity activity = sysManager.getActivity();
-//        activity = null;
         if (activity == null) {
 //            super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_error);
@@ -76,14 +57,9 @@ public class InboxMessageActivity extends AppCompatActivity {
             return;
         }
 
-
         final Mission mission = sysManager.getMissionByID(jestaId);
         if (mission == null) {
             return;
-        }
-
-        if (activity == null) {
-            System.out.println("SHITTTTTT");
         }
 
         activity = this;
@@ -91,8 +67,8 @@ public class InboxMessageActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         // 2. Chain together various setter methods to set the dialog characteristics
-        builder.setMessage(body)
-                .setTitle(title);
+        builder.setMessage(body).setTitle(title);
+
 
         if (title.contains("asked to do a jesta")) {
             builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
@@ -107,15 +83,15 @@ public class InboxMessageActivity extends AppCompatActivity {
                                 // todo some error
                                 return;
                             }
-                            Toast.makeText(getBaseContext(),"A message was sent to " + senderWhichBecomesReceiver.getDisplayName(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), "A message was sent to " + senderWhichBecomesReceiver.getDisplayName(), Toast.LENGTH_LONG).show();
 
-                            // currentUser asked to do a jesta TODO DENNIS
-//                            User userSender = sysManager.getCurrentUserFromDB();
-//                            User userReceiver = senderWhichBecomesReceiver;
+                            User userSender = sysManager.getCurrentUserFromDB();
+                            User userReceiver = senderWhichBecomesReceiver;
 
-//                            finish();
-//                            Intent i = new Intent(getBaseContext(), ChatActivity.class);
-//                            startActivity(i);
+                            TextView senderTextView = findViewById(R.id.jesta_notification_sender);
+                            TextView receiverTextView = findViewById(R.id.jesta_notification_receiver);
+                            senderTextView.setText(userSender.getDisplayName());
+                            receiverTextView.setText(userReceiver.getDisplayName());
 
                         }
                     });
@@ -123,9 +99,23 @@ public class InboxMessageActivity extends AppCompatActivity {
 
             });
             builder.setNegativeButton("Deny", null);
-        }
-        else if (title.contains("answered to your request")) {
-            builder.setPositiveButton("OK", null);
+        } else if (title.contains("answered to your request")) {
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    final User senderWhichBecomesReceiver = sysManager.getUserByID(sender);
+
+                    User userSender = sysManager.getCurrentUserFromDB();
+                    User userReceiver = senderWhichBecomesReceiver;
+
+                    TextView senderTextView = findViewById(R.id.jesta_notification_sender);
+                    TextView receiverTextView = findViewById(R.id.jesta_notification_receiver);
+                    senderTextView.setText(userSender.getDisplayName());
+                    receiverTextView.setText(userReceiver.getDisplayName());
+                }
+
+            });
         }
 
 
@@ -134,15 +124,9 @@ public class InboxMessageActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-//            finish();
+        } catch (Exception e) {
+            throw (e);
         }
-        catch(Exception e) {
-            throw(e);
-        }
-
-//
-//        TextView errMsgTV = findViewById(R.id.errorMessage);
-//        errMsgTV.setText(body);
 
     }
 }

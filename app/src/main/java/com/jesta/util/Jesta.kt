@@ -17,7 +17,7 @@ data class Mission(
     var duration: Int = -1,
     var location: String = "emptyLocation",
     var diamonds: Int = -1,
-    var tags: List<String> = listOf("Tag1", "Tag2")
+    var tags: List<String> = listOf("Tag1", "Tag2", "Tag3")
 ) : Parcelable {
 
     constructor(dbJesta: Map<String, String>) : this() {

@@ -29,10 +29,12 @@ class JestaCardRecyclerViewAdapter internal constructor(
         if (position < postList.size) {
             val jestaPost = postList[position]
             ImageReq.setImageFromUrl(holder.jestaCard.jesta_card_image, jestaPost.imageUrl)
+
             holder.jestaCard.jesta_card_title.text = jestaPost.title
             holder.jestaCard.jesta_card_difficulty.text = jestaPost.difficulty
             holder.jestaCard.jesta_card_tag_1.text = jestaPost.tags.first()
-            holder.jestaCard.jesta_card_tag_2.text = jestaPost.tags.last()
+            holder.jestaCard.jesta_card_tag_2.text = jestaPost.tags[1]
+            holder.jestaCard.jesta_card_tag_3.text = jestaPost.tags.last()
             holder.jestaCard.jesta_card_diamonds.text = jestaPost.diamonds.toString()
         }
 

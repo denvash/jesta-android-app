@@ -1,12 +1,16 @@
 package com.jesta.askJesta
 
 import android.app.Activity
+import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.InputFilter
 import android.widget.Toast
+import androidx.annotation.AnyRes
 import androidx.appcompat.app.AppCompatActivity
 import com.jesta.R
 import com.jesta.doJesta.DoJestaActivity
@@ -14,10 +18,12 @@ import com.jesta.settings.SettingsActivity
 import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
+import kotlinx.android.synthetic.main.abc_activity_chooser_view.view.*
 import kotlinx.android.synthetic.main.activity_ask_jesta.*
 import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 import kotlinx.android.synthetic.main.jesta_post.*
 import java.util.*
+
 
 class AskJestaActivity : AppCompatActivity() {
 
@@ -48,24 +54,36 @@ class AskJestaActivity : AppCompatActivity() {
                 Toast.makeText(this@AskJestaActivity, "Fill all fields", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
+            val imageUri = Uri.parse(
+                ContentResolver.SCHEME_ANDROID_RESOURCE +
+                        "://" + resources.getResourcePackageName(R.drawable.ic_jesta_default_image)
+                        + '/'.toString() + resources.getResourceTypeName(R.drawable.ic_jesta_default_image) + '/'.toString() + resources.getResourceEntryName(
+                    R.drawable.ic_jesta_default_image
+                )
+            )
+
+            // TODO RUN TIME EXCEPTION for fetching pictures
             val jesta = Mission(
                 authorId = sysManager.currentUserFromDB.id,
                 id = UUID.randomUUID().toString(),
                 title = jesta_post_title.text.toString(),
                 difficulty = jesta_post_difficulty.text.toString(),
                 description = jesta_post_description.text.toString(),
-                imageUrl = imageResult,
+                imageUrl = if (imageResult == "") imageUri.toString() else imageResult,
                 payment = jesta_post_payment.text.toString().toInt(),
                 numOfPeople = jesta_post_num_of_people.text.toString().toInt(),
                 duration = jesta_post_duration.text.toString().toInt(),
                 location = jesta_post_location.text.toString(),
                 diamonds = diamonds,
-                tags = listOf(
-                    jesta_preview_tag_1.text.toString(),
-                    jesta_preview_tag_2.text.toString(),
-                    jesta_preview_tag_3.text.toString()
-                )
+                tags = listOf("Tag1","Tag2","Tag3")
             )
+
+//            tags = listOf(
+//                jesta_preview_tag_1.text.toString(),
+//                jesta_preview_tag_2.text.toString(),
+//                jesta_preview_tag_3.text.toString()
+//            )
             sysManager.setMissionOnDB(jesta)
 
             Toast.makeText(this@AskJestaActivity, "Jesta posted", Toast.LENGTH_LONG).show()
@@ -125,7 +143,12 @@ class AskJestaActivity : AppCompatActivity() {
             // note: async function, therefore it is in the end of current function
             uploadAndGetUrl.addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    // Todo error here! e.g. start ErrorActivity here
+                    System.err.println(task.exception)
+                    Toast.makeText(
+                        this@AskJestaActivity,
+                        "Quota has been exceeded for this project.",
+                        Toast.LENGTH_LONG
+                    ).show()
                     return@addOnCompleteListener
                 }
 
@@ -133,5 +156,21 @@ class AskJestaActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    @Throws(Resources.NotFoundException::class)
+    fun getUriToResource(
+        context: Context,
+        @AnyRes resId: Int
+    ): Uri {
+        /** Return a Resources instance for your application's package.  */
+        val res = context.resources
+        /** return uri  */
+        return Uri.parse(
+            ContentResolver.SCHEME_ANDROID_RESOURCE +
+                    "://" + res.getResourcePackageName(resId)
+                    + '/'.toString() + res.getResourceTypeName(resId)
+                    + '/'.toString() + res.getResourceEntryName(resId)
+        )
     }
 }

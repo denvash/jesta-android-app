@@ -12,13 +12,14 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
         android:gravity="center"
+        android:weightSum="2"
         android:orientation="horizontal">
 
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="30dp"
+            android:layout_marginEnd="20dp"
             android:columnCount="2"
             android:rowCount="2">
 
@@ -132,7 +133,6 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10dp"
             android:padding="0.75dp"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_16dp"
@@ -146,8 +146,8 @@
 
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/jesta_card_preview_mission_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_jesta_default_image" />
             </com.google.android.material.card.MaterialCardView>
@@ -185,7 +185,7 @@
         android:layout_marginTop="-20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/colorPrimary" />
 
     <LinearLayout
@@ -197,9 +197,9 @@
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/jesta_card_review_avatar_icon"
             android:layout_marginStart="@dimen/_40dp"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="@dimen/_10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="20dp"
             android:contentDescription="@string/jesta_card_profile_description"
             android:src="@drawable/jesta_default_avatar"
             app:civ_border_color="@color/colorPrimary"
@@ -302,9 +302,9 @@
         android:layout_width="match_parent"
         android:layout_height="0.75dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_40dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="@dimen/_10dp"
         android:background="@color/colorPrimary" />
 
     <LinearLayout
