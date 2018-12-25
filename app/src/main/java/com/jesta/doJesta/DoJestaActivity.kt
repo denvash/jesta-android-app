@@ -26,6 +26,9 @@ class DoJestaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // late init
+        instance = this@DoJestaActivity
+
         val sysManager = SysManager(this@DoJestaActivity)
         val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
 
@@ -35,10 +38,13 @@ class DoJestaActivity : AppCompatActivity() {
         getAllJestas.addOnCompleteListener { task ->
             sysManager.stopLoadingAnim()
 
+            if (!task.isSuccessful) {
+                // todo error here! e.g. start ErrorActivity here
+                return@addOnCompleteListener
+            }
+
             setContentView(R.layout.activity_do_jesta)
 
-            // late init
-            instance = this@DoJestaActivity
 
             // set recycle view layout
             val column = if (resources.configuration.orientation == 2) 3 else 2
@@ -47,11 +53,6 @@ class DoJestaActivity : AppCompatActivity() {
 
             // prevent the loss of items
             do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
-
-            if (!task.isSuccessful) {
-                // todo error here! e.g. start ErrorActivity here
-                return@addOnCompleteListener
-            }
 
             // Task completed successfully
             val result: List<*> = task.result as List<*>
@@ -88,6 +89,19 @@ class DoJestaActivity : AppCompatActivity() {
                 finish()
                 startActivity(intent)
                 true
+            }
+
+            do_jesta_swipe_refresh.setColorSchemeResources(R.color.colorAccent,R.color.colorPrimary)
+            do_jesta_swipe_refresh.setOnRefreshListener {
+
+                val onRefreshGetAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
+                onRefreshGetAllJestas.addOnCompleteListener { task ->
+
+                    val refreshResult: List<*> = task.result as List<*>
+                    val refreshAdapter = JestaCardRecyclerViewAdapter(refreshResult.filterIsInstance<Mission>())
+                    do_jesta_recycle_view.adapter = refreshAdapter
+                    do_jesta_swipe_refresh.isRefreshing = false
+                }
             }
         }
     }

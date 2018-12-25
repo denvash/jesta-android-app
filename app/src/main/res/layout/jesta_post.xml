@@ -29,8 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/marvel"
-                android:textAllCaps="true"
-                android:inputType="textCapCharacters" />
+                android:inputType="textCapCharacters"
+                android:textAllCaps="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -45,9 +45,9 @@
                 android:id="@+id/jesta_post_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAllCaps="true"
                 android:fontFamily="@font/montserrat_light"
-                android:inputType="textCapSentences|textCapCharacters" />
+                android:inputType="textCapSentences|textCapCharacters"
+                android:textAllCaps="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <GridLayout
@@ -160,19 +160,19 @@
         android:background="@color/colorPrimary" />
 
     <LinearLayout
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="@dimen/_16dp"
             app:cardUseCompatPadding="true"
@@ -180,14 +180,15 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:cardCornerRadius="@dimen/_16dp">
 
                 <ImageView
                     android:id="@+id/jesta_post_preview_mission_image"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:adjustViewBounds="true"
                     android:src="@drawable/ic_jesta_default_image"
                     tools:ignore="ContentDescription" />
 
@@ -195,9 +196,11 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -217,33 +220,25 @@
                 android:textSize="12sp"
                 app:backgroundTint="@color/white"
                 app:cornerRadius="14dp"
-                app:rippleColor="@color/primaryLightColor"
+                app:rippleColor="@color/colorPrimaryLight"
                 app:strokeColor="@color/black"
                 app:strokeWidth="0.75dp" />
 
             <FrameLayout
-                android:layout_width="170dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <!--<TextView-->
-                    <!--style="@style/TextAppearance.Jesta.Type"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:gravity="center"-->
-                    <!--android:layout_gravity="start"-->
-                    <!--android:text="@string/jesta_preview_diamonds_text" />-->
 
                 <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/jesta_post_check_box"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:text="@string/jesta_post_check_box_text"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/marvel"
+                    android:gravity="center"
+                    android:text="@string/jesta_post_check_box_text"
                     android:textAllCaps="true"
-                    app:useMaterialThemeColors="false"/>
+                    app:useMaterialThemeColors="false" />
             </FrameLayout>
 
         </LinearLayout>
@@ -300,17 +295,17 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:hintAnimationEnabled="false"
                         android:gravity="center"
-                        app:boxBackgroundColor="@color/transparent">
+                        app:boxBackgroundColor="@color/transparent"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/jesta_post_payment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberSigned"
                             android:fontFamily="@font/marvel"
+                            android:inputType="numberSigned"
                             android:textColor="@color/colorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -351,17 +346,17 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:hintAnimationEnabled="false"
                         android:gravity="center"
-                        app:boxBackgroundColor="@color/transparent">
+                        app:boxBackgroundColor="@color/transparent"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/jesta_post_location"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textCapCharacters"
                             android:fontFamily="@font/marvel"
+                            android:inputType="textCapCharacters"
                             android:textColor="@color/colorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -403,17 +398,17 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:hintAnimationEnabled="false"
                         android:gravity="center"
-                        app:boxBackgroundColor="@color/transparent">
+                        app:boxBackgroundColor="@color/transparent"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/jesta_post_num_of_people"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberSigned"
                             android:fontFamily="@font/marvel"
+                            android:inputType="numberSigned"
                             android:textColor="@color/colorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -454,17 +449,17 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintEnabled="false"
-                        app:hintAnimationEnabled="false"
                         android:gravity="center"
-                        app:boxBackgroundColor="@color/transparent">
+                        app:boxBackgroundColor="@color/transparent"
+                        app:hintAnimationEnabled="false"
+                        app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/jesta_post_duration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberSigned"
                             android:fontFamily="@font/marvel"
+                            android:inputType="numberSigned"
                             android:textColor="@color/colorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>

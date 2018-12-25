@@ -51,7 +51,7 @@
                         android:textSize="15sp"
                         app:backgroundTint="@color/white"
                         app:cornerRadius="14dp"
-                        app:rippleColor="@color/primaryLightColor"
+                        app:rippleColor="@color/colorPrimaryLight"
                         app:strokeColor="@color/black"
                         app:strokeWidth="0.75dp" />
 
@@ -64,7 +64,7 @@
                         android:textSize="15sp"
                         app:backgroundTint="@color/white"
                         app:cornerRadius="14dp"
-                        app:rippleColor="@color/primaryLightColor"
+                        app:rippleColor="@color/colorPrimaryLight"
                         app:strokeColor="@color/black"
                         app:strokeWidth="0.75dp" />
                 </LinearLayout>

@@ -143,8 +143,9 @@
                 app:cardCornerRadius="@dimen/_16dp">
 
                 <com.android.volley.toolbox.NetworkImageView
+                    android:adjustViewBounds="true"
                     android:id="@+id/jesta_card_preview_mission_image"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_jesta_default_image" />
             </com.google.android.material.card.MaterialCardView>
@@ -363,5 +364,18 @@
         </FrameLayout>
     </LinearLayout>
 
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/jesta_preview_accept_button"
+        style="@style/Widget.Jesta.Button.Special"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40dp"
+        android:text="@string/jesta_post_button_accept"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="14dp"
+        app:rippleColor="@color/colorPrimaryLight"
+        app:strokeColor="@color/black"
+        app:strokeWidth="0.75dp" />
 </LinearLayout>

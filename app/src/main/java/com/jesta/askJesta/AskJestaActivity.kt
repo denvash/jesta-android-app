@@ -41,6 +41,8 @@ class AskJestaActivity : AppCompatActivity() {
         jesta_post_title.filters = jesta_post_title.filters + InputFilter.AllCaps()
         jesta_post_location.filters = jesta_post_location.filters + InputFilter.AllCaps()
         jesta_post_button_browse.setOnClickListener {
+//            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)
             requestPermission(this)
         }
         jesta_post_button_accept.setOnClickListener {
@@ -159,6 +161,7 @@ class AskJestaActivity : AppCompatActivity() {
             val file = comp.compressToFile(File(cursor.getString(idx)))
 
             filePath = Uri.fromFile(file)
+//            filePath = data.data
             jesta_post_preview_mission_image.setImageURI(filePath)
         }
     }

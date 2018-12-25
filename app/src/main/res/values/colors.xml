@@ -4,7 +4,7 @@
     <color name="colorPrimary">#7600FE</color>
     <color name="colorAccent">#29F036</color>
 
-    <color name="primaryLightColor">#e6ceff</color>
+    <color name="colorPrimaryLight">#e6ceff</color>
     <color name="transparent">@android:color/transparent</color>
 
     <color name="blue">#56CCF2</color>

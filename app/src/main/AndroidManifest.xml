@@ -91,7 +91,6 @@
         <activity android:name=".messaging.InboxMessageActivity" />
         <activity android:name=".settings.profile.ProfileActivity" />
         <activity android:name=".status.StatusActivity" />
-        <activity android:name=".chat.ChatActivity" />
     </application>
 
 </manifest>

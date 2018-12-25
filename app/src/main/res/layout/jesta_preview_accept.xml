@@ -1,58 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/jesta_preview_nested_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_4dp">
+        android:layout_height="match_parent">
 
         <ImageButton
             android:id="@+id/jesta_preview_accept_back_button"
             style="@style/Widget.Jesta.Toolbar"
+            android:layout_gravity="top"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_margin="@dimen/_10dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/ic_jesta_back"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
-            android:src="@drawable/ic_jesta_back" />
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/jesta_preview_nested_scroll_view"
+        <include
+            android:id="@+id/include"
+            layout="@layout/jesta_preview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/jesta_preview_accept_back_button">
-
-            <include
-                android:id="@+id/include"
-                layout="@layout/jesta_preview"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </androidx.core.widget.NestedScrollView>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/jesta_preview_accept_button"
-            style="@style/Widget.Jesta.Button.Special"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:text="@string/jesta_post_button_accept"
-            android:textSize="15sp"
-            app:backgroundTint="@color/white"
-            app:cornerRadius="14dp"
-            android:layout_marginTop="@dimen/_40dp"
-            app:layout_constraintTop_toBottomOf="@id/jesta_preview_nested_scroll_view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:rippleColor="@color/primaryLightColor"
-            app:strokeColor="@color/black"
-            app:strokeWidth="0.75dp" />
-
+            app:layout_constraintTop_toBottomOf="@id/jesta_preview_accept_back_button"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>
