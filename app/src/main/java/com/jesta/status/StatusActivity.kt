@@ -90,7 +90,7 @@ class StatusActivity : AppCompatActivity() {
                 onRefreshGetAllJestas.addOnCompleteListener { task ->
 
                     val refreshResult: List<*> = task.result as List<*>
-                    val refreshAdapter = JestaCardRecyclerViewAdapter(refreshResult.filterIsInstance<Mission>())
+                    val refreshAdapter = StatusRecyclerViewAdapter(refreshResult.filterIsInstance<Mission>())
                     jesta_status_recycle_view.adapter = refreshAdapter
                     jesta_status_swipe_refresh.isRefreshing = false
                 }
