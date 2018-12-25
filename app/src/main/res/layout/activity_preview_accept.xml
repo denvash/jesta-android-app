@@ -23,7 +23,7 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/jesta_preview"
+            layout="@layout/jesta_card_preview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/jesta_preview_accept_back_button"

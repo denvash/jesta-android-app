@@ -7,9 +7,8 @@ import com.jesta.R
 import com.jesta.util.ImageReq
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
-import kotlinx.android.synthetic.main.abc_activity_chooser_view.view.*
-import kotlinx.android.synthetic.main.jesta_preview.*
-import kotlinx.android.synthetic.main.jesta_preview_accept.*
+import kotlinx.android.synthetic.main.jesta_card_preview.*
+import kotlinx.android.synthetic.main.activity_preview_accept.*
 
 class JestaCardReviewActivity : AppCompatActivity() {
 
@@ -19,7 +18,7 @@ class JestaCardReviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.jesta_preview_accept)
+        setContentView(R.layout.activity_preview_accept)
 
         SysManager(this@JestaCardReviewActivity)
         val mission = intent.getParcelableExtra(extra) as Mission

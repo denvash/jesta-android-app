@@ -67,11 +67,6 @@
             <!--android:name="com.google.firebase.messaging.default_notification_color"-->
             <!--android:resource="@color/colorAccent" />-->
 
-
-
-
-
-
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/Theme.Jesta.Login" />
@@ -90,7 +85,9 @@
         <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".messaging.InboxMessageActivity" />
         <activity android:name=".settings.profile.ProfileActivity" />
+
         <activity android:name=".status.StatusActivity" />
+        <activity android:name=".status.StatusReviewActivity" />
     </application>
 
 </manifest>
