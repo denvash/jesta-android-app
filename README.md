@@ -19,6 +19,8 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   
 Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) for **User** and **Developer** guides.
 
+Check out our project [Poster](https://docs.google.com/presentation/d/1aVluE97VLNI44Mfrrvv5WK2jLRCA1n6hQDu2AXtBjO4/edit?usp=sharing)
+
 ## Project Managment
 
 This projects uses [Zen Hub](https://www.zenhub.com/) _Agile Project Managment_, download [chrome-extension](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) and check **ZenHub tab**.
