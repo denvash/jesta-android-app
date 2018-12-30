@@ -52,6 +52,8 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'id.zelory:compressor:2.1.0'
+    implementation 'com.ncapdevi:frag-nav:3.0.0'
+    implementation "com.roughike:bottom-bar:2.3.1"
 }
 
 apply plugin: 'com.google.gms.google-services'

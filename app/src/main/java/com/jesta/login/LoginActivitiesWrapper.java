@@ -42,7 +42,7 @@ public class LoginActivitiesWrapper extends AppCompatActivity {
                 sysManager.signInUser(task, getApplicationContext(), LoginActivitiesWrapper.this);
 
                 // redirect to main activity and clear activity stack
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), LoginMainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             } catch (Exception e) {

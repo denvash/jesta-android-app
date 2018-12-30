@@ -16,8 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.*;
+import com.jesta.MainActivity;
 import com.jesta.R;
-import com.jesta.doJesta.DoJestaActivity;
 import com.jesta.util.SysManager;
 import com.jesta.util.User;
 
@@ -26,7 +26,7 @@ import java.util.List;
 
 import static com.jesta.util.SysManager.DBTask.*;
 
-public class MainActivity extends LoginActivitiesWrapper {
+public class LoginMainActivity extends LoginActivitiesWrapper {
     GoogleSignInClient mGoogleSignInClient;
     CallbackManager fbCallbackManager;
     LoginButton loginButton;
@@ -64,14 +64,14 @@ public class MainActivity extends LoginActivitiesWrapper {
 //                    sysManager.setUserOnDB(currentUser);
 
                     //todo go to OTPActivity or check for OTP and go to Path
-                    Intent i = new Intent(getApplicationContext(), DoJestaActivity.class);
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
                     return;
                 }
 
                 // otherwise (user isn't logged in), render ui
-                setContentView(R.layout.activity_main);
+                setContentView(R.layout.activity_login_main);
                 sysManager.setTitle(getString(R.string.jesta_login_welcome));
                 sysManager.showBackButton(false);
 
@@ -93,7 +93,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                             public void onCancel() {
                                 // todo
                                 // there is nothing todo here really...
-//                                Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(LoginMainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
@@ -109,7 +109,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                 facebookSignInButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("email", "public_profile"));
+                        LoginManager.getInstance().logInWithReadPermissions(LoginMainActivity.this, Arrays.asList("email", "public_profile"));
                     }
                 });
 
@@ -153,7 +153,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // TODO Google Sign In failed, update UI appropriately
-                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginMainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == 64206) { // facebook
             fbCallbackManager.onActivityResult(requestCode, resultCode, data);

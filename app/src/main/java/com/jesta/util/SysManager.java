@@ -78,9 +78,9 @@ public class SysManager {
 
     }
 
-    public SysManager(Fragment fragment) {
-
-    }
+    // public SysManager(Fragment fragment) {
+    //
+    // }
 
     public SysManager(Activity currentActivity) {
         _activity = currentActivity;

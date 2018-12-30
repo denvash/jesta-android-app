@@ -22,7 +22,7 @@ public class LoginActivity extends LoginActivitiesWrapper {
 //        // If the fireBaseUser is logged in, close this activity and go to profile
 //        if (sysManager.getCurrentFireBaseUser() != null) {
 //            finish();
-//            Intent i = new Intent(this,SettingsActivity.class);
+//            Intent i = new Intent(this,SettingsFragment.class);
 //            startActivity(i);
 //            return;
 //        }

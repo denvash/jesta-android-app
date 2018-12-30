@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings.SettingsActivity">
+    tools:context=".settings.SettingsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -197,10 +197,4 @@
             app:strokeColor="@color/black"
             app:strokeWidth="1dp" />
     </LinearLayout>
-
-    <include
-        layout="@layout/frame_bottom_navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"/>
 </FrameLayout>

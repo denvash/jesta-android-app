@@ -1,70 +1,77 @@
 package com.jesta.doJesta
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.jesta.MainActivity
 import com.jesta.R
 import com.jesta.util.ImageReq
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.jesta_card_preview.*
-import kotlinx.android.synthetic.main.activity_preview_accept.*
+import kotlinx.android.synthetic.main.fragment_preview_accept.*
 
-class JestaCardReviewActivity : AppCompatActivity() {
+class JestaCardReviewActivity : Fragment() {
 
     companion object {
         const val extra = "jesta-card-review-extra"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_preview_accept)
 
-        SysManager(this@JestaCardReviewActivity)
-        val mission = intent.getParcelableExtra(extra) as Mission
+        val view = inflater.inflate(R.layout.fragment_preview_accept, container, false)
 
-        jesta_preview_title.text = mission.title
-        jesta_preview_difficulty.text = mission.difficulty
+//        SysManager(activity as MainActivity)
+//        val mission = intent.getParcelableExtra(extra) as Mission
+//
+//        jesta_preview_title.text = mission.title
+//        jesta_preview_difficulty.text = mission.difficulty
+//
+//        ImageReq.setImageFromUrl(jesta_card_preview_mission_image, mission.imageUrl)
+//
+//        jesta_preview_description.text = mission.description
+//        jesta_preview_payment.text = mission.payment.toString()
+//        jesta_preview_crew.text = mission.numOfPeople.toString()
+//        jesta_preview_duration.text = mission.duration.toString()
+//        jesta_preview_location.text = mission.location
+//        jesta_preview_diamonds.text = mission.diamonds.toString()
+//
+//        jesta_preview_tag_1.text = mission.tags.first()
+//        jesta_preview_tag_2.text = mission.tags[1]
+//        jesta_preview_tag_3.text = mission.tags.last()
+//
+//        jesta_preview_accept_back_button.setOnClickListener {
+//            finish()
+//        }
+//
+//
+//        jesta_preview_accept_button.setOnClickListener {
+//
+//            val sysManager = SysManager(activity as MainActivity)
+//            var jestaAuthor = sysManager.getUserByID(mission.authorId)
+//
+//            if (jestaAuthor == null) {
+//                jestaAuthor = sysManager.currentUserFromDB
+//            }
+//
+//            sysManager.askTodoJestaForUser(mission).addOnCompleteListener { task ->
+//                if (!task.isSuccessful) {
+//                    // todo some error
+//                }
+//                Toast.makeText(
+//                    activity as MainActivity,
+//                    "A message was sent to " + jestaAuthor.displayName,
+//                    Toast.LENGTH_LONG
+//                ).show()
+//
+//            }
 
-        ImageReq.setImageFromUrl(jesta_card_preview_mission_image, mission.imageUrl)
-
-        jesta_preview_description.text = mission.description
-        jesta_preview_payment.text = mission.payment.toString()
-        jesta_preview_crew.text = mission.numOfPeople.toString()
-        jesta_preview_duration.text = mission.duration.toString()
-        jesta_preview_location.text = mission.location
-        jesta_preview_diamonds.text = mission.diamonds.toString()
-
-        jesta_preview_tag_1.text = mission.tags.first()
-        jesta_preview_tag_2.text = mission.tags[1]
-        jesta_preview_tag_3.text = mission.tags.last()
-
-        jesta_preview_accept_back_button.setOnClickListener {
-            finish()
-        }
-
-
-        jesta_preview_accept_button.setOnClickListener {
-
-            val sysManager = SysManager(this@JestaCardReviewActivity)
-            var jestaAuthor = sysManager.getUserByID(mission.authorId)
-
-            if (jestaAuthor == null) {
-                jestaAuthor = sysManager.currentUserFromDB
-            }
-
-            sysManager.askTodoJestaForUser(mission).addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    // todo some error
-                }
-                Toast.makeText(
-                    this@JestaCardReviewActivity,
-                    "A message was sent to " + jestaAuthor.displayName,
-                    Toast.LENGTH_LONG
-                ).show()
-
-            }
-
-        }
+//        }
+        return view
     }
+
 }

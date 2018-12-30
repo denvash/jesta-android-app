@@ -8,7 +8,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.NetworkImageView
 import com.android.volley.toolbox.Volley
-import com.jesta.doJesta.DoJestaActivity
+import com.jesta.MainActivity
+import com.jesta.application.JestaApplication
 
 object ImageReq {
     private val requestQueue: RequestQueue
@@ -16,7 +17,7 @@ object ImageReq {
     private val maxByteSize: Int
 
     init {
-        val context = DoJestaActivity.instance
+        val context = MainActivity.instance
         requestQueue = Volley.newRequestQueue(context)
         requestQueue.start()
         maxByteSize = calculateMaxByteSize(context)
