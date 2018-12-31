@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.jesta.askJesta.AskJestaFragment
 import com.jesta.doJesta.DoJestaFragment
 import com.jesta.settings.SettingsFragment
@@ -19,7 +20,7 @@ const val INDEX_ASK_JESTA = FragNavController.TAB2
 const val INDEX_STATUS = FragNavController.TAB3
 const val INDEX_SETTINGS = FragNavController.TAB4
 
-class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener,
+class MainActivity : FragmentActivity(), FragNavController.RootFragmentListener,
     FragNavController.TransactionListener {
 
     companion object {
@@ -45,8 +46,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.jesta_main_activity)
-
-        val sysManager = SysManager(this@MainActivity)
 
         instance = this
 
@@ -104,13 +103,13 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
     override fun onTabTransaction(fragment: Fragment?, index: Int) {
         // If we have a backstack, show the back button
-        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
+//        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
     }
 
 
     override fun onFragmentTransaction(fragment: Fragment?, transactionType: FragNavController.TransactionType) {
         //do fragmentary stuff. Maybe change title, I'm not going to tell you how to live your life
         // If we have a backstack, show the back button
-        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
+//        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
     }
 }

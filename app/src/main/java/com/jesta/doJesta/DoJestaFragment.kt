@@ -27,28 +27,25 @@ class DoJestaFragment : Fragment() {
         val sysManager = SysManager(this)
         val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
 
-        // TODO: DO NOT NEW OPEN ACTIVITY, FINISH IT, or close the thread
-////         note: this change the layout of the activity,
-////         therefore you can use setContentView only after calling to sysManager.stopLoadingAnim()
 //        sysManager.startLoadingAnim()
-//        getAllJestas.addOnCompleteListener { task ->
-//            sysManager.stopLoadingAnim()
-//
-//            if (!task.isSuccessful) {
-//                // todo error here! e.g. start ErrorActivity here
-//                return@addOnCompleteListener
-//            }
-//
-//            // Task completed successfully
-//            val result: List<*> = task.result as List<*>
-//
-//            val missionList = result.filterIsInstance<Mission>()
-//
-//            // initial adapter with mission posts entries
-//            val adapter = JestaCardRecyclerViewAdapter(missionList)
-//            Log.i(TAG, missionList.toString())
-////            do_jesta_recycle_view.adapter = adapter
-//        }
+        getAllJestas.addOnCompleteListener { task ->
+            //            sysManager.stopLoadingAnim()
+
+            if (!task.isSuccessful) {
+                // todo error here! e.g. start ErrorActivity here
+                return@addOnCompleteListener
+            }
+
+            // Task completed successfully
+            val result: List<*> = task.result as List<*>
+
+            val missionList = result.filterIsInstance<Mission>()
+
+            // initial adapter with mission posts entries
+            val adapter = JestaCardRecyclerViewAdapter(missionList)
+            Log.i(TAG, missionList.toString())
+        }
+
         return view
     }
 
