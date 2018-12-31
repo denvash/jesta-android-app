@@ -23,10 +23,11 @@ class DoJestaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_do_jesta, container, false)
-//
-//        val sysManager = SysManager(this)
-//        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
-//
+
+        val sysManager = SysManager(this)
+        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
+
+        // TODO: DO NOT NEW OPEN ACTIVITY, FINISH IT, or close the thread
 ////         note: this change the layout of the activity,
 ////         therefore you can use setContentView only after calling to sysManager.stopLoadingAnim()
 //        sysManager.startLoadingAnim()
@@ -38,14 +39,6 @@ class DoJestaFragment : Fragment() {
 //                return@addOnCompleteListener
 //            }
 //
-//            // set recycle view layout
-//            val column = if (resources.configuration.orientation == 2) 3 else 2
-//            do_jesta_recycle_view.layoutManager =
-//                    StaggeredGridLayoutManager(column, RecyclerView.VERTICAL)
-//
-//            // prevent the loss of items
-//            do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
-//
 //            // Task completed successfully
 //            val result: List<*> = task.result as List<*>
 //
@@ -53,30 +46,39 @@ class DoJestaFragment : Fragment() {
 //
 //            // initial adapter with mission posts entries
 //            val adapter = JestaCardRecyclerViewAdapter(missionList)
-//
 //            Log.i(TAG, missionList.toString())
-//
-//            do_jesta_recycle_view.adapter = adapter
-//
-//            // Note: The layout has internal spacing;
-//            // mission cards padding example.
-//            // val scale = resources.displayMetrics.density
-//            // val spacing = (1 * scale + 2.0f).toInt()
-//            //do_jesta_recycle_view.addItemDecoration(JestaCardGridItemDecoration(0))
-//
-//            do_jesta_swipe_refresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
-//            do_jesta_swipe_refresh.setOnRefreshListener {
-//
-//                val onRefreshGetAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
-//                onRefreshGetAllJestas.addOnCompleteListener { task ->
-//
-//                    val refreshResult: List<*> = task.result as List<*>
-//                    val refreshAdapter = JestaCardRecyclerViewAdapter(refreshResult.filterIsInstance<Mission>())
-//                    do_jesta_recycle_view.adapter = refreshAdapter
-//                    do_jesta_swipe_refresh.isRefreshing = false
-//                }
-//            }
+////            do_jesta_recycle_view.adapter = adapter
 //        }
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // set recycle view layout
+        val column = if (resources.configuration.orientation == 2) 3 else 2
+        do_jesta_recycle_view.layoutManager =
+                StaggeredGridLayoutManager(column, RecyclerView.VERTICAL)
+
+        // prevent the loss of items
+        do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
+
+        // initial adapter with mission posts entries
+        val adapter = JestaCardRecyclerViewAdapter(emptyList())
+
+        do_jesta_recycle_view.adapter = adapter
+
+        do_jesta_swipe_refresh.setColorSchemeResources(R.color.colorAccent,R.color.colorPrimary)
+//        do_jesta_swipe_refresh.setOnRefreshListener {
+//
+//            val onRefreshGetAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
+//            onRefreshGetAllJestas.addOnCompleteListener { task ->
+//
+//                val refreshResult: List<*> = task.result as List<*>
+//                val refreshAdapter = JestaCardRecyclerViewAdapter(refreshResult.filterIsInstance<Mission>())
+//                do_jesta_recycle_view.adapter = refreshAdapter
+//                do_jesta_swipe_refresh.isRefreshing = false
+//            }
+//        }
     }
 }
