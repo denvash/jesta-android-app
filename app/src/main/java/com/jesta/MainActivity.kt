@@ -8,7 +8,6 @@ import com.jesta.askJesta.AskJestaFragment
 import com.jesta.doJesta.DoJestaFragment
 import com.jesta.settings.SettingsFragment
 import com.jesta.status.StatusFragment
-import com.jesta.util.Mission
 import com.jesta.util.SysManager
 import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
@@ -27,16 +26,13 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         private val TAG = MainActivity::class.java.simpleName
         lateinit var instance: MainActivity
             private set
-        lateinit var jestas: List<Mission>
     }
 
     override val numberOfRootFragments: Int = 4
 
     override fun getRootFragment(index: Int): Fragment {
         when (index) {
-            INDEX_DO_JESTA -> {
-                return DoJestaFragment()
-            }
+            INDEX_DO_JESTA -> return DoJestaFragment()
             INDEX_ASK_JESTA -> return AskJestaFragment()
             INDEX_STATUS -> return StatusFragment()
             INDEX_SETTINGS -> return SettingsFragment()
@@ -48,27 +44,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.jesta_main_activity)
 
         val sysManager = SysManager(this@MainActivity)
-        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
-
-        sysManager.startLoadingAnim()
-        getAllJestas.addOnCompleteListener { task ->
-            sysManager.stopLoadingAnim()
-            if (!task.isSuccessful) {
-                // todo error here! e.g. start ErrorActivity here
-                return@addOnCompleteListener
-            }
-            // Task completed successfully
-            val result = task.result as List<*>
-            jestas = result.filterIsInstance<Mission>()
-//            DoJestaFragment.newInstance(jestas.toString())
-            Log.i(TAG, jestas.toString())
-
-            //            val adapter = JestaCardRecyclerViewAdapter(result.filterIsInstance<Mission>())
-        }
-
-        setContentView(R.layout.jesta_main_activity)
 
         instance = this
 
@@ -99,7 +77,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                 R.id.nav_do_jesta -> fragNavController.switchTab(INDEX_DO_JESTA)
                 R.id.nav_ask_jesta -> fragNavController.switchTab(INDEX_ASK_JESTA)
                 R.id.nav_status -> fragNavController.switchTab(INDEX_STATUS)
-                else -> fragNavController.switchTab(INDEX_SETTINGS)
+                R.id.nav_settings -> fragNavController.switchTab(INDEX_SETTINGS)
             }
             true
         }
@@ -107,10 +85,10 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         jesta_bottom_navigation.setOnNavigationItemReselectedListener {
             fragNavController.clearStack()
         }
-
-
-
     }
+
+
+
 
     override fun onBackPressed() {
         if (fragNavController.popFragment().not()) {

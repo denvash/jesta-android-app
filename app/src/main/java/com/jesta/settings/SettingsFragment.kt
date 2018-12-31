@@ -18,9 +18,6 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sysManager = SysManager(activity as MainActivity)
-        val currentUser = sysManager.currentUserFromDB
-
 //        jesta_settings_profile_full_name.text = currentUser.displayName
 //        jesta_settings_profile_phone_number.text = currentUser.phoneNumber
 
