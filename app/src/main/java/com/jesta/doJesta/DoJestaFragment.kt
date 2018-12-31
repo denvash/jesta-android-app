@@ -39,7 +39,7 @@ class DoJestaFragment : Fragment() {
 
             // initial adapter with mission posts entries
             view?.do_jesta_recycle_view?.adapter = JestaCardRecyclerViewAdapter(missionList)
-            Log.i(TAG, "Reload Jestas Status = " + missionList.isNotEmpty())
+            Log.d(TAG, "Reload Jestas Status = " + missionList.isNotEmpty())
         }
     }
 

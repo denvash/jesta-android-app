@@ -2,6 +2,7 @@ package com.jesta
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -91,6 +92,14 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         if (fragNavController.popFragment().not()) {
             super.onBackPressed()
         }
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> fragNavController.popFragment()
+        }
+        return true
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
