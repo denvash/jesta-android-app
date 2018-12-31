@@ -10,7 +10,7 @@
     android:gravity="center"
     android:orientation="vertical"
 
-    tools:context=".login.MainActivity">
+    tools:context=".login.LoginMainActivity">
 
 
     <include layout="@layout/jesta_logo_bar"/>

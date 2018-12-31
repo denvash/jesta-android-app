@@ -26,7 +26,7 @@ import java.util.List;
 
 import static com.jesta.util.SysManager.DBTask.*;
 
-public class MainActivity extends LoginActivitiesWrapper {
+public class LoginMainActivity extends LoginActivitiesWrapper {
     GoogleSignInClient mGoogleSignInClient;
     CallbackManager fbCallbackManager;
     LoginButton loginButton;
@@ -93,7 +93,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                             public void onCancel() {
                                 // todo
                                 // there is nothing todo here really...
-//                                Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
+//                                Toast.makeText(LoginMainActivity.this, "Login Cancel", Toast.LENGTH_LONG).show();
                             }
 
                             @Override
@@ -109,7 +109,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                 facebookSignInButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("email", "public_profile"));
+                        LoginManager.getInstance().logInWithReadPermissions(LoginMainActivity.this, Arrays.asList("email", "public_profile"));
                     }
                 });
 
@@ -153,7 +153,7 @@ public class MainActivity extends LoginActivitiesWrapper {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // TODO Google Sign In failed, update UI appropriately
-                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginMainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         } else if (requestCode == 64206) { // facebook
             fbCallbackManager.onActivityResult(requestCode, resultCode, data);

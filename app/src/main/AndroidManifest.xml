@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Jesta">
         <activity
-            android:name=".login.MainActivity"
+            android:name=".login.LoginMainActivity"
             android:theme="@style/Theme.Jesta.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
