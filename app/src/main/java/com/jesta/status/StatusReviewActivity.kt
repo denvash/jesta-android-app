@@ -1,16 +1,14 @@
 package com.jesta.status
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.jesta.R
-import com.jesta.util.ImageReq
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
 import kotlinx.android.synthetic.main.activity_status_preview.*
 import kotlinx.android.synthetic.main.jesta_status_bar_preview.*
 
-class StatusReviewActivity : AppCompatActivity() {
+class StatusReviewActivity : FragmentActivity() {
 
     companion object {
         const val extra = "jesta-card-review-extra"

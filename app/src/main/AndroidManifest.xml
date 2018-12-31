@@ -10,7 +10,6 @@
         android:name=".application.JestaApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_jesta_launcher"
-        android:label="@string/jesta_app_name"
         android:roundIcon="@mipmap/ic_jesta_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Jesta">

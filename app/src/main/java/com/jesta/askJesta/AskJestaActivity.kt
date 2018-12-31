@@ -2,17 +2,20 @@ package com.jesta.askJesta
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.InputFilter
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import co.lujun.androidtagview.TagView
 import com.jesta.R
 import com.jesta.doJesta.DoJestaActivity
 import com.jesta.settings.SettingsActivity
@@ -20,6 +23,7 @@ import com.jesta.status.StatusActivity
 import com.jesta.util.Mission
 import com.jesta.util.SysManager
 import id.zelory.compressor.Compressor
+import kotlinx.android.synthetic.main.abc_activity_chooser_view_list_item.view.*
 import kotlinx.android.synthetic.main.activity_ask_jesta.*
 import kotlinx.android.synthetic.main.frame_bottom_navigation_view.*
 import kotlinx.android.synthetic.main.jesta_post.*
@@ -38,11 +42,51 @@ class AskJestaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ask_jesta)
 
+        jesta_post_tag_layout.tags = listOf("Heavy", "Help", "Now")
+
+        btn_add_tag.setOnClickListener {
+            if (!text_tag.text.isNullOrEmpty()) {
+                jesta_post_tag_layout.addTag(text_tag.text.toString())
+            }
+            text_tag.text = null
+        }
+
+        jesta_post_tag_layout.setOnTagClickListener(object : TagView.OnTagClickListener {
+            override fun onTagClick(position: Int, text: String) {
+                Toast.makeText(
+                    this@AskJestaActivity, "click-position:$position, text:$text",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            override fun onTagLongClick(position: Int, text: String) {
+                val dialog = AlertDialog.Builder(this@AskJestaActivity)
+                    .setTitle("long click")
+                    .setMessage("You will delete this tag!")
+                    .setPositiveButton("Delete") { _, _ ->
+                        if (position < jesta_post_tag_layout.childCount) {
+                            jesta_post_tag_layout.removeTag(position)
+                        }
+                    }
+                    .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss() }
+                    .create()
+                dialog.show()
+            }
+
+            override fun onSelectedTagDrag(position: Int, text: String) {}
+
+            override fun onTagCrossClick(position: Int) {
+                jesta_post_tag_layout.removeTag(position)
+                Toast.makeText(
+                    this@AskJestaActivity, "Click TagView cross! position = $position",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+
         jesta_post_title.filters = jesta_post_title.filters + InputFilter.AllCaps()
         jesta_post_location.filters = jesta_post_location.filters + InputFilter.AllCaps()
         jesta_post_button_browse.setOnClickListener {
-//            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//            startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)
             requestPermission(this)
         }
         jesta_post_button_accept.setOnClickListener {
@@ -72,13 +116,10 @@ class AskJestaActivity : AppCompatActivity() {
                 duration = jesta_post_duration.text.toString().toInt(),
                 location = jesta_post_location.text.toString(),
                 diamonds = diamonds,
-                tags = listOf("Tag1", "Tag2", "Tag3")
+                tags = jesta_post_tag_layout.tags
             )
 
             uploadedImageToDB(jesta, sysManager)
-
-//            val isUploadedImageToDB = jesta_post_check_box.isChecked
-//            sysManager.setMissionOnDB(jesta,isUploadedImageToDB)
 
             Toast.makeText(this@AskJestaActivity, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
             val intent = Intent(this@AskJestaActivity, DoJestaActivity::class.java)
@@ -144,9 +185,7 @@ class AskJestaActivity : AppCompatActivity() {
                 jesta_post_num_of_people.text.isNullOrEmpty() ||
                 jesta_post_duration.text.isNullOrEmpty() ||
                 jesta_post_location.text.isNullOrEmpty() ||
-                jesta_preview_tag_1.text.isNullOrEmpty() ||
-                jesta_preview_tag_2.text.isNullOrEmpty() ||
-                jesta_preview_tag_3.text.isNullOrEmpty()
+                jesta_post_tag_layout.tags.size < 3
     }
 
 
@@ -154,14 +193,14 @@ class AskJestaActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
 
-            val cursor = MediaStore.Images.Media.query(contentResolver,  data.data, arrayOf(MediaStore.Images.Media.DATA))
+            val cursor =
+                MediaStore.Images.Media.query(contentResolver, data.data, arrayOf(MediaStore.Images.Media.DATA))
             cursor.moveToFirst()
             val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
             val comp = Compressor(this)
             val file = comp.compressToFile(File(cursor.getString(idx)))
 
             filePath = Uri.fromFile(file)
-//            filePath = data.data
             jesta_post_preview_mission_image.setImageURI(filePath)
         }
     }

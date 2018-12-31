@@ -52,6 +52,7 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'id.zelory:compressor:2.1.0'
+    implementation 'co.lujun:androidtagview:1.1.6'
 }
 
 apply plugin: 'com.google.gms.google-services'
