@@ -20,11 +20,12 @@ const val INDEX_ASK_JESTA = FragNavController.TAB2
 const val INDEX_STATUS = FragNavController.TAB3
 const val INDEX_SETTINGS = FragNavController.TAB4
 
-class MainActivity : FragmentActivity(), FragNavController.RootFragmentListener,
+class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener,
     FragNavController.TransactionListener {
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
+
         lateinit var instance: MainActivity
             private set
     }
@@ -85,9 +86,6 @@ class MainActivity : FragmentActivity(), FragNavController.RootFragmentListener,
             fragNavController.clearStack()
         }
     }
-
-
-
 
     override fun onBackPressed() {
         if (fragNavController.popFragment().not()) {

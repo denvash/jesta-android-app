@@ -45,9 +45,6 @@ class JestaCardRecyclerViewAdapter internal constructor(
                 Toast.LENGTH_LONG
             )
                 .show()
-//            val intent = Intent(it.context, JestaCardReviewActivity::class.java)
-//            intent.putExtra(JestaCardReviewActivity.extra, postList[position])
-//            it.context.startActivity(intent)
         }
 
     }
