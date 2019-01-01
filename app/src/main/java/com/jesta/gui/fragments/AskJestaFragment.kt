@@ -12,9 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import co.lujun.androidtagview.TagView
 import com.jesta.gui.activities.INDEX_DO_JESTA
 import com.jesta.gui.activities.MainActivity
 import com.jesta.R
@@ -40,6 +42,51 @@ class AskJestaFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_ask_jesta, container, false)
 
         view.jesta_post_title.filters = view.jesta_post_title.filters + InputFilter.AllCaps()
+
+
+        view.jesta_post_tag_layout.tags = listOf("Heavy", "Help", "Now")
+
+        view.jesta_post_button_add_tag.setOnClickListener {
+            if (!view.text_tag.text.isNullOrEmpty()) {
+                view.jesta_post_tag_layout.addTag(text_tag.text.toString())
+            }
+            view.text_tag.text = null
+        }
+
+        view.jesta_post_tag_layout.setOnTagClickListener(object : TagView.OnTagClickListener {
+            override fun onTagClick(position: Int, text: String) {
+                Toast.makeText(
+                    MainActivity.instance, "click-position:$position, text:$text",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            override fun onTagLongClick(position: Int, text: String) {
+                val dialog = AlertDialog.Builder(MainActivity.instance)
+                    .setTitle("long click")
+                    .setMessage("You will delete this tag!")
+                    .setPositiveButton("Delete") { _, _ ->
+                        if (position < jesta_post_tag_layout.childCount) {
+                            view.jesta_post_tag_layout.removeTag(position)
+                        }
+                    }
+                    .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss() }
+                    .create()
+                dialog.show()
+            }
+
+            override fun onSelectedTagDrag(position: Int, text: String) {}
+
+            override fun onTagCrossClick(position: Int) {
+                view.jesta_post_tag_layout.removeTag(position)
+                Toast.makeText(
+                    MainActivity.instance, "Click TagView cross! position = $position",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
+
+
         view.jesta_post_location.filters = view.jesta_post_location.filters + InputFilter.AllCaps()
         view.jesta_post_button_browse.setOnClickListener {
             requestPermission(MainActivity.instance)

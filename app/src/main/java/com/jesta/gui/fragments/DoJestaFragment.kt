@@ -20,6 +20,7 @@ class DoJestaFragment : Fragment() {
     companion object {
         private val TAG = DoJestaFragment::class.java.simpleName
     }
+
     private val sysManager = SysManager(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,7 +51,7 @@ class DoJestaFragment : Fragment() {
         }
 
         // set refresh on swiping top
-        view.do_jesta_swipe_refresh.setColorSchemeResources(R.color.colorAccent,R.color.colorPrimary)
+        view.do_jesta_swipe_refresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
         view.do_jesta_swipe_refresh.setOnRefreshListener {
 
             val onRefreshGetAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
@@ -62,6 +63,7 @@ class DoJestaFragment : Fragment() {
                 view.do_jesta_swipe_refresh.isRefreshing = false
             }
         }
+
 
         return view
     }
