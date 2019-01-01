@@ -26,6 +26,8 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.fragment_ask_jesta.view.*
+import kotlinx.android.synthetic.main.jesta_main_activity.*
+import kotlinx.android.synthetic.main.jesta_main_activity.view.*
 import kotlinx.android.synthetic.main.jesta_post.*
 import kotlinx.android.synthetic.main.jesta_post.view.*
 import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
@@ -112,6 +114,7 @@ class AskJestaFragment : Fragment() {
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
             MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
+            MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
         }
 
         // TODO: max of the users Diamonds
