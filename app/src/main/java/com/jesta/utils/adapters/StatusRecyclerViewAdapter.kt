@@ -48,7 +48,6 @@ class StatusRecyclerViewAdapter internal constructor(
             intent.putExtra(StatusReviewActivity.extra, postList[position])
             it.context.startActivity(intent)
         }
-
     }
 
     override fun getItemCount(): Int {

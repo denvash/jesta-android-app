@@ -56,6 +56,8 @@ dependencies {
     implementation 'co.lujun:androidtagview:1.1.6'
     implementation 'com.github.arcadefire:nice-spinner:1.3.7'
     implementation 'com.ramotion.fluidslider:fluid-slider:0.3.0'
+    implementation 'com.koushikdutta.ion:ion:2.2.1'
+    implementation 'com.wang.avi:library:2.1.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

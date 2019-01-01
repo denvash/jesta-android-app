@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:id="@+id/jesta_preview_accept_back_button"
+            android:id="@+id/jesta_preview_button_back"
             style="@style/Widget.Jesta.Toolbar"
             android:layout_gravity="top"
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             layout="@layout/jesta_card_preview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/jesta_preview_accept_back_button"
+            app:layout_constraintTop_toBottomOf="@id/jesta_preview_button_back"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jesta.R
 import com.jesta.data.Mission
+import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.adapters.JestaCardRecyclerViewAdapter
 import com.jesta.utils.db.SysManager
+import kotlinx.android.synthetic.main.fragment_do_jesta.*
 import kotlinx.android.synthetic.main.fragment_do_jesta.view.*
 
 
@@ -26,6 +28,8 @@ class DoJestaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_do_jesta, container, false)
+
+//        view.do_jesta_recycle_view.visibility = View.INVISIBLE
 
         // set recycle view layout
         val column = if (resources.configuration.orientation == 2) 3 else 2
@@ -43,11 +47,13 @@ class DoJestaFragment : Fragment() {
             }
 
             // Task completed successfully
-            val missionList = (task.result as List<*>).filterIsInstance<Mission>()
+            val missionList = (task.result as List<*>).filterIsInstance<Mission>().reversed()
 
             // initial adapter with mission posts entries
             view?.do_jesta_recycle_view?.adapter = JestaCardRecyclerViewAdapter(missionList)
             Log.d(TAG, "Reload Jestas Status = " + missionList.isNotEmpty())
+
+            view.do_jesta_progress_bar.visibility = View.INVISIBLE
         }
 
         // set refresh on swiping top

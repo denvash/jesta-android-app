@@ -22,28 +22,26 @@ object ImageReqService {
         maxByteSize = calculateMaxByteSize(context)
         imageLoader = ImageLoader(
             requestQueue,
-                object : ImageLoader.ImageCache {
-                    private val lruCache = object : LruCache<String, Bitmap>(maxByteSize) {
-                        override fun sizeOf(url: String, bitmap: Bitmap): Int {
-                            return bitmap.byteCount
-                        }
+            object : ImageLoader.ImageCache {
+                private val lruCache = object : LruCache<String, Bitmap>(maxByteSize) {
+                    override fun sizeOf(url: String, bitmap: Bitmap): Int {
+                        return bitmap.byteCount
                     }
+                }
 
-                    @Synchronized
-                    override fun getBitmap(url: String): Bitmap? {
-                        return lruCache.get(url)
-                    }
+                @Synchronized
+                override fun getBitmap(url: String): Bitmap? {
+                    return lruCache.get(url)
+                }
 
-                    @Synchronized
-                    override fun putBitmap(url: String, bitmap: Bitmap) {
-                        lruCache.put(url, bitmap)
-                    }
-                })
+                @Synchronized
+                override fun putBitmap(url: String, bitmap: Bitmap) {
+                    lruCache.put(url, bitmap)
+                }
+            })
     }
-    fun setImageFromUrl(
-        networkImageView: NetworkImageView,
-        url: String
-    ) {
+
+    fun setImageFromUrl(networkImageView: NetworkImageView,url: String) {
         networkImageView.setImageUrl(url, imageLoader)
     }
 

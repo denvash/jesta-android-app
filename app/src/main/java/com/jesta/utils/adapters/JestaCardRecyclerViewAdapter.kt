@@ -1,6 +1,5 @@
 package com.jesta.utils.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +7,18 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jesta.R
-import com.jesta.utils.services.ImageReqService
 import com.jesta.data.Mission
-import com.jesta.gui.activities.JestaCardReviewActivity
 import com.jesta.gui.activities.MainActivity
+import com.jesta.gui.fragments.JestaCardReviewFragment
+import com.jesta.utils.services.ImageReqService
 import kotlinx.android.synthetic.main.jesta_card.view.*
+import kotlinx.android.synthetic.main.jesta_main_activity.*
 
 class JestaCardRecyclerViewAdapter internal constructor(
     private val postList: List<Mission>
 ) : RecyclerView.Adapter<JestaCardRecyclerViewAdapter.JestaCardViewHolder>() {
+
+    private val mainInstance = MainActivity.instance
 
     inner class JestaCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var jestaCard: MaterialCardView = itemView.findViewById(R.id.jesta_card)
@@ -28,29 +30,24 @@ class JestaCardRecyclerViewAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: JestaCardViewHolder, position: Int) {
-        if (position < postList.size) {
-            val jestaPost = postList[position]
-            ImageReqService.setImageFromUrl(holder.jestaCard.jesta_card_image, jestaPost.imageUrl)
+        val mission = postList[position]
 
-            holder.jestaCard.jesta_card_title.text = jestaPost.title
-            holder.jestaCard.jesta_card_difficulty.text = jestaPost.difficulty
-            holder.jestaCard.jesta_card_tag_1.text = jestaPost.tags.first()
-            holder.jestaCard.jesta_card_tag_2.text = jestaPost.tags[1]
-            holder.jestaCard.jesta_card_tag_3.text = jestaPost.tags.last()
-            holder.jestaCard.jesta_card_diamonds.text = jestaPost.diamonds.toString()
+        if (position < postList.size) {
+            val card = holder.jestaCard
+            ImageReqService.setImageFromUrl(card.jesta_card_image, mission.imageUrl)
+
+            card.jesta_card_title.text = mission.title
+            card.jesta_card_difficulty.text = mission.difficulty
+            card.jesta_card_tag_1.text = mission.tags.first()
+            card.jesta_card_tag_2.text = mission.tags[1]
+            card.jesta_card_tag_3.text = mission.tags.last()
+            card.jesta_card_diamonds.text = mission.diamonds.toString()
         }
 
         holder.jestaCard.setOnClickListener {
-            Toast.makeText(
-                it.context,
-                "Clicked card=$position",
-                Toast.LENGTH_LONG
-            )
-                .show()
-            MainActivity.instance.fragNavController.clearStack()
-            val intent = Intent(it.context, JestaCardReviewActivity::class.java)
-            intent.putExtra(JestaCardReviewActivity.extra, postList[position])
-            it.context.startActivity(intent)
+            Toast.makeText(it.context,"Clicked card=$position",Toast.LENGTH_LONG).show()
+            mainInstance.fragNavController.replaceFragment(JestaCardReviewFragment.newInstance(mission))
+            MainActivity.instance.jesta_bottom_navigation.visibility = View.INVISIBLE
         }
 
     }

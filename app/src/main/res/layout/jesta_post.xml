@@ -41,6 +41,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/marvel"
                     android:inputType="textCapCharacters"
+                    android:focusableInTouchMode="false"
                     android:textAllCaps="true" />
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -6,6 +6,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.jesta.R
+import com.jesta.data.INDEX_ASK_JESTA
+import com.jesta.data.INDEX_DO_JESTA
+import com.jesta.data.INDEX_SETTINGS
+import com.jesta.data.INDEX_STATUS
 import com.jesta.gui.fragments.AskJestaFragment
 import com.jesta.gui.fragments.DoJestaFragment
 import com.jesta.gui.fragments.SettingsFragment
@@ -14,10 +18,7 @@ import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 
-const val INDEX_DO_JESTA = FragNavController.TAB1
-const val INDEX_ASK_JESTA = FragNavController.TAB2
-const val INDEX_STATUS = FragNavController.TAB3
-const val INDEX_SETTINGS = FragNavController.TAB4
+
 
 class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener,
     FragNavController.TransactionListener {
