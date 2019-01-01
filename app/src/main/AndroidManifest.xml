@@ -14,22 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Jesta">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".gui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".login.LoginMainActivity"
-            android:theme="@style/Theme.Jesta.Login">
+            android:name=".gui.activities.login.LoginMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".gui.activities.login.LoginActivity" />
+
 
         <meta-data
             android:name="preloaded_fonts"
@@ -52,8 +53,9 @@
                 <data android:scheme="@string/jesta_login_fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <activity android:name=".gui.activities.StatusReviewActivity" />
 
-        <service android:name=".util.MessagingService">
+        <service android:name=".utils.services.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

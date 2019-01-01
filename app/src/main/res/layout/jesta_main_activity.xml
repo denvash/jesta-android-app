@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".gui.activities.MainActivity">
 
-    <fragment
-        android:name="com.jesta.doJesta.DoJestaFragment"
+    <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/jesta_bottom_navigation" />
+        android:layout_above="@id/jesta_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/jesta_bottom_navigation"

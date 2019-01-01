@@ -6,7 +6,7 @@
     android:layout_marginBottom="@dimen/bottom_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".askJesta.AskJestaFragment">
+    tools:context=".gui.fragments.AskJestaFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
