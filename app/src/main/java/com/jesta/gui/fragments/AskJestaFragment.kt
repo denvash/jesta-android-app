@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_ask_jesta.view.*
 import kotlinx.android.synthetic.main.jesta_post.*
 import kotlinx.android.synthetic.main.jesta_post.view.*
 import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.io.File
 import java.util.*
 
@@ -123,6 +124,8 @@ class AskJestaFragment : Fragment() {
         slider.position = 0.3f
         slider.startText = "$min"
 //        slider.endText = "$max"
+
+        OverScrollDecoratorHelper.setUpOverScroll(view.jesta_post_view_nested_scroll_view)
 
         return view
     }

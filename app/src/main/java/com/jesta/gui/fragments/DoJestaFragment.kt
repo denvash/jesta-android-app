@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jesta.R
 import com.jesta.data.Mission
-import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.adapters.JestaCardRecyclerViewAdapter
 import com.jesta.utils.db.SysManager
-import kotlinx.android.synthetic.main.fragment_do_jesta.*
 import kotlinx.android.synthetic.main.fragment_do_jesta.view.*
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
 
 
 class DoJestaFragment : Fragment() {
@@ -28,8 +28,6 @@ class DoJestaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_do_jesta, container, false)
-
-//        view.do_jesta_recycle_view.visibility = View.INVISIBLE
 
         // set recycle view layout
         val column = if (resources.configuration.orientation == 2) 3 else 2
@@ -54,6 +52,7 @@ class DoJestaFragment : Fragment() {
             Log.d(TAG, "Reload Jestas Status = " + missionList.isNotEmpty())
 
             view.do_jesta_progress_bar.visibility = View.INVISIBLE
+
         }
 
         // set refresh on swiping top
@@ -63,7 +62,7 @@ class DoJestaFragment : Fragment() {
             val onRefreshGetAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
             onRefreshGetAllJestas.addOnCompleteListener { task ->
 
-                val missionListOnRefresh = (task.result as List<*>).filterIsInstance<Mission>()
+                val missionListOnRefresh = (task.result as List<*>).filterIsInstance<Mission>().reversed()
                 val refreshAdapter = JestaCardRecyclerViewAdapter(missionListOnRefresh)
                 view.do_jesta_recycle_view.adapter = refreshAdapter
                 view.do_jesta_swipe_refresh.isRefreshing = false

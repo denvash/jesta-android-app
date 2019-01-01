@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/jesta_settings_scroll_view"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -98,6 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="@dimen/_10dp"
             android:paddingStart="@dimen/_40dp"
             android:paddingEnd="@dimen/_40dp">
 
@@ -127,7 +129,6 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10dp"
             android:layout_marginBottom="@dimen/_10dp"
             android:paddingStart="@dimen/_40dp"
             android:paddingEnd="@dimen/_40dp">
@@ -159,6 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/_40dp"
+            android:layout_marginBottom="@dimen/_10dp"
             android:paddingEnd="@dimen/_40dp">
 
             <ImageView
@@ -183,6 +185,65 @@
                 android:src="@drawable/ic_right_arrow" />
         </GridLayout>
 
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_40dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:paddingEnd="@dimen/_40dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_jesta_bug"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                style="@style/TextAppearance.Jesta.Type.Purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_4dp"
+                android:text="@string/jesta_settings_bug" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                android:src="@drawable/ic_right_arrow" />
+        </GridLayout>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_40dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:paddingEnd="@dimen/_40dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_jesta_about"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                style="@style/TextAppearance.Jesta.Type.Purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_4dp"
+                android:text="@string/jesta_settings_about" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                android:src="@drawable/ic_right_arrow" />
+        </GridLayout>
+
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/jesta_settings_button_log_out"
             style="@style/Widget.Jesta.Button.Special"
@@ -197,4 +258,4 @@
             app:strokeColor="@color/black"
             app:strokeWidth="1dp" />
     </LinearLayout>
-</FrameLayout>
+</ScrollView>

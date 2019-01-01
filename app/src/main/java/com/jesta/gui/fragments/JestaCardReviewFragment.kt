@@ -12,10 +12,10 @@ import com.jesta.data.BUNDLE_MISSION
 import com.jesta.data.Mission
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.services.ImageReqService
-import com.koushikdutta.ion.Ion
-import kotlinx.android.synthetic.main.fragment_jesta_card_preview.view.*
+import kotlinx.android.synthetic.main.fragment_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
-import kotlinx.android.synthetic.main.jesta_main_activity.*
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
 
 class JestaCardReviewFragment : Fragment() {
     companion object {
@@ -29,7 +29,8 @@ class JestaCardReviewFragment : Fragment() {
         }
     }
 
-    private lateinit var mission : Mission
+    private lateinit var mission: Mission
+    private lateinit var layoutParams: ViewGroup.LayoutParams
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -40,7 +41,7 @@ class JestaCardReviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_jesta_card_preview, container, false)
+        val view = inflater.inflate(R.layout.fragment_card_preview, container, false)
 
         Log.d(TAG, "Accepted mission: $mission")
 
@@ -48,10 +49,6 @@ class JestaCardReviewFragment : Fragment() {
         view.jesta_preview_difficulty.text = mission.difficulty
 
         ImageReqService.setImageFromUrl(view.jesta_card_preview_mission_image, mission.imageUrl)
-
-//        Ion.with(view.jesta_card_preview_mission_image)
-//            .placeholder(R.drawable.ic_jesta_default_image)
-//            .load(mission.imageUrl)
 
         view.jesta_preview_description.text = mission.description
         view.jesta_preview_payment.text = mission.payment.toString()
@@ -65,12 +62,11 @@ class JestaCardReviewFragment : Fragment() {
         view.jesta_preview_tag_3.text = mission.tags.last()
 
         view.jesta_preview_button_back.setOnClickListener {
-            MainActivity.instance.fragNavController.replaceFragment(DoJestaFragment())
-            MainActivity.instance.jesta_bottom_navigation.visibility = View.VISIBLE
+            MainActivity.instance.fragNavController.popFragment()
         }
 
         view.jesta_preview_accept_button.setOnClickListener {
-//            val sysManager = SysManager(this@JestaCardReviewFragment)
+            //            val sysManager = SysManager(this@JestaCardReviewFragment)
 //            var jestaAuthor = sysManager.getUserByID(mission.authorId)
 //
 //            if (jestaAuthor == null) {
@@ -89,6 +85,9 @@ class JestaCardReviewFragment : Fragment() {
 //
 //            }
         }
+
+        OverScrollDecoratorHelper.setUpOverScroll(view.jesta_preview_nested_scroll_view)
+
 
         return view
     }

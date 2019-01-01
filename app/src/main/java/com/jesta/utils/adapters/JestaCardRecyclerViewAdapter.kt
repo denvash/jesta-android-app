@@ -46,8 +46,21 @@ class JestaCardRecyclerViewAdapter internal constructor(
 
         holder.jestaCard.setOnClickListener {
             Toast.makeText(it.context,"Clicked card=$position",Toast.LENGTH_LONG).show()
-            mainInstance.fragNavController.replaceFragment(JestaCardReviewFragment.newInstance(mission))
-            MainActivity.instance.jesta_bottom_navigation.visibility = View.INVISIBLE
+
+
+//            MainActivity.instance.jesta_main_activity_relative_layout.visibility = View.INVISIBLE
+//            val layoutParams = MainActivity.instance.jesta_bottom_navigation.layoutParams
+//            mainInstance.fragNavController.replaceFragment(JestaCardReviewFragment.newInstance(mission))
+            mainInstance.fragNavController.pushFragment(JestaCardReviewFragment.newInstance(mission))
+
+//            val decorView = MainActivity.instance.window.decorView
+//            val uiOptions =
+//                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+//            decorView.systemUiVisibility = uiOptions
+
+//            layoutParams.height = 0
+//            MainActivity.instance.jesta_bottom_navigation.layoutParams = layoutParams
+
         }
 
     }

@@ -10,6 +10,13 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/jesta_main_line_view"/>
+
+    <View
+        android:id="@+id/jesta_main_line_view"
+        android:layout_width="match_parent"
+        android:layout_height="0.75dp"
+        android:background="@color/black"
         android:layout_above="@id/jesta_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,4 +29,6 @@
         app:itemIconTint="@drawable/jesta_bottom_navigation_colors"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_drawer_menu" />
+
+
 </RelativeLayout>

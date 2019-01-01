@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jesta.gui.activities.MainActivity
 import com.jesta.R
+import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.activities.login.LoginMainActivity
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_settings.view.*
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class SettingsFragment : Fragment() {
 
@@ -42,6 +43,8 @@ class SettingsFragment : Fragment() {
             MainActivity.instance.fragNavController.clearStack()
             startActivity(intent)
         }
+
+        OverScrollDecoratorHelper.setUpOverScroll(view.jesta_settings_scroll_view)
 
         return view
     }

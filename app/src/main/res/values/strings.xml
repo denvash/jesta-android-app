@@ -61,7 +61,7 @@
     <string name="jesta_settings_phone_number_default">example@gmail.com</string>
     <string name="jesta_settings_full_name_default">Full Name</string>
     <string name="jesta_settings_edit_profile_icon_description">Edit Profile Icon</string>
-    <string name="jesta_settings_default_values">Jesta Default Values</string>
+    <string name="jesta_settings_default_values">Default Values</string>
     <string name="jesta_settings_diamond_amount">Diamonds Amount</string>
     <string name="jesta_settings_account">Account</string>
     <string name="jesta_settings_chat">Chat</string>
@@ -86,5 +86,7 @@
     <string name="jesta_post_button_reset">Reset</string>
     <string name="jesta_post_choose_difficulty">Difficulty</string>
     <string name="jesta_post_worth">Set the Jesta worth</string>
+    <string name="jesta_settings_bug">REPORT A BUG</string>
+    <string name="jesta_settings_about">About</string>
 
 </resources>
