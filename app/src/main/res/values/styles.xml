@@ -83,7 +83,7 @@
     <!-- Login theme and widgets-->
 
     <style name="Theme.Jesta.Login" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/semiTransparentWhite</item>
+        <item name="colorPrimary">@color/semiTransparentPurple</item>
         <item name="colorOnPrimary">@color/darkGray</item>
         <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorAccent">@color/blue</item>

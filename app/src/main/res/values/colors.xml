@@ -13,7 +13,8 @@
     <color name="darkGray">#424242</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="semiTransparentWhite">#eeffffff</color>
+    <color name="semiTransparentPurple">#337600fe</color>
+    <color name="semiTransparentGrey">#22979797</color>
 
     <color name="hint_color">#979797</color>
 

@@ -44,7 +44,7 @@
     <!--Jesta Post-->
     <string name="jesta_post_button_accept">Accept Jesta</string>
     <string name="jesta_post_description">Description</string>
-    <string name="jesta_post_title">JESTA TITLE</string>
+    <string name="jesta_post_title">Title</string>
     <string name="jesta_post_photo">Jesta Photo</string>
     <string name="jesta_post_browse">Browse</string>
     <string name="jesta_post_fill_amount">FILL AMOUNT</string>
@@ -55,7 +55,7 @@
     <string name="jesta_post_duration">How long the Jesta may take?</string>
     <string name="jesta_post_accept">Post a Jesta</string>
     <string name="jesta_post_preview">Preview</string>
-    <string name="jesta_post_difficulty_medium">Medium</string>
+    <string name="jesta_post_difficulty">Medium</string>
 
     <!--Jesta Settings-->
     <string name="jesta_settings_phone_number_default">example@gmail.com</string>
@@ -83,5 +83,8 @@
     <string name="jesta_inbox_message">MESSAGE</string>
     <string name="jesta_post_check_box_text">[dev] Upload to DB</string>
     <string name="jesta_post_add_tag">Add Tag</string>
+    <string name="jesta_post_button_reset">Reset</string>
+    <string name="jesta_post_choose_difficulty">Difficulty</string>
+    <string name="jesta_post_worth">Set the Jesta worth</string>
 
 </resources>

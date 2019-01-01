@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,10 +12,12 @@ import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import co.lujun.androidtagview.TagView
 import com.jesta.gui.activities.INDEX_DO_JESTA
@@ -23,9 +26,11 @@ import com.jesta.R
 import com.jesta.data.Mission
 import com.jesta.utils.db.SysManager
 import id.zelory.compressor.Compressor
+import kotlinx.android.synthetic.main.fragment_ask_jesta.*
 import kotlinx.android.synthetic.main.fragment_ask_jesta.view.*
 import kotlinx.android.synthetic.main.jesta_post.*
 import kotlinx.android.synthetic.main.jesta_post.view.*
+import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import java.io.File
 import java.util.*
 
@@ -43,8 +48,9 @@ class AskJestaFragment : Fragment() {
 
         view.jesta_post_title.filters = view.jesta_post_title.filters + InputFilter.AllCaps()
 
-
+        view.jesta_post_tag_layout.tagTypeface = ResourcesCompat.getFont(MainActivity.instance,R.font.montserrat_light_italic)
         view.jesta_post_tag_layout.tags = listOf("Heavy", "Help", "Now")
+
 
         view.jesta_post_button_add_tag.setOnClickListener {
             if (!view.text_tag.text.isNullOrEmpty()) {
@@ -61,19 +67,7 @@ class AskJestaFragment : Fragment() {
                 ).show()
             }
 
-            override fun onTagLongClick(position: Int, text: String) {
-                val dialog = AlertDialog.Builder(MainActivity.instance)
-                    .setTitle("long click")
-                    .setMessage("You will delete this tag!")
-                    .setPositiveButton("Delete") { _, _ ->
-                        if (position < jesta_post_tag_layout.childCount) {
-                            view.jesta_post_tag_layout.removeTag(position)
-                        }
-                    }
-                    .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss() }
-                    .create()
-                dialog.show()
-            }
+            override fun onTagLongClick(position: Int, text: String) {}
 
             override fun onSelectedTagDrag(position: Int, text: String) {}
 
@@ -85,6 +79,8 @@ class AskJestaFragment : Fragment() {
                 ).show()
             }
         })
+
+        view.jesta_post_difficulty.attachDataSource(listOf("Easy","Medium","Hard"))
 
 
         view.jesta_post_location.filters = view.jesta_post_location.filters + InputFilter.AllCaps()
@@ -99,12 +95,6 @@ class AskJestaFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val diamonds = when (view.jesta_post_difficulty.text.toString()) {
-                "Easy" -> 10000
-                "Medium" -> 20000
-                else -> 3000
-            }
-
             val jesta = Mission(
                 authorId = sysManager.currentUserFromDB.id,
                 id = UUID.randomUUID().toString(),
@@ -116,18 +106,25 @@ class AskJestaFragment : Fragment() {
                 numOfPeople = view.jesta_post_num_of_people.text.toString().toInt(),
                 duration = view.jesta_post_duration.text.toString().toInt(),
                 location = view.jesta_post_location.text.toString(),
-                diamonds = diamonds,
-                tags = listOf("Tag1", "Tag2", "Tag3")
+                diamonds = view.jesta_post_fluid_slider.text.toString().toInt(),
+                tags = view.jesta_post_tag_layout.tags
             )
 
             uploadedImageToDB(jesta, sysManager)
-
-//            sysManager.setMissionOnDB(jesta,isUploadedImageToDB)
-
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
             MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
         }
+
+        // TODO: max of the users Diamonds
+        val max = 10000
+        val min = 100
+        val total = max - min
+        val slider = view.jesta_post_fluid_slider
+        slider.positionListener = { pos -> slider.bubbleText = "${min + (total  * pos).toInt()}" }
+        slider.position = 0.3f
+        slider.startText ="$min"
+//        slider.endText = "$max"
 
         return view
     }
@@ -210,6 +207,5 @@ class AskJestaFragment : Fragment() {
             val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE)
         }
-
     }
 }
