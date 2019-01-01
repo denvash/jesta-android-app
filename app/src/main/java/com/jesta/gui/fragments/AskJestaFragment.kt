@@ -111,9 +111,7 @@ class AskJestaFragment : Fragment() {
                 jesta_post_num_of_people.text.isNullOrEmpty() ||
                 jesta_post_duration.text.isNullOrEmpty() ||
                 jesta_post_location.text.isNullOrEmpty() ||
-                jesta_preview_tag_1.text.isNullOrEmpty() ||
-                jesta_preview_tag_2.text.isNullOrEmpty() ||
-                jesta_preview_tag_3.text.isNullOrEmpty()
+                jesta_post_tag_layout.tags.size < 3
     }
 
 

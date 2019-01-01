@@ -1,5 +1,6 @@
 package com.jesta.utils.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import com.google.android.material.card.MaterialCardView
 import com.jesta.R
 import com.jesta.utils.services.ImageReqService
 import com.jesta.data.Mission
+import com.jesta.gui.activities.JestaCardReviewActivity
+import com.jesta.gui.activities.MainActivity
 import kotlinx.android.synthetic.main.jesta_card.view.*
 
 class JestaCardRecyclerViewAdapter internal constructor(
@@ -44,6 +47,10 @@ class JestaCardRecyclerViewAdapter internal constructor(
                 Toast.LENGTH_LONG
             )
                 .show()
+            MainActivity.instance.fragNavController.clearStack()
+            val intent = Intent(it.context, JestaCardReviewActivity::class.java)
+            intent.putExtra(JestaCardReviewActivity.extra, postList[position])
+            it.context.startActivity(intent)
         }
 
     }
