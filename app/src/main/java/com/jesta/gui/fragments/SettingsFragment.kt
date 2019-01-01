@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.tasks.Task
 import com.jesta.R
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.activities.login.LoginMainActivity
@@ -25,10 +27,19 @@ class SettingsFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        // TODO: User null
-//        val currentUser = sysManager.currentUserFromDB
-//        view.jesta_settings_profile_full_name.text = currentUser.displayName
-//        view.jesta_settings_profile_phone_number.text = currentUser.phoneNumber
+        val reloadUsersTasks = sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS)
+        reloadUsersTasks.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                // todo error
+
+            } else {
+                // TODO: User null
+                val currentUser = sysManager.currentUserFromDB
+                view.jesta_settings_profile_full_name.text = currentUser.displayName
+                view.jesta_settings_profile_phone_number.text = currentUser.phoneNumber
+            }
+        }
+
 
 //                Toast.makeText(
 //                    this@AskJestaFragment,
