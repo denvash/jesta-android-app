@@ -3,5 +3,9 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/marvel</item>
         <item>@font/montserrat</item>
+        <item>@font/montserrat_light</item>
+        <item>@font/montserrat_light_italic</item>
+        <item>@font/montserrat_medium</item>
+        <item>@font/montserrat_medium_italic</item>
     </array>
 </resources>

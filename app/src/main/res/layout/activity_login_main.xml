@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    android:gravity="center"
+    android:orientation="vertical"
+
+    tools:context=".gui.activities.login.LoginMainActivity">
+
+
+    <include layout="@layout/jesta_logo_bar"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="110dp"
+        android:paddingLeft="110dp"
+        android:orientation="vertical"
+        android:theme="@style/Theme.Jesta.Login"
+        >
+
+
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/google_sign_in_btn"
+                style="@style/Theme.Jesta.Login.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/jesta_login_google"
+                android:padding="20dp"
+                android:textColor="@color/darkGray"
+        />
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/facebook_sign_in_btn"
+                style="@style/Theme.Jesta.Login.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/jesta_login_facebook"
+                android:padding="20dp"
+                android:textColor="@color/darkGray"
+        />
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/email_sign_in_btn"
+                style="@style/Theme.Jesta.Login.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/jesta_login_email"
+                android:padding="20dp"
+                android:textColor="@color/darkGray"
+        />
+    </LinearLayout>
+
+</LinearLayout>

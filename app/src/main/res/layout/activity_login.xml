@@ -24,7 +24,7 @@
                 android:gravity="center"
                 android:paddingRight="@dimen/side_padding"
                 android:paddingLeft="@dimen/side_padding"
-                tools:context=".login.LoginActivity"
+                tools:context=".gui.activities.login.LoginActivity"
         >
 
             <com.google.android.material.textfield.TextInputLayout

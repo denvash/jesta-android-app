@@ -58,6 +58,7 @@
                 style="@style/TextAppearance.Jesta.Type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/marvel"
                 android:text="@string/jesta_card_title"
                 android:textAlignment="center"
                 android:textSize="25sp" />

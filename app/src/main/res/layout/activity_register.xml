@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            tools:context=".login.RegisterActivity"
+            tools:context=".gui.activities.login.RegisterActivity"
             android:paddingRight="@dimen/side_padding"
             android:paddingLeft="@dimen/side_padding"
             >
