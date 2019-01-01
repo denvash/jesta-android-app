@@ -50,7 +50,6 @@ class AskJestaFragment : Fragment() {
                 ResourcesCompat.getFont(MainActivity.instance, R.font.montserrat_light_italic)
         view.jesta_post_tag_layout.tags = listOf("Heavy", "Help", "Now")
 
-
         view.jesta_post_button_add_tag.setOnClickListener {
             if (!view.text_tag.text.isNullOrEmpty()) {
                 view.jesta_post_tag_layout.addTag(text_tag.text.toString())
@@ -105,7 +104,7 @@ class AskJestaFragment : Fragment() {
                 numOfPeople = view.jesta_post_num_of_people.text.toString().toInt(),
                 duration = view.jesta_post_duration.text.toString().toInt(),
                 location = view.jesta_post_location.text.toString(),
-                diamonds = view.jesta_post_fluid_slider.text.toString().toInt(),
+                diamonds = view.jesta_post_fluid_slider.bubbleText?.toInt()!!,
                 tags = view.jesta_post_tag_layout.tags
             )
 

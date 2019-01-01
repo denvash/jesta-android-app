@@ -81,8 +81,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/marvel"
                 android:lines="3"
-                android:maxLines="3"
-                android:inputType="textCapSentences|textCapCharacters|textMultiLine"
+                android:inputType="textCapSentences|textCapCharacters"
                 android:textAllCaps="true" />
         </com.google.android.material.textfield.TextInputLayout>
 

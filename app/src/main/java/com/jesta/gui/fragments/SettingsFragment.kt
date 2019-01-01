@@ -40,13 +40,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-
-//                Toast.makeText(
-//                    this@AskJestaFragment,
-//                    "Quota has been exceeded for this project.",
-//                    Toast.LENGTH_LONG
-//                ).show()
-
         view.jesta_settings_button_log_out.setOnClickListener {
             sysManager.signOutUser(context)
             val intent = Intent(context, LoginMainActivity::class.java)
