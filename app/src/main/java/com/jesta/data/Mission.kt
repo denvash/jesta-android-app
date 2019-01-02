@@ -1,39 +1,43 @@
 package com.jesta.data
 
 import android.os.Parcelable
+import com.google.gson.reflect.TypeToken
+import com.jesta.gui.activities.MainActivity.Companion.gson
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Mission(
-    var id: String = "emptyID",
-    var authorId: String = "emptyID",
-    var title: String = "emptyTitle",
-    var difficulty: String = "emptyDifficulty",
-    var description: String = "emptyDescription",
-    var imageUrl: String = "emptyImageUrl",
-    var payment: Int = -1,
-    var numOfPeople: Int = -1,
-    var duration: Int = -1,
-    var location: String = "emptyLocation",
-    var diamonds: Int = -1,
-    var tags: List<String> = listOf("Tag1", "Tag2", "Tag3")
+    var id: String = MISSION_EMPTY_ID,
+    var authorId: String = MISSION_EMPTY_AUTHOR_ID,
+    var title: String = MISSION_EMPTY_TITLE,
+    var difficulty: String = MISSION_EMPTY_DIFFICULTY,
+    var description: String = MISSION_EMPTY_DESCRIPTION,
+    var imageUrl: String = MISSION_EMPTY_IMAGE_URL,
+    var payment: Int = MISSION_EMPTY_PAYMENT,
+    var numOfPeople: Int = MISSION_EMPTY_NUM_OF_PEOPLE,
+    var duration: Int = MISSION_EMPTY_DURATION,
+    var location: String = MISSION_EMPTY_LOCATION,
+    var diamonds: Int = MISSION_EMPTY_DIAMONDS,
+    var tags: List<String> = emptyList(),
+    var isAvailable: Boolean = true
 ) : Parcelable {
 
-    constructor(dbJesta: Map<String, String>) : this() {
-        id = dbJesta["id"].toString()
-        authorId = dbJesta["authorId"].toString()
-        difficulty = dbJesta["difficulty"].toString()
-        description = dbJesta["description"].toString()
-        imageUrl = dbJesta["imageUrl"].toString()
-        payment = dbJesta["payment"].toString().toInt()
-        numOfPeople = dbJesta["numOfPeople"].toString().toInt()
-        duration = dbJesta["duration"].toString().toInt()
-        location = dbJesta["location"].toString()
-        diamonds = dbJesta["diamonds"].toString().toInt()
-        title = dbJesta["title"].toString()
-
-        // TODO write initializer from JSON
-//        tags = dbJesta["tags"]
-    }
+//    constructor(dbJesta: Map<String, String>) : this() {
+//        id = dbJesta[MISSION_ID].toString()
+//        authorId = dbJesta[MISSION_AUTHOR_ID].toString()
+//        difficulty = dbJesta[MISSION_DIFFICULTY].toString()
+//        description = dbJesta[MISSION_DESCRIPTION].toString()
+//        imageUrl = dbJesta[MISSION_IMAGE_URL].toString()
+//        payment = dbJesta[MISSION_PAYMENT].toString().toInt()
+//        numOfPeople = dbJesta[MISSION_NUM_OF_PEOPLE].toString().toInt()
+//        duration = dbJesta[MISSION_DURATION].toString().toInt()
+//        location = dbJesta[MISSION_LOCATION].toString()
+//        diamonds = dbJesta[MISSION_DIAMONDS].toString().toInt()
+//        title = dbJesta[MISSION_TITLE].toString()
+//        tags = if (dbJesta[MISSION_TAGS] == null) emptyList() else gson.fromJson(dbJesta[MISSION_TAGS], object :
+//            TypeToken<List<String>>() {}.type)
+//        isAvailable = gson.fromJson(dbJesta[MISSION_IS_AVAILABLE], object :
+//            TypeToken<Boolean>() {}.type)
+//    }
 
 }

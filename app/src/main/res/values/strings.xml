@@ -88,5 +88,7 @@
     <string name="jesta_post_worth">Set the Jesta worth</string>
     <string name="jesta_settings_bug">REPORT A BUG</string>
     <string name="jesta_settings_about">About</string>
+    <string name="jesta_settings_total_diamonds">Total diamonds</string>
+    <string name="jesta_settings_fake_total_diamonds">30000</string>
 
 </resources>

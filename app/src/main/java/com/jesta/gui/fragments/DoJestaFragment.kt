@@ -51,8 +51,7 @@ class DoJestaFragment : Fragment() {
             view?.do_jesta_recycle_view?.adapter = JestaCardRecyclerViewAdapter(missionList)
             Log.d(TAG, "Reload Jestas Status = " + missionList.isNotEmpty())
 
-            view.do_jesta_progress_bar.visibility = View.INVISIBLE
-
+            view.do_jesta_progress_bar.hide()
         }
 
         // set refresh on swiping top
@@ -68,8 +67,7 @@ class DoJestaFragment : Fragment() {
                 view.do_jesta_swipe_refresh.isRefreshing = false
             }
         }
-
-
+        
         return view
     }
 }

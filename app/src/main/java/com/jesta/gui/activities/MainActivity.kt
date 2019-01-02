@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.gson.GsonBuilder
 import com.jesta.R
 import com.jesta.data.INDEX_ASK_JESTA
 import com.jesta.data.INDEX_DO_JESTA
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     companion object {
         private val TAG = MainActivity::class.java.simpleName
 
+        val gson = GsonBuilder().setPrettyPrinting().create()!!
         lateinit var instance: MainActivity
             private set
     }
@@ -95,13 +97,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         }
     }
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> fragNavController.popFragment()
-        }
-        return true
-    }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)

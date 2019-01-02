@@ -201,20 +201,25 @@ public class SysManager {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<Mission> jestasList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        HashMap dbJesta = (HashMap)ds.getValue();
+                        Mission dbJesta = ds.getValue(Mission.class);
                         if (dbJesta == null) {
                             throw new NullPointerException("dbJesta is null");
                         }
-                        Mission jesta = new Mission(dbJesta);
                         // todo: use randomUUID() when storing jestas in db
                         // here: use (String)dbJesta.get("id")
-                        if ((String)dbJesta.get("id") != null) {
-                            _jestasDict.put((String)dbJesta.get("id"), jesta);
-                        }
-                        else {
-                            _jestasDict.put(UUID.randomUUID().toString(), jesta);
-                        }
-                        jestasList.add(jesta);
+
+                        // TODO: pACHKA LOX WONT READ IT ANYWAYS
+                        // I FIXED FOR U
+                        // if ((String)dbJesta.get("id") != null) {
+                        //     _jestasDict.put((String)dbJesta.get("id"), jesta);
+                        // }
+                        // else {
+                        //     _jestasDict.put(UUID.randomUUID().toString(), jesta);
+                        // }
+                        // jestasList.add(jesta);
+
+                        _jestasDict.put(dbJesta.getId(), dbJesta);
+                        jestasList.add(dbJesta);
                     }
 
                     source.setResult(jestasList);
