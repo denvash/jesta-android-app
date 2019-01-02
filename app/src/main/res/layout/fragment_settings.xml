@@ -126,6 +126,7 @@
                 android:background="@color/colorPrimary" />
 
             <GridLayout
+                android:id="@+id/jesta_settings_tab_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
@@ -142,7 +143,6 @@
 
                 <TextView
                     style="@style/TextAppearance.Jesta.Type.Purple"
-                    android:id="@+id/jesta_settings_tab_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -178,35 +178,6 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_4dp"
                     android:text="@string/jesta_settings_chat" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
-                    android:src="@drawable/ic_right_arrow" />
-            </GridLayout>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_40dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:paddingEnd="@dimen/_40dp">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_jesta_default_values"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    style="@style/TextAppearance.Jesta.Type.Purple"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_4dp"
-                    android:text="@string/jesta_settings_default_values" />
 
                 <ImageView
                     android:layout_width="wrap_content"

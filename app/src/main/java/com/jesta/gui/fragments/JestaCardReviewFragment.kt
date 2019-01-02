@@ -1,18 +1,23 @@
 package com.jesta.gui.fragments
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.BUNDLE_MISSION
+import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
 import com.jesta.data.Mission
+import com.jesta.data.USER_EMPTY_PHOTO
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.services.ImageReqService
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
+import kotlinx.android.synthetic.main.jesta_card.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
@@ -45,6 +50,10 @@ class JestaCardReviewFragment : Fragment() {
 
         Log.d(TAG, "Accepted mission: $mission")
 
+        if (mission.authorImage != MISSION_EMPTY_AUTHOR_IMAGE) {
+            view.jesta_preview_avatar_icon.setImageURI(Uri.parse(mission.authorImage))
+        }
+
         view.jesta_preview_title.text = mission.title
         view.jesta_preview_difficulty.text = mission.difficulty
 
@@ -57,9 +66,9 @@ class JestaCardReviewFragment : Fragment() {
         view.jesta_preview_location.text = mission.location
         view.jesta_preview_diamonds.text = mission.diamonds.toString()
 
-        view.jesta_preview_tag_1.text = mission.tags.first()
-        view.jesta_preview_tag_2.text = mission.tags[1]
-        view.jesta_preview_tag_3.text = mission.tags.last()
+        view.jesta_card_preview_tags_layout.tagTypeface =
+                ResourcesCompat.getFont(MainActivity.instance, R.font.montserrat_light_italic)
+        view.jesta_card_preview_tags_layout.tags = mission.tags
 
         view.jesta_preview_button_back.setOnClickListener {
             MainActivity.instance.fragNavController.popFragment()

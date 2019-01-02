@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         app:indicatorName="LineScalePulseOutIndicator"
         android:visibility="visible"
-        app:indicatorColor="@color/colorAccent"
+        app:indicatorColor="@color/black"
         android:layout_gravity="center"
         />
 

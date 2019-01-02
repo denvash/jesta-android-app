@@ -85,6 +85,25 @@
                 android:textAllCaps="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <co.lujun.androidtagview.TagContainerLayout
+            android:layout_margin="@dimen/_10dp"
+            android:id="@+id/jesta_post_tag_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:container_background_color="@color/transparent"
+            app:container_border_color="@color/transparent"
+            app:tag_background_color="@color/transparent"
+            app:tag_border_color="@color/black"
+            app:tag_border_width="0.7dp"
+            app:tag_clickable="true"
+            app:tag_corner_radius="5dp"
+            app:tag_cross_color="@color/colorPrimary"
+            app:tag_cross_line_width="0.6dp"
+            app:tag_enable_cross="true"
+            app:tag_max_length="20"
+            app:tag_selectable="true"
+            app:tag_theme="none" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,7 +120,7 @@
                 app:boxBackgroundColor="@color/transparent"
                 app:boxStrokeWidth="1dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="10"
+                app:counterMaxLength="20"
                 app:hintAnimationEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -129,23 +148,7 @@
                 app:strokeWidth="0.75dp" />
         </LinearLayout>
 
-        <co.lujun.androidtagview.TagContainerLayout
-            android:id="@+id/jesta_post_tag_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:container_background_color="@color/transparent"
-            app:container_border_color="@color/transparent"
-            app:tag_background_color="@color/transparent"
-            app:tag_border_color="@color/black"
-            app:tag_border_width="0.7dp"
-            app:tag_clickable="true"
-            app:tag_corner_radius="5dp"
-            app:tag_cross_color="@color/colorPrimary"
-            app:tag_cross_line_width="0.6dp"
-            app:tag_enable_cross="true"
-            app:tag_max_length="18"
-            app:tag_selectable="true"
-            app:tag_theme="none" />
+
     </LinearLayout>
 
     <LinearLayout

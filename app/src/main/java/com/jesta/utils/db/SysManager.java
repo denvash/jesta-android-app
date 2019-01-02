@@ -175,14 +175,24 @@ public class SysManager {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<User> usersList = new ArrayList<>();
+                    // for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    //     HashMap dbUser = (HashMap)ds.getValue();
+                    //     if (dbUser == null) {
+                    //         throw new NullPointerException("dbUser is null");
+                    //     }
+                    //     User user = new User(dbUser);
+                    //     _usersDict.put((String)dbUser.get("id"), user);
+                    //     usersList.add(user);
+                    // }
+
+                    // TODO: FIXED BY DENNIS
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        HashMap dbUser = (HashMap)ds.getValue();
+                        User dbUser = ds.getValue(User.class);
                         if (dbUser == null) {
                             throw new NullPointerException("dbUser is null");
                         }
-                        User user = new User(dbUser);
-                        _usersDict.put((String)dbUser.get("id"), user);
-                        usersList.add(user);
+                        _usersDict.put(dbUser.getId(), dbUser);
+                        usersList.add(dbUser);
                     }
                     source.setResult(usersList);
                 }

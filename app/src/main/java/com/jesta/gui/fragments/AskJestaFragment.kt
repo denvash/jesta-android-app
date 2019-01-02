@@ -18,19 +18,15 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import co.lujun.androidtagview.TagView
 import com.jesta.R
-import com.jesta.data.INDEX_DO_JESTA
-import com.jesta.data.Mission
-import com.jesta.data.REQUEST_STORAGE_PERMISSION
-import com.jesta.data.RESULT_LOAD_IMAGE
+import com.jesta.data.*
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.fragment_ask_jesta.view.*
+import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
-import kotlinx.android.synthetic.main.jesta_main_activity.view.*
 import kotlinx.android.synthetic.main.jesta_post.*
 import kotlinx.android.synthetic.main.jesta_post.view.*
-import kotlinx.android.synthetic.main.notification_template_lines_media.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.io.File
 import java.util.*
@@ -46,13 +42,15 @@ class AskJestaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_ask_jesta, container, false)
 
+        setLayoutOnLastMission(view, sysManager.currentUserFromDB.lastMission)
+
         view.jesta_post_title.filters = view.jesta_post_title.filters + InputFilter.AllCaps()
 
         view.jesta_post_tag_layout.tagTypeface =
                 ResourcesCompat.getFont(MainActivity.instance, R.font.montserrat_light_italic)
-        view.jesta_post_tag_layout.tags = listOf("Heavy", "Help", "Now")
 
         view.jesta_post_button_add_tag.setOnClickListener {
+            if (jesta_post_tag_layout.tags.size == 5) jesta_post_button_add_tag.isEnabled = false
             if (!view.text_tag.text.isNullOrEmpty()) {
                 view.jesta_post_tag_layout.addTag(text_tag.text.toString())
             }
@@ -73,10 +71,7 @@ class AskJestaFragment : Fragment() {
 
             override fun onTagCrossClick(position: Int) {
                 view.jesta_post_tag_layout.removeTag(position)
-                Toast.makeText(
-                    MainActivity.instance, "Click TagView cross! position = $position",
-                    Toast.LENGTH_SHORT
-                ).show()
+                view.jesta_post_button_add_tag.isEnabled = true
             }
         })
 
@@ -97,6 +92,7 @@ class AskJestaFragment : Fragment() {
 
             val jesta = Mission(
                 authorId = sysManager.currentUserFromDB.id,
+                authorImage = sysManager.currentUserFromDB.photoUrl,
                 id = UUID.randomUUID().toString(),
                 title = view.jesta_post_title.text.toString(),
                 difficulty = view.jesta_post_difficulty.text.toString(),
@@ -110,8 +106,20 @@ class AskJestaFragment : Fragment() {
                 tags = view.jesta_post_tag_layout.tags
             )
 
-            uploadedImageToDB(jesta, sysManager)
+            uploadMissionToDB(jesta, sysManager)
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
+
+
+            val userCacheMission = sysManager.currentUserFromDB
+            userCacheMission.lastMission = jesta.copy()
+
+
+            sysManager.setUserOnDB(userCacheMission)
+            val reloadUsersTasks = sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS)
+            reloadUsersTasks.addOnCompleteListener {
+                Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
+            }
+
 
             MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
             MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
@@ -132,8 +140,25 @@ class AskJestaFragment : Fragment() {
         return view
     }
 
+    private fun setLayoutOnLastMission(view: View, mission: Mission) {
+        if (mission.id == MISSION_EMPTY_ID || !mission.isAvailable) return
 
-    private fun uploadedImageToDB(jesta: Mission, sysManager: SysManager) {
+        view.jesta_post_title.setText(mission.title)
+        view.jesta_post_description.setText(mission.description)
+        view.jesta_post_tag_layout.tags = mission.tags
+        view.jesta_post_payment.setText(mission.payment.toString())
+        view.jesta_post_location.setText(mission.location)
+        view.jesta_post_num_of_people.setText(mission.numOfPeople.toString())
+        view.jesta_post_duration.setText(mission.duration.toString())
+        view.jesta_post_difficulty.selectedIndex = when (mission.difficulty) {
+            DIFFICULTY_EASY -> 0
+            DIFFICULTY_MEDIUM -> 1
+            else -> 2
+        }
+    }
+
+
+    private fun uploadMissionToDB(jesta: Mission, sysManager: SysManager) {
 
         val uploadAndGetUrl = sysManager.createDBTask(SysManager.DBTask.UPLOAD_FILE, filePath)
         // note: async function, therefore it is in the end of current function
@@ -157,8 +182,7 @@ class AskJestaFragment : Fragment() {
                 jesta_post_payment.text.isNullOrEmpty() ||
                 jesta_post_num_of_people.text.isNullOrEmpty() ||
                 jesta_post_duration.text.isNullOrEmpty() ||
-                jesta_post_location.text.isNullOrEmpty() ||
-                jesta_post_tag_layout.tags.size < 3
+                jesta_post_location.text.isNullOrEmpty()
     }
 
 

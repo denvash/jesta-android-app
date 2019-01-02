@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.USER_EMPTY_DIAMONDS
@@ -29,8 +30,7 @@ class SettingsFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        val reloadUsersTasks = sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS)
-        reloadUsersTasks.addOnCompleteListener { task ->
+        sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener { task ->
             if (!task.isSuccessful) {
                 // todo error
             } else {
@@ -38,6 +38,18 @@ class SettingsFragment : Fragment() {
             }
 
             view.jesta_settings_profile_layout.visibility = View.VISIBLE
+        }
+
+        view.jesta_settings_tab_account.setOnClickListener {
+            val userChangeAccount = sysManager.currentUserFromDB
+            userChangeAccount.displayName =
+                    "RandomAcc-"+Random.nextInt(500, 30000).toString()
+
+            sysManager.setUserOnDB(userChangeAccount)
+            sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener {
+                Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
+                updateUserLayout(view)
+            }
         }
 
         view.jesta_settings_button_log_out.setOnClickListener {
