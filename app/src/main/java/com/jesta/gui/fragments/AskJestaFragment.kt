@@ -123,6 +123,7 @@ class AskJestaFragment : Fragment() {
 
             MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
             MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
+
         }
 
         // TODO: max of the users Diamonds
