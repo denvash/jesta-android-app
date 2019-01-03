@@ -12,10 +12,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.jesta.R;
 import com.jesta.data.Mission;
-import com.jesta.utils.db.SysManager;
+import com.jesta.data.Relation;
 import com.jesta.data.User;
+import com.jesta.utils.db.SysManager;
 
 import java.util.List;
+import java.util.UUID;
+
+import static com.jesta.data.ConstantsKt.RELATION_STATUS_INIT;
 
 public class InboxMessageActivity extends AppCompatActivity {
 //    @Override
@@ -92,6 +96,15 @@ public class InboxMessageActivity extends AppCompatActivity {
                             TextView receiverTextView = findViewById(R.id.jesta_notification_receiver);
                             senderTextView.setText(userSender.getDisplayName());
                             receiverTextView.setText(userReceiver.getDisplayName());
+
+                            Relation rel = new Relation(
+                                    UUID.randomUUID().toString(),
+                                    userReceiver.getId(),
+                                    mission.getAuthorId(),
+                                    mission.getId(),
+                                    RELATION_STATUS_INIT
+                            );
+                            sysManager.setRelUserJestaOnDB(rel);
 
                         }
                     });

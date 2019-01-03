@@ -10,17 +10,16 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.jesta.R
-import com.jesta.data.BUNDLE_MISSION
-import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
-import com.jesta.data.Mission
-import com.jesta.data.USER_EMPTY_PHOTO
+import com.jesta.data.*
 import com.jesta.gui.activities.MainActivity
+import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_card.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
+import java.util.*
 
 class JestaCardReviewFragment : Fragment() {
     companion object {
@@ -34,8 +33,8 @@ class JestaCardReviewFragment : Fragment() {
         }
     }
 
+    private val sysManager = SysManager(this)
     private lateinit var mission: Mission
-    private lateinit var layoutParams: ViewGroup.LayoutParams
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -75,7 +74,7 @@ class JestaCardReviewFragment : Fragment() {
         }
 
         view.jesta_preview_accept_button.setOnClickListener {
-            //            val sysManager = SysManager(this@JestaCardReviewFragment)
+//                        val sysManager = SysManager(this@JestaCardReviewFragment)
 //            var jestaAuthor = sysManager.getUserByID(mission.authorId)
 //
 //            if (jestaAuthor == null) {
@@ -93,6 +92,15 @@ class JestaCardReviewFragment : Fragment() {
 //                ).show()
 //
 //            }
+            val rel = Relation(
+                id = UUID.randomUUID().toString(),
+                doer_id = sysManager.currentUserFromDB.id,
+                poster_id = mission.authorId,
+                jesta_id = mission.id,
+                status = RELATION_STATUS_INIT
+            )
+            sysManager.setRelUserJestaOnDB(rel)
+            MainActivity.instance.fragNavController.popFragment()
         }
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_preview_nested_scroll_view)

@@ -23,7 +23,6 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.fragment_ask_jesta.view.*
-import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import kotlinx.android.synthetic.main.jesta_post.*
 import kotlinx.android.synthetic.main.jesta_post.view.*
@@ -106,7 +105,15 @@ class AskJestaFragment : Fragment() {
                 tags = view.jesta_post_tag_layout.tags
             )
 
-            uploadMissionToDB(jesta, sysManager)
+            val rel = Relation(
+                id = UUID.randomUUID().toString(),
+                doer_id = sysManager.currentUserFromDB.id,
+                poster_id = jesta.authorId,
+                jesta_id = jesta.id,
+                status = RELATION_STATUS_INIT
+            )
+
+            uploadMissionToDB(jesta, rel, sysManager)
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
 
@@ -159,7 +166,7 @@ class AskJestaFragment : Fragment() {
     }
 
 
-    private fun uploadMissionToDB(jesta: Mission, sysManager: SysManager) {
+    private fun uploadMissionToDB(jesta: Mission, rel: Relation, sysManager: SysManager) {
 
         val uploadAndGetUrl = sysManager.createDBTask(SysManager.DBTask.UPLOAD_FILE, filePath)
         // note: async function, therefore it is in the end of current function
@@ -173,6 +180,7 @@ class AskJestaFragment : Fragment() {
                 jesta.imageUrl = task.result.toString()
             }
             sysManager.setMissionOnDB(jesta)
+            sysManager.setRelUserJestaOnDB(rel)
         }
     }
 

@@ -8,13 +8,13 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jesta.R
-import com.jesta.data.Mission
+import com.jesta.data.Relation
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.activities.StatusReviewActivity
 import kotlinx.android.synthetic.main.jesta_status_bar.view.*
 
 class StatusRecyclerViewAdapter internal constructor(
-    private val postList: List<Mission>
+    private val postList: List<ArrayList<Relation>>
 ) : RecyclerView.Adapter<StatusRecyclerViewAdapter.StatusReviewViewHolder>() {
 
     inner class StatusReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -29,11 +29,11 @@ class StatusRecyclerViewAdapter internal constructor(
     override fun onBindViewHolder(holder: StatusReviewViewHolder, position: Int) {
         if (position < postList.size) {
             val jestaStatus = postList[position]
-            holder.jestaStatus.jesta_status_bar_title.text = jestaStatus.title
+            holder.jestaStatus.jesta_status_bar_title.text = jestaStatus[0].jesta_id
 
             // TODO: add counter to Jesta Status
 //            holder.jestaStatus.jesta_status_count.text = jestaStatus.count.toString()
-            holder.jestaStatus.jesta_status_bar_count.text = 0.toString()
+            holder.jestaStatus.jesta_status_bar_count.text = jestaStatus.size.toString()
         }
 
         holder.jestaStatus.setOnClickListener {
@@ -45,7 +45,9 @@ class StatusRecyclerViewAdapter internal constructor(
                 .show()
             MainActivity.instance.fragNavController.clearStack()
             val intent = Intent(it.context, StatusReviewActivity::class.java)
-            intent.putExtra(StatusReviewActivity.extra, postList[position])
+            // if poster 'postList[position]' containing list of doers
+            // if doer 'postList[position]' containing list of 1 node
+            intent.putParcelableArrayListExtra(StatusReviewActivity.extra, postList[position])
             it.context.startActivity(intent)
         }
     }
