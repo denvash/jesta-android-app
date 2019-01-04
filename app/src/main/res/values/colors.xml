@@ -23,5 +23,4 @@
     <color name="status_done">#29F036</color>
     <color name="status_declined">#D93916</color>
 
-    <!--<color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorAccent</color>-->
 </resources>

@@ -94,5 +94,6 @@
     <string name="jesta_settings_fill_email">EMAIL</string>
     <string name="jesta_settings_send_bug">Send Report</string>
     <string name="jesta_status_phase">Phase</string>
+    <string name="jesta_status_total_users">Total Users</string>
 
 </resources>

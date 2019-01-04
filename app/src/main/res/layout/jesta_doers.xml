@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/jesta_doers"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/jesta_doers_avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/jesta_default_avatar"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="0.75dp" />
+
+        <TextView
+            android:id="@+id/jesta_doers_name"
+            style="@style/TextAppearance.Jesta.Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jesta_settings_account" />
+
+        <ImageButton
+            android:id="@+id/jesta_doers_chat"
+            android:src="@drawable/ic_jesta_chat_icon"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/jesta_doers_decline"
+            android:src="@drawable/ic_jesta_decline_doer"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/jesta_doers_accept"
+            android:src="@drawable/ic_jesta_accept_doer"
+            tools:ignore="ContentDescription" />
+    </GridLayout>
+</LinearLayout>

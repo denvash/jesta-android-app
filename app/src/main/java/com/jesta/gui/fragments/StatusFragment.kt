@@ -59,7 +59,16 @@ class StatusFragment : Fragment() {
 
     private fun setRecycleView(view: View, reloadJestasTask: Task<Any>, userRelationsTask: Task<Any>) {
         val statusList: List<Pair<Relation, Mission>> = toStatusList(userRelationsTask, reloadJestasTask)
-        val adapter = StatusAdapter()
+
+        val allRelations = statusList.map { it.first }
+
+        val missionToDoers = statusList.map {
+            it.second.id to allRelations.filter { relation ->
+                relation.missionID == it.second.id
+            }.map { relation -> relation.doerID }
+        }.map { it.first to it.second }.toMap()
+
+        val adapter = StatusAdapter(missionToDoers)
         adapter.setItems(statusList)
         view.jesta_status_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
         view.jesta_status_recycle_view.adapter = adapter
@@ -73,6 +82,6 @@ class StatusFragment : Fragment() {
         val allMissions: List<Mission> = (reloadJestasTask.result as List<*>).filterIsInstance<Mission>()
         val relatedMissionsIDs = userRelations.map { it.missionID }
         val relatedMissions = allMissions.filter { relatedMissionsIDs.contains(it.id) }
-        return userRelations.map { relation -> Pair(relation, relatedMissions.find { it.id == relation.missionID }!!) }
+        return userRelations.map { relation -> relation to relatedMissions.find { it.id == relation.missionID }!! }
     }
 }

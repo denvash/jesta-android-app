@@ -15,7 +15,6 @@
 
         <!-- HEADER -->
         <GridLayout
-            android:id="@+id/jesta_settings_tab_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/black">
@@ -49,6 +48,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/jesta_status_phase" />
 
+            <TextView
+                android:id="@+id/jesta_status_total_doers"
+                style="@style/TextAppearance.Jesta.Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jesta_status_total_users" />
+
             <!-- HEADER INDICATOR -->
             <ImageView
                 android:id="@+id/statusHeaderIndicator"
@@ -61,7 +67,6 @@
         </GridLayout>
 
 
-
     </com.github.florent37.expansionpanel.ExpansionHeader>
 
     <com.github.florent37.expansionpanel.ExpansionLayout
@@ -70,20 +75,14 @@
         android:layout_height="wrap_content"
         app:expansion_expanded="false">
 
-        <LinearLayout
-            android:id="@+id/container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/jesta_status_doers_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="#EEE"
-                android:gravity="center"
-                android:text="content" />
-
-        </LinearLayout>
+            android:layout_marginStart="@dimen/_40dp"
+            android:layout_marginEnd="@dimen/_40dp"
+            android:background="@color/hint_color"
+            android:scrollbars="vertical" />
 
     </com.github.florent37.expansionpanel.ExpansionLayout>
 </LinearLayout>

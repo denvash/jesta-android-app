@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.florent37.expansionpanel.ExpansionLayout
 import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection
@@ -12,13 +13,11 @@ import com.jesta.data.*
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_status.view.*
 
 import java.util.ArrayList
 
-class StatusAdapter(
-) : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
+class StatusAdapter(private val missionToDoers: Map<String, List<String>>) : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
     private val list = ArrayList<Pair<Relation,Mission>>()
     private val expansionsCollection = ExpansionLayoutCollection()
@@ -45,6 +44,8 @@ class StatusAdapter(
 
         holder.view.jesta_status_title.text = mission.title
         holder.view.jesta_status_job.text = if (currUser.id==mission.posterID) STATUS_POSTER else STATUS_DOER
+        holder.view.jesta_status_total_doers.text = mission.numOfPeople.toString()
+        holder.view.jesta_status_total_doers.visibility = if (currUser.id==mission.posterID) View.VISIBLE else View.INVISIBLE
 
         holder.view.jesta_status_phase.text = when (relation.status) {
             RELATION_STATUS_INIT -> STATUS_PENDING
@@ -61,6 +62,10 @@ class StatusAdapter(
                 else -> R.color.status_declined
             }
         )
+
+        holder.view.jesta_status_doers_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
+        holder.view.jesta_status_doers_recycle_view.adapter = DoersAdapter(missionToDoers[mission.id]!!)
+
 
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
         if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
