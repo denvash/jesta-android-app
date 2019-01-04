@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.jesta_post.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AskJestaFragment : Fragment() {
@@ -74,7 +75,7 @@ class AskJestaFragment : Fragment() {
             }
         })
 
-        view.jesta_post_difficulty.attachDataSource(listOf("Easy", "Medium", "Hard"))
+        view.jesta_post_difficulty.attachDataSource(listOf(DIFFICULTY_EASY, DIFFICULTY_MEDIUM, DIFFICULTY_HARD))
 
 
         view.jesta_post_location.filters = view.jesta_post_location.filters + InputFilter.AllCaps()
@@ -105,15 +106,16 @@ class AskJestaFragment : Fragment() {
                 tags = view.jesta_post_tag_layout.tags
             )
 
-            val rel = Relation(
+            val relation = Relation(
                 id = UUID.randomUUID().toString(),
-                doer_id = sysManager.currentUserFromDB.id,
-                poster_id = jesta.authorId,
-                jesta_id = jesta.id,
+                doerList = ArrayList(),
+                posterID = jesta.authorId,
+                missionID = jesta.id,
+                chosenID = RELATION_EMPTY_CHOSEN_ID,
                 status = RELATION_STATUS_INIT
             )
 
-            uploadMissionToDB(jesta, rel, sysManager)
+            uploadMissionToDB(jesta, relation, sysManager)
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
 

@@ -58,10 +58,9 @@ class DoJestaFragment : Fragment() {
         view.do_jesta_swipe_refresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
         view.do_jesta_swipe_refresh.setOnRefreshListener {
 
-            val onRefreshGetAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
-            onRefreshGetAllJestas.addOnCompleteListener { task ->
+            sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener {
 
-                val missionListOnRefresh = (task.result as List<*>).filterIsInstance<Mission>().reversed()
+                val missionListOnRefresh = (it.result as List<*>).filterIsInstance<Mission>().reversed()
                 val refreshAdapter = JestaCardRecyclerViewAdapter(missionListOnRefresh)
                 view.do_jesta_recycle_view.adapter = refreshAdapter
                 view.do_jesta_swipe_refresh.isRefreshing = false

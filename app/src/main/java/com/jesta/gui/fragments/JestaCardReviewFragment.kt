@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.jesta.R
@@ -15,10 +16,8 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
-import kotlinx.android.synthetic.main.jesta_card.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper.ORIENTATION_VERTICAL
 import java.util.*
 
 class JestaCardReviewFragment : Fragment() {
@@ -74,38 +73,28 @@ class JestaCardReviewFragment : Fragment() {
         }
 
         view.jesta_preview_accept_button.setOnClickListener {
-//                        val sysManager = SysManager(this@JestaCardReviewFragment)
-//            var jestaAuthor = sysManager.getUserByID(mission.authorId)
-//
-//            if (jestaAuthor == null) {
-//                jestaAuthor = sysManager.currentUserFromDB
-//            }
-//
-//            sysManager.askTodoJestaForUser(mission).addOnCompleteListener { task ->
-//                if (!task.isSuccessful) {
-//                    // todo some error
-//                }
-//                Toast.makeText(
-//                    this@JestaCardReviewFragment,
-//                    "A message was sent to " + jestaAuthor.displayName,
-//                    Toast.LENGTH_LONG
-//                ).show()
-//
-//            }
-            val rel = Relation(
-                id = UUID.randomUUID().toString(),
-                doer_id = sysManager.currentUserFromDB.id,
-                poster_id = mission.authorId,
-                jesta_id = mission.id,
-                status = RELATION_STATUS_INIT
-            )
-            sysManager.setRelationOnDB(rel)
-            MainActivity.instance.fragNavController.popFragment()
+
+            sysManager.getUserRelations(sysManager.currentUserFromDB.id).addOnCompleteListener { getRelationsTask ->
+                val result: List<Relation> = (getRelationsTask.result as List<*>).filterIsInstance<Relation>()
+
+                val currMissionRelation = result.find { relation -> relation.missionID == mission.id }
+
+                if (currMissionRelation != null) {
+                    if (currMissionRelation.posterID == sysManager.currentUserFromDB.id) {
+                        Toast.makeText(MainActivity.instance,"You can't do your own post!",Toast.LENGTH_LONG).show()
+                    }
+                    else if (!currMissionRelation.doerList.contains(sysManager.currentUserFromDB.id)) {
+                        currMissionRelation.doerList.add(sysManager.currentUserFromDB.id)
+                        sysManager.setRelationOnDB(currMissionRelation)
+                        MainActivity.instance.fragNavController.popFragment()
+                    } else {
+                        Toast.makeText(MainActivity.instance,"You already Assigned as a Doer",Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_preview_nested_scroll_view)
-
-
         return view
     }
 

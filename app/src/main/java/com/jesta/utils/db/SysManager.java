@@ -249,6 +249,8 @@ public class SysManager {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<Relation> relationsList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                        //TODO: fixed by Dennis
                     //     HashMap dbRelUserJesta = (HashMap)ds.getValue();
                     //     if (dbRelUserJesta == null) {
                     //         throw new NullPointerException("dbRelUserJesta is null");
@@ -263,9 +265,9 @@ public class SysManager {
                     //     }
                     //     reluserjestaList.add(rel);
                     // }
-                        Relation dbRelation = ds.getValue(Relation.class);
+                    Relation dbRelation = ds.getValue(Relation.class);
                         if (dbRelation == null) {
-                            throw new NullPointerException("dbRelation is null");
+                            throw new NullPointerException("dbRelUserJesta is null");
                         }
                         _relationsDict.put(dbRelation.getId(), dbRelation);
                         relationsList.add(dbRelation);
@@ -385,7 +387,7 @@ public class SysManager {
         return _relationsDict.get(id);
     }
 
-    public Task getUserRels(String id){
+    public Task getUserRelations(String id){
         if (id == null || id.equals("null")) {
             return null;
         }
@@ -404,7 +406,7 @@ public class SysManager {
 
                 List<Relation> lst = task.getResult();
                 for (Relation i : lst) {
-                    if (i.getDoer_id().equals(usr_id) || i.getPoster_id().equals(usr_id))
+                    if (i.getDoerList().equals(usr_id) || i.getPosterID().equals(usr_id))
                         relUserList.add(i);
                 }
                 source.setResult(relUserList);

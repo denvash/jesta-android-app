@@ -21,7 +21,7 @@ class StatusReviewActivity : AppCompatActivity() {
         SysManager(this@StatusReviewActivity)
         val rel = intent.getParcelableArrayListExtra<Relation>(extra) as ArrayList<Relation>
         //TODO: create text views dynamically for all doers , rel is a list of doers
-        jesta_status_bar_preview_title.text = rel[0].doer_id
+//        jesta_status_bar_preview_title.text = rel[0].doerList
 
         jesta_status_preview_back_button.setOnClickListener {
             finish()

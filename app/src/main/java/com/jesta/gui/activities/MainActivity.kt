@@ -2,10 +2,8 @@ package com.jesta.gui.activities
 
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.gson.GsonBuilder
 import com.jesta.R
 import com.jesta.data.INDEX_ASK_JESTA
 import com.jesta.data.INDEX_DO_JESTA
@@ -27,7 +25,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     companion object {
         private val TAG = MainActivity::class.java.simpleName
 
-        val gson = GsonBuilder().setPrettyPrinting().create()!!
         lateinit var instance: MainActivity
             private set
     }
@@ -76,6 +73,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         fragNavController.initialize(INDEX_DO_JESTA, savedInstanceState)
 
         jesta_bottom_navigation.setOnNavigationItemSelectedListener {
+            if (!fragNavController.isRootFragment) {
+                fragNavController.popFragment()
+            }
             when (it.itemId) {
                 R.id.nav_do_jesta -> fragNavController.switchTab(INDEX_DO_JESTA)
                 R.id.nav_ask_jesta -> fragNavController.switchTab(INDEX_ASK_JESTA)
