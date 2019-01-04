@@ -31,6 +31,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+import static com.jesta.data.ConstantsKt.*;
 import static com.jesta.utils.db.SysManager.DBTask.*;
 
 
@@ -415,6 +416,22 @@ public class SysManager {
         return source.getTask();
     }
 
+    public void onAcceptDoer(Relation rel, Mission mission){
+        mission.setNumOfPeople(mission.getNumOfPeople() - 1);
+        if(mission.getNumOfPeople() == 0)
+            mission.setAvailable(false);
+        this.setMissionOnDB(mission);
+
+        rel.setStatus(RELATION_STATUS_IN_PROGRESS);
+        this.setRelationOnDB(rel);
+        // TODO: send notification to accepted user rel.doer_id
+    }
+
+    public void onDeclineUser(Relation rel){
+        rel.setStatus(RELATION_STATUS_USER_DECLINED);
+        this.setRelationOnDB(rel);
+        // TODO: send notification to declined user rel.doer_id
+    }
     /**
      * Messaging and push notifications
      *
