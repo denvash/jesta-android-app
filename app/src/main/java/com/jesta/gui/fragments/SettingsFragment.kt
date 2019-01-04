@@ -88,7 +88,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun areSameFields(changed: User, current: User): Any {
-        return changed.displayName == current.displayName && changed.email != current.displayName
+        return changed.displayName == current.displayName && changed.email == current.email
     }
 
     private fun updateUserLayout(view: View) {
