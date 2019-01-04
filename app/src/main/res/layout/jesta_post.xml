@@ -372,6 +372,11 @@
                         android:text="@string/jesta_post_crew"
                         android:textAlignment="center" />
 
+                    <!--<nl.dionsegijn.steppertouch.StepperTouch-->
+                        <!--android:id="@+id/jesta_post_num_of_people"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content" />-->
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                         android:layout_width="match_parent"

@@ -22,8 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp">
+                android:layout_marginTop="30dp">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
@@ -33,19 +32,18 @@
                         android:id="@+id/jesta_settings_profile_full_name_progress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:indicatorName="LineScalePulseOutIndicator"
+                        android:layout_gravity="center"
                         android:visibility="visible"
                         app:indicatorColor="@color/black"
-                        android:layout_gravity="center"
-                        />
+                        app:indicatorName="LineScalePulseOutIndicator" />
 
                     <LinearLayout
                         android:id="@+id/jesta_settings_profile_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:visibility="invisible"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
 
                         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/jesta_settings_avatar"
@@ -56,7 +54,6 @@
                             android:src="@drawable/jesta_default_avatar"
                             app:civ_border_color="@color/colorPrimary"
                             app:civ_border_width="0.5dp" />
-
 
 
                         <LinearLayout
@@ -73,8 +70,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
-
-
 
 
                             <TextView
@@ -96,8 +91,8 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/_10dp"
                                     android:layout_gravity="center"
+                                    android:layout_marginEnd="@dimen/_10dp"
                                     android:src="@drawable/ic_jesta_diamond_normal"
                                     tools:ignore="ContentDescription" />
 
@@ -108,7 +103,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:text="@string/jesta_settings_fake_total_diamonds"
-                                    android:textSize="25sp"/>
+                                    android:textSize="25sp" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -122,129 +117,331 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="60dp"
                 android:background="@color/colorPrimary" />
 
-            <GridLayout
-                android:id="@+id/jesta_settings_tab_account"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:paddingStart="@dimen/_40dp"
-                android:paddingEnd="@dimen/_40dp">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_jesta_account"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    style="@style/TextAppearance.Jesta.Type.Purple"
-                    android:layout_width="wrap_content"
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_4dp"
-                    android:text="@string/jesta_settings_account" />
+                    app:expansion_headerIndicator="@id/accountHeaderIndicator"
+                    app:expansion_layout="@id/accountExpansionLayout"
+                    app:expansion_toggleOnClick="true">
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                    <!-- HEADER -->
+                    <GridLayout
+                        android:id="@+id/jesta_settings_tab_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:backgroundTint="@color/black"
+                        android:paddingStart="@dimen/_40dp"
+                        android:paddingEnd="@dimen/_40dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_jesta_account"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type.Purple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_4dp"
+                            android:text="@string/jesta_settings_account" />
+
+                    </GridLayout>
+                    <!-- HEADER INDICATOR -->
+                    <ImageView
+                        android:id="@+id/accountHeaderIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/_40dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                        android:src="@drawable/ic_right_arrow" />
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/accountExpansionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- CONTENT -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_40dp"
+                            android:layout_marginEnd="@dimen/_10dp"
+                            android:text="@string/jesta_settings_fill_display_name" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_40dp"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            app:boxBackgroundColor="@color/transparent"
+                            app:boxStrokeWidth="1dp"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="20"
+                            app:hintAnimationEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/text_tag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/marvel"
+                                android:inputType="textCapSentences"
+                                android:textColor="@color/colorPrimary" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+                <!--CHAT TAB-->
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
-                    android:src="@drawable/ic_right_arrow" />
-            </GridLayout>
+                    app:expansion_headerIndicator="@id/chatHeaderIndicator"
+                    app:expansion_layout="@id/chatExpansionLayout"
+                    app:expansion_toggleOnClick="true">
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:paddingStart="@dimen/_40dp"
-                android:paddingEnd="@dimen/_40dp">
+                    <!-- HEADER -->
+                    <GridLayout
+                        android:id="@+id/jesta_settings_tab_chat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:backgroundTint="@color/black"
+                        android:paddingStart="@dimen/_40dp"
+                        android:paddingEnd="@dimen/_40dp">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_jesta_chat"
+                            tools:ignore="ContentDescription" />
 
-                    android:src="@drawable/ic_jesta_chat"
-                    tools:ignore="ContentDescription" />
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type.Purple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_4dp"
+                            android:text="@string/jesta_settings_chat" />
 
-                <TextView
-                    style="@style/TextAppearance.Jesta.Type.Purple"
-                    android:layout_width="wrap_content"
+                    </GridLayout>
+                    <!-- HEADER INDICATOR -->
+                    <ImageView
+                        android:id="@+id/chatHeaderIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/_40dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                        android:src="@drawable/ic_right_arrow" />
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/chatExpansionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- CONTENT -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_40dp"
+                            android:layout_marginEnd="@dimen/_10dp"
+                            android:text="CHAT CONTENT" />
+                    </LinearLayout>
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+
+
+
+                <!--BUG TAB-->
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_4dp"
-                    android:text="@string/jesta_settings_chat" />
+                    app:expansion_headerIndicator="@id/bugHeaderIndicator"
+                    app:expansion_layout="@id/bugExpansionLayout"
+                    app:expansion_toggleOnClick="true">
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                    <!-- HEADER -->
+                    <GridLayout
+                        android:id="@+id/jesta_settings_tab_bug"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:backgroundTint="@color/black"
+                        android:paddingStart="@dimen/_40dp"
+                        android:paddingEnd="@dimen/_40dp">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_jesta_bug"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type.Purple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_4dp"
+                            android:text="@string/jesta_settings_bug" />
+
+                    </GridLayout>
+                    <!-- HEADER INDICATOR -->
+                    <ImageView
+                        android:id="@+id/bugHeaderIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/_40dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                        android:src="@drawable/ic_right_arrow" />
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/bugExpansionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- CONTENT -->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_40dp"
+                            android:layout_marginEnd="@dimen/_10dp"
+                            android:text="BUG CONTENT" />
+                    </LinearLayout>
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
+
+                <!--about TAB-->
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
-                    android:src="@drawable/ic_right_arrow" />
-            </GridLayout>
+                    app:expansion_headerIndicator="@id/aboutHeaderIndicator"
+                    app:expansion_layout="@id/aboutExpansionLayout"
+                    app:expansion_toggleOnClick="true">
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_40dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:paddingEnd="@dimen/_40dp">
+                    <!-- HEADER -->
+                    <GridLayout
+                        android:id="@+id/jesta_settings_tab_about"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:backgroundTint="@color/black"
+                        android:paddingStart="@dimen/_40dp"
+                        android:paddingEnd="@dimen/_40dp">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_jesta_bug"
-                    tools:ignore="ContentDescription" />
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_jesta_about"
+                            tools:ignore="ContentDescription" />
 
-                <TextView
-                    style="@style/TextAppearance.Jesta.Type.Purple"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_4dp"
-                    android:text="@string/jesta_settings_bug" />
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type.Purple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_4dp"
+                            android:text="@string/jesta_settings_about" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
-                    android:src="@drawable/ic_right_arrow" />
-            </GridLayout>
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_40dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:paddingEnd="@dimen/_40dp">
+                    </GridLayout>
+                    <!-- HEADER INDICATOR -->
+                    <ImageView
+                        android:id="@+id/aboutHeaderIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="@dimen/_40dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
+                        android:src="@drawable/ic_right_arrow" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_jesta_about"
-                    tools:ignore="ContentDescription" />
+                </com.github.florent37.expansionpanel.ExpansionHeader>
 
-                <TextView
-                    style="@style/TextAppearance.Jesta.Type.Purple"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_4dp"
-                    android:text="@string/jesta_settings_about" />
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/aboutExpansionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
-                    android:src="@drawable/ic_right_arrow" />
-            </GridLayout>
+                    <!-- CONTENT -->
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            style="@style/TextAppearance.Jesta.Type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_40dp"
+                            android:layout_marginEnd="@dimen/_10dp"
+                            android:text="ABOUT CONTENT" />
+                    </LinearLayout>
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/jesta_settings_button_log_out"
@@ -259,6 +456,8 @@
                 app:rippleColor="@color/colorPrimaryLight"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp" />
+
+
         </LinearLayout>
     </ScrollView>
 

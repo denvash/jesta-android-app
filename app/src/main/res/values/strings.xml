@@ -90,5 +90,6 @@
     <string name="jesta_settings_about">About</string>
     <string name="jesta_settings_total_diamonds">Total diamonds</string>
     <string name="jesta_settings_fake_total_diamonds">30000</string>
+    <string name="jesta_settings_fill_display_name">Display name</string>
 
 </resources>
