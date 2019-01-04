@@ -1,6 +1,7 @@
 package com.jesta.gui.fragments
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -49,7 +50,7 @@ class JestaCardReviewFragment : Fragment() {
 
         Log.d(TAG, "Accepted mission: $mission")
 
-        val posterAvatar = sysManager.getUserByID(mission.posterID).avatarUrl
+        val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
         if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
             Picasso.get().load(posterAvatar).noFade().into(view.jesta_preview_avatar_icon)
         }

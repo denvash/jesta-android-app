@@ -1,21 +1,27 @@
 package com.jesta.utils.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jesta.R
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
 import com.jesta.data.Mission
+import com.jesta.data.USER_EMPTY_PHOTO
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.JestaCardReviewFragment
 import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_settings.view.*
 import kotlinx.android.synthetic.main.jesta_card.view.*
+import kotlinx.android.synthetic.main.jesta_card_preview.view.*
+import kotlinx.android.synthetic.main.jesta_main_activity.*
 
 class JestaCardRecyclerViewAdapter internal constructor(
     private val postList: List<Mission>
@@ -44,7 +50,7 @@ class JestaCardRecyclerViewAdapter internal constructor(
 
             ImageReqService.setImageFromUrl(card.jesta_card_image, mission.imageUrl)
 
-            val posterAvatar = sysManager.getUserByID(mission.posterID).avatarUrl
+            val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
             if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
                 Picasso.get().load(posterAvatar).noFade().into(card.jesta_card_avatar_icon)
             }
