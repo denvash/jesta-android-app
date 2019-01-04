@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
 
     override fun onFragmentTransaction(fragment: Fragment?, transactionType: FragNavController.TransactionType) {
-        //do fragmentary stuff. Maybe change title, I'm not going to tell you how to live your life
+        //do fragmentary stuff. Maybe change statusTitle, I'm not going to tell you how to live your life
         // If we have a backstack, show the back button
 //        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
     }

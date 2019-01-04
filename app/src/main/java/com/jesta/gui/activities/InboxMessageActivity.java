@@ -46,7 +46,7 @@ public class InboxMessageActivity extends AppCompatActivity {
         }
 
         final String body = b.getString("body");
-        final String title = b.getString("title");
+        final String title = b.getString("statusTitle");
         final String sender = b.getString("sender");
         final String jestaId = b.getString("jesta");
 

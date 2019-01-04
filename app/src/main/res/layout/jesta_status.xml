@@ -1,73 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:id="@+id/jesta_status"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <com.github.florent37.expansionpanel.ExpansionHeader
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        app:expansion_headerIndicator="@id/headerIndicator"
-        app:expansion_layout="@id/expansionLayout"
+        android:layout_height="wrap_content"
+        app:expansion_headerIndicator="@id/statusHeaderIndicator"
+        app:expansion_layout="@id/statusExpansionLayout"
         app:expansion_toggleOnClick="true">
 
-        <RelativeLayout
-            android:background="@android:color/white"
-            android:layout_height="48dp"
+        <!-- HEADER -->
+        <GridLayout
+            android:id="@+id/jesta_settings_tab_account"
             android:layout_width="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black">
 
-            <TextView
-                android:layout_centerVertical="true"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Trip name"
-                android:textColor="#3E3E3E" />
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/jesta_status_avatar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/jesta_default_avatar"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="0.75dp" />
 
             <TextView
                 android:id="@+id/jesta_status_title"
-                android:layout_centerVertical="true"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
+                style="@style/TextAppearance.Jesta.Type"
                 android:layout_width="wrap_content"
-                android:text="Carribean cruise"
-                android:textColor="#AAA" />
+                android:layout_height="wrap_content"
+                android:text="@string/jesta_settings_account" />
 
+            <TextView
+                android:id="@+id/jesta_status_job"
+                style="@style/TextAppearance.Jesta.Type.Purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jesta_settings_account" />
+
+            <TextView
+                android:id="@+id/jesta_status_phase"
+                style="@style/TextAppearance.Jesta.Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jesta_status_phase" />
+
+            <!-- HEADER INDICATOR -->
             <ImageView
-                android:id="@+id/headerIndicator"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="16dp"
-                android:layout_centerVertical="true"
+                android:id="@+id/statusHeaderIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
                 android:src="@drawable/ic_right_arrow" />
+        </GridLayout>
 
-        </RelativeLayout>
+
 
     </com.github.florent37.expansionpanel.ExpansionHeader>
 
     <com.github.florent37.expansionpanel.ExpansionLayout
-        android:id="@+id/expansionLayout"
-        app:expansion_expanded="false"
+        android:id="@+id/statusExpansionLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        app:expansion_expanded="false">
 
         <LinearLayout
             android:id="@+id/container"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:background="#EEE"
                 android:gravity="center"
-                android:layout_height="100dp"
-                android:layout_width="match_parent"
                 android:text="content" />
 
         </LinearLayout>

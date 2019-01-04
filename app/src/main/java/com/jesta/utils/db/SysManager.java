@@ -488,7 +488,7 @@ public class SysManager {
             String jestaId = jesta.getId();
 
             String title = getCurrentUserFromDB().getDisplayName() + " asked to do a jesta for you!";
-            String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
+            String body = "Jesta statusTitle: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
             title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
             jestaId = URLEncoder.encode(jestaId, StandardCharsets.UTF_8.toString());
@@ -497,7 +497,7 @@ public class SysManager {
 
 
             url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
-                    "&title=" + title +
+                    "&statusTitle=" + title +
                     "&body=" + body +
                     "&receiver=" + receiver +
                     "&sender=" + sender +
@@ -554,7 +554,7 @@ public class SysManager {
 
         String title = getCurrentUserFromDB().getDisplayName() + " answered to your request!";
         String body = "He's accepted you to do him the following jesta\n" +
-                "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
+                "Jesta statusTitle: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
 
         try {
             // TODO change to post request to avoid this shit
@@ -566,7 +566,7 @@ public class SysManager {
         }
 
         String url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
-                "&title=" + title +
+                "&statusTitle=" + title +
                 "&body=" + body +
                 "&receiver=" + receiverId +
                 "&sender=" + sender +
@@ -613,7 +613,7 @@ public class SysManager {
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
         }
 
-        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + topicName + "&title=" + title + "&body=" + body;
+        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + topicName + "&statusTitle=" + title + "&body=" + body;
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

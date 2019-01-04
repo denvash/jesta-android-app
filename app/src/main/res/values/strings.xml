@@ -93,5 +93,6 @@
     <string name="jesta_settings_fill_display_name">Display name</string>
     <string name="jesta_settings_fill_email">EMAIL</string>
     <string name="jesta_settings_send_bug">Send Report</string>
+    <string name="jesta_status_phase">Phase</string>
 
 </resources>

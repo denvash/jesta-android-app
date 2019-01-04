@@ -33,7 +33,7 @@ public class MessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         String title = null, body = null, jestaId = null, sender = null;
         try {
-            title = remoteMessage.getData().get("title");
+            title = remoteMessage.getData().get("statusTitle");
             body = remoteMessage.getData().get("body");
             jestaId = remoteMessage.getData().get("jesta");
             sender = remoteMessage.getData().get("sender");
@@ -54,7 +54,7 @@ public class MessagingService extends FirebaseMessagingService {
             // opens a dialog
             Intent i = new Intent(getApplicationContext(), InboxMessageActivity.class);
             Bundle b = new Bundle();
-            b.putString("title", title);
+            b.putString("statusTitle", title);
             b.putString("body", body);
             b.putString("jesta", jestaId);
             b.putString("sender", sender);
