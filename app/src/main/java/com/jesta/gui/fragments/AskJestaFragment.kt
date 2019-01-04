@@ -41,7 +41,7 @@ class AskJestaFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_ask_jesta, container, false)
 
-        setLayoutOnLastMission(view, sysManager.currentUserFromDB.lastMission)
+        setLayoutOnLastMission(view, sysManager.currentUserFromDB.missionCache)
 
         view.jesta_post_title.filters = view.jesta_post_title.filters + InputFilter.AllCaps()
 
@@ -91,7 +91,6 @@ class AskJestaFragment : Fragment() {
 
             val jesta = Mission(
                 posterID = sysManager.currentUserFromDB.id,
-                authorImage = sysManager.currentUserFromDB.photoUrl,
                 id = UUID.randomUUID().toString(),
                 title = view.jesta_post_title.text.toString(),
                 difficulty = view.jesta_post_difficulty.text.toString(),
@@ -110,7 +109,7 @@ class AskJestaFragment : Fragment() {
 
 
             val userCacheMission = sysManager.currentUserFromDB
-            userCacheMission.lastMission = jesta.copy()
+            userCacheMission.missionCache = jesta.copy()
 
 
             sysManager.setUserOnDB(userCacheMission)

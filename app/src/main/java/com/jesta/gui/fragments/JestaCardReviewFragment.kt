@@ -1,7 +1,6 @@
 package com.jesta.gui.fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +14,7 @@ import com.jesta.data.*
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
@@ -46,10 +46,12 @@ class JestaCardReviewFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_card_preview, container, false)
 
+
         Log.d(TAG, "Accepted mission: $mission")
 
-        if (mission.authorImage != MISSION_EMPTY_AUTHOR_IMAGE) {
-            view.jesta_preview_avatar_icon.setImageURI(Uri.parse(mission.authorImage))
+        val posterAvatar = sysManager.getUserByID(mission.posterID).avatarUrl
+        if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
+            Picasso.get().load(posterAvatar).noFade().into(view.jesta_preview_avatar_icon)
         }
 
         view.jesta_preview_title.text = mission.title

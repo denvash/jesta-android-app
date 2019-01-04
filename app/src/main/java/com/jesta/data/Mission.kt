@@ -7,7 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class Mission(
     var id: String = MISSION_EMPTY_ID,
     var posterID: String = MISSION_EMPTY_AUTHOR_ID,
-    var authorImage: String = MISSION_EMPTY_AUTHOR_IMAGE,
     var title: String = MISSION_EMPTY_TITLE,
     var difficulty: String = MISSION_EMPTY_DIFFICULTY,
     var description: String = MISSION_EMPTY_DESCRIPTION,

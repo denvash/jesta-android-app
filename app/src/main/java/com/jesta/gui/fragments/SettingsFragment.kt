@@ -53,7 +53,6 @@ class SettingsFragment : Fragment() {
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_settings_scroll_view)
 
-
         view.tab_account_edit_display_name.setText(sysManager.currentUserFromDB.displayName)
         view.tab_account_edit_email.setText(sysManager.currentUserFromDB.email)
 
@@ -97,8 +96,8 @@ class SettingsFragment : Fragment() {
         view.jesta_settings_profile_phone_number.text = currentUser.email
         view.jesta_settings_profile_full_name_progress.hide()
 
-        if (currentUser.photoUrl != USER_EMPTY_PHOTO) {
-            view.jesta_settings_avatar.setImageURI(Uri.parse(currentUser.photoUrl))
+        if (currentUser.avatarUrl != USER_EMPTY_PHOTO) {
+            view.jesta_settings_avatar.setImageURI(Uri.parse(currentUser.avatarUrl))
         }
         if (currentUser.diamonds == USER_EMPTY_DIAMONDS) {
             view.jesta_settings_diamond_amount.text = Random.nextInt(500, 30000).toString()
