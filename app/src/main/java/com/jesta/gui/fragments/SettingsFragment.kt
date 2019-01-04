@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.USER_EMPTY_DIAMONDS
@@ -77,9 +78,10 @@ class SettingsFragment : Fragment() {
                     } else {
                         updateUserLayout(view)
                     }
-
                     view.jesta_settings_profile_layout.visibility = View.VISIBLE
                 }
+            } else {
+                Toast.makeText(MainActivity.instance,"Nothing to change!",Toast.LENGTH_LONG).show()
             }
         }
         return view
