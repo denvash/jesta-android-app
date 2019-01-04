@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.jesta_post.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.io.File
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AskJestaFragment : Fragment() {
@@ -91,7 +90,7 @@ class AskJestaFragment : Fragment() {
             }
 
             val jesta = Mission(
-                authorId = sysManager.currentUserFromDB.id,
+                posterID = sysManager.currentUserFromDB.id,
                 authorImage = sysManager.currentUserFromDB.photoUrl,
                 id = UUID.randomUUID().toString(),
                 title = view.jesta_post_title.text.toString(),
@@ -106,16 +105,7 @@ class AskJestaFragment : Fragment() {
                 tags = view.jesta_post_tag_layout.tags
             )
 
-            val relation = Relation(
-                id = UUID.randomUUID().toString(),
-                doerList = ArrayList(),
-                posterID = jesta.authorId,
-                missionID = jesta.id,
-                chosenID = RELATION_EMPTY_CHOSEN_ID,
-                status = RELATION_STATUS_INIT
-            )
-
-            uploadMissionToDB(jesta, relation, sysManager)
+            uploadMissionToDB(jesta, sysManager)
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
 
@@ -167,9 +157,7 @@ class AskJestaFragment : Fragment() {
         }
     }
 
-
-    private fun uploadMissionToDB(jesta: Mission, rel: Relation, sysManager: SysManager) {
-
+    private fun uploadMissionToDB(jesta: Mission, sysManager: SysManager) {
         val uploadAndGetUrl = sysManager.createDBTask(SysManager.DBTask.UPLOAD_FILE, filePath)
         // note: async function, therefore it is in the end of current function
         uploadAndGetUrl.addOnCompleteListener { task ->
@@ -182,7 +170,6 @@ class AskJestaFragment : Fragment() {
                 jesta.imageUrl = task.result.toString()
             }
             sysManager.setMissionOnDB(jesta)
-            sysManager.setRelationOnDB(rel)
         }
     }
 

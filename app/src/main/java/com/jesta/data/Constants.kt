@@ -40,8 +40,8 @@ const val USER_EMPTY_DIAMONDS: String = nullString
 
 const val RELATION_EMPTY_ID: String = nullString
 const val RELATION_EMPTY_POSTER_ID: String = nullString
+const val RELATION_EMPTY_DOER_ID: String = nullString
 const val RELATION_EMPTY_MISSION_ID: String = nullString
-const val RELATION_EMPTY_CHOSEN_ID: String = nullString
 
 const val RELATION_STATUS_INIT = 0
 const val RELATION_STATUS_IN_PROGRESS = 1
