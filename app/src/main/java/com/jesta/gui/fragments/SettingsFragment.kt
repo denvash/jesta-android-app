@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.USER_EMPTY_DIAMONDS
 import com.jesta.data.USER_EMPTY_PHOTO
+import com.jesta.data.User
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.activities.login.LoginMainActivity
 import com.jesta.utils.db.SysManager
@@ -53,8 +53,40 @@ class SettingsFragment : Fragment() {
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_settings_scroll_view)
 
 
-        view.tab_account_edit_email.setText(sysManager.currentUserFromDB.displayName)
+        view.tab_account_edit_display_name.setText(sysManager.currentUserFromDB.displayName)
+        view.tab_account_edit_email.setText(sysManager.currentUserFromDB.email)
+
+        view.jesta_settings_button_accept_changes.setOnClickListener {
+            val currentUser = sysManager.currentUserFromDB
+            val changedUser = currentUser.copy()
+
+            val displayNameEditable = view.tab_account_edit_display_name.text
+            val emailEditable = view.tab_account_edit_email.text
+
+            if (!displayNameEditable.isNullOrBlank() && !emailEditable.isNullOrBlank()) {
+                changedUser.displayName = displayNameEditable.toString()
+                changedUser.email = emailEditable.toString()
+            }
+
+            if (areSameFields(changedUser, currentUser) == false) {
+                view.jesta_settings_profile_layout.visibility = View.INVISIBLE
+                sysManager.setUserOnDB(changedUser)
+                sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        return@addOnCompleteListener
+                    } else {
+                        updateUserLayout(view)
+                    }
+
+                    view.jesta_settings_profile_layout.visibility = View.VISIBLE
+                }
+            }
+        }
         return view
+    }
+
+    private fun areSameFields(changed: User, current: User): Any {
+        return changed.displayName == current.displayName && changed.email != current.displayName
     }
 
     private fun updateUserLayout(view: View) {

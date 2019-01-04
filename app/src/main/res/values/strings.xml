@@ -42,7 +42,7 @@
     <string name="jesta_card_review_crew">Crew</string>
 
     <!--Jesta Post-->
-    <string name="jesta_post_button_accept">Accept Jesta</string>
+    <string name="jesta_post_button_accept">DO Jesta</string>
     <string name="jesta_post_description">Description</string>
     <string name="jesta_post_title">Title</string>
     <string name="jesta_post_photo">Jesta Photo</string>
@@ -91,5 +91,6 @@
     <string name="jesta_settings_total_diamonds">Total diamonds</string>
     <string name="jesta_settings_fake_total_diamonds">30000</string>
     <string name="jesta_settings_fill_display_name">Display name</string>
+    <string name="jesta_settings_fill_email">EMAIL</string>
 
 </resources>

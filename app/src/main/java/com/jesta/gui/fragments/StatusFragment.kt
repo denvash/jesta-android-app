@@ -30,7 +30,7 @@ class StatusFragment : Fragment() {
                     return@addOnCompleteListener
                 }
 
-                val allMissions = (reloadJestasTask.result as List<*>).filterIsInstance<Mission>()
+//                val allMissions = (reloadJestasTask.result as List<*>).filterIsInstance<Mission>()
                 val allRelations: List<Relation> = (userRelationsTask.result as List<*>).filterIsInstance<Relation>()
 
                 val column = 1
