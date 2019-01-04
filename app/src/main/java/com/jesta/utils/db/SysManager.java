@@ -47,13 +47,13 @@ public class SysManager {
     // users management
     private static HashMap<String, User> _usersDict = new HashMap<>();
     private static HashMap<String, Mission> _jestasDict = new HashMap<>();
-    private static HashMap<String, Relation> _reluserjestaDict = new HashMap<>();
+    private static HashMap<String, Relation> _relationsDict = new HashMap<>();
     private User _currentUser = null;
 
     // db
     private static DatabaseReference _usersDatabase = FirebaseDatabase.getInstance().getReference("users");
     private static DatabaseReference _jestasDatabase = FirebaseDatabase.getInstance().getReference("jestas");
-    private static DatabaseReference _reluserjestaDatabase = FirebaseDatabase.getInstance().getReference("reluserjesta");
+    private static DatabaseReference _relationsDatabase = FirebaseDatabase.getInstance().getReference("relations");
 
     // messaging
     private static FirebaseMessaging _messaging = FirebaseMessaging.getInstance();
@@ -124,7 +124,7 @@ public class SysManager {
     {
         RELOAD_USERS, // update _usersDict
         RELOAD_JESTAS, // update _jestasDict
-        RELOAD_RELUSERJESTA, // update _reluserjestaDict
+        RELOAD_RELATIONS, // update _relationsDict
         UPLOAD_FILE
     }
 
@@ -242,12 +242,12 @@ public class SysManager {
             // return the task so it could be waited on the caller
             return source.getTask();
         }
-        else if (taskName == RELOAD_RELUSERJESTA) {
+        else if (taskName == RELOAD_RELATIONS) {
             final TaskCompletionSource<List<Relation>> source = new TaskCompletionSource<>();
-            _reluserjestaDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            _relationsDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    List<Relation> reluserjestaList = new ArrayList<>();
+                    List<Relation> relationsList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //     HashMap dbRelUserJesta = (HashMap)ds.getValue();
                     //     if (dbRelUserJesta == null) {
@@ -256,22 +256,22 @@ public class SysManager {
                     //     Relation rel = new Relation(dbRelUserJesta);
                     //     // here: use (String)dbJesta.get("id")
                     //     if ((String)dbRelUserJesta.get("id") != null) {
-                    //         _reluserjestaDict.put((String)dbRelUserJesta.get("id"), rel);
+                    //         _relationsDict.put((String)dbRelUserJesta.get("id"), rel);
                     //     }
                     //     else {
-                    //         _reluserjestaDict.put(UUID.randomUUID().toString(), rel);
+                    //         _relationsDict.put(UUID.randomUUID().toString(), rel);
                     //     }
                     //     reluserjestaList.add(rel);
                     // }
-                    Relation dbRelUserJesta = ds.getValue(Relation.class);
-                        if (dbRelUserJesta == null) {
-                            throw new NullPointerException("dbRelUserJesta is null");
+                        Relation dbRelation = ds.getValue(Relation.class);
+                        if (dbRelation == null) {
+                            throw new NullPointerException("dbRelation is null");
                         }
-                        _reluserjestaDict.put(dbRelUserJesta.getId(), dbRelUserJesta);
-                        reluserjestaList.add(dbRelUserJesta);
+                        _relationsDict.put(dbRelation.getId(), dbRelation);
+                        relationsList.add(dbRelation);
                     }
 
-                    source.setResult(reluserjestaList);
+                    source.setResult(relationsList);
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -365,7 +365,7 @@ public class SysManager {
         _jestasDatabase.child(mission.getId()).setValue(mission);
     }
 
-    public void setRelUserJestaOnDB(Relation rel){ _reluserjestaDatabase.child(rel.getId()).setValue(rel); }
+    public void setRelationOnDB(Relation rel){ _relationsDatabase.child(rel.getId()).setValue(rel); }
 
     public User getUserByID(String id) {
         return _usersDict.get(id);
@@ -378,11 +378,11 @@ public class SysManager {
         return _jestasDict.get(id);
     }
 
-    public Relation getRelUserJestaByID(String id) {
+    public Relation getRelationByID(String id) {
         if (id == null || id.equals("null")) {
             return null;
         }
-        return _reluserjestaDict.get(id);
+        return _relationsDict.get(id);
     }
 
     public Task getUserRels(String id){
@@ -391,7 +391,7 @@ public class SysManager {
         }
         final String usr_id = id;
         final List<Relation> relUserList = new ArrayList<>();
-        Task<List<Relation>> allRels = this.createDBTask(DBTask.RELOAD_RELUSERJESTA);
+        Task<List<Relation>> allRels = this.createDBTask(DBTask.RELOAD_RELATIONS);
         final TaskCompletionSource<List<Relation>> source = new TaskCompletionSource<>();
         allRels.addOnCompleteListener(new OnCompleteListener<List<Relation>>() {
             @Override

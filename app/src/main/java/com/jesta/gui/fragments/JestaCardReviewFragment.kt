@@ -99,7 +99,7 @@ class JestaCardReviewFragment : Fragment() {
                 jesta_id = mission.id,
                 status = RELATION_STATUS_INIT
             )
-            sysManager.setRelUserJestaOnDB(rel)
+            sysManager.setRelationOnDB(rel)
             MainActivity.instance.fragNavController.popFragment()
         }
 

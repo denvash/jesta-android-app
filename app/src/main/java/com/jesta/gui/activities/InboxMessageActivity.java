@@ -96,16 +96,6 @@ public class InboxMessageActivity extends AppCompatActivity {
                             TextView receiverTextView = findViewById(R.id.jesta_notification_receiver);
                             senderTextView.setText(userSender.getDisplayName());
                             receiverTextView.setText(userReceiver.getDisplayName());
-
-                            Relation rel = new Relation(
-                                    UUID.randomUUID().toString(),
-                                    userReceiver.getId(),
-                                    mission.getAuthorId(),
-                                    mission.getId(),
-                                    RELATION_STATUS_INIT
-                            );
-                            sysManager.setRelUserJestaOnDB(rel);
-
                         }
                     });
                 }
