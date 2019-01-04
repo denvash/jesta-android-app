@@ -127,6 +127,43 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--style="@style/TextAppearance.Jesta.Type"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginStart="@dimen/_40dp"-->
+                        <!--android:layout_marginEnd="@dimen/_10dp"-->
+                        <!--android:text="@string/jesta_settings_fill_display_name" />-->
+
+                    <!--<com.google.android.material.textfield.TextInputLayout-->
+                        <!--style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginEnd="@dimen/_40dp"-->
+                        <!--android:layout_weight="0.5"-->
+                        <!--android:gravity="center"-->
+                        <!--app:boxBackgroundColor="@color/transparent"-->
+                        <!--app:boxStrokeWidth="1dp"-->
+                        <!--app:counterEnabled="true"-->
+                        <!--app:counterMaxLength="20"-->
+                        <!--app:hintAnimationEnabled="true">-->
+
+                        <!--<com.google.android.material.textfield.TextInputEditText-->
+                            <!--android:id="@+id/tab_account_edit_email"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:fontFamily="@font/marvel"-->
+                            <!--android:inputType="textCapSentences"-->
+                            <!--android:textColor="@color/colorPrimary" />-->
+                    <!--</com.google.android.material.textfield.TextInputLayout>-->
+                <!--</LinearLayout>-->
+
                 <com.github.florent37.expansionpanel.ExpansionHeader
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -165,7 +202,7 @@
                         android:id="@+id/accountHeaderIndicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|end"
+                        android:layout_gravity="center|end"
                         android:layout_marginEnd="@dimen/_40dp"
                         android:adjustViewBounds="true"
                         android:contentDescription="@string/jesta_settings_edit_profile_icon_description"
@@ -179,7 +216,6 @@
                     android:layout_height="wrap_content">
 
                     <!-- CONTENT -->
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,7 +244,7 @@
                             app:hintAnimationEnabled="true">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/text_tag"
+                                android:id="@+id/tab_account_edit_email"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/marvel"
@@ -290,10 +326,6 @@
                             android:text="CHAT CONTENT" />
                     </LinearLayout>
                 </com.github.florent37.expansionpanel.ExpansionLayout>
-
-
-
-
 
                 <!--BUG TAB-->
                 <com.github.florent37.expansionpanel.ExpansionHeader
@@ -443,21 +475,40 @@
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/jesta_settings_button_log_out"
-                style="@style/Widget.Jesta.Button.Special"
-                android:layout_width="130dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_40dp"
-                android:text="@string/jesta_settings_button_log_out"
-                android:textSize="15sp"
-                app:backgroundTint="@color/white"
-                app:cornerRadius="14dp"
-                app:rippleColor="@color/colorPrimaryLight"
-                app:strokeColor="@color/black"
-                app:strokeWidth="1dp" />
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center">
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/jesta_settings_button_log_out"
+                    style="@style/Widget.Jesta.Button.Special"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jesta_settings_button_log_out"
+                    android:textSize="15sp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="14dp"
+                    app:rippleColor="@color/colorPrimaryLight"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="1dp" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/jesta_settings_button_accept"
+                    style="@style/Widget.Jesta.Button.Special"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accept Changes"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="14dp"
+                    app:rippleColor="@color/colorPrimaryLight"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="0.75dp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

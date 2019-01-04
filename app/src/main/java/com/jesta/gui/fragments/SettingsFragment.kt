@@ -40,18 +40,6 @@ class SettingsFragment : Fragment() {
             view.jesta_settings_profile_layout.visibility = View.VISIBLE
         }
 
-//        view.jesta_settings_tab_account.setOnClickListener {
-//            val userChangeAccount = sysManager.currentUserFromDB
-//            userChangeAccount.displayName =
-//                    "RandomAcc-"+Random.nextInt(500, 30000).toString()
-//
-//            sysManager.setUserOnDB(userChangeAccount)
-//            sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener {
-//                Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
-//                updateUserLayout(view)
-//            }
-//        }
-
         view.jesta_settings_button_log_out.setOnClickListener {
             sysManager.signOutUser(MainActivity.instance)
             MainActivity.instance.fragNavController.clearStack()
@@ -63,6 +51,9 @@ class SettingsFragment : Fragment() {
         }
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_settings_scroll_view)
+
+
+        view.tab_account_edit_email.setText(sysManager.currentUserFromDB.displayName)
         return view
     }
 
