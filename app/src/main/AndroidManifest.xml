@@ -57,6 +57,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".gui.activities.StatusReviewActivity" />
+        <activity android:name=".gui.activities.login.RegisterActivity" />
+        <activity android:name=".gui.activities.login.ErrorActivity" />
+        <activity android:name=".gui.activities.login.LoginActivitiesWrapper" />
+        <activity android:name=".gui.activities.login.OTPActivity" />
 
         <service android:name=".utils.services.MessagingService">
             <intent-filter>
