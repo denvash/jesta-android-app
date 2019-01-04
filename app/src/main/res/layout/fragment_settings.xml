@@ -411,9 +411,10 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/tab_bug_edit"
                                 android:layout_width="match_parent"
+                                android:elegantTextHeight="true"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/marvel"
-                                android:inputType="textCapSentences"
+                                android:inputType="textCapSentences|textMultiLine"
                                 android:textColor="@color/colorPrimary" />
                         </com.google.android.material.textfield.TextInputLayout>
 
