@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.florent37.expansionpanel.ExpansionLayout
@@ -39,13 +40,18 @@ class StatusAdapter(private val missionToDoers: Map<String, List<String>>) : Rec
         val relation = status.first
         val mission = status.second
 
+        val isPosterMission = currUser.id==mission.posterID
+
         holder.bind(list[position])
         expansionsCollection.add(holder.expansionLayout)
 
         holder.view.jesta_status_title.text = mission.title
-        holder.view.jesta_status_job.text = if (currUser.id==mission.posterID) STATUS_POSTER else STATUS_DOER
         holder.view.jesta_status_total_doers.text = mission.numOfPeople.toString()
-        holder.view.jesta_status_total_doers.visibility = if (currUser.id==mission.posterID) View.VISIBLE else View.INVISIBLE
+        val prefix = "As a "
+        holder.view.jesta_status_job.text = if (isPosterMission) prefix + STATUS_POSTER else prefix + STATUS_DOER
+        holder.view.jesta_status_total_doers.visibility = if (isPosterMission) View.VISIBLE else View.INVISIBLE
+        holder.view.jesta_status_divider.visibility = if (isPosterMission) View.VISIBLE else View.INVISIBLE
+
 
         holder.view.jesta_status_phase.text = when (relation.status) {
             RELATION_STATUS_INIT -> STATUS_PENDING
@@ -55,16 +61,17 @@ class StatusAdapter(private val missionToDoers: Map<String, List<String>>) : Rec
         }
 
         holder.view.jesta_status_phase.setTextColor(
+            ContextCompat.getColor(MainActivity.instance,
             when (relation.status) {
                 RELATION_STATUS_INIT -> R.color.status_pending
                 RELATION_STATUS_IN_PROGRESS -> R.color.status_in_progress
                 RELATION_STATUS_DONE -> R.color.status_done
                 else -> R.color.status_declined
-            }
+            })
         )
 
         holder.view.jesta_status_doers_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
-        holder.view.jesta_status_doers_recycle_view.adapter = DoersAdapter(missionToDoers[mission.id]!!)
+        holder.view.jesta_status_doers_recycle_view.adapter = DoersAdapter(missionToDoers[mission.id]!!,relation,mission)
 
 
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl

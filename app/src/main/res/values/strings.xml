@@ -75,11 +75,6 @@
     <string name="jesta_preview_difficulty_text">Difficulty</string>
 
     <!--Jesta Chat-->
-    <string name="app_name">Scaledrone chat</string>
-    <string name="count_initial_value">0</string>
-    <string name="button_label">Send</string>
-    <string name="toast_message">Hurra!</string>
-    <string name="input_placeholder">Write a message</string>
     <string name="jesta_inbox_message">MESSAGE</string>
     <string name="jesta_post_check_box_text">[dev] Upload to DB</string>
     <string name="jesta_post_add_tag">Add Tag</string>
@@ -95,5 +90,11 @@
     <string name="jesta_settings_send_bug">Send Report</string>
     <string name="jesta_status_phase">Phase</string>
     <string name="jesta_status_total_users">Total Users</string>
+    <string name="jesta_status_title">Jesta Title</string>
+    <string name="jesta_status_job">Job</string>
+    <string name="jesta_status_assign_a_doer">Assign a Doer</string>
+    <string name="jesta_status_settings">Settings</string>
+    <string name="jesta_status_edit_jesta">Edit jesta</string>
+    <string name="jesta_status_preview">Preview</string>
 
 </resources>

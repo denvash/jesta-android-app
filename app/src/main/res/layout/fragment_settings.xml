@@ -385,9 +385,7 @@
                 <com.github.florent37.expansionpanel.ExpansionLayout
                     android:id="@+id/bugExpansionLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_40dp"
-                    android:layout_marginStart="@dimen/_40dp">
+                    android:layout_height="wrap_content">
 
                     <!-- CONTENT -->
                     <LinearLayout

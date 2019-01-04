@@ -29,6 +29,10 @@
         <item name="android:fontFamily">@font/marvel</item>
     </style>
 
+    <style name="TextAppearance.Jesta.Type.Small" parent="TextAppearance.Jesta.Type">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="Widget.Jesta.EditText" parent="TextAppearance.Jesta.Type">
         <item name="textAllCaps">true</item>
         <item name="android:textColor">@color/colorPrimary</item>

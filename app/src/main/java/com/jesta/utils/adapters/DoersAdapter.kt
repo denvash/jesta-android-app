@@ -5,24 +5,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jesta.R
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
+import com.jesta.data.Mission
+import com.jesta.data.Relation
 import com.jesta.gui.activities.MainActivity
-import com.jesta.gui.fragments.JestaCardReviewFragment
 import com.jesta.utils.db.SysManager
-import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.jesta_card.view.*
 import kotlinx.android.synthetic.main.jesta_doers.view.*
+import kotlinx.android.synthetic.main.jesta_status.view.*
 
 class DoersAdapter internal constructor(
-    private val doerList: List<String>
+    private val doerList: List<String>,
+    private val relation: Relation,
+    private val mission: Mission
 ) : RecyclerView.Adapter<DoersAdapter.JestaCardViewHolder>() {
 
-    private val mainInstance = MainActivity.instance
-    private val sysManager = SysManager(mainInstance)
+    private val sysManager = SysManager(MainActivity.instance)
 
     inner class JestaCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var doerBar: LinearLayout = itemView.findViewById(R.id.jesta_doers)
@@ -40,27 +40,26 @@ class DoersAdapter internal constructor(
             bar.jesta_doers_name.text = doer.displayName
         }
 
+        if (doer.photoUrl != MISSION_EMPTY_AUTHOR_IMAGE) {
+            Picasso.get().load(doer.photoUrl).noFade().into(holder.doerBar.jesta_doers_avatar)
+        }
+
         holder.doerBar.jesta_doers_accept.setOnClickListener {
             Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
+            sysManager.onAcceptDoer(relation,mission)
         }
 
         holder.doerBar.jesta_doers_decline.setOnClickListener {
             Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
+            sysManager.onDeclineUser(relation)
         }
 
         holder.doerBar.jesta_doers_chat.setOnClickListener {
             Toast.makeText(it.context,"Chat Clicked",Toast.LENGTH_LONG).show()
         }
-
-
-
     }
 
     override fun getItemCount(): Int {
         return doerList.size
     }
-
-
 }
-
-
