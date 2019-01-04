@@ -15,12 +15,12 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_status.view.*
+import java.util.*
 
-import java.util.ArrayList
+class StatusAdapter(private val missionToDoers: Map<String, List<String>>) :
+    RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
-class StatusAdapter(private val missionToDoers: Map<String, List<String>>) : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
-
-    private val list = ArrayList<Pair<Relation,Mission>>()
+    private val list = ArrayList<Pair<Relation, Mission>>()
     private val expansionsCollection = ExpansionLayoutCollection()
     private val sysManager = SysManager(MainActivity.instance)
 
@@ -40,7 +40,7 @@ class StatusAdapter(private val missionToDoers: Map<String, List<String>>) : Rec
         val relation = status.first
         val mission = status.second
 
-        val isPosterMission = currUser.id==mission.posterID
+        val isPosterMission = currUser.id == mission.posterID
 
         holder.bind(list[position])
         expansionsCollection.add(holder.expansionLayout)
@@ -61,17 +61,20 @@ class StatusAdapter(private val missionToDoers: Map<String, List<String>>) : Rec
         }
 
         holder.view.jesta_status_phase.setTextColor(
-            ContextCompat.getColor(MainActivity.instance,
-            when (relation.status) {
-                RELATION_STATUS_INIT -> R.color.status_pending
-                RELATION_STATUS_IN_PROGRESS -> R.color.status_in_progress
-                RELATION_STATUS_DONE -> R.color.status_done
-                else -> R.color.status_declined
-            })
+            ContextCompat.getColor(
+                MainActivity.instance,
+                when (relation.status) {
+                    RELATION_STATUS_INIT -> R.color.status_pending
+                    RELATION_STATUS_IN_PROGRESS -> R.color.status_in_progress
+                    RELATION_STATUS_DONE -> R.color.status_done
+                    else -> R.color.status_declined
+                }
+            )
         )
 
         holder.view.jesta_status_doers_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
-        holder.view.jesta_status_doers_recycle_view.adapter = DoersAdapter(missionToDoers[mission.id]!!,relation,mission)
+        holder.view.jesta_status_doers_recycle_view.adapter =
+                DoersAdapter(missionToDoers[mission.id]!!, relation, mission)
 
 
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
@@ -85,7 +88,7 @@ class StatusAdapter(private val missionToDoers: Map<String, List<String>>) : Rec
         return list.size
     }
 
-    fun setItems(items: List<Pair<Relation,Mission>>) {
+    fun setItems(items: List<Pair<Relation, Mission>>) {
         this.list.addAll(items)
         notifyDataSetChanged()
     }

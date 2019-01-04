@@ -15,6 +15,7 @@ import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_doers.view.*
 import kotlinx.android.synthetic.main.jesta_status.view.*
+import kotlin.random.Random
 
 class DoersAdapter internal constructor(
     private val doerList: List<String>,
@@ -38,6 +39,7 @@ class DoersAdapter internal constructor(
         if (position < doerList.size) {
             val bar = holder.doerBar
             bar.jesta_doers_name.text = doer.displayName
+            bar.jesta_doers_diamond_amount.text = Random.nextInt(1, 40000).toString()
         }
 
         if (doer.photoUrl != MISSION_EMPTY_AUTHOR_IMAGE) {
