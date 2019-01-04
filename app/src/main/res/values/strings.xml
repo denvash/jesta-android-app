@@ -92,5 +92,6 @@
     <string name="jesta_settings_fake_total_diamonds">30000</string>
     <string name="jesta_settings_fill_display_name">Display name</string>
     <string name="jesta_settings_fill_email">EMAIL</string>
+    <string name="jesta_settings_send_bug">Send Report</string>
 
 </resources>

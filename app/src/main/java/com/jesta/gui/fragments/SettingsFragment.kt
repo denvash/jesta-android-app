@@ -39,6 +39,7 @@ class SettingsFragment : Fragment() {
             }
 
             view.jesta_settings_profile_layout.visibility = View.VISIBLE
+
         }
 
         view.jesta_settings_button_log_out.setOnClickListener {
@@ -83,6 +84,22 @@ class SettingsFragment : Fragment() {
                 Toast.makeText(MainActivity.instance,"Nothing to change!",Toast.LENGTH_LONG).show()
             }
         }
+
+        view.jesta_settings_send_bug.setOnClickListener {
+
+            val bugEditable = view.tab_bug_edit.text
+            if(bugEditable.isNullOrBlank() || bugEditable.isNullOrEmpty()) {
+                Toast.makeText(it.context, "Please fill your bug report", Toast.LENGTH_LONG).show()
+            }
+
+            val to = "jestaa80@gmail.com"
+            val emailIntent = Intent(Intent.ACTION_SENDTO)
+            emailIntent.data = Uri.parse("mailto:$to")
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Jesta Bug Report")
+            emailIntent.putExtra(Intent.EXTRA_TEXT, view.tab_bug_edit.text)
+            startActivity(emailIntent)
+        }
+
         return view
     }
 

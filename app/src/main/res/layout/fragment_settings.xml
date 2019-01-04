@@ -127,7 +127,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <com.github.florent37.expansionpanel.ExpansionHeader
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -242,6 +241,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="@dimen/_40dp"
+                                android:layout_marginBottom="20dp"
                                 android:layout_weight="0.5"
                                 android:gravity="center"
                                 app:boxBackgroundColor="@color/transparent"
@@ -385,28 +385,57 @@
                 <com.github.florent37.expansionpanel.ExpansionLayout
                     android:id="@+id/bugExpansionLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_40dp"
+                    android:layout_marginStart="@dimen/_40dp">
 
                     <!-- CONTENT -->
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_marginStart="@dimen/_40dp"
+                        android:layout_marginEnd="@dimen/_40dp"
+                        android:orientation="vertical">
 
-                        <TextView
-                            style="@style/TextAppearance.Jesta.Type"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:hint="Description"
+                            app:boxBackgroundColor="@color/transparent"
+                            app:boxStrokeWidth="1dp"
+                            app:hintEnabled="true"
+                            app:hintAnimationEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/tab_bug_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/marvel"
+                                android:inputType="textCapSentences"
+                                android:textColor="@color/colorPrimary" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/jesta_settings_send_bug"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="20dp"
+                            style="@style/Widget.Jesta.Button.Special"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_40dp"
-                            android:layout_marginEnd="@dimen/_10dp"
-                            android:text="BUG CONTENT" />
+                            app:icon="@drawable/ic_jesta_send"
+                            app:iconTint="@color/colorPrimary"
+                            app:iconGravity="textStart"
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="5dp"
+                            app:rippleColor="@color/colorPrimaryLight"
+                            app:strokeColor="@color/black"
+                            app:strokeWidth="1dp" />
                     </LinearLayout>
-                </com.github.florent37.expansionpanel.ExpansionLayout>
 
+
+                </com.github.florent37.expansionpanel.ExpansionLayout>
 
 
                 <!--about TAB-->
@@ -485,18 +514,18 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_gravity="center">
+                android:layout_marginBottom="20dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/jesta_settings_button_log_out"
                     style="@style/Widget.Jesta.Button.Special"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10dp"
                     android:text="@string/jesta_settings_button_log_out"
                     android:textSize="15sp"
-                    android:layout_marginEnd="@dimen/_10dp"
                     app:backgroundTint="@color/white"
                     app:cornerRadius="14dp"
                     app:rippleColor="@color/colorPrimaryLight"
