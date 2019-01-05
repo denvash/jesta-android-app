@@ -34,22 +34,22 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
     override fun onBindViewHolder(holder: RecyclerHolder, position: Int) {
 
         val status = list[position]
-        val currUser = sysManager.currentUserFromDB
-
         val mission = sysManager.getMissionByID(status.missionID)
 
-        val isPosterMission = status.isPoster
 
         holder.bind(list[position])
         expansionsCollection.add(holder.expansionLayout)
 
         holder.view.jesta_status_title.text = mission.title
         holder.view.jesta_status_total_doers.text = mission.numOfPeople.toString()
-        val prefix = "As a "
-        holder.view.jesta_status_job.text = if (isPosterMission) prefix + STATUS_POSTER else prefix + STATUS_DOER
-        holder.view.jesta_status_total_doers.visibility = if (isPosterMission) View.VISIBLE else View.INVISIBLE
-        holder.view.jesta_status_divider.visibility = if (isPosterMission) View.VISIBLE else View.INVISIBLE
 
+        if (status.status == RELATION_STATUS_DONE || mission.numOfPeople == 0 || !status.isPoster) {
+            holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
+            holder.view.jesta_status_divider.visibility = View.INVISIBLE
+        }
+
+        val prefix = "As a "
+        holder.view.jesta_status_job.text = if (status.isPoster) prefix + STATUS_POSTER else prefix + STATUS_DOER
 
         holder.view.jesta_status_phase.text = when (status.status) {
             RELATION_STATUS_INIT -> STATUS_PENDING
@@ -74,12 +74,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         holder.view.jesta_status_doers_recycle_view.adapter =
                 DoersAdapter(status.doerIDList, status, mission)
 
-
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
-        if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
-            Picasso.get().load(posterAvatar).noFade().into(holder.view.jesta_status_avatar)
-        }
-
+        Picasso.get().load(posterAvatar).noFade().into(holder.view.jesta_status_avatar)
     }
 
     override fun getItemCount(): Int {

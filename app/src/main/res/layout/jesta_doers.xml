@@ -17,7 +17,6 @@
             android:id="@+id/jesta_doers_avatar"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/jesta_default_avatar"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="0.75dp" />
 
