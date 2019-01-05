@@ -467,6 +467,8 @@ public class SysManager {
     }
 
     public void onAcceptDoer(Relation rel, Mission mission) {
+        if(mission.getNumOfPeople() == 0)
+            return;
         mission.setNumOfPeople(mission.getNumOfPeople() - 1);
         if (mission.getNumOfPeople() == 0)
             mission.setAvailable(false);
