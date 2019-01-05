@@ -538,14 +538,6 @@ public class SysManager {
         final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/askTodoJestaForUser";
         // TODO add authorization header
 
-
-//        // TODO Remove this debugging hack
-//        String authorId = null;
-//        authorId = jesta.getAuthorId();
-//        if (authorId.equals("null")) {
-//            authorId = getCurrentUserFromDB().getId();
-//        }
-
         String receiverId = receiver.getId();
         String receiverInbox = receiverId + "_" + TopicDescriptor.USER_INBOX;
         String sender = getCurrentUserFromDB().getId();
@@ -588,7 +580,6 @@ public class SysManager {
                     }
                 });
 
-// Add the request to the RequestQueue.
         queue.add(stringRequest);
 
         return source.getTask();

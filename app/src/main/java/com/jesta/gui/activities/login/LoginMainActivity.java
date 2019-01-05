@@ -16,11 +16,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.*;
+import com.jesta.data.Mission;
+import com.jesta.gui.activities.ChatActivity;
 import com.jesta.gui.activities.MainActivity;
 import com.jesta.R;
+import com.jesta.utils.chat.ChatManager;
+import com.jesta.utils.chat.ChatRoom;
 import com.jesta.utils.db.SysManager;
 import com.jesta.data.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,19 +59,32 @@ public class LoginMainActivity extends LoginActivitiesWrapper {
                     return;
                 }
 
+                // todo restore before push
+
 
 
                 // user is logged in
-                User currentUser = sysManager.getCurrentUserFromDB();
-                if (currentUser != null) {
-                    // todo example of changing an user on DB
-//                    currentUser.setDisplayName("Pachka hagever :)");
-//                    sysManager.setUserOnDB(currentUser);
+                User currentUser = sysManager.getCurrentUserFromDB(); // jenya leo
 
-                    //todo go to OTPActivity or check for OTP and go to Path
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                if (currentUser != null) {
+
+                    User user1 = sysManager.getUserByID("zWePMHCjPNVDJYd5PN7AUCpLtnE2"); // jenya leo
+                    User user2 = sysManager.getUserByID("4K8htpRzkRSs8P77yBVvRJIwKCA3"); // jenya leonti
+                    Mission jesta = new Mission("fake-id-lol-z", user2.getId(), "", "jestaTitle here", "hard", "desc", "no", 0, 540, 324, "haifa", 535, new ArrayList<String>(), true);
+
+                    ChatRoom room = new ChatRoom(user1, user2, jesta);
+                    ChatManager chatManager = new ChatManager();
+                    chatManager.subscribeToChatRoom(room);
+
+                    Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("roomId", room.getId());
+                    i.putExtras(b);
                     startActivity(i);
+
+//                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(i);
                     return;
                 }
 
