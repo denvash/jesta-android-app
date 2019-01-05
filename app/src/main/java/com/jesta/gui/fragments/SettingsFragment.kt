@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.USER_EMPTY_DIAMONDS
 import com.jesta.data.USER_EMPTY_PHOTO
+import com.jesta.data.User
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.activities.login.LoginMainActivity
 import com.jesta.utils.db.SysManager
@@ -38,6 +39,7 @@ class SettingsFragment : Fragment() {
             }
 
             view.jesta_settings_profile_layout.visibility = View.VISIBLE
+
         }
 
         view.jesta_settings_button_log_out.setOnClickListener {
@@ -52,9 +54,57 @@ class SettingsFragment : Fragment() {
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_settings_scroll_view)
 
+        view.tab_account_edit_display_name.setText(sysManager.currentUserFromDB.displayName)
+        view.tab_account_edit_email.setText(sysManager.currentUserFromDB.email)
 
-        view.tab_account_edit_email.setText(sysManager.currentUserFromDB.displayName)
+        view.jesta_settings_button_accept_changes.setOnClickListener {
+            val currentUser = sysManager.currentUserFromDB
+            val changedUser = currentUser.copy()
+
+            val displayNameEditable = view.tab_account_edit_display_name.text
+            val emailEditable = view.tab_account_edit_email.text
+
+            if (!displayNameEditable.isNullOrBlank() && !emailEditable.isNullOrBlank()) {
+                changedUser.displayName = displayNameEditable.toString()
+                changedUser.email = emailEditable.toString()
+            }
+
+            if (areSameFields(changedUser, currentUser) == false) {
+                view.jesta_settings_profile_layout.visibility = View.INVISIBLE
+                sysManager.setUserOnDB(changedUser)
+                sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        return@addOnCompleteListener
+                    } else {
+                        updateUserLayout(view)
+                    }
+                    view.jesta_settings_profile_layout.visibility = View.VISIBLE
+                }
+            } else {
+                Toast.makeText(MainActivity.instance,"Nothing to change!",Toast.LENGTH_LONG).show()
+            }
+        }
+
+        view.jesta_settings_send_bug.setOnClickListener {
+
+            val bugEditable = view.tab_bug_edit.text
+            if(bugEditable.isNullOrBlank() || bugEditable.isNullOrEmpty()) {
+                Toast.makeText(it.context, "Please fill your bug report", Toast.LENGTH_LONG).show()
+            }
+
+            val to = "jestaa80@gmail.com"
+            val emailIntent = Intent(Intent.ACTION_SENDTO)
+            emailIntent.data = Uri.parse("mailto:$to")
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Jesta Bug Report")
+            emailIntent.putExtra(Intent.EXTRA_TEXT, view.tab_bug_edit.text)
+            startActivity(emailIntent)
+        }
+
         return view
+    }
+
+    private fun areSameFields(changed: User, current: User): Any {
+        return changed.displayName == current.displayName && changed.email == current.email
     }
 
     private fun updateUserLayout(view: View) {

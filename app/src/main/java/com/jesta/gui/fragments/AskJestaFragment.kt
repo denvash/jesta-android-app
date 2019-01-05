@@ -91,7 +91,6 @@ class AskJestaFragment : Fragment() {
 
             val jesta = Mission(
                 posterID = sysManager.currentUserFromDB.id,
-                authorImage = sysManager.currentUserFromDB.photoUrl,
                 id = UUID.randomUUID().toString(),
                 title = view.jesta_post_title.text.toString(),
                 difficulty = view.jesta_post_difficulty.text.toString(),

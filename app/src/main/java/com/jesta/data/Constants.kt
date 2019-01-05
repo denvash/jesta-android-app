@@ -11,6 +11,13 @@ const val DIFFICULTY_EASY = "Easy"
 const val DIFFICULTY_MEDIUM = "Medium"
 const val DIFFICULTY_HARD = "Hard"
 
+const val STATUS_POSTER = "Poster"
+const val STATUS_DOER = "Doer"
+const val STATUS_PENDING = "Pending"
+const val STATUS_IN_PROGRESS = "In Progress"
+const val STATUS_DONE = "Done"
+const val STATUS_DECLINED = "Declined"
+
 const val INDEX_DO_JESTA = FragNavController.TAB1
 const val INDEX_ASK_JESTA = FragNavController.TAB2
 const val INDEX_STATUS = FragNavController.TAB3
@@ -46,3 +53,4 @@ const val RELATION_EMPTY_MISSION_ID: String = nullString
 const val RELATION_STATUS_INIT = 0
 const val RELATION_STATUS_IN_PROGRESS = 1
 const val RELATION_STATUS_DONE = 2
+const val RELATION_STATUS_USER_DECLINED = 3
