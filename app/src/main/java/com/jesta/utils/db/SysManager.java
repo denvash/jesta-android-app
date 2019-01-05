@@ -1,4 +1,5 @@
 package com.jesta.utils.db;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
@@ -9,11 +10,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.android.volley.*;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.*;
-import com.google.firebase.auth.*;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -21,7 +27,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
-import com.jesta.data.*;
+import com.jesta.data.Mission;
+import com.jesta.data.Relation;
+import com.jesta.data.Status;
+import com.jesta.data.User;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
 import org.json.JSONException;
@@ -33,9 +42,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import static com.jesta.data.ConstantsKt.*;
+import static com.jesta.data.ConstantsKt.RELATION_STATUS_IN_PROGRESS;
+import static com.jesta.data.ConstantsKt.RELATION_STATUS_USER_DECLINED;
 import static com.jesta.utils.db.SysManager.DBTask.*;
-
 
 
 /**
@@ -102,7 +111,7 @@ public class SysManager {
 
     public void startLoadingAnim() {
         _activity.setContentView(R.layout.jesta_loading);
-        _pgsBar = (ProgressBar)_activity.findViewById(R.id.pBar);
+        _pgsBar = (ProgressBar) _activity.findViewById(R.id.pBar);
         _pgsBar.setVisibility(View.VISIBLE);
     }
 
@@ -123,8 +132,7 @@ public class SysManager {
      * TODO-MAX: implement updateUserInDB etc'...
      */
 
-    public enum DBTask
-    {
+    public enum DBTask {
         RELOAD_USERS, // update _usersDict
         RELOAD_JESTAS, // update _jestasDict
         RELOAD_RELATIONS, // update _relationsDict
@@ -139,13 +147,12 @@ public class SysManager {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            _storage.child(randomFileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-                            {
+                            _storage.child(randomFileName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
-                                public void onSuccess(Uri downloadUrl)
-                                {
+                                public void onSuccess(Uri downloadUrl) {
                                     source.setResult(downloadUrl.toString());
                                 }
+
                                 public void onFailure(@NonNull Exception e) {
                                     source.setException(e);
                                 }
@@ -199,6 +206,7 @@ public class SysManager {
                     }
                     source.setResult(usersList);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     source.setException(databaseError.toException());
@@ -206,8 +214,7 @@ public class SysManager {
             });
             // return the task so it could be waited on the caller
             return source.getTask();
-        }
-        else if (taskName == RELOAD_JESTAS) {
+        } else if (taskName == RELOAD_JESTAS) {
             final TaskCompletionSource<List<Mission>> source = new TaskCompletionSource<>();
             _jestasDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -237,6 +244,7 @@ public class SysManager {
 
                     source.setResult(jestasList);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     source.setException(databaseError.toException());
@@ -244,8 +252,7 @@ public class SysManager {
             });
             // return the task so it could be waited on the caller
             return source.getTask();
-        }
-        else if (taskName == RELOAD_RELATIONS) {
+        } else if (taskName == RELOAD_RELATIONS) {
             final TaskCompletionSource<List<Relation>> source = new TaskCompletionSource<>();
             _relationsDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -254,21 +261,21 @@ public class SysManager {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         //TODO: fixed by Dennis
-                    //     HashMap dbRelUserJesta = (HashMap)ds.getValue();
-                    //     if (dbRelUserJesta == null) {
-                    //         throw new NullPointerException("dbRelUserJesta is null");
-                    //     }
-                    //     Relation rel = new Relation(dbRelUserJesta);
-                    //     // here: use (String)dbJesta.get("id")
-                    //     if ((String)dbRelUserJesta.get("id") != null) {
-                    //         _relationsDict.put((String)dbRelUserJesta.get("id"), rel);
-                    //     }
-                    //     else {
-                    //         _relationsDict.put(UUID.randomUUID().toString(), rel);
-                    //     }
-                    //     reluserjestaList.add(rel);
-                    // }
-                    Relation dbRelation = ds.getValue(Relation.class);
+                        //     HashMap dbRelUserJesta = (HashMap)ds.getValue();
+                        //     if (dbRelUserJesta == null) {
+                        //         throw new NullPointerException("dbRelUserJesta is null");
+                        //     }
+                        //     Relation rel = new Relation(dbRelUserJesta);
+                        //     // here: use (String)dbJesta.get("id")
+                        //     if ((String)dbRelUserJesta.get("id") != null) {
+                        //         _relationsDict.put((String)dbRelUserJesta.get("id"), rel);
+                        //     }
+                        //     else {
+                        //         _relationsDict.put(UUID.randomUUID().toString(), rel);
+                        //     }
+                        //     reluserjestaList.add(rel);
+                        // }
+                        Relation dbRelation = ds.getValue(Relation.class);
                         if (dbRelation == null) {
                             throw new NullPointerException("dbRelUserJesta is null");
                         }
@@ -278,6 +285,7 @@ public class SysManager {
 
                     source.setResult(relationsList);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     source.setException(databaseError.toException());
@@ -286,8 +294,10 @@ public class SysManager {
             // return the task so it could be waited on the caller
             return source.getTask();
         }
-       return null;
-    };
+        return null;
+    }
+
+    ;
 
     public FirebaseAuth getFirebaseAuth() {
         return _auth;
@@ -297,6 +307,7 @@ public class SysManager {
      * Called when user authenticated against firebase auth.
      * Sets the currentUser of the system, with the user's data got from DB.
      * If user isn't on DB yet, it will insert a new entry for him at the DB.
+     *
      * @param task
      * @param context
      * @param previousActivity
@@ -326,8 +337,7 @@ public class SysManager {
         // unsubscribe from all system messages topics
         try {
             _firebaseInstance.deleteInstanceId();
-        }
-        catch (IOException ioException) {
+        } catch (IOException ioException) {
             // todo activityError
         }
 
@@ -349,6 +359,7 @@ public class SysManager {
     /**
      * Note: RELOAD_USERS should be called before using this function at the first time
      * Call RELOAD_USERS every time you need the users list to be updated from DB
+     *
      * @return
      */
     public User getCurrentUserFromDB() {
@@ -370,7 +381,9 @@ public class SysManager {
         _jestasDatabase.child(mission.getId()).setValue(mission);
     }
 
-    public void setRelationOnDB(Relation rel){ _relationsDatabase.child(rel.getId()).setValue(rel); }
+    public void setRelationOnDB(Relation rel) {
+        _relationsDatabase.child(rel.getId()).setValue(rel);
+    }
 
     public User getUserByID(String id) {
         return _usersDict.get(id);
@@ -390,7 +403,7 @@ public class SysManager {
         return _relationsDict.get(id);
     }
 
-    public Task getUserRelations(String id){
+    public Task getUserRelations(String id) {
         if (id == null || id.equals("null")) {
             return null;
         }
@@ -418,7 +431,7 @@ public class SysManager {
         return source.getTask();
     }
 
-    public Task getStatusList(){
+    public Task getStatusList() {
         final String user = this.getCurrentUserFromDB().getId();
         final HashMap<String, Status> statusMap = new HashMap<>();
         Task<List<Relation>> allRels = this.createDBTask(DBTask.RELOAD_RELATIONS);
@@ -436,11 +449,11 @@ public class SysManager {
                 for (Relation i : lst) {
                     if (i.getDoerID().equals(user) || i.getPosterID().equals(user)) {
                         Status sts = statusMap.get(i.getMissionID());
-                        if(sts == null){
+                        if (sts == null) {
                             sts = new Status();
                             sts.setMissionID(i.getMissionID());
                             sts.setStatus(i.getStatus());
-                            if(i.getPosterID().equals(user))
+                            if (i.getPosterID().equals(user))
                                 sts.setPoster(true);
                             statusMap.put(i.getMissionID(), sts);
                         }
@@ -453,9 +466,9 @@ public class SysManager {
         return source.getTask();
     }
 
-    public void onAcceptDoer(Relation rel, Mission mission){
+    public void onAcceptDoer(Relation rel, Mission mission) {
         mission.setNumOfPeople(mission.getNumOfPeople() - 1);
-        if(mission.getNumOfPeople() == 0)
+        if (mission.getNumOfPeople() == 0)
             mission.setAvailable(false);
         this.setMissionOnDB(mission);
 
@@ -464,14 +477,14 @@ public class SysManager {
         // TODO: send notification to accepted user rel.doer_id
     }
 
-    public void onDeclineUser(Relation rel){
+    public void onDeclineUser(Relation rel) {
         rel.setStatus(RELATION_STATUS_USER_DECLINED);
         this.setRelationOnDB(rel);
         // TODO: send notification to declined user rel.doer_id
     }
+
     /**
      * Messaging and push notifications
-     *
      */
 
     public Task subscribeToTopic(Topic topic) {
@@ -484,7 +497,7 @@ public class SysManager {
                         source.setResult("msg_subscribed");
 
                         if (!task.isSuccessful()) {
-                           source.setException(task.getException());
+                            source.setException(task.getException());
                         }
 
                     }
@@ -501,7 +514,7 @@ public class SysManager {
                         source.setResult("msg_unsubscribed");
 
                         if (!task.isSuccessful()) {
-                           source.setException(task.getException());
+                            source.setException(task.getException());
                         }
 
                     }
@@ -534,7 +547,7 @@ public class SysManager {
         String url = null;
         try {
             User author = getUserByID(authorId);
-            String  receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
+            String receiverInbox = author.getId() + "_" + TopicDescriptor.USER_INBOX;
 
             String receiver = author.getId();
             String sender = getCurrentUserFromDB().getId();
@@ -558,8 +571,7 @@ public class SysManager {
                     "&jesta=" + jestaId;
 
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -606,8 +618,7 @@ public class SysManager {
             // TODO change to post request to avoid this shit
             title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // todo handle it
         }
 
@@ -652,8 +663,7 @@ public class SysManager {
 
         if (title == null || body == null) {
             // TODO throw exception
-        }
-        else {
+        } else {
             // TODO change to post request to avoid this shit
             title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
@@ -676,8 +686,7 @@ public class SysManager {
                         source.setException(error);
                         System.out.println(error.getMessage());
                     }
-                })
-        {
+                }) {
 //            /** Passing some request headers* */
 //            @Override
 //            public Map getHeaders() throws AuthFailureError {
@@ -714,8 +723,7 @@ public class SysManager {
     public void showKeyboardAutomatically(Boolean flag) {
         if (flag) {
             _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
-        else {// don't show keyboard
+        } else {// don't show keyboard
             _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
     }
