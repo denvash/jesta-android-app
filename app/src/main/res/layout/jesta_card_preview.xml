@@ -215,7 +215,6 @@
             android:layout_marginStart="@dimen/_40dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="@string/jesta_card_profile_description"
-            android:src="@drawable/jesta_default_avatar"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="0.75dp" />
 

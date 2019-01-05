@@ -10,11 +10,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.USER_EMPTY_DIAMONDS
-import com.jesta.data.USER_EMPTY_PHOTO
 import com.jesta.data.User
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.activities.login.LoginMainActivity
 import com.jesta.utils.db.SysManager
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import kotlin.random.Random
@@ -81,14 +81,14 @@ class SettingsFragment : Fragment() {
                     view.jesta_settings_profile_layout.visibility = View.VISIBLE
                 }
             } else {
-                Toast.makeText(MainActivity.instance,"Nothing to change!",Toast.LENGTH_LONG).show()
+                Toast.makeText(MainActivity.instance, "Nothing to change!", Toast.LENGTH_LONG).show()
             }
         }
 
         view.jesta_settings_send_bug.setOnClickListener {
 
             val bugEditable = view.tab_bug_edit.text
-            if(bugEditable.isNullOrBlank() || bugEditable.isNullOrEmpty()) {
+            if (bugEditable.isNullOrBlank() || bugEditable.isNullOrEmpty()) {
                 Toast.makeText(it.context, "Please fill your bug report", Toast.LENGTH_LONG).show()
             }
 
@@ -113,9 +113,8 @@ class SettingsFragment : Fragment() {
         view.jesta_settings_profile_phone_number.text = currentUser.email
         view.jesta_settings_profile_full_name_progress.hide()
 
-        if (currentUser.photoUrl != USER_EMPTY_PHOTO) {
-            view.jesta_settings_avatar.setImageURI(Uri.parse(currentUser.photoUrl))
-        }
+        Picasso.get().load(currentUser.photoUrl).noFade().into(view.jesta_settings_avatar)
+
         if (currentUser.diamonds == USER_EMPTY_DIAMONDS) {
             view.jesta_settings_diamond_amount.text = Random.nextInt(500, 30000).toString()
         }

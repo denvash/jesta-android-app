@@ -51,7 +51,6 @@
                             android:layout_height="80dp"
                             android:layout_marginEnd="10dp"
                             android:contentDescription="@string/nav_bottom_sheet_profile_description"
-                            android:src="@drawable/jesta_default_avatar"
                             app:civ_border_color="@color/colorPrimary"
                             app:civ_border_width="0.5dp" />
 
