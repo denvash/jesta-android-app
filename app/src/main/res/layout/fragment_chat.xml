@@ -31,7 +31,6 @@
         app:attachmentButtonDefaultIconPressedColor="@color/white"
         app:attachmentButtonDefaultBgPressedColor="@color/colorPrimary"
         app:inputButtonDefaultIconColor="@color/white"
-        app:inputButtonDefaultBgColor="@color/colorPrimary"
-        />
+        app:inputButtonDefaultBgColor="@color/colorPrimary"/>
 
 </RelativeLayout>

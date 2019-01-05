@@ -38,9 +38,6 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-
-
-
         Bundle b = getIntent().getExtras();
         final String roomId = b.getString("roomId");
         final Context context = this;

@@ -6,6 +6,8 @@ const val nullString = "null"
 const val nullInt = -1
 
 const val BUNDLE_MISSION = "jesta-mission"
+const val BUNDLE_CHAT_ROOM = "jesta-chat"
+
 
 const val DIFFICULTY_EASY = "Easy"
 const val DIFFICULTY_MEDIUM = "Medium"

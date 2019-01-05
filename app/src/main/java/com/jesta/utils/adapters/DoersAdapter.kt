@@ -16,10 +16,10 @@ import com.jesta.gui.fragments.ChatFragment
 import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.ChatRoom
 import com.jesta.gui.activities.ChatActivity
+import com.jesta.gui.fragments.JestaCardReviewFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_doers.view.*
-import kotlinx.android.synthetic.main.jesta_main_activity.view.*
 import kotlin.random.Random
 
 class DoersAdapter internal constructor(
@@ -86,7 +86,20 @@ class DoersAdapter internal constructor(
         }
 
         holder.doerBar.jesta_doers_new_layout.setOnClickListener {
-            MainActivity.instance.fragNavController.pushFragment(ChatFragment())
+            val roomDoer = sysManager.getUserByID(relation.doerID)
+            val poster = sysManager.getUserByID(mission.posterID)
+            val chatRoom = ChatRoom(roomDoer,poster,mission)
+            val chatManager = ChatManager()
+
+            chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    // todo some error
+                    return@addOnCompleteListener
+                }
+
+                //TODO: too slow subscribe
+            }
+            MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!))
         }
     }
 

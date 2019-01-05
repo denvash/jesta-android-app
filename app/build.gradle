@@ -50,8 +50,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    implementation 'androidx.core:core-ktx:1.1.0-alpha03'
-
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'id.zelory:compressor:2.1.0'
     implementation 'com.ncapdevi:frag-nav:3.0.0'
