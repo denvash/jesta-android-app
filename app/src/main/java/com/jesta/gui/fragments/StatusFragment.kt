@@ -57,17 +57,7 @@ class StatusFragment : Fragment() {
         return view
     }
 
-    //    private fun setRecycleView(view: View, reloadJestasTask: Task<Any>, statusTask: Task<Any>) {
     private fun setRecycleView(view: View, statusTask: Task<Any>) {
-//        val statusList: List<Pair<Relation, Mission>> = toStatusList(statusTask, reloadJestasTask)
-//
-//        val allRelations = statusList.map { it.first }
-//
-//        val missionToDoers = statusList.map {
-//            it.second.id to allRelations.filter { relation ->
-//                relation.missionID == it.second.id
-//            }.map { relation -> relation.doerID }
-//        }.map { it.first to it.second }.toMap()
 
         val statusList = (statusTask.result as List<*>).filterIsInstance<Status>()
 
