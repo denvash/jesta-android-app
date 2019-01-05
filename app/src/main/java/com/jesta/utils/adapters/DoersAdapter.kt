@@ -59,6 +59,7 @@ class DoersAdapter internal constructor(
                     Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
                 }
                 holder.doerBar.jesta_doers_accept.isEnabled = false
+                holder.doerBar.jesta_doers_decline.isEnabled = false
                 sysManager.onAcceptDoer(doerList[position],mission)
             }
 
@@ -66,6 +67,7 @@ class DoersAdapter internal constructor(
                 if (holder.doerBar.jesta_doers_accept.isEnabled) {
                     Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
                 }
+                holder.doerBar.jesta_doers_accept.isEnabled = false
                 holder.doerBar.jesta_doers_decline.isEnabled = false
                 sysManager.onDeclineUser(doerList[position])
             }
