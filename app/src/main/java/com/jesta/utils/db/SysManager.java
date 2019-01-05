@@ -418,6 +418,41 @@ public class SysManager {
         return source.getTask();
     }
 
+    public Task getStatusList(){
+        final String user = this.getCurrentUserFromDB().getId();
+        final HashMap<String, Status> statusMap = new HashMap<>();
+        Task<List<Relation>> allRels = this.createDBTask(DBTask.RELOAD_RELATIONS);
+        final TaskCompletionSource<List<Status>> source = new TaskCompletionSource<>();
+        allRels.addOnCompleteListener(new OnCompleteListener<List<Relation>>() {
+            @Override
+            public void onComplete(@NonNull Task<List<Relation>> task) {
+
+                if (!task.isSuccessful()) {
+                    // todo some error
+                    return;
+                }
+
+                List<Relation> lst = task.getResult();
+                for (Relation i : lst) {
+                    if (i.getDoerID().equals(user) || i.getPosterID().equals(user)) {
+                        Status sts = statusMap.get(i.getMissionID());
+                        if(sts == null){
+                            sts = new Status();
+                            sts.setMissionID(i.getMissionID());
+                            sts.setStatus(i.getStatus());
+                            if(i.getPosterID().equals(user))
+                                sts.setPoster(true);
+                            statusMap.put(i.getMissionID(), sts);
+                        }
+                        sts.getDoerIDList().add(i.getDoerID());
+                    }
+                }
+                source.setResult(new ArrayList<Status>(statusMap.values()));
+            }
+        });
+        return source.getTask();
+    }
+
     public void onAcceptDoer(Relation rel, Mission mission){
         mission.setNumOfPeople(mission.getNumOfPeople() - 1);
         if(mission.getNumOfPeople() == 0)
