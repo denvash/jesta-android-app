@@ -59,12 +59,13 @@ class DoJestaFragment : Fragment() {
             sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener {
 
                 val missionListOnRefresh = (it.result as List<*>).filterIsInstance<Mission>().reversed()
+                    .filter { mission -> mission.isAvailable }
                 val refreshAdapter = CardAdapter(missionListOnRefresh)
                 view.do_jesta_recycle_view.adapter = refreshAdapter
                 view.do_jesta_swipe_refresh.isRefreshing = false
             }
         }
-        
+
         return view
     }
 }
