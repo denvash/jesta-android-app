@@ -1,5 +1,3 @@
-@file:Suppress("LABEL_NAME_CLASH")
-
 package com.jesta.gui.fragments
 
 import android.os.Bundle

@@ -43,7 +43,7 @@ class DoJestaFragment : Fragment() {
             }
 
             // Task completed successfully
-            val missionList = (task.result as List<*>).filterIsInstance<Mission>().reversed()
+            val missionList = (task.result as List<*>).filterIsInstance<Mission>().reversed().filter { it.isAvailable }
 
             // initial adapter with mission posts entries
             view?.do_jesta_recycle_view?.adapter = CardAdapter(missionList)

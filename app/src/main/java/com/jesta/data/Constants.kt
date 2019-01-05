@@ -6,7 +6,9 @@ const val nullString = "null"
 const val nullInt = -1
 
 const val BUNDLE_MISSION = "jesta-mission"
-const val BUNDLE_CHAT_ROOM = "jesta-chat"
+const val BUNDLE_ROOM_ID = "jesta-chat"
+const val BUNDLE_RELATION_ID = "jesta-relation"
+const val BUNDLE_MISSION_ID = "jesta-mission-id"
 
 
 const val DIFFICULTY_EASY = "Easy"
@@ -19,6 +21,9 @@ const val STATUS_PENDING = "Pending"
 const val STATUS_IN_PROGRESS = "In Progress"
 const val STATUS_DONE = "Done"
 const val STATUS_DECLINED = "Declined"
+
+
+const val DEFAULT_AVATAR_URL = "https://i.imgur.com/HyHVdRC.png"
 
 const val INDEX_DO_JESTA = FragNavController.TAB1
 const val INDEX_ASK_JESTA = FragNavController.TAB2

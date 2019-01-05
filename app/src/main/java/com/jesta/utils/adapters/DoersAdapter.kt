@@ -1,6 +1,5 @@
 package com.jesta.utils.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,7 @@ import com.jesta.data.Mission
 import com.jesta.data.Relation
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.ChatFragment
-import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.ChatRoom
-import com.jesta.gui.activities.ChatActivity
-import com.jesta.gui.fragments.JestaCardReviewFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_doers.view.*
@@ -54,53 +50,24 @@ class DoersAdapter internal constructor(
         holder.doerBar.jesta_doers_accept.setOnClickListener {
             Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
             sysManager.onAcceptDoer(relation,mission)
+            holder.doerBar.jesta_doers_accept.isEnabled = false
         }
 
         holder.doerBar.jesta_doers_decline.setOnClickListener {
             Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
             sysManager.onDeclineUser(relation)
+            holder.doerBar.jesta_doers_accept.isEnabled = false
         }
 
         holder.doerBar.jesta_doers_chat.setOnClickListener {
-            Toast.makeText(it.context,"Chat Clicked",Toast.LENGTH_LONG).show()
-
-
-
-            // subscribe poster to chat room
-            val poster = sysManager.getUserByID(mission.posterID)
-            val chatRoom = ChatRoom(doer, poster, mission)
-            val chatManager = ChatManager()
-            chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    // todo some error
-                    return@addOnCompleteListener
-                }
-
-
-
-                val intent = Intent(it.context, ChatActivity::class.java)
-//                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                intent.putExtra("roomId", chatRoom.id)
-                it.context.startActivity(intent)
-            }
-        }
-
-        holder.doerBar.jesta_doers_new_layout.setOnClickListener {
             val roomDoer = sysManager.getUserByID(relation.doerID)
             val poster = sysManager.getUserByID(mission.posterID)
             val chatRoom = ChatRoom(roomDoer,poster,mission)
-            val chatManager = ChatManager()
 
-            chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    // todo some error
-                    return@addOnCompleteListener
-                }
-
-                //TODO: too slow subscribe
-            }
-            MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!))
+            MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!,relation.id,mission.id))
         }
+
+
     }
 
     override fun getItemCount(): Int {
