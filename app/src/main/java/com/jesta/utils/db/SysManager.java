@@ -514,7 +514,7 @@ public class SysManager {
 
 
             url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
-                    "&statusTitle=" + title +
+                    "&title=" + title +
                     "&body=" + body +
                     "&receiver=" + receiver +
                     "&sender=" + sender +
@@ -575,7 +575,7 @@ public class SysManager {
         }
 
         String url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
-                "&statusTitle=" + title +
+                "&title=" + title +
                 "&body=" + body +
                 "&receiver=" + receiverId +
                 "&sender=" + sender +
@@ -622,7 +622,7 @@ public class SysManager {
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
         }
 
-        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + topicName + "&statusTitle=" + title + "&body=" + body;
+        String url = SEND_MESSAGE_ENDPOINT + "?topic=" + topicName + "&title=" + title + "&body=" + body;
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

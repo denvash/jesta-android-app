@@ -33,7 +33,7 @@ public class MessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         String title = null, body = null, jestaId = null, sender = null;
         try {
-            title = remoteMessage.getData().get("statusTitle");
+            title = remoteMessage.getData().get("title");
             body = remoteMessage.getData().get("body");
             jestaId = remoteMessage.getData().get("jesta");
             sender = remoteMessage.getData().get("sender");
