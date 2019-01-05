@@ -15,9 +15,7 @@ import com.jesta.utils.db.SysManager;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static com.facebook.FacebookSdk.getCacheDir;
 
@@ -91,17 +89,19 @@ public class ChatManager {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<ChatMessage> messagesList = new ArrayList<>();
 
-                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                     HashMap dbMsg = (HashMap)ds.getValue();
-                     String msgKey = ds.getKey();
-                     if (dbMsg == null) {
-                         throw new NullPointerException("dbUser is null");
-                     }
-                     String senderId = (String)dbMsg.get("sender");
-                     User sender = sysManager.getUserByID(senderId);
-                     ChatMessage message = new ChatMessage(msgKey, (String)dbMsg.get("body"), sender, (String)dbMsg.get("time"));
-                     messagesList.add(message);
-                 }
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    HashMap dbMsg = (HashMap) ds.getValue();
+                    String msgKey = ds.getKey();
+                    if (dbMsg == null) {
+                        throw new NullPointerException("dbUser is null");
+                    }
+                    String senderId = (String) dbMsg.get("sender");
+                    User sender = sysManager.getUserByID(senderId);
+                    ChatMessage message = new ChatMessage(msgKey, (String) dbMsg.get("body"), sender, (String) dbMsg.get("time"));
+                    messagesList.add(message);
+                }
+
+                Collections.sort(messagesList, new ChatMessage.SortByDate());
                 source.setResult(messagesList);
             }
             @Override

@@ -2,16 +2,13 @@ package com.jesta.utils.chat;
 
 import com.jesta.data.User;
 
+import java.util.Comparator;
+
 public class ChatMessage {
     String id;
     String message;
     User sender;
     String createdAt;
-
-    public ChatMessage(String message, User sender) {
-        this.message = message;
-        this.sender = sender;
-    }
 
     public ChatMessage(String id, String message, User sender, String createdAt) {
         this.id = id;
@@ -32,10 +29,6 @@ public class ChatMessage {
         return sender;
     }
 
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
     public String getCreatedAt() {
         return createdAt;
     }
@@ -49,5 +42,13 @@ public class ChatMessage {
         }
         ChatMessage msg = (ChatMessage)o;
         return msg.id == this.id;
+    }
+
+    public static class SortByDate implements Comparator<ChatMessage>
+    {
+        @Override
+        public int compare(ChatMessage o1, ChatMessage o2) {
+            return (int)(Long.parseLong(o1.getCreatedAt()) - Long.parseLong(o2.getCreatedAt()));
+        }
     }
 }
