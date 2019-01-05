@@ -7,6 +7,23 @@ import java.util.Comparator;
 public class ChatMessage {
     String id;
     String message;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
     User sender;
     String createdAt;
 

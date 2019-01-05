@@ -2,6 +2,8 @@ package com.jesta.data.chat;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.*;
 import com.android.volley.toolbox.*;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -11,9 +13,11 @@ import com.google.firebase.database.*;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.jesta.data.User;
 import com.jesta.utils.db.SysManager;
+import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ChatManager {
@@ -25,6 +29,21 @@ public class ChatManager {
     public Task subscribeToChatRoom(ChatRoom room) {
         final TaskCompletionSource<String> source = new TaskCompletionSource<>();
         _messaging.subscribeToTopic(room.getId()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (!task.isSuccessful()) {
+                    source.setException(task.getException());
+                }
+                source.setResult("subscribed");
+            }
+        });
+        return source.getTask();
+    }
+
+    public Task subscribeToChatRoom(String roomId) {
+        final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+        _messaging.subscribeToTopic(roomId).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -110,4 +129,65 @@ public class ChatManager {
         return source.getTask();
     }
 
+    public void listenForIncomingMessages(final MessagesListAdapter<Message> adapter, final String roomId, final List<ChatMessage> messagesLiveSnapShot) {
+        // listen for child add event; e.g. new message has arrived
+        DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
+        roomDBRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
+                HashMap dbMsg = (HashMap)ds.getValue();
+                String msgKey = ds.getKey();
+                if (dbMsg == null) {
+                    throw new NullPointerException("dbUser is null");
+                }
+                String senderId = (String)dbMsg.get("sender");
+                User sender = sysManager.getUserByID(senderId);
+                ChatMessage dbMessage = new ChatMessage(msgKey, (String)dbMsg.get("body"), sender, (String)dbMsg.get("time"));
+
+
+
+                if (!messagesLiveSnapShot.contains(dbMessage)) {
+                    messagesLiveSnapShot.add(dbMessage);
+                    Collections.sort(messagesLiveSnapShot, new ChatMessage.SortByDate());
+
+
+                    Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
+                    Date date;
+
+                    try {
+                        date = new Date(Long.parseLong(dbMessage.getCreatedAt()));
+                    }
+                    catch (Exception e) {
+                        // todo
+                        date = new Date();
+                    }
+
+
+                    Message UIMessage = new Message(dbMessage.getId(), UIAuthor, date, dbMessage.getMessage());
+                    adapter.addToStart(UIMessage, true);
+
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

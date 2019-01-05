@@ -30,8 +30,7 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
     private SysManager sysManager = new SysManager();
     private ChatManager chatManager = new ChatManager();
-    private List<ChatMessage> messagesLiveSnapShot;
-    MessageListAdapter adapter;
+    RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,51 +44,13 @@ public class ChatActivity extends AppCompatActivity {
 
         mMessageRecycler = (RecyclerView) findViewById(R.id.reyclerview_message_list);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(context));
-        messagesLiveSnapShot = new ArrayList<ChatMessage>();
+        List<ChatMessage> messagesLiveSnapShot = new ArrayList<ChatMessage>();
         adapter = new MessageListAdapter(messagesLiveSnapShot);
         mMessageRecycler.setAdapter(adapter);
 
 
         // listen for child add event; e.g. new message has arrived
-        DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
-        roomDBRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
-                HashMap dbMsg = (HashMap)ds.getValue();
-                String msgKey = ds.getKey();
-                if (dbMsg == null) {
-                    throw new NullPointerException("dbUser is null");
-                }
-                String senderId = (String)dbMsg.get("sender");
-                User sender = sysManager.getUserByID(senderId);
-                ChatMessage message = new ChatMessage(msgKey, (String)dbMsg.get("body"), sender, (String)dbMsg.get("time"));
-                if (!messagesLiveSnapShot.contains(message)) {
-                    messagesLiveSnapShot.add(message);
-                    Collections.sort(messagesLiveSnapShot, new ChatMessage.SortByDate());
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        chatManager.listenForIncomingMessages(adapter, roomId, messagesLiveSnapShot);
 
 
 

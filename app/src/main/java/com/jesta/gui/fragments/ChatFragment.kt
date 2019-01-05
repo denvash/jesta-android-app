@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.BUNDLE_CHAT_ROOM
 import com.jesta.data.chat.Author
+import com.jesta.data.chat.ChatManager
+import com.jesta.data.chat.ChatMessage
 import com.jesta.data.chat.Message
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
@@ -56,17 +58,32 @@ class ChatFragment : Fragment() {
         val adapter = MessagesListAdapter<Message>(sysManager.currentUserFromDB.id, imageLoader)
         view.messagesList.setAdapter(adapter)
 
-        view.input.setInputListener {
-            adapter.addToStart(
-                Message(
-                    chatID,
-                    Author(currUser.id, currUser.displayName, currUser.photoUrl),
-                    Date(),
-                    it.toString()
-                ), true
-            )
-            true
+        val chatManger = ChatManager()
+
+        // todo dennis you should to animation here while waiting for subscription
+        chatManger.subscribeToChatRoom(chatID).addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                //todo some error
+                return@addOnCompleteListener
+            }
+
+            val messagesLiveSnapShot = arrayListOf<ChatMessage>()
+            chatManger.listenForIncomingMessages(adapter, chatID, messagesLiveSnapShot)
+
+            view.input.setInputListener {
+                chatManger.sendMessage(context, chatID, currUser, it.toString())
+//            adapter.addToStart(
+//                Message(
+//                    chatID,
+//                    Author(currUser.id, currUser.displayName, currUser.photoUrl),
+//                    Date(),
+//                    it.toString()
+//                ), true
+//            )
+                true
+            }
         }
+
 
         return view
     }
