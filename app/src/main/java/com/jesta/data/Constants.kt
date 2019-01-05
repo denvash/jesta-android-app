@@ -24,7 +24,6 @@ const val STATUS_IN_PROGRESS = "In Progress"
 const val STATUS_DONE = "Done"
 const val STATUS_DECLINED = "Declined"
 
-
 const val DEFAULT_AVATAR_URL = "https://i.imgur.com/HyHVdRC.png"
 
 const val AVATAR_BEAVER   = "https://i.imgur.com/wahDm7F.png"
