@@ -1,16 +1,22 @@
 package com.jesta.utils.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.jesta.R
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
 import com.jesta.data.Mission
 import com.jesta.data.Relation
+import com.jesta.gui.activities.ChatActivity
 import com.jesta.gui.activities.MainActivity
+import com.jesta.gui.activities.login.LoginMainActivity
+import com.jesta.utils.chat.ChatManager
+import com.jesta.utils.chat.ChatRoom
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_doers.view.*
@@ -58,6 +64,26 @@ class DoersAdapter internal constructor(
 
         holder.doerBar.jesta_doers_chat.setOnClickListener {
             Toast.makeText(it.context,"Chat Clicked",Toast.LENGTH_LONG).show()
+
+
+
+            // subscribe poster to chat room
+            val doer = sysManager.getUserByID(relation.doerID)
+            val poster = sysManager.getUserByID(mission.posterID)
+            val chatRoom = ChatRoom(doer, poster, mission)
+            val chatManager = ChatManager()
+            chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    // todo some error
+                    return@addOnCompleteListener
+                }
+
+                // todo DENNIS do your shit here
+                val intent = Intent(it.context, ChatActivity::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.putExtra("roomId", chatRoom.id)
+                it.context.startActivity(intent)
+            }
         }
     }
 
