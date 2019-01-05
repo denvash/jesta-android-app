@@ -26,6 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:inputHint="Type a message..."
-        app:showAttachmentButton="true" />
+        app:showAttachmentButton="true"
+        app:attachmentButtonDefaultIconColor="@color/colorPrimary"
+        app:attachmentButtonDefaultIconPressedColor="@color/white"
+        app:attachmentButtonDefaultBgPressedColor="@color/colorPrimary"
+        app:inputButtonDefaultIconColor="@color/white"
+        app:inputButtonDefaultBgColor="@color/colorPrimary"
+        />
 
 </RelativeLayout>
