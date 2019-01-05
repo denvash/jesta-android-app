@@ -39,11 +39,15 @@ class DoersAdapter internal constructor(
             val doerRelation = doerList[position]
             val doer = sysManager.getUserByID(doerList[position].doerID)
             val bar = holder.doerBar
-            bar.jesta_doers_name.text = doer.displayName
+
+            // All actions related to doer
+            if (doer != null && doer.displayName != RELATION_EMPTY_ID) {
+                bar.jesta_doers_name.text = doer.displayName
+                Picasso.get().load(doer.photoUrl).noFade().into(holder.doerBar.jesta_doers_avatar)
+            }
+
             bar.jesta_doers_diamond_amount.text = Random.nextInt(1, 40000).toString()
 
-
-            Picasso.get().load(doer.photoUrl).noFade().into(holder.doerBar.jesta_doers_avatar)
 
             if (doerRelation.status != RELATION_STATUS_INIT) {
                 holder.doerBar.jesta_doers_accept.isEnabled = false
