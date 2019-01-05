@@ -426,12 +426,35 @@ public class SysManager {
 
         rel.setStatus(RELATION_STATUS_IN_PROGRESS);
         this.setRelationOnDB(rel);
+        User doer = getUserByID(rel.getDoerID());
+        answerTodoJestaForUser(doer, mission, true).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if (!task.isSuccessful()) {
+                    // todo
+                    return;
+                }
+                // todo something? idk
+            }
+        });
         // TODO: send notification to accepted user rel.doer_id
     }
 
     public void onDeclineUser(Relation rel){
         rel.setStatus(RELATION_STATUS_USER_DECLINED);
         this.setRelationOnDB(rel);
+        User doer = getUserByID(rel.getDoerID());
+        Mission mission = getMissionByID(rel.getMissionID());
+        answerTodoJestaForUser(doer, mission, false).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if (!task.isSuccessful()) {
+                    // todo
+                    return;
+                }
+                // todo something? idk
+            }
+        });
         // TODO: send notification to declined user rel.doer_id
     }
     /**
@@ -549,7 +572,7 @@ public class SysManager {
         return source.getTask();
     }
 
-    public Task answerTodoJestaForUser(User receiver, Mission jesta) {
+    public Task answerTodoJestaForUser(User receiver, Mission jesta, Boolean isAccept) {
         final TaskCompletionSource<String> source = new TaskCompletionSource<>();
         RequestQueue queue = Volley.newRequestQueue(_activity.getApplicationContext());
         final String PROJECT_ID = "jesta-42";
@@ -563,9 +586,16 @@ public class SysManager {
         String jestaId = jesta.getId();
 
 
-        String title = getCurrentUserFromDB().getDisplayName() + " answered to your request!";
-        String body = "He's accepted you to do him the following jesta\n" +
-                "Jesta statusTitle: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
+
+        String title;
+        if (isAccept) {
+             title = getCurrentUserFromDB().getDisplayName() + " accepted you as a doer!";
+        }
+        else {
+            title = getCurrentUserFromDB().getDisplayName() + " declined you as a doer!";
+        }
+
+        String body = "Jesta statusTitle: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
 
         try {
             // TODO change to post request to avoid this shit

@@ -80,7 +80,7 @@ public class InboxMessageActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
 
                     final User senderWhichBecomesReceiver = sysManager.getUserByID(sender);
-                    sysManager.answerTodoJestaForUser(senderWhichBecomesReceiver, mission).addOnCompleteListener(new OnCompleteListener<List<User>>() {
+                    sysManager.answerTodoJestaForUser(senderWhichBecomesReceiver, mission, true).addOnCompleteListener(new OnCompleteListener<List<User>>() {
                         @Override
                         public void onComplete(@NonNull Task<List<User>> task) {
                             if (!task.isSuccessful()) {

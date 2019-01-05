@@ -45,7 +45,10 @@ public class MessagingService extends FirebaseMessagingService {
         Boolean isPrompt = false;
         if (title != null && (
                 title.contains("asked to do a jesta") ||
-                title.contains("answered to your request")))
+                title.contains("accepted you") ||
+                title.contains("declined you")
+
+        ))
         {
             isPrompt = true;
         }
