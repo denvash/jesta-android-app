@@ -1,6 +1,5 @@
 package com.jesta.utils.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +12,7 @@ import com.jesta.data.Mission
 import com.jesta.data.Relation
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.ChatFragment
-import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.ChatRoom
-import com.jesta.gui.activities.ChatActivity
-import com.jesta.gui.fragments.JestaCardReviewFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_doers.view.*
@@ -54,11 +50,13 @@ class DoersAdapter internal constructor(
         holder.doerBar.jesta_doers_accept.setOnClickListener {
             Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
             sysManager.onAcceptDoer(relation,mission)
+            holder.doerBar.jesta_doers_accept.isEnabled = false
         }
 
         holder.doerBar.jesta_doers_decline.setOnClickListener {
             Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
             sysManager.onDeclineUser(relation)
+            holder.doerBar.jesta_doers_accept.isEnabled = false
         }
 
         holder.doerBar.jesta_doers_chat.setOnClickListener {
@@ -66,8 +64,10 @@ class DoersAdapter internal constructor(
             val poster = sysManager.getUserByID(mission.posterID)
             val chatRoom = ChatRoom(roomDoer,poster,mission)
 
-            MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!))
+            MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!,relation.id,mission.id))
         }
+
+
     }
 
     override fun getItemCount(): Int {
