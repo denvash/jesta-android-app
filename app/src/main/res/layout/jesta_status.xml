@@ -117,7 +117,6 @@
 
             <LinearLayout
                 android:id="@+id/jesta_status_doer_layout"
-                android:visibility="visible"
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -197,7 +196,6 @@
 
             <LinearLayout
                 android:id="@+id/jesta_status_poster_layout"
-                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">

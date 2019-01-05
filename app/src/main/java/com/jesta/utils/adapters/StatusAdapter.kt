@@ -45,6 +45,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         holder.view.jesta_status_title.text = mission.title
         holder.view.jesta_status_total_doers.text = mission.numOfPeople.toString()
 
+        holder.view.jesta_status_doer_layout.visibility = View.GONE
+
         if (status.status == RELATION_STATUS_DONE || !status.isPoster) {
             holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
             holder.view.jesta_status_poster_layout.visibility = View.GONE
