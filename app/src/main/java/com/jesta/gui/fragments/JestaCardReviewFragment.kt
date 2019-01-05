@@ -74,23 +74,30 @@ class JestaCardReviewFragment : Fragment() {
 
         view.jesta_preview_accept_button.setOnClickListener {
 
+            if (mission.posterID == sysManager.currentUserFromDB.id) {
+                Toast.makeText(MainActivity.instance,"You can't do your own post!",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             sysManager.getUserRelations(sysManager.currentUserFromDB.id).addOnCompleteListener { getRelationsTask ->
                 val result: List<Relation> = (getRelationsTask.result as List<*>).filterIsInstance<Relation>()
 
                 val currMissionRelation = result.find { relation -> relation.missionID == mission.id }
 
-                if (currMissionRelation != null) {
-                    if (currMissionRelation.posterID == sysManager.currentUserFromDB.id) {
-                        Toast.makeText(MainActivity.instance,"You can't do your own post!",Toast.LENGTH_LONG).show()
-                    }
-                    else if (!currMissionRelation.doerList.contains(sysManager.currentUserFromDB.id)) {
-                        currMissionRelation.doerList.add(sysManager.currentUserFromDB.id)
-                        sysManager.setRelationOnDB(currMissionRelation)
-                        MainActivity.instance.fragNavController.popFragment()
-                    } else {
-                        Toast.makeText(MainActivity.instance,"You already Assigned as a Doer",Toast.LENGTH_LONG).show()
-                    }
+                if (currMissionRelation != null && currMissionRelation.doerID == sysManager.currentUserFromDB.id) {
+                    Toast.makeText(MainActivity.instance,"You already Assigned as a Doer",Toast.LENGTH_LONG).show()
+                    return@addOnCompleteListener
                 }
+
+                val relation = Relation(
+                    id = UUID.randomUUID().toString(),
+                    doerID = sysManager.currentUserFromDB.id,
+                    posterID = mission.posterID,
+                    missionID = mission.id,
+                    status = RELATION_STATUS_INIT
+                )
+                sysManager.setRelationOnDB(relation)
+                MainActivity.instance.fragNavController.popFragment()
             }
         }
 

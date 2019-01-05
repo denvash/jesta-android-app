@@ -406,7 +406,7 @@ public class SysManager {
 
                 List<Relation> lst = task.getResult();
                 for (Relation i : lst) {
-                    if (i.getDoerList().equals(usr_id) || i.getPosterID().equals(usr_id))
+                    if (i.getDoerID().equals(usr_id) || i.getPosterID().equals(usr_id))
                         relUserList.add(i);
                 }
                 source.setResult(relUserList);
@@ -472,7 +472,7 @@ public class SysManager {
         // TODO add authorization header
 
         // TODO Remove this debugging hack
-        String authorId = jesta.getAuthorId();
+        String authorId = jesta.getPosterID();
         if (authorId.equals("null") || authorId == null) {
             authorId = getCurrentUserFromDB().getId();
         }
@@ -580,6 +580,7 @@ public class SysManager {
                     }
                 });
 
+// Add the request to the RequestQueue.
         queue.add(stringRequest);
 
         return source.getTask();

@@ -37,7 +37,7 @@ class StatusFragment : Fragment() {
                 view.jesta_status_recycle_view.layoutManager = StaggeredGridLayoutManager(column, RecyclerView.VERTICAL)
                 view.jesta_status_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
 
-                view.jesta_status_recycle_view.adapter = getRelatedAdapter(allRelations, allMissions)
+//                view.jesta_status_recycle_view.adapter = getRelatedAdapter(allRelations, allMissions)
 
                 view.jesta_status_swipe_refresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
                 view.jesta_status_swipe_refresh.setOnRefreshListener {
@@ -57,8 +57,8 @@ class StatusFragment : Fragment() {
                                     val refreshAllMissions =
                                         (refreshReloadTask.result as List<*>).filterIsInstance<Mission>()
 
-                                    view.jesta_status_recycle_view.adapter =
-                                            getRelatedAdapter(refreshAllRelations, refreshAllMissions)
+//                                    view.jesta_status_recycle_view.adapter =
+//                                            getRelatedAdapter(refreshAllRelations, refreshAllMissions)
                                     view.jesta_status_swipe_refresh.isRefreshing = false
                                 }
                         }
@@ -69,19 +69,19 @@ class StatusFragment : Fragment() {
         return view
     }
 
-    private fun getRelatedAdapter(allRelations: List<Relation>, allMissions: List<Mission>): RecyclerView.Adapter<*>? {
-        val userID = sysManager.currentUserFromDB.id
-
-        // get All related relations
-        val asAPoster = allRelations.filter { it.posterID == userID }
-        val asADoer = allRelations.filter { it.doerList.contains(userID) }
-        val relatedRelations = asAPoster + asADoer
-
-        // Get all related Missions
-        val relatedMissionsIDs = relatedRelations.map { it.missionID }
-        val relatedMissions = allMissions.filter { relatedMissionsIDs.contains(it.id) }
-
-        // initial adapter with mission posts entries
-        return StatusRecyclerViewAdapter(relatedRelations, relatedMissions)
-    }
+//    private fun getRelatedAdapter(allRelations: List<Relation>, allMissions: List<Mission>): RecyclerView.Adapter<*>? {
+//        val userID = sysManager.currentUserFromDB.id
+//
+//        // get All related relations
+//        val asAPoster = allRelations.filter { it.posterID == userID }
+//        val asADoer = allRelations.filter { it.doerList.contains(userID) }
+//        val relatedRelations = asAPoster + asADoer
+//
+//        // Get all related Missions
+//        val relatedMissionsIDs = relatedRelations.map { it.missionID }
+//        val relatedMissions = allMissions.filter { relatedMissionsIDs.contains(it.id) }
+//
+//        // initial adapter with mission posts entries
+//        return StatusRecyclerViewAdapter(relatedRelations, relatedMissions)
+//    }
 }
