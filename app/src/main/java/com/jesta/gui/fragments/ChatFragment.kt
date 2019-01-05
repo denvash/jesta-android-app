@@ -79,6 +79,8 @@ class ChatFragment : Fragment() {
                     return@addOnCompleteListener
                 }
 
+                view.attachmentButton.isEnabled = false
+
                 val messagesHistory = (task.result as MutableList<*>).filterIsInstance<Message>()
 
                 view.chat_progress_bar.visibility = View.INVISIBLE

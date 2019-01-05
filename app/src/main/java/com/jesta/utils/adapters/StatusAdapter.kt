@@ -11,7 +11,9 @@ import com.github.florent37.expansionpanel.ExpansionLayout
 import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection
 import com.jesta.R
 import com.jesta.data.*
+import com.jesta.data.chat.ChatRoom
 import com.jesta.gui.activities.MainActivity
+import com.jesta.gui.fragments.ChatFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_status.view.*
@@ -48,6 +50,19 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
             holder.view.jesta_status_divider.visibility = View.INVISIBLE
             holder.view.jesta_status_poster_layout.visibility = View.GONE
             holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
+            holder.view.jesta_status_doer_chat.setOnClickListener {
+                val roomDoer = sysManager.currentUserFromDB
+                val poster = sysManager.getUserByID(mission.posterID)
+                val chatRoom = ChatRoom(roomDoer, poster, mission)
+
+                MainActivity.instance.fragNavController.pushFragment(
+                    ChatFragment.newInstance(
+                        chatRoom.id!!,
+                        roomDoer.id,
+                        mission.id
+                    )
+                )
+            }
         }
 
         val prefix = "As a "

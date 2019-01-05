@@ -117,7 +117,7 @@
 
             <LinearLayout
                 android:id="@+id/jesta_status_doer_layout"
-                android:visibility="invisible"
+                android:visibility="visible"
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,9 +156,11 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
+                        android:id="@+id/jesta_status_doer_chat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_edit_jesta"
+                        android:tint="@color/colorPrimary"
+                        android:src="@drawable/ic_jesta_chat_icon"
                         tools:ignore="ContentDescription" />
 
                     <TextView
@@ -166,7 +168,7 @@
                         style="@style/TextAppearance.Jesta.Type.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/jesta_status_edit_jesta" />
+                        android:text="Chat" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -195,6 +197,7 @@
 
             <LinearLayout
                 android:id="@+id/jesta_status_poster_layout"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
