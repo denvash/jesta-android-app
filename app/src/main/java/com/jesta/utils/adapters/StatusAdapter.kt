@@ -46,6 +46,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         if (status.status == RELATION_STATUS_DONE || mission.numOfPeople == 0 || !status.isPoster) {
             holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
             holder.view.jesta_status_divider.visibility = View.INVISIBLE
+            holder.view.jesta_status_poster_layout.visibility = View.GONE
+            holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
         }
 
         val prefix = "As a "

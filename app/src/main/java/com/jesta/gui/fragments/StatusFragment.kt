@@ -70,6 +70,7 @@ class StatusFragment : Fragment() {
 //        }.map { it.first to it.second }.toMap()
 
         val statusList = (statusTask.result as List<*>).filterIsInstance<Status>()
+
         val adapter = StatusAdapter()
         adapter.setItems(statusList)
         view.jesta_status_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)

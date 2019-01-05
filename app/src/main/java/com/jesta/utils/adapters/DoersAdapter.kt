@@ -34,12 +34,14 @@ class DoersAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: JestaCardViewHolder, position: Int) {
+
         if (position < doerList.size) {
             val doerRelation = doerList[position]
             val doer = sysManager.getUserByID(doerList[position].doerID)
             val bar = holder.doerBar
             bar.jesta_doers_name.text = doer.displayName
             bar.jesta_doers_diamond_amount.text = Random.nextInt(1, 40000).toString()
+
 
             Picasso.get().load(doer.photoUrl).noFade().into(holder.doerBar.jesta_doers_avatar)
 

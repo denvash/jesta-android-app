@@ -108,7 +108,7 @@ class AskJestaFragment : Fragment() {
                 id = UUID.randomUUID().toString(),
                 missionID = jesta.id,
                 posterID = jesta.posterID,
-                doerID = "",
+                doerID = RELATION_EMPTY_ID,
                 status = RELATION_STATUS_INIT
             )
 
