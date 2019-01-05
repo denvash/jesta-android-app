@@ -10,16 +10,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.BUNDLE_CHAT_ROOM
-import com.jesta.data.chat.Author
 import com.jesta.data.chat.ChatManager
-import com.jesta.data.chat.ChatMessage
 import com.jesta.data.chat.Message
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import kotlinx.android.synthetic.main.fragment_chat.view.*
-import java.util.*
 
 
 class ChatFragment : Fragment() {
@@ -60,7 +57,6 @@ class ChatFragment : Fragment() {
 
         val chatManger = ChatManager()
 
-        // todo dennis you should to animation here while waiting for subscription
         chatManger.subscribeToChatRoom(chatID).addOnCompleteListener { task ->
             if (!task.isSuccessful) {
                 //todo some error
@@ -74,7 +70,9 @@ class ChatFragment : Fragment() {
                     return@addOnCompleteListener
                 }
 
-                val messagesHistory = task.getResult() as MutableList<Message>?;
+                val messagesHistory = (task.result as MutableList<*>).filterIsInstance<Message>()
+
+                view.chat_progress_bar.visibility = View.INVISIBLE
                 adapter.addToEnd(messagesHistory, true)
                 chatManger.listenForIncomingMessages(adapter, chatID, messagesHistory)
 
@@ -84,9 +82,7 @@ class ChatFragment : Fragment() {
                 }
 
             }
-
         }
-
 
         return view
     }

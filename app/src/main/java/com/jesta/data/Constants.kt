@@ -20,6 +20,9 @@ const val STATUS_IN_PROGRESS = "In Progress"
 const val STATUS_DONE = "Done"
 const val STATUS_DECLINED = "Declined"
 
+
+const val DEFAULT_AVATAR_URL = "https://i.imgur.com/HyHVdRC.png"
+
 const val INDEX_DO_JESTA = FragNavController.TAB1
 const val INDEX_ASK_JESTA = FragNavController.TAB2
 const val INDEX_STATUS = FragNavController.TAB3

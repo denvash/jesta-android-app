@@ -62,43 +62,10 @@ class DoersAdapter internal constructor(
         }
 
         holder.doerBar.jesta_doers_chat.setOnClickListener {
-            Toast.makeText(it.context,"Chat Clicked",Toast.LENGTH_LONG).show()
-
-
-
-            // subscribe poster to chat room
-            val poster = sysManager.getUserByID(mission.posterID)
-            val chatRoom = ChatRoom(doer, poster, mission)
-            val chatManager = ChatManager()
-            chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    // todo some error
-                    return@addOnCompleteListener
-                }
-
-
-
-                val intent = Intent(it.context, ChatActivity::class.java)
-//                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                intent.putExtra("roomId", chatRoom.id)
-                it.context.startActivity(intent)
-            }
-        }
-
-        holder.doerBar.jesta_doers_new_layout.setOnClickListener {
             val roomDoer = sysManager.getUserByID(relation.doerID)
             val poster = sysManager.getUserByID(mission.posterID)
             val chatRoom = ChatRoom(roomDoer,poster,mission)
-            val chatManager = ChatManager()
 
-            chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    // todo some error
-                    return@addOnCompleteListener
-                }
-
-                //TODO: too slow subscribe
-            }
             MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!))
         }
     }

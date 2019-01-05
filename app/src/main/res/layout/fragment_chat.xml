@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/jesta_status_swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent">
 
-    <com.stfalcon.chatkit.messages.MessagesList
-        android:id="@+id/messagesList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/input" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/input"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/gray" />
-
-    <com.stfalcon.chatkit.messages.MessageInput
-        android:id="@+id/input"
-        android:layout_width="match_parent"
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/chat_progress_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:inputHint="Type a message..."
-        app:showAttachmentButton="true"
-        app:attachmentButtonDefaultIconColor="@color/colorPrimary"
-        app:attachmentButtonDefaultIconPressedColor="@color/white"
-        app:attachmentButtonDefaultBgPressedColor="@color/colorPrimary"
-        app:inputButtonDefaultIconColor="@color/white"
-        app:inputButtonDefaultBgColor="@color/colorPrimary"/>
+        android:layout_gravity="center"
+        android:visibility="visible"
+        app:indicatorColor="@color/black"
+        app:indicatorName="LineScalePulseOutIndicator"/>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.stfalcon.chatkit.messages.MessagesList
+            android:id="@+id/messagesList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/input"
+            app:outcomingDefaultBubbleColor="@color/colorPrimary"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/input"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/gray" />
+
+        <com.stfalcon.chatkit.messages.MessageInput
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:inputHint="Type a message..."
+            app:showAttachmentButton="true"
+            app:attachmentButtonIcon="@drawable/ic_jesta_accept"
+            app:attachmentButtonDefaultBgPressedColor="@color/status_pending"
+            app:inputButtonDefaultIconColor="@color/white"
+            app:inputButtonDefaultBgColor="@color/colorPrimary"
+            />
+    </RelativeLayout>
+
+
+
+</FrameLayout>
