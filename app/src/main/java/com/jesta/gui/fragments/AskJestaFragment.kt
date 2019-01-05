@@ -104,7 +104,15 @@ class AskJestaFragment : Fragment() {
                 tags = view.jesta_post_tag_layout.tags
             )
 
-            uploadMissionToDB(jesta, sysManager)
+            val rel = Relation(
+                id = UUID.randomUUID().toString(),
+                missionID = jesta.id,
+                posterID = jesta.posterID,
+                doerID = "",
+                status = RELATION_STATUS_INIT
+            )
+
+            uploadMissionToDB(jesta, rel, sysManager)
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
 
@@ -156,7 +164,7 @@ class AskJestaFragment : Fragment() {
         }
     }
 
-    private fun uploadMissionToDB(jesta: Mission, sysManager: SysManager) {
+    private fun uploadMissionToDB(jesta: Mission, rel: Relation, sysManager: SysManager) {
         val uploadAndGetUrl = sysManager.createDBTask(SysManager.DBTask.UPLOAD_FILE, filePath)
         // note: async function, therefore it is in the end of current function
         uploadAndGetUrl.addOnCompleteListener { task ->
@@ -169,6 +177,7 @@ class AskJestaFragment : Fragment() {
                 jesta.imageUrl = task.result.toString()
             }
             sysManager.setMissionOnDB(jesta)
+            sysManager.setRelationOnDB(rel)
         }
     }
 
