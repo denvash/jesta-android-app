@@ -22,6 +22,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
 import com.jesta.data.*;
+import com.jesta.data.notification.Topic;
+import com.jesta.data.notification.TopicDescriptor;
 import org.json.JSONException;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.jesta.utils.chat;
+package com.jesta.data.chat;
 
 import com.jesta.data.User;
 

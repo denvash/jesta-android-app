@@ -17,8 +17,8 @@ import com.google.firebase.database.*;
 import com.jesta.R;
 import com.jesta.data.User;
 import com.jesta.utils.adapters.MessageListAdapter;
-import com.jesta.utils.chat.ChatManager;
-import com.jesta.utils.chat.ChatMessage;
+import com.jesta.data.chat.ChatManager;
+import com.jesta.data.chat.ChatMessage;
 import com.jesta.utils.db.SysManager;
 
 import java.util.ArrayList;

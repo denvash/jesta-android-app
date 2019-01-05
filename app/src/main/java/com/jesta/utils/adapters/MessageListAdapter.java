@@ -1,22 +1,18 @@
 package com.jesta.utils.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import co.lujun.androidtagview.Utils;
 import com.jesta.R;
-import com.jesta.utils.chat.ChatMessage;
+import com.jesta.data.chat.ChatMessage;
 import com.jesta.utils.db.SysManager;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;

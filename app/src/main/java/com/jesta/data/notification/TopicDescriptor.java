@@ -1,4 +1,4 @@
-package com.jesta.data;
+package com.jesta.data.notification;
 
 import androidx.annotation.NonNull;
 

@@ -13,8 +13,7 @@
         android:backgroundTint="@color/black"
         android:columnCount="3">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/jesta_doers_avatar"
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -23,13 +22,13 @@
             app:civ_border_width="0.75dp" />
 
         <LinearLayout
-            android:paddingStart="@dimen/_10dp"
-            android:paddingEnd="@dimen/_10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="@dimen/_10dp"
+            android:paddingEnd="@dimen/_10dp">
 
             <TextView
                 android:id="@+id/jesta_doers_name"
@@ -40,52 +39,62 @@
                 android:text="@string/jesta_value" />
 
             <TextView
-                android:drawableStart="@drawable/ic_jesta_card_diamond"
                 android:id="@+id/jesta_doers_diamond_amount"
                 style="@style/TextAppearance.Jesta.Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:drawableStart="@drawable/ic_jesta_card_diamond"
                 android:drawablePadding="5dp"
-                android:textSize="20sp"
-                android:text="@string/jesta_settings_fake_total_diamonds"/>
+                android:text="@string/jesta_settings_fake_total_diamonds"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_column="2"
-            android:layout_gravity="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="end"
             android:orientation="horizontal">
 
             <ImageButton
-                android:padding="@dimen/_10dp"
+                android:id="@+id/jesta_doers_new_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/jesta_doers_chat"
                 android:layout_gravity="center"
                 android:background="@color/transparent"
+                android:padding="@dimen/_10dp"
+                android:src="@drawable/ic_jesta_diamond_normal"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/jesta_doers_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:padding="@dimen/_10dp"
                 android:src="@drawable/ic_jesta_chat_icon"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
-                android:padding="@dimen/_10dp"
+                android:id="@+id/jesta_doers_decline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/jesta_doers_decline"
                 android:layout_gravity="center"
                 android:background="@color/transparent"
+                android:padding="@dimen/_10dp"
                 android:src="@drawable/ic_jesta_decline_doer"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
-                android:padding="@dimen/_10dp"
+                android:id="@+id/jesta_doers_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/jesta_doers_accept"
                 android:layout_gravity="center"
                 android:background="@color/transparent"
+                android:padding="@dimen/_10dp"
                 android:src="@drawable/ic_jesta_accept_doer"
                 tools:ignore="ContentDescription" />
         </LinearLayout>

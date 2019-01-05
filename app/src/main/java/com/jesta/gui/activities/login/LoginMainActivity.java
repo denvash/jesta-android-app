@@ -16,16 +16,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.*;
-import com.jesta.data.Mission;
-import com.jesta.gui.activities.ChatActivity;
 import com.jesta.gui.activities.MainActivity;
 import com.jesta.R;
-import com.jesta.utils.chat.ChatManager;
-import com.jesta.utils.chat.ChatRoom;
 import com.jesta.utils.db.SysManager;
 import com.jesta.data.User;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,6 +1,8 @@
-package com.jesta.data;
+package com.jesta.data.notification;
 
 import androidx.annotation.NonNull;
+import com.jesta.data.Mission;
+import com.jesta.data.User;
 
 public class Topic
 {

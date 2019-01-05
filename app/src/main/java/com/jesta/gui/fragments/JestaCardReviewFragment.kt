@@ -1,7 +1,6 @@
 package com.jesta.gui.fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,8 +12,8 @@ import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.*
 import com.jesta.gui.activities.MainActivity
-import com.jesta.utils.chat.ChatManager
-import com.jesta.utils.chat.ChatRoom
+import com.jesta.data.chat.ChatManager
+import com.jesta.data.chat.ChatRoom
 import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso

@@ -58,19 +58,19 @@
                 <data android:scheme="@string/jesta_login_fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.activities.StatusReviewActivity" />
         <activity android:name=".gui.activities.login.RegisterActivity" />
         <activity android:name=".gui.activities.login.ErrorActivity" />
         <activity android:name=".gui.activities.login.LoginActivitiesWrapper" />
         <activity android:name=".gui.activities.login.OTPActivity" />
 
+        <!--TODO PERMISSIONS?-->
         <service android:name=".utils.services.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".gui.activities.ChatActivity"></activity>
+        <activity android:name=".gui.activities.ChatActivity"/>
     </application>
 
 </manifest>

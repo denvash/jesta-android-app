@@ -6,21 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.jesta.R
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
 import com.jesta.data.Mission
 import com.jesta.data.Relation
-import com.jesta.gui.activities.ChatActivity
 import com.jesta.gui.activities.MainActivity
-import com.jesta.gui.activities.login.LoginMainActivity
-import com.jesta.utils.chat.ChatManager
-import com.jesta.utils.chat.ChatRoom
+import com.jesta.gui.fragments.ChatFragment
+import com.jesta.data.chat.ChatManager
+import com.jesta.data.chat.ChatRoom
+import com.jesta.gui.activities.ChatActivity
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_doers.view.*
-import kotlinx.android.synthetic.main.jesta_status.view.*
+import kotlinx.android.synthetic.main.jesta_main_activity.view.*
 import kotlin.random.Random
 
 class DoersAdapter internal constructor(
@@ -41,7 +40,7 @@ class DoersAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: JestaCardViewHolder, position: Int) {
-        val doer = sysManager.getUserByID(doerList[position])
+        val doer = sysManager.getUserByID(relation.doerID)
         if (position < doerList.size) {
             val bar = holder.doerBar
             bar.jesta_doers_name.text = doer.displayName
@@ -68,7 +67,6 @@ class DoersAdapter internal constructor(
 
 
             // subscribe poster to chat room
-            val doer = sysManager.getUserByID(relation.doerID)
             val poster = sysManager.getUserByID(mission.posterID)
             val chatRoom = ChatRoom(doer, poster, mission)
             val chatManager = ChatManager()
@@ -78,12 +76,17 @@ class DoersAdapter internal constructor(
                     return@addOnCompleteListener
                 }
 
-                // todo DENNIS do your shit here
+
+
                 val intent = Intent(it.context, ChatActivity::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 intent.putExtra("roomId", chatRoom.id)
                 it.context.startActivity(intent)
             }
+        }
+
+        holder.doerBar.jesta_doers_new_layout.setOnClickListener {
+            MainActivity.instance.fragNavController.pushFragment(ChatFragment())
         }
     }
 

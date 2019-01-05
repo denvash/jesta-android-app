@@ -1,4 +1,4 @@
-package com.jesta.utils.chat;
+package com.jesta.data.chat;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
@@ -9,15 +9,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.database.*;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.jesta.data.Mission;
 import com.jesta.data.User;
 import com.jesta.utils.db.SysManager;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-
-import static com.facebook.FacebookSdk.getCacheDir;
 
 public class ChatManager {
     private final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/sendChatMessage";
