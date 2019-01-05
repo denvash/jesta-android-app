@@ -457,7 +457,7 @@ public class SysManager {
                                 sts.setPoster(true);
                             statusMap.put(i.getMissionID(), sts);
                         }
-                        sts.getDoerIDList().add(i.getDoerID());
+                        sts.getDoerIDList().add(i);
                     }
                 }
                 source.setResult(new ArrayList<Status>(statusMap.values()));

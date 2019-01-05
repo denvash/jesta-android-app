@@ -10,6 +10,7 @@ import com.jesta.R
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
 import com.jesta.data.Mission
 import com.jesta.data.Relation
+import com.jesta.data.Status
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.ChatFragment
 import com.jesta.data.chat.ChatRoom
@@ -19,8 +20,8 @@ import kotlinx.android.synthetic.main.jesta_doers.view.*
 import kotlin.random.Random
 
 class DoersAdapter internal constructor(
-    private val doerList: List<String>,
-    private val relation: Relation,
+    private val doerList: List<Relation>,
+    private val status: Status,
     private val mission: Mission
 ) : RecyclerView.Adapter<DoersAdapter.JestaCardViewHolder>() {
 
@@ -36,35 +37,42 @@ class DoersAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: JestaCardViewHolder, position: Int) {
-        val doer = sysManager.getUserByID(relation.doerID)
         if (position < doerList.size) {
+            val doer = sysManager.getUserByID(doerList[position].doerID)
             val bar = holder.doerBar
             bar.jesta_doers_name.text = doer.displayName
             bar.jesta_doers_diamond_amount.text = Random.nextInt(1, 40000).toString()
-        }
 
-        if (doer.photoUrl != MISSION_EMPTY_AUTHOR_IMAGE) {
-            Picasso.get().load(doer.photoUrl).noFade().into(holder.doerBar.jesta_doers_avatar)
-        }
 
-        holder.doerBar.jesta_doers_accept.setOnClickListener {
-            Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
-            sysManager.onAcceptDoer(relation,mission)
-            holder.doerBar.jesta_doers_accept.isEnabled = false
-        }
+            if (doer.photoUrl != MISSION_EMPTY_AUTHOR_IMAGE) {
+                Picasso.get().load(doer.photoUrl).noFade().into(holder.doerBar.jesta_doers_avatar)
+            }
 
-        holder.doerBar.jesta_doers_decline.setOnClickListener {
-            Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
-            sysManager.onDeclineUser(relation)
-            holder.doerBar.jesta_doers_accept.isEnabled = false
-        }
+            holder.doerBar.jesta_doers_accept.setOnClickListener {
+                Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
+                sysManager.onAcceptDoer(doerList[position],mission)
+                holder.doerBar.jesta_doers_accept.isEnabled = false
+            }
 
-        holder.doerBar.jesta_doers_chat.setOnClickListener {
-            val roomDoer = sysManager.getUserByID(relation.doerID)
-            val poster = sysManager.getUserByID(mission.posterID)
-            val chatRoom = ChatRoom(roomDoer,poster,mission)
+            holder.doerBar.jesta_doers_decline.setOnClickListener {
+                Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
+                sysManager.onDeclineUser(doerList[position])
+                holder.doerBar.jesta_doers_accept.isEnabled = false
+            }
 
-            MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!,relation.id,mission.id))
+            holder.doerBar.jesta_doers_chat.setOnClickListener {
+                val roomDoer = sysManager.getUserByID(doerList[position].doerID)
+                val poster = sysManager.getUserByID(mission.posterID)
+                val chatRoom = ChatRoom(roomDoer, poster, mission)
+
+                MainActivity.instance.fragNavController.pushFragment(
+                    ChatFragment.newInstance(
+                        chatRoom.id!!,
+                        doerList[position].id,
+                        mission.id
+                    )
+                )
+            }
         }
 
 
