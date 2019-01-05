@@ -67,21 +67,24 @@ class ChatFragment : Fragment() {
                 return@addOnCompleteListener
             }
 
-            val messagesLiveSnapShot = arrayListOf<ChatMessage>()
-            chatManger.listenForIncomingMessages(adapter, chatID, messagesLiveSnapShot)
 
-            view.input.setInputListener {
-                chatManger.sendMessage(context, chatID, currUser, it.toString())
-//            adapter.addToStart(
-//                Message(
-//                    chatID,
-//                    Author(currUser.id, currUser.displayName, currUser.photoUrl),
-//                    Date(),
-//                    it.toString()
-//                ), true
-//            )
-                true
+            chatManger.getMessagesByRoomId(chatID).addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    //todo some error
+                    return@addOnCompleteListener
+                }
+
+                val messagesHistory = task.getResult() as MutableList<Message>?;
+                adapter.addToEnd(messagesHistory, true)
+                chatManger.listenForIncomingMessages(adapter, chatID, messagesHistory)
+
+                view.input.setInputListener {
+                    chatManger.sendMessage(context, chatID, currUser, it.toString())
+                    true
+                }
+
             }
+
         }
 
 

@@ -97,13 +97,26 @@ public class ChatManager {
         return source.getTask();
     }
 
+    public static class SortByDate implements Comparator<Message>
+    {
+        @Override
+        public int compare(Message o1, Message o2) {
+            if (o1.getDate().before(o2.getDate())) {
+                return -1;
+            }
+            else {
+                return 1;
+            }
+        }
+    }
+
     public Task getMessagesByRoomId(String roomId) {
-        final TaskCompletionSource<List<ChatMessage>> source = new TaskCompletionSource<>();
+        final TaskCompletionSource<List<Message>> source = new TaskCompletionSource<>();
         DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
         roomDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<ChatMessage> messagesList = new ArrayList<>();
+                List<Message> messagesList = new ArrayList<>();
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     HashMap dbMsg = (HashMap) ds.getValue();
@@ -113,11 +126,14 @@ public class ChatManager {
                     }
                     String senderId = (String) dbMsg.get("sender");
                     User sender = sysManager.getUserByID(senderId);
-                    ChatMessage message = new ChatMessage(msgKey, (String) dbMsg.get("body"), sender, (String) dbMsg.get("time"));
+
+                    Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
+                    Date date = new Date(Long.parseLong((String) dbMsg.get("time")));
+                    Message message = new Message(msgKey, UIAuthor, date, (String) dbMsg.get("body"));
                     messagesList.add(message);
                 }
 
-                Collections.sort(messagesList, new ChatMessage.SortByDate());
+                Collections.sort(messagesList, new SortByDate());
                 source.setResult(messagesList);
             }
             @Override
@@ -129,7 +145,7 @@ public class ChatManager {
         return source.getTask();
     }
 
-    public void listenForIncomingMessages(final MessagesListAdapter<Message> adapter, final String roomId, final List<ChatMessage> messagesLiveSnapShot) {
+    public void listenForIncomingMessages(final MessagesListAdapter<Message> adapter, final String roomId, final List<Message> messagesHistory) {
         // listen for child add event; e.g. new message has arrived
         DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
         roomDBRef.addChildEventListener(new ChildEventListener() {
@@ -142,30 +158,12 @@ public class ChatManager {
                 }
                 String senderId = (String)dbMsg.get("sender");
                 User sender = sysManager.getUserByID(senderId);
-                ChatMessage dbMessage = new ChatMessage(msgKey, (String)dbMsg.get("body"), sender, (String)dbMsg.get("time"));
+                Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
+                Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
+                Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
 
-
-
-                if (!messagesLiveSnapShot.contains(dbMessage)) {
-                    messagesLiveSnapShot.add(dbMessage);
-                    Collections.sort(messagesLiveSnapShot, new ChatMessage.SortByDate());
-
-
-                    Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
-                    Date date;
-
-                    try {
-                        date = new Date(Long.parseLong(dbMessage.getCreatedAt()));
-                    }
-                    catch (Exception e) {
-                        // todo
-                        date = new Date();
-                    }
-
-
-                    Message UIMessage = new Message(dbMessage.getId(), UIAuthor, date, dbMessage.getMessage());
+                if (!messagesHistory.contains(UIMessage)) {
                     adapter.addToStart(UIMessage, true);
-
                 }
             }
 
