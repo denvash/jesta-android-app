@@ -767,11 +767,10 @@ public class SysManager {
                 builder.setMessage(UIMessage.getText()).setTitle((String)dbMsg.get("title"));
 
                 builder.setNeutralButton("OK", null);
-                final AlertDialog dialog = builder.create();
-                dialog.setCanceledOnTouchOutside(false);
+
 
                 // TODO ASK DENNIS HOW TO GO TO STATUS
-               builder.setNeutralButton("GO TO STATUS", new DialogInterface.OnClickListener() {
+               builder.setPositiveButton("GO TO STATUS", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
                        if (activity instanceof MainActivity) {
@@ -779,6 +778,9 @@ public class SysManager {
                        }
                    }
                });
+
+                final AlertDialog dialog = builder.create();
+                dialog.setCanceledOnTouchOutside(false);
 
                 DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
                 msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

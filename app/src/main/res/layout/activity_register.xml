@@ -72,6 +72,7 @@
             >
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
+                    android:id="@+id/fullName"
                     android:hint="@string/jesta_login_full_name_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -87,6 +88,7 @@
             >
                 <com.google.android.material.textfield.TextInputEditText
                         style="@style/Theme.Jesta.Login.TextInputEditText"
+                    android:id="@+id/phoneNumber"
                     android:hint="@string/jesta_login_cellular_hint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
