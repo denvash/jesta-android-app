@@ -25,9 +25,9 @@
 
             <TextView
                 style="@style/TextAppearance.Jesta.Type"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/jesta_post_choose_difficulty" />
 
             <org.angmarch.views.NiceSpinner
@@ -35,12 +35,12 @@
                 style="@style/Widget.Jesta.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/jesta_post_difficulty"
-                android:textAlignment="center"
                 android:layout_gravity="center"
                 android:backgroundTintMode="src_atop"
-                app:textTint="@color/colorPrimary"
-                app:arrowTint="@color/colorPrimary"/>
+                android:text="@string/jesta_post_difficulty"
+                android:textAlignment="center"
+                app:arrowTint="@color/colorPrimary"
+                app:textTint="@color/colorPrimary" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -72,26 +72,26 @@
             android:hint="@string/jesta_post_description"
             app:boxBackgroundColor="@color/transparent"
             app:boxStrokeWidth="1dp"
-            app:hintEnabled="true"
-            app:hintAnimationEnabled="true"
             app:counterEnabled="true"
-            app:counterMaxLength="100">
+            app:counterMaxLength="100"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/jesta_post_description"
                 android:layout_width="match_parent"
-                android:elegantTextHeight="true"
                 android:layout_height="wrap_content"
+                android:elegantTextHeight="true"
                 android:fontFamily="@font/marvel"
                 android:inputType="textCapSentences|textMultiLine"
                 android:textColor="@color/colorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <co.lujun.androidtagview.TagContainerLayout
-            android:layout_margin="@dimen/_10dp"
             android:id="@+id/jesta_post_tag_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10dp"
             app:container_background_color="@color/transparent"
             app:container_border_color="@color/transparent"
             app:tag_background_color="@color/transparent"
@@ -109,14 +109,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_marginEnd="@dimen/_40dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_40dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 app:boxBackgroundColor="@color/transparent"
@@ -137,10 +137,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/jesta_post_button_add_tag"
                 style="@style/Widget.Jesta.Button.Special"
-                android:layout_marginEnd="@dimen/_10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_10dp"
                 android:text="@string/jesta_post_add_tag"
                 android:textSize="12sp"
                 app:backgroundTint="@color/white"
@@ -149,16 +149,14 @@
                 app:strokeColor="@color/black"
                 app:strokeWidth="0.75dp" />
         </LinearLayout>
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
@@ -243,7 +241,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill_horizontal"
                 android:layout_marginEnd="@dimen/_10dp"
@@ -294,7 +292,8 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill_horizontal"
                 android:layout_marginStart="20dp"
@@ -345,7 +344,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_gravity="fill_horizontal"
                 android:layout_marginEnd="@dimen/_10dp"
@@ -374,37 +373,30 @@
                         android:text="@string/jesta_post_crew"
                         android:textAlignment="center" />
 
-                    <!--<nl.dionsegijn.steppertouch.StepperTouch-->
-                        <!--android:id="@+id/jesta_post_num_of_people"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content" />-->
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                        android:layout_width="match_parent"
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/jesta_post_num_of_people"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        app:boxBackgroundColor="@color/transparent"
-                        app:hintAnimationEnabled="false"
-                        app:hintEnabled="false">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/jesta_post_num_of_people"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/marvel"
-                            android:inputType="numberSigned"
-                            android:textColor="@color/colorPrimary" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        app:np_dividerColor="@color/colorPrimary"
+                        app:np_height="50dp"
+                        app:np_max="10"
+                        app:np_min="0"
+                        app:np_orientation="horizontal"
+                        app:np_selectedTextColor="@color/colorPrimary"
+                        app:np_selectedTextSize="16sp"
+                        app:np_textColor="@color/colorPrimary"
+                        app:np_textSize="16sp"
+                        app:np_typeface="marvel"
+                        app:np_value="1" />
 
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:layout_gravity="fill_horizontal"
+                android:layout_gravity=""
                 android:layout_marginStart="20dp"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -413,6 +405,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
                     android:layout_marginEnd="@dimen/_10dp"
                     android:contentDescription="@string/jesta_card_review_icon"
                     android:src="@drawable/ic_jesta_time" />
@@ -420,51 +413,73 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="top|center"
                     android:orientation="vertical">
 
                     <TextView
                         style="@style/TextAppearance.Jesta.Type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="@string/jesta_post_duration"
                         android:textAlignment="center" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        app:boxBackgroundColor="@color/transparent"
-                        app:hintAnimationEnabled="false"
-                        app:hintEnabled="false">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/jesta_post_duration"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/marvel"
-                            android:inputType="numberSigned"
-                            android:textColor="@color/colorPrimary" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:gravity="center"
+                            app:boxBackgroundColor="@color/transparent"
+                            app:hintAnimationEnabled="false"
+                            app:hintEnabled="false">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/jesta_post_duration"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/marvel"
+                                android:inputType="numberSigned"
+                                android:textColor="@color/colorPrimary" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/jesta_post_time_start"
+                            style="@style/Widget.Jesta.Button.Special"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:text="@string/jesta_post_time_start"
+                            android:textSize="12sp"
+                            app:backgroundTint="@color/white"
+                            app:cornerRadius="14dp"
+                            app:rippleColor="@color/colorPrimaryLight"
+                            app:strokeColor="@color/black"
+                            app:strokeWidth="0.75dp" />
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </GridLayout>
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-60dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="-60dp"
             android:orientation="horizontal"
             tools:ignore="UseCompoundDrawables">
 
@@ -490,12 +505,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:bar_color="@color/semiTransparentGrey"
-            app:bubble_text_color="@color/white"
-            app:bubble_color="@color/colorPrimary"
             app:bar_text_color="@color/colorPrimary"
-            app:start_text="100"
+            app:bubble_color="@color/colorPrimary"
+            app:bubble_text_color="@color/white"
             app:end_text="MAX"
-            app:size="normal"/>
+            app:size="normal"
+            app:start_text="100" />
 
     </LinearLayout>
 

@@ -97,5 +97,6 @@
     <string name="jesta_status_edit_jesta">Edit jesta</string>
     <string name="jesta_status_preview">Preview</string>
     <string name="jesta_status_no_doer">No Doer Assigned Yet</string>
+    <string name="jesta_post_time_start">Set Time Start</string>
 
 </resources>

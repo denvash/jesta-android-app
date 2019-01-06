@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.jesta_main_activity.*
 import kotlinx.android.synthetic.main.jesta_post.*
 import kotlinx.android.synthetic.main.jesta_post.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
+import net.steamcrafted.lineartimepicker.dialog.LinearTimePickerDialog
 import java.io.File
 import java.util.*
 
@@ -42,6 +44,21 @@ class AskJestaFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_ask_jesta, container, false)
 
         setLayoutOnLastMission(view, sysManager.currentUserFromDB.lastMission)
+
+        val ints = MainActivity.instance
+        view.jesta_post_time_start.setOnClickListener {
+            LinearTimePickerDialog.Builder.with(ints)
+                .setDialogBackgroundColor(ContextCompat.getColor(ints,R.color.semiWhite))
+                .setPickerBackgroundColor(ContextCompat.getColor(ints,R.color.semiWhite))
+                .setLineColor(ContextCompat.getColor(ints,R.color.black))
+                .setTextColor(ContextCompat.getColor(ints,R.color.colorPrimary))
+                .setTextBackgroundColor(ContextCompat.getColor(ints,R.color.semiTransparentGrey))
+                .setButtonColor(ContextCompat.getColor(ints,R.color.colorPrimary))
+                .build()
+                .show()
+
+        }
+
 
         view.jesta_post_title.filters = view.jesta_post_title.filters + InputFilter.AllCaps()
 
@@ -97,7 +114,7 @@ class AskJestaFragment : Fragment() {
                 description = view.jesta_post_description.text.toString(),
                 imageUrl = "",
                 payment = view.jesta_post_payment.text.toString().toInt(),
-                numOfPeople = view.jesta_post_num_of_people.text.toString().toInt(),
+                numOfPeople = view.jesta_post_num_of_people.value,
                 duration = view.jesta_post_duration.text.toString().toInt(),
                 location = view.jesta_post_location.text.toString(),
                 diamonds = view.jesta_post_fluid_slider.bubbleText?.toInt()!!,
@@ -155,7 +172,7 @@ class AskJestaFragment : Fragment() {
         view.jesta_post_tag_layout.tags = mission.tags
         view.jesta_post_payment.setText(mission.payment.toString())
         view.jesta_post_location.setText(mission.location)
-        view.jesta_post_num_of_people.setText(mission.numOfPeople.toString())
+        view.jesta_post_num_of_people.value = mission.numOfPeople
         view.jesta_post_duration.setText(mission.duration.toString())
         view.jesta_post_difficulty.selectedIndex = when (mission.difficulty) {
             DIFFICULTY_EASY -> 0
@@ -191,7 +208,6 @@ class AskJestaFragment : Fragment() {
                 jesta_post_difficulty.text.isNullOrEmpty() ||
                 jesta_post_description.text.isNullOrEmpty() ||
                 jesta_post_payment.text.isNullOrEmpty() ||
-                jesta_post_num_of_people.text.isNullOrEmpty() ||
                 jesta_post_duration.text.isNullOrEmpty() ||
                 jesta_post_location.text.isNullOrEmpty()
     }
