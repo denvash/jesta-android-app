@@ -29,6 +29,7 @@ import com.jesta.data.chat.Author;
 import com.jesta.data.chat.Message;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
+import com.jesta.gui.activities.MainActivity;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -38,9 +39,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import static com.jesta.data.ConstantsKt.RELATION_STATUS_IN_PROGRESS;
-import static com.jesta.data.ConstantsKt.RELATION_STATUS_USER_DECLINED;
-import static com.jesta.data.ConstantsKt.RELATION_EMPTY_DOER_ID;
+import static com.jesta.data.ConstantsKt.*;
 import static com.jesta.utils.db.SysManager.DBTask.*;
 
 
@@ -771,12 +770,14 @@ public class SysManager {
                 dialog.setCanceledOnTouchOutside(false);
 
                 // TODO ASK DENNIS HOW TO GO TO STATUS
-//                builder.setNeutralButton("GO TO STATUS", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        MainActivity.class.getI.getFragNavController()
-//                    }
-//                });
+               builder.setNeutralButton("GO TO STATUS", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       if (activity instanceof MainActivity) {
+                           ((MainActivity) activity).getInstance().getFragNavController().switchTab(INDEX_STATUS);
+                       }
+                   }
+               });
 
                 DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
                 msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

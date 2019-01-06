@@ -1,0 +1,126 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/jesta_status_poster_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            tools:ignore="UseCompoundDrawables"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|bottom"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                tools:ignore="ContentDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_jesta_preview" />
+
+            <TextView
+                style="@style/TextAppearance.Jesta.Type.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/jesta_status_preview" />
+        </LinearLayout>
+
+        <LinearLayout
+            tools:ignore="UseCompoundDrawables"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                tools:ignore="ContentDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit_jesta" />
+
+            <TextView
+                style="@style/TextAppearance.Jesta.Type.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/jesta_status_edit_jesta" />
+        </LinearLayout>
+
+        <LinearLayout
+            tools:ignore="UseCompoundDrawables"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|bottom"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                tools:ignore="ContentDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_jesta_settings" />
+
+            <TextView
+                style="@style/TextAppearance.Jesta.Type.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/jesta_status_settings" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="0.75dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/Widget.Jesta.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4dp"
+                    android:text="@string/jesta_status_assign_a_doer" />
+            </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.75dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/jesta_status_doers_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical" />
+</LinearLayout>

@@ -1,0 +1,14 @@
+<LinearLayout android:id="@+id/jesta_status_poster_no_doers_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="20dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        style="@style/TextAppearance.Jesta.Type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/jesta_status_no_doer" />
+</LinearLayout>

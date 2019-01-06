@@ -17,6 +17,9 @@ import com.jesta.gui.fragments.ChatFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_status.view.*
+import kotlinx.android.synthetic.main.jesta_status_doer.view.*
+import kotlinx.android.synthetic.main.jesta_status_poster.view.*
+import kotlinx.android.synthetic.main.jesta_status_poster_no_doers.view.*
 import java.util.*
 
 class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
@@ -45,11 +48,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         holder.view.jesta_status_title.text = mission.title
         holder.view.jesta_status_total_doers.text = mission.numOfPeople.toString()
 
-        holder.view.jesta_status_doer_layout.visibility = View.GONE
-
         if (status.status == RELATION_STATUS_DONE || !status.isPoster) {
             holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
-            holder.view.jesta_status_poster_layout.visibility = View.GONE
 
             holder.view.jesta_status_total_doers.visibility = View.GONE
             holder.view.jesta_status_divider.visibility = View.GONE
@@ -69,10 +69,15 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
             }
         }
 
-        if (status.isPoster && status.doerIDList.first().doerID == RELATION_EMPTY_DOER_ID) {
+        else if (status.isPoster && status.doerIDList.first().doerID == RELATION_EMPTY_DOER_ID) {
             holder.view.jesta_status_poster_no_doers_layout.visibility = View.VISIBLE
-            holder.view.jesta_status_poster_layout.visibility = View.GONE
+
         }
+
+        else if (status.isPoster) {
+            holder.view.jesta_status_poster_layout.visibility = View.VISIBLE
+        }
+
 
         if (mission.numOfPeople == 0) {
             holder.view.jesta_status_total_doers.visibility = View.GONE
