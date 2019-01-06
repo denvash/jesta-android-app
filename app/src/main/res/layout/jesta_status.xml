@@ -116,6 +116,23 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/jesta_status_poster_no_doers_layout"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.Jesta.Type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jesta_status_no_doer" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/jesta_status_doer_layout"
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
@@ -198,6 +215,8 @@
                 android:id="@+id/jesta_status_poster_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -317,7 +336,6 @@
                     android:scrollbars="vertical" />
             </LinearLayout>
         </FrameLayout>
-
 
 
     </com.github.florent37.expansionpanel.ExpansionLayout>

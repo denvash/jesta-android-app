@@ -47,8 +47,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
         holder.view.jesta_status_doer_layout.visibility = View.GONE
 
-        if (status.status == RELATION_STATUS_DONE || !status.isPoster ||
-            (status.isPoster && status.doerIDList.size == 1)) {
+        if (status.status == RELATION_STATUS_DONE || !status.isPoster) {
             holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
             holder.view.jesta_status_poster_layout.visibility = View.GONE
 
@@ -68,6 +67,11 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                     )
                 )
             }
+        }
+
+        if (status.isPoster && status.doerIDList.first().doerID == RELATION_EMPTY_DOER_ID) {
+            holder.view.jesta_status_poster_no_doers_layout.visibility = View.VISIBLE
+            holder.view.jesta_status_poster_layout.visibility = View.GONE
         }
 
         if (mission.numOfPeople == 0) {
