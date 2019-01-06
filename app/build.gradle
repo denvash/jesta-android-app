@@ -62,8 +62,8 @@ dependencies {
     implementation 'com.github.florent37:expansionpanel:1.2.2'
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     implementation 'com.github.stfalcon:chatkit:0.3.3'
+    implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
