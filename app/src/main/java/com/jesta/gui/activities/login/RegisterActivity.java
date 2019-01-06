@@ -9,12 +9,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.jesta.R;
 import com.jesta.utils.db.SysManager;
 
 public class RegisterActivity extends LoginActivitiesWrapper {
 
-    EditText e1,e2;
+    EditText emailET, passwordET, phoneNumberET, fullNameET;
     FirebaseAuth auth;
 
     @Override
@@ -24,15 +26,18 @@ public class RegisterActivity extends LoginActivitiesWrapper {
 
         setContentView(R.layout.activity_register);
 
-        e1 = (EditText)findViewById(R.id.email);
-        e2 = (EditText)findViewById(R.id.password);
+        emailET = (EditText)findViewById(R.id.email);
+        passwordET = (EditText)findViewById(R.id.password);
+        phoneNumberET = (EditText)findViewById(R.id.phoneNumber);
+        fullNameET = (EditText)findViewById(R.id.fullName);
         auth = FirebaseAuth.getInstance();
     }
 
     public void createUser(View v) {
-        final String email = e1.getText().toString();
-        final String password = e2.getText().toString();
-
+        final String email = emailET.getText().toString();
+        final String password = passwordET.getText().toString();
+        final String phoneNumber = phoneNumberET.getText().toString();
+        final String fullName = fullNameET.getText().toString();
         // todo-optional: do some email and password validation on client's side
         try {
             auth.createUserWithEmailAndPassword(email, password)
@@ -47,10 +52,23 @@ public class RegisterActivity extends LoginActivitiesWrapper {
                                 startActivity(i);
                                 return;
                             }
+                            AuthResult authResult = task.getResult();
+                            FirebaseUser user = authResult.getUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(fullName).build();
+
+                            user.updateProfile(profileUpdates);
+
+
+
                             // user created in firebase only
                             Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
                             // TODO jesta_loading-animation here
                             loginWithCredentials(email, password);
+
+//                            User newUserOnDB = new User(user.getUid(), fullName, user.getEmail(), null, null, null);
+//                            sysManager.setUserOnDB(newUserOnDB);
                         }
                     });
         }
