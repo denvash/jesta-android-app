@@ -13,6 +13,7 @@ import com.jesta.gui.fragments.AskJestaFragment
 import com.jesta.gui.fragments.DoJestaFragment
 import com.jesta.gui.fragments.SettingsFragment
 import com.jesta.gui.fragments.StatusFragment
+import com.jesta.utils.db.SysManager
 import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
 import kotlinx.android.synthetic.main.jesta_main_activity.*
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             private set
     }
 
+    fun getInstance(): MainActivity {
+        return instance
+    }
     override val numberOfRootFragments: Int = 4
 
     override fun getRootFragment(index: Int): Fragment {
@@ -88,6 +92,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         jesta_bottom_navigation.setOnNavigationItemReselectedListener {
             fragNavController.clearStack()
         }
+
+        val sysManager = SysManager(this)
+        sysManager.listenForIncomingInboxMessages(this)
     }
 
     override fun onBackPressed() {

@@ -13,7 +13,6 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
-import com.jesta.gui.activities.InboxMessageActivity;
 
 import java.util.Random;
 
@@ -30,77 +29,55 @@ public class MessagingService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        //todo debug
+
         super.onMessageReceived(remoteMessage);
-        String title = null, body = null, jestaId = null, sender = null;
-        try {
-            title = remoteMessage.getData().get("title");
-            body = remoteMessage.getData().get("body");
-            jestaId = remoteMessage.getData().get("jesta");
-            sender = remoteMessage.getData().get("sender");
-        }
-        catch (Exception e) {
-            // todo open error activity
-        }
 
-        Boolean isPrompt = false;
-        if (title != null && (
-                title.contains("asked to do a jesta") ||
-                title.contains("accepted you") ||
-                title.contains("declined you")
-
-        ))
-        {
-            isPrompt = true;
-        }
-
-        if (isPrompt) {
-            // opens a dialog
-            Intent i = new Intent(getApplicationContext(), InboxMessageActivity.class);
-            Bundle b = new Bundle();
-            b.putString("statusTitle", title);
-            b.putString("body", body);
-            b.putString("jesta", jestaId);
-            b.putString("sender", sender);
-            i.putExtras(b);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-            return;
-        }
-
-         // not a promt, decide if chat message or system message
-        if (title.equals("chatMessage")) {
-
-        }
-        else {
-            showNotification(title, body);
-        }
-
-
-
-//        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-//        Log.d(TAG, "From: " + remoteMessage.getFrom());
-//
-//        // Check if message contains a data payload.
-//        if (remoteMessage.getData().size() > 0) {
-//            Log.d(TAG, "ChatMessage data payload: " + remoteMessage.getData());
-//
-//            if (/* Check if data needs to be processed by long running job */ true) {
-//                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-//                scheduleJob();
-//            } else {
-//                // Handle message within 10 seconds
-//                handleNow();
-//            }
-//
+        return; //todo debug
+//        String title = null, body = null, jestaId = null, sender = null;
+//        try {
+//            title = remoteMessage.getData().get("title");
+//            body = remoteMessage.getData().get("body");
+//            jestaId = remoteMessage.getData().get("jesta");
+//            sender = remoteMessage.getData().get("sender");
+//        }
+//        catch (Exception e) {
+//            // todo open error activity
 //        }
 //
-//        // Check if message contains a notification payload.
-//        if (remoteMessage.getNotification() != null) {
-//            Log.d(TAG, "ChatMessage Notification Body: " + remoteMessage.getNotification().getBody());
+//        Boolean isPrompt = false;
+//        if (title != null && (
+//                title.contains("asked to do a jesta") ||
+//                title.contains("accepted you") ||
+//                title.contains("declined you")
+//
+//        ))
+//        {
+//            isPrompt = true;
 //        }
 //
-//        // Also if you intend on generating your own notifications as a result of a received FCM
-//        // message, here is where that should be initiated. See sendNotification method below.
+//        if (isPrompt) {
+//            // opens a dialog
+//            Intent i = new Intent(getApplicationContext(), InboxMessageActivity.class);
+//            Bundle b = new Bundle();
+//            b.putString("statusTitle", title);
+//            b.putString("body", body);
+//            b.putString("jesta", jestaId);
+//            b.putString("sender", sender);
+//            i.putExtras(b);
+//            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(i);
+//            return;
+//        }
+//
+//         // not a promt, decide if chat message or system message
+//        if (title.equals("chatMessage")) {
+//
+//        }
+//        else {
+//            showNotification(title, body);
+//        }
+
     }
 
     private void showNotification(String title, String body) {

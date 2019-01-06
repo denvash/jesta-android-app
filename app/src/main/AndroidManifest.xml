@@ -62,7 +62,6 @@
         <activity android:name=".gui.activities.login.ErrorActivity" />
         <activity android:name=".gui.activities.login.LoginActivitiesWrapper" />
         <activity android:name=".gui.activities.login.OTPActivity" />
-        <activity android:name=".gui.activities.InboxMessageActivity" />
 
         <!--TODO PERMISSIONS?-->
         <service android:name=".utils.services.MessagingService">

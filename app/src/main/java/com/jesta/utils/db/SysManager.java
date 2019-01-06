@@ -1,6 +1,7 @@
 package com.jesta.utils.db;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.view.View;
 import android.view.WindowManager;
@@ -8,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
@@ -22,8 +25,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
 import com.jesta.data.*;
+import com.jesta.data.chat.Author;
+import com.jesta.data.chat.Message;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
+import com.jesta.gui.activities.MainActivity;
+import com.jesta.gui.fragments.StatusFragment;
+import com.ncapdevi.fragnav.FragNavController;
+import com.stfalcon.chatkit.messages.MessagesListAdapter;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -595,7 +604,7 @@ public class SysManager {
             title = getCurrentUserFromDB().getDisplayName() + " declined you as a doer!";
         }
 
-        String body = "Jesta statusTitle: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
+        String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
 
         try {
             // TODO change to post request to avoid this shit
@@ -688,6 +697,72 @@ public class SysManager {
         queue.add(stringRequest);
 
         return source.getTask();
+    }
+
+    public void listenForIncomingInboxMessages(final Context context) {
+        // listen for child add event; e.g. new message has arrived
+        final String receiverInbox = getCurrentUserFromDB().getId() + "_" + TopicDescriptor.USER_INBOX;
+        DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox);
+        roomDBRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
+
+                HashMap dbMsg = (HashMap)ds.getValue();
+                String msgKey = ds.getKey();
+                if (dbMsg == null) {
+                    throw new NullPointerException("dbUser is null");
+                }
+                String senderId = (String)dbMsg.get("sender");
+                User sender = getUserByID(senderId);
+                Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
+                Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
+                Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage(UIMessage.getText()).setTitle((String)dbMsg.get("title"));
+
+                builder.setNeutralButton("OK", null);
+
+                // TODO ASK DENNIS HOW TO GO TO STATUS
+//                builder.setNeutralButton("GO TO STATUS", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        MainActivity.class.getI.getFragNavController()
+//                    }
+//                });
+
+                DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
+                msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        AlertDialog dialog = builder.create();
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.show();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**
