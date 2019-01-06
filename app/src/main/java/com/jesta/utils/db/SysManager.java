@@ -25,6 +25,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
 import com.jesta.data.*;
+import com.jesta.data.chat.Author;
+import com.jesta.data.chat.Message;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
 import org.json.JSONException;
@@ -730,7 +732,7 @@ public class SysManager {
         return source.getTask();
     }
 
-    public void listenForIncomingInboxMessages(final Context context) {
+    public void listenForIncomingInboxMessages(final Activity activity) {
         // listen for child add event; e.g. new message has arrived
         final String receiverInbox = getCurrentUserFromDB().getId() + "_" + TopicDescriptor.USER_INBOX;
         DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox);
@@ -749,10 +751,12 @@ public class SysManager {
                 Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
                 Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setMessage(UIMessage.getText()).setTitle((String)dbMsg.get("title"));
 
                 builder.setNeutralButton("OK", null);
+                final AlertDialog dialog = builder.create();
+                dialog.setCanceledOnTouchOutside(false);
 
                 // TODO ASK DENNIS HOW TO GO TO STATUS
 //                builder.setNeutralButton("GO TO STATUS", new DialogInterface.OnClickListener() {
@@ -766,8 +770,7 @@ public class SysManager {
                 msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        AlertDialog dialog = builder.create();
-                        dialog.setCanceledOnTouchOutside(false);
+
                         dialog.show();
                     }
                 });

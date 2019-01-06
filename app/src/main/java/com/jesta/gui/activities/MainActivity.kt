@@ -93,8 +93,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             fragNavController.clearStack()
         }
 
-        val sysManager = SysManager(this)
-        sysManager.listenForIncomingInboxMessages(this)
+        val sysManager = SysManager(instance)
+        sysManager.listenForIncomingInboxMessages(instance)
     }
 
     override fun onBackPressed() {
