@@ -444,20 +444,28 @@ public class SysManager {
 
                 List<Relation> lst = task.getResult();
                 for (Relation i : lst) {
-                    if (i.getDoerID().equals(user) || i.getPosterID().equals(user)) {
+                    if (i.getPosterID().equals(user)) {
                         Status sts = statusMap.get(i.getMissionID());
                         if (sts == null) {
                             sts = new Status();
                             sts.setMissionID(i.getMissionID());
-                            sts.setStatus(i.getStatus());
-                            if (i.getPosterID().equals(user))
-                                sts.setPoster(true);
+                            sts.setPoster(true);
                             statusMap.put(i.getMissionID(), sts);
                         }
                         if(i.getDoerID().equals(RELATION_EMPTY_DOER_ID))
                             sts.getDoerIDList().add(0, i);
-                        else
+                        else {
                             sts.getDoerIDList().add(i);
+                            if(i.getStatus() == RELATION_STATUS_IN_PROGRESS)
+                                sts.setStatus(RELATION_STATUS_IN_PROGRESS);
+                        }
+                    }
+                    else if(i.getDoerID().equals(user)) {
+                        Status sts = new Status();
+                        sts.setMissionID(i.getMissionID());
+                        sts.setStatus(i.getStatus());
+                        sts.getDoerIDList().add(i);
+                        statusMap.put(i.getMissionID(), sts);
                     }
                 }
                 source.setResult(new ArrayList<Status>(statusMap.values()));
