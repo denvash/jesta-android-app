@@ -23,7 +23,10 @@ import com.jesta.data.User;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
+import static com.jesta.data.ConstantsKt.USER_EMPTY_PHOTO;
+import static com.jesta.data.ConstantsKt.getAvatarDict;
 import static com.jesta.utils.db.SysManager.DBTask.*;
 
 public class LoginMainActivity extends LoginActivitiesWrapper {
@@ -62,6 +65,12 @@ public class LoginMainActivity extends LoginActivitiesWrapper {
 //                    sysManager.setUserOnDB(currentUser);
 
                     //todo go to OTPActivity or check for OTP and go to Path
+                    if (currentUser.getPhotoUrl().equals(USER_EMPTY_PHOTO)) {
+                        Random rand = new Random();
+                        int avatar = rand.nextInt(15);
+                        currentUser.setPhotoUrl(getAvatarDict().get(avatar));
+                        sysManager.setUserOnDB(currentUser);
+                    }
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);

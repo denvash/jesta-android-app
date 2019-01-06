@@ -35,7 +35,6 @@ class CardAdapter internal constructor(
 
     override fun onBindViewHolder(holder: JestaCardViewHolder, position: Int) {
         val mission = postList[position]
-        if (!mission.isAvailable) return
         if (position < postList.size) {
             val card = holder.jestaCard
 

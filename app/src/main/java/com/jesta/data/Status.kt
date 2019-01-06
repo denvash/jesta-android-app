@@ -1,8 +1,8 @@
 package com.jesta.data
 
 data class Status(
-    val missionID: String,
-    val doerIDList: List<String>,
-    val isPoster: Boolean,
-    val status: String
+    var missionID: String = MISSION_EMPTY_ID,
+    var doerIDList: List<Relation> = ArrayList(),
+    var isPoster: Boolean = false,
+    var status: Int = RELATION_STATUS_INIT
 )

@@ -17,7 +17,6 @@
             android:id="@+id/jesta_doers_avatar"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/jesta_default_avatar"
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="0.75dp" />
 
@@ -57,16 +56,6 @@
             android:layout_column="2"
             android:layout_gravity="end"
             android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/jesta_doers_new_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/transparent"
-                android:padding="@dimen/_10dp"
-                android:src="@drawable/ic_jesta_diamond_normal"
-                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/jesta_doers_chat"

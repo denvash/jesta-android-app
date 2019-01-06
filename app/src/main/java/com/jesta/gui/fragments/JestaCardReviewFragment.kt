@@ -113,7 +113,7 @@ class JestaCardReviewFragment : Fragment() {
                         // todo some error
                         return@addOnCompleteListener
                     }
-                    MainActivity.instance.fragNavController.popFragment()
+                    MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
                 }
 
                 sysManager.askTodoJestaForUser(mission)

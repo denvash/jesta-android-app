@@ -9,17 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jesta.R
-import com.jesta.data.BUNDLE_CHAT_ROOM
-import com.jesta.data.chat.Author
+import com.jesta.data.BUNDLE_MISSION_ID
+import com.jesta.data.BUNDLE_RELATION_ID
+import com.jesta.data.BUNDLE_ROOM_ID
 import com.jesta.data.chat.ChatManager
-import com.jesta.data.chat.ChatMessage
 import com.jesta.data.chat.Message
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import kotlinx.android.synthetic.main.fragment_chat.view.*
-import java.util.*
+import kotlinx.android.synthetic.main.view_message_input.view.*
 
 
 class ChatFragment : Fragment() {
@@ -27,19 +27,25 @@ class ChatFragment : Fragment() {
         private val TAG = ChatFragment::class.java.simpleName
 
         @JvmStatic
-        fun newInstance(chatID: String) = ChatFragment().apply {
+        fun newInstance(roomID: String, relationID: String, missionID: String) = ChatFragment().apply {
             arguments = Bundle().apply {
-                putString(BUNDLE_CHAT_ROOM, chatID)
+                putString(BUNDLE_ROOM_ID, roomID)
+                putString(BUNDLE_RELATION_ID, relationID)
+                putString(BUNDLE_MISSION_ID, missionID)
             }
         }
     }
 
     private lateinit var chatID: String
+    private lateinit var relationID: String
+    private lateinit var missionID: String
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        arguments?.getString(BUNDLE_CHAT_ROOM)?.let {
+        arguments?.getString(BUNDLE_ROOM_ID)?.let {
             chatID = it
+            relationID = it
+            missionID = it
         }
     }
 
@@ -60,7 +66,6 @@ class ChatFragment : Fragment() {
 
         val chatManger = ChatManager()
 
-        // todo dennis you should to animation here while waiting for subscription
         chatManger.subscribeToChatRoom(chatID).addOnCompleteListener { task ->
             if (!task.isSuccessful) {
                 //todo some error
@@ -74,7 +79,11 @@ class ChatFragment : Fragment() {
                     return@addOnCompleteListener
                 }
 
-                val messagesHistory = task.getResult() as MutableList<Message>?;
+                view.attachmentButton.isEnabled = false
+
+                val messagesHistory = (task.result as MutableList<*>).filterIsInstance<Message>()
+
+                view.chat_progress_bar.visibility = View.INVISIBLE
                 adapter.addToEnd(messagesHistory, true)
                 chatManger.listenForIncomingMessages(adapter, chatID, messagesHistory)
 
@@ -83,10 +92,13 @@ class ChatFragment : Fragment() {
                     true
                 }
 
+                view.attachmentButton.setOnClickListener {
+                    view.attachmentButton.isEnabled = false
+                    sysManager.onAcceptDoer(sysManager.getRelationByID(relationID),sysManager.getMissionByID(missionID))
+                }
+
             }
-
         }
-
 
         return view
     }
