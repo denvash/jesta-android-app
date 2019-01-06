@@ -2,6 +2,9 @@ package com.jesta.gui.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.jesta.R
@@ -17,7 +20,7 @@ import com.jesta.utils.db.SysManager
 import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
 import kotlinx.android.synthetic.main.jesta_main_activity.*
-
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
 
 class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener,
@@ -33,6 +36,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     fun getInstance(): MainActivity {
         return instance
     }
+
     override val numberOfRootFragments: Int = 4
 
     override fun getRootFragment(index: Int): Fragment {
@@ -52,6 +56,23 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         setContentView(R.layout.jesta_main_activity)
 
         instance = this
+
+        KeyboardVisibilityEvent.setEventListener(this@MainActivity) {
+            val containerParams = RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            if (it) {
+                jesta_bottom_navigation.visibility = View.INVISIBLE
+                jesta_main_line_view.visibility = View.INVISIBLE
+            } else {
+                jesta_bottom_navigation.visibility = View.VISIBLE
+                jesta_main_line_view.visibility = View.VISIBLE
+                containerParams.addRule(RelativeLayout.ABOVE, R.id.jesta_main_line_view)
+            }
+            container.layoutParams = containerParams
+
+        }
 
         fragNavController.apply {
             transactionListener = this@MainActivity

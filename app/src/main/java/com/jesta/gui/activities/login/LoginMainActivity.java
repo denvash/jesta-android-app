@@ -62,7 +62,7 @@ public class LoginMainActivity extends LoginActivitiesWrapper {
                 User currentUser = sysManager.getCurrentUserFromDB();
                 if (currentUser != null) {
                     Random rand = new Random();
-                    int avatar = rand.nextInt(15);
+                    int avatar = rand.nextInt(16);
                     currentUser.setPhotoUrl(Objects.requireNonNull(getAvatarDict().get(avatar)));
                     sysManager.setUserOnDB(currentUser);
 

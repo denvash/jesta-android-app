@@ -47,7 +47,7 @@ const val AVATAR_DONKEY   = "https://i.imgur.com/qhDPhjf.png"
 val avatarDict: HashMap<Int, String> = hashMapOf(0 to AVATAR_BEAVER, 1 to AVATAR_DUCK,
     2 to AVATAR_ELEPHANT, 3 to AVATAR_LION, 4 to AVATAR_MONKEY, 5 to AVATAR_PIG, 6 to AVATAR_PENGUIN,
     7 to AVATAR_SEAL, 8 to AVATAR_BEAR, 9 to AVATAR_ZEBRA, 10 to AVATAR_CAT, 11 to AVATAR_CHICK,
-    12 to AVATAR_CHICKEN, 13 to AVATAR_COW, 14 to AVATAR_DOG, 15 to AVATAR_DONKEY)
+    12 to AVATAR_CHICKEN, 13 to AVATAR_COW, 14 to AVATAR_DOG, 15 to AVATAR_DONKEY, 16 to AVATAR_STUPID_DOG)
 
 const val INDEX_DO_JESTA = FragNavController.TAB1
 const val INDEX_ASK_JESTA = FragNavController.TAB2

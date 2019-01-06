@@ -7,5 +7,5 @@
     <dimen name="_40dp">40.00dp</dimen>
     <dimen name="_10dp">10dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="bottom_bar">44dp</dimen>
+    <dimen name="bottom_bar">44.75dp</dimen>
 </resources>

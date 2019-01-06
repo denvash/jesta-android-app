@@ -70,7 +70,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".gui.activities.ChatActivity"/>
     </application>
 
 </manifest>
