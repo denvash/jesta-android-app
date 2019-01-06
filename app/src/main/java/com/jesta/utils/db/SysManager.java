@@ -40,6 +40,7 @@ import java.util.*;
 
 import static com.jesta.data.ConstantsKt.RELATION_STATUS_IN_PROGRESS;
 import static com.jesta.data.ConstantsKt.RELATION_STATUS_USER_DECLINED;
+import static com.jesta.data.ConstantsKt.RELATION_EMPTY_DOER_ID;
 import static com.jesta.utils.db.SysManager.DBTask.*;
 
 
@@ -453,7 +454,10 @@ public class SysManager {
                                 sts.setPoster(true);
                             statusMap.put(i.getMissionID(), sts);
                         }
-                        sts.getDoerIDList().add(i);
+                        if(i.getDoerID().equals(RELATION_EMPTY_DOER_ID))
+                            sts.getDoerIDList().add(0, i);
+                        else
+                            sts.getDoerIDList().add(i);
                     }
                 }
                 source.setResult(new ArrayList<Status>(statusMap.values()));

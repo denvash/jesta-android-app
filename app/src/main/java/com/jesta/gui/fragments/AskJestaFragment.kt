@@ -177,7 +177,7 @@ class AskJestaFragment : Fragment() {
                 jesta.imageUrl = task.result.toString()
             }
             sysManager.setMissionOnDB(jesta)
-//            sysManager.setRelationOnDB(rel)
+            sysManager.setRelationOnDB(rel)
         }
     }
 

@@ -47,7 +47,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
         holder.view.jesta_status_doer_layout.visibility = View.GONE
 
-        if (status.status == RELATION_STATUS_DONE || !status.isPoster) {
+        if (status.status == RELATION_STATUS_DONE || !status.isPoster ||
+            (status.isPoster && status.doerIDList.size == 1)) {
             holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
             holder.view.jesta_status_poster_layout.visibility = View.GONE
 
@@ -98,7 +99,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
         holder.view.jesta_status_doers_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
         holder.view.jesta_status_doers_recycle_view.adapter =
-                DoersAdapter(status.doerIDList, status, mission)
+                if (status.doerIDList.size == 1) DoersAdapter(status.doerIDList, status, mission)
+                else DoersAdapter(status.doerIDList.takeLast(status.doerIDList.size - 1), status, mission)
 
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
         Picasso.get().load(posterAvatar).noFade().into(holder.view.jesta_status_avatar)
