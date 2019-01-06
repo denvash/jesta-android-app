@@ -116,6 +116,8 @@ class JestaCardReviewFragment : Fragment() {
                     MainActivity.instance.fragNavController.popFragment()
                 }
 
+                sysManager.askTodoJestaForUser(mission)
+
             }
         }
 
