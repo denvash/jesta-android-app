@@ -165,19 +165,24 @@ class AskJestaFragment : Fragment() {
     }
 
     private fun uploadMissionToDB(jesta: Mission, rel: Relation, sysManager: SysManager) {
-        val uploadAndGetUrl = sysManager.createDBTask(SysManager.DBTask.UPLOAD_FILE, filePath)
-        // note: async function, therefore it is in the end of current function
-        uploadAndGetUrl.addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                System.err.println(task.exception)
-                Toast.makeText(context, "Quota has been exceeded for this project.", Toast.LENGTH_LONG).show()
-                return@addOnCompleteListener
-            } else {
-                Toast.makeText(context, "Image uploaded to Storage", Toast.LENGTH_LONG).show()
-                jesta.imageUrl = task.result.toString()
-            }
+        if (filePath == null) {
             sysManager.setMissionOnDB(jesta)
             sysManager.setRelationOnDB(rel)
+        } else {
+            sysManager.createDBTask(SysManager.DBTask.UPLOAD_FILE, filePath)
+                // note: async function, therefore it is in the end of current function
+                .addOnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        System.err.println(task.exception)
+                        Toast.makeText(context, "Quota has been exceeded for this project.", Toast.LENGTH_LONG).show()
+                        return@addOnCompleteListener
+                    } else {
+                        Toast.makeText(context, "Image uploaded to Storage", Toast.LENGTH_LONG).show()
+                        jesta.imageUrl = task.result.toString()
+                    }
+                    sysManager.setMissionOnDB(jesta)
+                    sysManager.setRelationOnDB(rel)
+                }
         }
     }
 

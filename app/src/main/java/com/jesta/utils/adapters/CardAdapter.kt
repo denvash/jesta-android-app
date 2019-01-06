@@ -8,6 +8,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jesta.R
+import com.jesta.data.IMAGE_DEFAULT_JESTA
+import com.jesta.data.IMAGE_EMPTY
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
 import com.jesta.data.Mission
 import com.jesta.gui.activities.MainActivity
@@ -42,7 +44,10 @@ class CardAdapter internal constructor(
                     ResourcesCompat.getFont(MainActivity.instance, R.font.montserrat_light_italic)
             card.jesta_card_tags_layout.tags = mission.tags
 
-            ImageReqService.setImageFromUrl(card.jesta_card_image, mission.imageUrl)
+            ImageReqService.setImageFromUrl(
+                card.jesta_card_image,
+                if (mission.imageUrl != IMAGE_EMPTY) mission.imageUrl else IMAGE_DEFAULT_JESTA
+            )
 
             val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
             if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
@@ -55,7 +60,7 @@ class CardAdapter internal constructor(
         }
 
         holder.jestaCard.setOnClickListener {
-            Toast.makeText(it.context,"Clicked card=$position",Toast.LENGTH_LONG).show()
+            Toast.makeText(it.context, "Clicked card=$position", Toast.LENGTH_LONG).show()
             mainInstance.fragNavController.pushFragment(JestaCardReviewFragment.newInstance(mission))
         }
 

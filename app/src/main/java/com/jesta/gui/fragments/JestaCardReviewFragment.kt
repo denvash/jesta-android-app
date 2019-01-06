@@ -18,7 +18,9 @@ import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
+import kotlinx.android.synthetic.main.jesta_card.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
+import kotlinx.android.synthetic.main.jesta_doers.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.*
 
@@ -59,7 +61,10 @@ class JestaCardReviewFragment : Fragment() {
         view.jesta_preview_title.text = mission.title
         view.jesta_preview_difficulty.text = mission.difficulty
 
-        ImageReqService.setImageFromUrl(view.jesta_card_preview_mission_image, mission.imageUrl)
+        ImageReqService.setImageFromUrl(
+            view.jesta_card_preview_mission_image,
+            if (mission.imageUrl != IMAGE_EMPTY) mission.imageUrl else IMAGE_DEFAULT_JESTA
+        )
 
         view.jesta_preview_description.text = mission.description
         view.jesta_preview_payment.text = mission.payment.toString()

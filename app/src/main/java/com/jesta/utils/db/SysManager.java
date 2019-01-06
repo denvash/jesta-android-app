@@ -30,6 +30,7 @@ import com.jesta.data.chat.Message;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
 import com.jesta.gui.activities.MainActivity;
+import com.jesta.gui.fragments.StatusFragment;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -774,7 +775,7 @@ public class SysManager {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
                        if (activity instanceof MainActivity) {
-                           ((MainActivity) activity).getInstance().getFragNavController().switchTab(INDEX_STATUS);
+                           ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
                        }
                    }
                });

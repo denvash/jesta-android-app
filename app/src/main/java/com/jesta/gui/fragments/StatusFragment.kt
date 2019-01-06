@@ -30,14 +30,13 @@ class StatusFragment : Fragment() {
                     return@addOnCompleteListener
                 }
 
-
                 setRecycleView(view!!, userRelationsTask)
 
                 view.jesta_status_swipe_refresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
                 view.jesta_status_swipe_refresh.setOnRefreshListener {
 
                     sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
-                        .addOnCompleteListener { refreshReloadTask ->
+                        .addOnCompleteListener {
 
                             sysManager.statusList
                                 .addOnCompleteListener { refreshRelationsTask ->
@@ -65,16 +64,5 @@ class StatusFragment : Fragment() {
         adapter.setItems(statusList)
         view.jesta_status_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
         view.jesta_status_recycle_view.adapter = adapter
-    }
-
-    private fun toStatusList(
-        userRelationsTask: Task<Any>,
-        reloadJestasTask: Task<Any>
-    ): List<Pair<Relation, Mission>> {
-        val userRelations: List<Relation> = (userRelationsTask.result as List<*>).filterIsInstance<Relation>()
-        val allMissions: List<Mission> = (reloadJestasTask.result as List<*>).filterIsInstance<Mission>()
-        val relatedMissionsIDs = userRelations.map { it.missionID }
-        val relatedMissions = allMissions.filter { relatedMissionsIDs.contains(it.id) }
-        return userRelations.map { relation -> relation to relatedMissions.find { it.id == relation.missionID }!! }
     }
 }
