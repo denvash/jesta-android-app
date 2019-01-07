@@ -66,7 +66,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
             if (user == null) {
                 val intent = Intent(this,LoginMainActivity::class.java)
-                fragNavController.clearStack()
+                if (!fragNavController.isRootFragment) {
+                    fragNavController.clearStack()
+                }
                 startActivity(intent)
             }
 
