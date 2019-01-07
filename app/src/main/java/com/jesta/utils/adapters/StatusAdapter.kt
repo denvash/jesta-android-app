@@ -100,7 +100,6 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
 
         holder.view.jesta_status_button_complete.setOnClickListener {
-            
              sysManager.updateRelationsDone(status)
         }
 
