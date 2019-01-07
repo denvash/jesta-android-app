@@ -802,22 +802,29 @@ public class SysManager {
                 Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
                 Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
 
+                // delete the message we got !!!
+                 DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
+                 msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                     @Override
+                     public void onComplete(@NonNull Task<Void> task) {
 
-                Alerter.create(activity)
-                        .setTitle("You got a Doer! \uD83E\uDD29")
-                        .setText("Someone offered to do a Jesta for you! Check out the Status tab!")
-                        .setBackgroundColorRes(R.color.colorPrimary)
-                        .setIcon(R.drawable.ic_jesta_diamond_normal)
-                        .addButton("GO TO STATUS", R.style.AlertButton, new View.OnClickListener() {
+                         Alerter.create(activity)
+                                 .setTitle("You got a Doer! \uD83E\uDD29")
+                                 .setText("Someone offered to do a Jesta for you! Check out the Status tab!")
+                                 .setBackgroundColorRes(R.color.colorPrimary)
+                                 .setIcon(R.drawable.ic_jesta_diamond_normal)
+                                 .addButton("GO TO STATUS", R.style.AlertButton, new View.OnClickListener() {
 
-                            @Override
-                            public void onClick(View v) {
-                                if (activity instanceof MainActivity) {
-                                    ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
-                                }
-                            }
-                        })
-                        .show();
+                                     @Override
+                                     public void onClick(View v) {
+                                         if (activity instanceof MainActivity) {
+                                             ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
+                                         }
+                                     }
+                                 })
+                                 .show();
+                     }
+                 });
 
                 // final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 // builder.setMessage(UIMessage.getText()).setTitle((String)dbMsg.get("title"));
@@ -836,14 +843,7 @@ public class SysManager {
                 // final AlertDialog dialog = builder.create();
                 // dialog.setCanceledOnTouchOutside(false);
 
-                // DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
-                // msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                //     @Override
-                //     public void onComplete(@NonNull Task<Void> task) {
-                //
-                //         dialog.show();
-                //     }
-                // });
+
 
             }
 
