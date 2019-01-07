@@ -63,6 +63,7 @@ public class SysManager {
     private static DatabaseReference _usersDatabase = FirebaseDatabase.getInstance().getReference("users");
     private static DatabaseReference _jestasDatabase = FirebaseDatabase.getInstance().getReference("jestas");
     private static DatabaseReference _relationsDatabase = FirebaseDatabase.getInstance().getReference("relations");
+    private static DatabaseReference _graveyardDatabase = FirebaseDatabase.getInstance().getReference("graveyard");
 
     // messaging
     private static FirebaseMessaging _messaging = FirebaseMessaging.getInstance();
@@ -370,6 +371,14 @@ public class SysManager {
         return currentUser;
     }
 
+    public void setRelationOnGraveDB(Relation rel){
+        _graveyardDatabase.child("relations").child(rel.getId()).setValue(rel);
+    }
+
+    public void setMissionOnGraveDB(Mission mission){
+        _graveyardDatabase.child("jestas").child(mission.getId()).setValue(mission);
+    }
+
     public void setUserOnDB(User user) {
         _usersDatabase.child(user.getId()).setValue(user);
     }
@@ -398,6 +407,16 @@ public class SysManager {
             return null;
         }
         return _relationsDict.get(id);
+    }
+
+    public void removeRelation(Relation rel){
+        _relationsDatabase.child(rel.getId()).removeValue();
+        _relationsDict.remove(rel.getId());
+    }
+
+    public void removeMission(Mission mission){
+        _jestasDatabase.child(mission.getId()).removeValue();
+        _jestasDict.remove(mission.getId());
     }
 
     public Task getUserRelations(String id) {
@@ -472,6 +491,16 @@ public class SysManager {
             }
         });
         return source.getTask();
+    }
+
+    public void moveToGraveDB(Status sts){
+        for(Relation i : sts.getDoerIDList()){
+            this.setRelationOnGraveDB(i);
+            this.removeRelation(i);
+        }
+        Mission mission = getMissionByID(sts.getMissionID());
+        this.setMissionOnGraveDB(mission);
+        this.removeMission(mission);
     }
 
     public void onAcceptDoer(Relation rel, Mission mission) {
