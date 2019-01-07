@@ -76,7 +76,7 @@ class DoersAdapter internal constructor(
                         .setTitle("You declined a Doer! \uD83E\uDD7A")
                         .setText("No worries you will get an offer in no time! \uD83E\uDD1E")
                         .setBackgroundColorRes(R.color.colorPrimary)
-                        .setIcon(R.drawable.ic_jesta_diamond_normal)
+                        .setIcon(R.drawable.ic_remove)
                         .show()
                     Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
                 }

@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -49,12 +48,12 @@ class AskJestaFragment : Fragment() {
         val ints = MainActivity.instance
         view.jesta_post_time_start.setOnClickListener {
             LinearTimePickerDialog.Builder.with(ints)
-                .setDialogBackgroundColor(ContextCompat.getColor(ints,R.color.semiWhite))
-                .setPickerBackgroundColor(ContextCompat.getColor(ints,R.color.semiWhite))
-                .setLineColor(ContextCompat.getColor(ints,R.color.black))
-                .setTextColor(ContextCompat.getColor(ints,R.color.colorPrimary))
-                .setTextBackgroundColor(ContextCompat.getColor(ints,R.color.semiTransparentGrey))
-                .setButtonColor(ContextCompat.getColor(ints,R.color.colorPrimary))
+                .setDialogBackgroundColor(ContextCompat.getColor(ints, R.color.semiWhite))
+                .setPickerBackgroundColor(ContextCompat.getColor(ints, R.color.semiWhite))
+                .setLineColor(ContextCompat.getColor(ints, R.color.black))
+                .setTextColor(ContextCompat.getColor(ints, R.color.colorPrimary))
+                .setTextBackgroundColor(ContextCompat.getColor(ints, R.color.semiTransparentGrey))
+                .setButtonColor(ContextCompat.getColor(ints, R.color.colorPrimary))
                 .build()
                 .show()
 
@@ -133,16 +132,14 @@ class AskJestaFragment : Fragment() {
             uploadMissionToDB(jesta, rel, sysManager)
             Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
-
             val userCacheMission = sysManager.currentUserFromDB
             userCacheMission.lastMission = jesta.copy()
 
-
             sysManager.setUserOnDB(userCacheMission)
-            val reloadUsersTasks = sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS)
-            reloadUsersTasks.addOnCompleteListener {
-                Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
-            }
+            sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS)
+                .addOnCompleteListener {
+                    Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
+                }
 
             Alerter.create(MainActivity.instance)
                 .setTitle("Nice one! You posted a Jesta! \uD83E\uDD73")
@@ -150,9 +147,9 @@ class AskJestaFragment : Fragment() {
                 .setBackgroundColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
+
             MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
             MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
-
         }
 
         // TODO: max of the users Diamonds

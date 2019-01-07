@@ -98,21 +98,24 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
             }
         }
 
-
         holder.view.jesta_status_button_complete.setOnClickListener {
+            Alerter.create(MainActivity.instance)
+                .setTitle("Good Job! Jesta completed! \uD83E\uDD1D")
+                .setText("Now claim your rewards!")
+                .setBackgroundColorRes(R.color.colorPrimary)
+                .setIcon(R.drawable.ic_jesta_diamond_normal)
+                .show()
              sysManager.updateRelationsDone(status)
         }
 
         holder.view.jesta_status_done_button_remove.setOnClickListener {
             Alerter.create(MainActivity.instance)
-                .setTitle("Nice you complete a Jesta! \uD83D\uDCA0")
-                .setText("Now claim your rewards!")
+                .setTitle("Goodbye my friend! \uD83D\uDE25")
                 .setBackgroundColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
             sysManager.moveToGraveDB(status)
         }
-
 
         if (mission.numOfPeople == 0) {
             holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
