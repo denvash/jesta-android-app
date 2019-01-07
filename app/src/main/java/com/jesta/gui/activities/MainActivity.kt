@@ -3,6 +3,7 @@ package com.jesta.gui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -20,6 +21,14 @@ import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+import android.content.Context.INPUT_METHOD_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
+import android.app.Activity
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+
+
 
 
 class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener,
@@ -172,5 +181,31 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         //do fragmentary stuff. Maybe change statusTitle, I'm not going to tell you how to live your life
         // If we have a backstack, show the back button
 //        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val v = currentFocus
+
+        if (v != null &&
+            (ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE) &&
+            v is EditText &&
+            !v.javaClass.name.startsWith("android.webkit.")
+        ) {
+            val scrcoords = IntArray(2)
+            v.getLocationOnScreen(scrcoords)
+            val x = ev.rawX + v.left - scrcoords[0]
+            val y = ev.rawY + v.top - scrcoords[1]
+
+            if (x < v.left || x > v.right || y < v.top || y > v.bottom)
+                hideKeyboard(this)
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    fun hideKeyboard(activity: Activity?) {
+        if (activity != null && activity.window != null) {
+            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, 0)
+        }
     }
 }
