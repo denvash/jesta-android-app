@@ -14,7 +14,7 @@ public class OTPActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         sysManager.setTitle(getString(R.string.jesta_login_request_otp));
-        sysManager.showBackButton(true);
+        // sysManager.showBackButton(true);
     }
 
     @Override

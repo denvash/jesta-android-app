@@ -8,8 +8,8 @@
     <string name="jesta_login_email_hint">Enter email</string>
     <string name="jesta_login_password_hint">Enter password</string>
     <string name="jesta_login_register">REGISTER</string>
-    <string name="jesta_login_login">LOGIN</string>
-    <string name="jesta_login_welcome">WELCOME</string>
+    <string name="jesta_login_login">Login</string>
+    <string name="jesta_login_welcome">Welcome!</string>
     <string name="jesta_login_error">ERROR</string>
     <string name="jesta_login_request_otp">REQUEST OTP</string>
     <string name="jesta_login_full_name_hint">Enter full name</string>

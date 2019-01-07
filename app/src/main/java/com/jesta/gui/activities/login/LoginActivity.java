@@ -16,7 +16,7 @@ public class LoginActivity extends LoginActivitiesWrapper {
         super.onResume();
         sysManager = new SysManager(this);
         sysManager.setTitle(getString(R.string.jesta_login_login));
-        sysManager.showBackButton(true);
+        // sysManager.showBackButton(true);
         sysManager.showKeyboardAutomatically(false);
 
 //        // If the fireBaseUser is logged in, close this activity and go to profile
