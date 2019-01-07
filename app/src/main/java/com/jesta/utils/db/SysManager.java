@@ -802,6 +802,7 @@ public class SysManager {
                 Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
                 Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
 
+
                 Alerter.create(activity)
                         .setTitle("You got a Doer! \uD83E\uDD29")
                         .setText("Someone offered to do a Jesta for you! Check out the Status tab!")

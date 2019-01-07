@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
+import kotlinx.android.synthetic.main.jesta_main_activity.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.*
 
@@ -139,6 +140,7 @@ class CardReviewFragment : Fragment() {
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
             MainActivity.instance.fragNavController.replaceFragment(StatusFragment())
+            MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_status
         }
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_preview_nested_scroll_view)
