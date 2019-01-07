@@ -380,7 +380,7 @@
                         app:np_dividerColor="@color/colorPrimary"
                         app:np_height="50dp"
                         app:np_max="10"
-                        app:np_min="0"
+                        app:np_min="1"
                         app:np_orientation="horizontal"
                         app:np_selectedTextColor="@color/colorPrimary"
                         app:np_selectedTextSize="16sp"
