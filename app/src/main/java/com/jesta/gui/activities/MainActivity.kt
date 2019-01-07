@@ -69,52 +69,51 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                 if (!fragNavController.isRootFragment && fragNavController.size != 0) {
                     fragNavController.clearStack()
                 }
-                finish()
+                instance.finishAffinity()
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-            }
+            } else {
+                jesta_main_progress_bar.visibility = View.INVISIBLE
+                jesta_container.visibility = View.VISIBLE
+                jesta_main_line_view.visibility = View.VISIBLE
+                jesta_bottom_navigation.visibility = View.VISIBLE
 
-            jesta_main_progress_bar.visibility = View.INVISIBLE
-            jesta_container.visibility = View.VISIBLE
-            jesta_main_line_view.visibility = View.VISIBLE
-            jesta_bottom_navigation.visibility = View.VISIBLE
-
-            // Add random avatar for empty ones
-            if (user.photoUrl == USER_EMPTY_PHOTO) {
-                user.photoUrl = avatarList.random()
-                sysManager.setUserOnDB(user)
-            }
-
-
-
-            KeyboardVisibilityEvent.setEventListener(this@MainActivity) {
-                val containerParams = RelativeLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-                if (it) {
-                    jesta_bottom_navigation.visibility = View.INVISIBLE
-                    jesta_main_line_view.visibility = View.INVISIBLE
-                } else {
-                    jesta_bottom_navigation.visibility = View.VISIBLE
-                    jesta_main_line_view.visibility = View.VISIBLE
-                    containerParams.addRule(RelativeLayout.ABOVE, R.id.jesta_main_line_view)
+                // Add random avatar for empty ones
+                if (user.photoUrl == USER_EMPTY_PHOTO) {
+                    user.photoUrl = avatarList.random()
+                    sysManager.setUserOnDB(user)
                 }
-                jesta_container.layoutParams = containerParams
 
-            }
 
-            fragNavController.apply {
-                transactionListener = this@MainActivity
-                rootFragmentListener = this@MainActivity
-                createEager = true
-                fragNavLogger = object : FragNavLogger {
-                    override fun error(message: String, throwable: Throwable) {
-                        Log.e(TAG, message, throwable)
+
+                KeyboardVisibilityEvent.setEventListener(this@MainActivity) { isKeyboardOpen ->
+                    val containerParams = RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                    )
+                    if (isKeyboardOpen) {
+                        jesta_bottom_navigation.visibility = View.INVISIBLE
+                        jesta_main_line_view.visibility = View.INVISIBLE
+                    } else {
+                        jesta_bottom_navigation.visibility = View.VISIBLE
+                        jesta_main_line_view.visibility = View.VISIBLE
+                        containerParams.addRule(RelativeLayout.ABOVE, R.id.jesta_main_line_view)
                     }
+                    jesta_container.layoutParams = containerParams
+
                 }
 
-                // TODO: normal animations
+                fragNavController.apply {
+                    transactionListener = this@MainActivity
+                    rootFragmentListener = this@MainActivity
+                    createEager = true
+                    fragNavLogger = object : FragNavLogger {
+                        override fun error(message: String, throwable: Throwable) {
+                            Log.e(TAG, message, throwable)
+                        }
+                    }
+
+                    // TODO: normal animations
 //            defaultTransactionOptions = FragNavTransactionOptions.newBuilder().customAnimations(
 //                R.anim.slide_in_from_right,
 //                R.anim.slide_out_to_left,
@@ -122,29 +121,30 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 //                R.anim.slide_out_to_right
 //            ).build()
 
-                fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
-            }
-
-            fragNavController.initialize(INDEX_DO_JESTA, savedInstanceState)
-
-            jesta_bottom_navigation.setOnNavigationItemSelectedListener {
-                if (!fragNavController.isRootFragment) {
-                    fragNavController.popFragment()
+                    fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
                 }
-                when (it.itemId) {
-                    R.id.nav_do_jesta -> fragNavController.switchTab(INDEX_DO_JESTA)
-                    R.id.nav_ask_jesta -> fragNavController.switchTab(INDEX_ASK_JESTA)
-                    R.id.nav_status -> fragNavController.switchTab(INDEX_STATUS)
-                    R.id.nav_settings -> fragNavController.switchTab(INDEX_SETTINGS)
+
+                fragNavController.initialize(INDEX_DO_JESTA, savedInstanceState)
+
+                jesta_bottom_navigation.setOnNavigationItemSelectedListener {
+                    if (!fragNavController.isRootFragment) {
+                        fragNavController.popFragment()
+                    }
+                    when (it.itemId) {
+                        R.id.nav_do_jesta -> fragNavController.switchTab(INDEX_DO_JESTA)
+                        R.id.nav_ask_jesta -> fragNavController.switchTab(INDEX_ASK_JESTA)
+                        R.id.nav_status -> fragNavController.switchTab(INDEX_STATUS)
+                        R.id.nav_settings -> fragNavController.switchTab(INDEX_SETTINGS)
+                    }
+                    true
                 }
-                true
-            }
 
-            jesta_bottom_navigation.setOnNavigationItemReselectedListener {
-                fragNavController.clearStack()
-            }
+                jesta_bottom_navigation.setOnNavigationItemReselectedListener {
+                    fragNavController.clearStack()
+                }
 
-            sysManager.listenForIncomingInboxMessages(instance)
+                sysManager.listenForIncomingInboxMessages(instance)
+            }
         }
     }
 
