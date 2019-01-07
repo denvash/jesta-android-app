@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_status.view.*
 import kotlinx.android.synthetic.main.jesta_status_doer.view.*
 import kotlinx.android.synthetic.main.jesta_status_poster.view.*
+import kotlinx.android.synthetic.main.jesta_status_poster_complete.view.*
 import kotlinx.android.synthetic.main.jesta_status_poster_no_doers.view.*
 import java.util.*
 
@@ -51,8 +52,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         if (status.status == RELATION_STATUS_DONE || !status.isPoster) {
             holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
 
-            holder.view.jesta_status_total_doers.visibility = View.GONE
-            holder.view.jesta_status_divider.visibility = View.GONE
+            holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
+            holder.view.jesta_status_divider.visibility = View.INVISIBLE
 
             holder.view.jesta_status_doer_chat.setOnClickListener {
                 val roomDoer = sysManager.currentUserFromDB
@@ -75,13 +76,22 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         }
 
         else if (status.isPoster) {
-            holder.view.jesta_status_poster_layout.visibility = View.VISIBLE
+            if (mission.numOfPeople == 0) {
+                holder.view.jesta_status_poster_complete_layout.visibility = View.VISIBLE
+            } else {
+                holder.view.jesta_status_poster_layout.visibility = View.VISIBLE
+            }
+        }
+
+
+        holder.view.jesta_status_button_complete.setOnClickListener {
+            sysManager.moveToGraveDB(status)
         }
 
 
         if (mission.numOfPeople == 0) {
-            holder.view.jesta_status_total_doers.visibility = View.GONE
-            holder.view.jesta_status_divider.visibility = View.GONE
+            holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
+            holder.view.jesta_status_divider.visibility = View.INVISIBLE
         }
 
         val prefix = "As a "

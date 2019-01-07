@@ -124,6 +124,10 @@
             <include
                 layout="@layout/jesta_status_poster"
                 android:visibility="gone" />
+
+            <include
+                layout="@layout/jesta_status_poster_complete"
+                android:visibility="gone" />
         </FrameLayout>
 
 
