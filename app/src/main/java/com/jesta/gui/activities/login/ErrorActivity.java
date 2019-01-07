@@ -12,7 +12,7 @@ public class ErrorActivity extends AppCompatActivity {
         super.onResume();
         SysManager sysManager = new SysManager(this);
         sysManager.setTitle(getString(R.string.jesta_login_error));
-        sysManager.showBackButton(true);
+        // sysManager.showBackButton(true);
     }
 
     @Override

@@ -874,15 +874,15 @@ public class SysManager {
 
     public void setTitle(String title) {
         TextView pageNameTv = (TextView) _activity.findViewById(R.id.page_name);
-        pageNameTv.setText(title);
+        // pageNameTv.setText(title);
     }
 
-    public void showBackButton(Boolean flag) {
-        _backButtonTv = (TextView) _activity.findViewById(R.id.back_button);
-        if (_backButtonTv == null)
-            return;
-        _backButtonTv.setText(flag ? _activity.getResources().getString(R.string.jesta_login_leftArrow) : "");
-    }
+    // public void showBackButton(Boolean flag) {
+    //     _backButtonTv = (TextView) _activity.findViewById(R.id.back_button);
+    //     if (_backButtonTv == null)
+    //         return;
+    //     _backButtonTv.setText(flag ? _activity.getResources().getString(R.string.jesta_login_leftArrow) : "");
+    // }
 
     public void showKeyboardAutomatically(Boolean flag) {
         if (flag) {

@@ -73,9 +73,9 @@ public class LoginMainActivity extends LoginActivitiesWrapper {
                 }
 
                 // otherwise (user isn't logged in), render ui
-                setContentView(R.layout.activity_login_main);
+                setContentView(R.layout.fragment_login_path);
                 sysManager.setTitle(getString(R.string.jesta_login_welcome));
-                sysManager.showBackButton(false);
+                // sysManager.showBackButton(false);
 
                 Button facebookSignInButton = (Button) findViewById(R.id.facebook_sign_in_btn);
 
