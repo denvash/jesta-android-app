@@ -133,8 +133,8 @@ class CardReviewFragment : Fragment() {
                 sysManager.askTodoJestaForUser(mission)
             }
             Alerter.create(MainActivity.instance)
-                .setTitle("Great Job! Check out the Status tab!\uD83E\uDD19")
-                .setText("You Offered to Do a Jesta! " +
+                .setTitle("You Offered to Do a Jesta!\uD83E\uDD19")
+                .setText("Great Job! Check out the Status tab! " +
                         "The poster has been notified!")
                 .setBackgroundColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_jesta_diamond_normal)

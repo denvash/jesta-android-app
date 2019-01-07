@@ -66,6 +66,9 @@ class DoersAdapter internal constructor(
                 }
                 holder.doerBar.jesta_doers_accept.isEnabled = false
                 holder.doerBar.jesta_doers_decline.isEnabled = false
+
+                holder.doerBar.jesta_doers_accept.visibility = View.INVISIBLE
+                holder.doerBar.jesta_doers_decline.visibility = View.INVISIBLE
                 sysManager.onAcceptDoer(doerList[position],mission)
             }
 
@@ -81,6 +84,9 @@ class DoersAdapter internal constructor(
                 }
                 holder.doerBar.jesta_doers_accept.isEnabled = false
                 holder.doerBar.jesta_doers_decline.isEnabled = false
+
+                holder.doerBar.jesta_doers_accept.visibility = View.INVISIBLE
+                holder.doerBar.jesta_doers_decline.visibility = View.INVISIBLE
                 sysManager.onDeclineUser(doerList[position])
             }
 
