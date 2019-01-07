@@ -70,9 +70,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
             }
         }
 
-        else if (status.isPoster && status.doerIDList.first().doerID == RELATION_EMPTY_DOER_ID) {
+        else if (status.isPoster && status.doerIDList.last().doerID == RELATION_EMPTY_DOER_ID) {
             holder.view.jesta_status_poster_no_doers_layout.visibility = View.VISIBLE
-
         }
 
         else if (status.isPoster) {
