@@ -77,6 +77,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         else if (status.isPoster) {
             if (mission.numOfPeople == 0) {
                 holder.view.jesta_status_poster_complete_layout.visibility = View.VISIBLE
+                holder.view.jesta_status_complete_doers_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
+                holder.view.jesta_status_complete_doers_recycle_view.adapter = DoersAdapter(status.doerIDList.filter { it.status == RELATION_STATUS_IN_PROGRESS }, status, mission)
             } else {
                 holder.view.jesta_status_poster_layout.visibility = View.VISIBLE
             }

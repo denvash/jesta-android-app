@@ -70,6 +70,13 @@
         <item name="android:fontFamily">@font/montserrat_light_italic</item>
     </style>
 
+    <style name="Widget.Jesta.Tag.NumOfPeople" parent="">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/marvel</item>
+    </style>
+
     <style name="Widget.Jesta.Chip" parent="Widget.Jesta.Tag">
         <item name="android:fontFamily">@font/marvel</item>
         <item name="android:textAllCaps">true</item>

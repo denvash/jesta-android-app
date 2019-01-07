@@ -98,6 +98,8 @@
     <string name="jesta_status_preview">Preview</string>
     <string name="jesta_status_no_doer">No Doer Assigned Yet</string>
     <string name="jesta_post_time_start">Set Time Start</string>
-    <string name="jesta_status_approve_jesta">Jesta Complete</string>
+    <string name="jesta_status_approve_jesta">Approve Jesta Complete</string>
+    <string name="jesta_status_post_complete_your_doers">Your doers</string>
+    <string name="jesta_status_poster_no_doers_assigned_yet">no doers assigned yet</string>
 
 </resources>

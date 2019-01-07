@@ -65,10 +65,11 @@
 
                 <TextView
                     android:id="@+id/jesta_status_total_doers"
-                    style="@style/Widget.Jesta.Tag"
+                    style="@style/Widget.Jesta.Tag.NumOfPeople"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/marvel"
                     android:text="@string/jesta_status_total_users" />
 
                 <View
@@ -129,7 +130,6 @@
                 layout="@layout/jesta_status_poster_complete"
                 android:visibility="gone" />
         </FrameLayout>
-
 
     </com.github.florent37.expansionpanel.ExpansionLayout>
 </LinearLayout>
