@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/jesta_status_poster_complete_layout"
+    android:id="@+id/jesta_status_done_complete_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -17,10 +17,10 @@
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
-            android:id="@+id/jesta_status_button_complete"
+            android:id="@+id/jesta_status_done_button_remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_jesta_approve_button"
+            android:src="@drawable/ic_jesta_status_delete"
             android:tint="@color/colorPrimary"
             tools:ignore="ContentDescription" />
 
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/jesta_status_approve_jesta" />
+            android:text="@string/jesta_status_remove" />
     </LinearLayout>
 
     <FrameLayout
@@ -66,7 +66,7 @@
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/jesta_status_complete_doers_recycle_view"
+        android:id="@+id/jesta_status_done_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

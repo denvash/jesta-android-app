@@ -101,5 +101,6 @@
     <string name="jesta_status_approve_jesta">Approve Jesta Complete</string>
     <string name="jesta_status_post_complete_your_doers">Your doers</string>
     <string name="jesta_status_poster_no_doers_assigned_yet">no doers assigned yet</string>
+    <string name="jesta_status_remove">Remove from status</string>
 
 </resources>

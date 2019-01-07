@@ -129,6 +129,10 @@
             <include
                 layout="@layout/jesta_status_poster_complete"
                 android:visibility="gone" />
+
+            <include
+                layout="@layout/jesta_status_done"
+                android:visibility="gone" />
         </FrameLayout>
 
     </com.github.florent37.expansionpanel.ExpansionLayout>

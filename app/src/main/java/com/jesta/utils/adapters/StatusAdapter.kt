@@ -18,6 +18,7 @@ import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_status.view.*
 import kotlinx.android.synthetic.main.jesta_status_doer.view.*
+import kotlinx.android.synthetic.main.jesta_status_done.view.*
 import kotlinx.android.synthetic.main.jesta_status_poster.view.*
 import kotlinx.android.synthetic.main.jesta_status_poster_complete.view.*
 import kotlinx.android.synthetic.main.jesta_status_poster_no_doers.view.*
@@ -68,24 +69,44 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                     )
                 )
             }
-        }
-
-        else if (status.isPoster && status.doerIDList.last().doerID == RELATION_EMPTY_DOER_ID) {
+        } else if (status.isPoster && status.doerIDList.last().doerID == RELATION_EMPTY_DOER_ID) {
             holder.view.jesta_status_poster_no_doers_layout.visibility = View.VISIBLE
-        }
-
-        else if (status.isPoster) {
-            if (mission.numOfPeople == 0) {
-                holder.view.jesta_status_poster_complete_layout.visibility = View.VISIBLE
-                holder.view.jesta_status_complete_doers_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
-                holder.view.jesta_status_complete_doers_recycle_view.adapter = DoersAdapter(status.doerIDList.filter { it.status == RELATION_STATUS_IN_PROGRESS }, status, mission)
-            } else {
-                holder.view.jesta_status_poster_layout.visibility = View.VISIBLE
+        } else if (status.isPoster) {
+            when {
+                mission.numOfPeople == 0 -> {
+                    holder.view.jesta_status_poster_complete_layout.visibility = View.VISIBLE
+                    holder.view.jesta_status_complete_doers_recycle_view.layoutManager =
+                            LinearLayoutManager(MainActivity.instance)
+                    holder.view.jesta_status_complete_doers_recycle_view.adapter = DoersAdapter(
+                        status.doerIDList.filter { it.status == RELATION_STATUS_IN_PROGRESS },
+                        status,
+                        mission
+                    )
+                }
+                status.status == RELATION_STATUS_DONE -> {
+                    holder.view.jesta_status_done_complete_layout.visibility = View.VISIBLE
+                    holder.view.jesta_status_done_recycle_view.layoutManager =
+                            LinearLayoutManager(MainActivity.instance)
+                    holder.view.jesta_status_done_recycle_view.adapter = DoersAdapter(
+                        status.doerIDList.filter { it.status == RELATION_STATUS_DONE },
+                        status,
+                        mission
+                    )
+                }
+                else -> holder.view.jesta_status_poster_layout.visibility = View.VISIBLE
             }
         }
 
 
         holder.view.jesta_status_button_complete.setOnClickListener {
+            // for now
+            sysManager.moveToGraveDB(status)
+
+            // TODO: Max
+            // sysManager.onAcceptPoster(...)
+        }
+
+        holder.view.jesta_status_done_button_remove.setOnClickListener {
             sysManager.moveToGraveDB(status)
         }
 
