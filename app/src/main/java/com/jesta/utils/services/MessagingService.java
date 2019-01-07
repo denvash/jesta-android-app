@@ -10,7 +10,9 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
+import com.jesta.data.User;
 import com.jesta.gui.activities.MainActivity;
+import com.jesta.utils.db.SysManager;
 
 import java.util.Random;
 
@@ -19,7 +21,8 @@ import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIB
 
 
 public class MessagingService extends FirebaseMessagingService {
-
+    private SysManager sysManager = new SysManager();
+    private User senderUser;
     private static final String TAG = "MyFirebaseMsgService";
 
     private boolean isAppInForeground(Context context)
@@ -62,18 +65,32 @@ public class MessagingService extends FirebaseMessagingService {
             body = remoteMessage.getData().get("body");
             jestaId = remoteMessage.getData().get("jesta");
             sender = remoteMessage.getData().get("sender");
+
+            senderUser = sysManager.getUserByID(sender);
+            // don't do anything if user isn't logged in!
+            if (senderUser == null) {
+                return;
+            }
         }
         catch (Exception e) {
             // todo open error activity
         }
 
         // push notifications only when app in background
-        if (!isAppInForeground(this)) {
-            showNotification(title, body);
+        if (isAppInForeground(this)) {
+            return;
         }
+        showNotification(title, body);
     }
 
     private void showNotification(String title, String body) {
+
+
+        // construct custom title for a chat message
+        if (title.equals("chatMessage")) {
+            title = senderUser.getDisplayName() + " sent you a message!";
+        }
+
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "com.jesta.util.test";
 
