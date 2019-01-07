@@ -13,7 +13,7 @@ import com.jesta.data.IMAGE_EMPTY
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
 import com.jesta.data.Mission
 import com.jesta.gui.activities.MainActivity
-import com.jesta.gui.fragments.JestaCardReviewFragment
+import com.jesta.gui.fragments.CardReviewFragment
 import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso
@@ -61,7 +61,7 @@ class CardAdapter internal constructor(
 
         holder.jestaCard.setOnClickListener {
             Toast.makeText(it.context, "Clicked card=$position", Toast.LENGTH_LONG).show()
-            mainInstance.fragNavController.pushFragment(JestaCardReviewFragment.newInstance(mission))
+            mainInstance.fragNavController.pushFragment(CardReviewFragment.newInstance(mission))
         }
 
     }

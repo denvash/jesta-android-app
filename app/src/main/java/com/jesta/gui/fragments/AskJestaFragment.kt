@@ -22,6 +22,7 @@ import com.jesta.R
 import com.jesta.data.*
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
+import com.tapadoo.alerter.Alerter
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.fragment_ask_jesta.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
@@ -143,7 +144,12 @@ class AskJestaFragment : Fragment() {
                 Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
             }
 
-
+            Alerter.create(MainActivity.instance)
+                .setTitle("Nice one! You posted a Jesta! \uD83E\uDD73")
+                .setText("Remember to refresh the Jestas list!")
+                .setBackgroundColorRes(R.color.colorPrimary)
+                .setIcon(R.drawable.ic_jesta_diamond_normal)
+                .show()
             MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
             MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
 

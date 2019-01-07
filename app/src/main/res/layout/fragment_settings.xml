@@ -490,22 +490,11 @@
 
                     <!-- CONTENT -->
 
-                    <LinearLayout
+                    <include
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/TextAppearance.Jesta.Type"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_40dp"
-                            android:layout_marginEnd="@dimen/_10dp"
-                            android:text="ABOUT CONTENT" />
-                    </LinearLayout>
+                        layout="@layout/jesta_about"
+                        />
                 </com.github.florent37.expansionpanel.ExpansionLayout>
             </LinearLayout>
 

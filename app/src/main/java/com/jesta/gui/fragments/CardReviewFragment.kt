@@ -17,20 +17,18 @@ import com.jesta.data.chat.ChatRoom
 import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso
+import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
-import kotlinx.android.synthetic.main.jesta_card.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
-import kotlinx.android.synthetic.main.jesta_doers.view.*
-import kotlinx.android.synthetic.main.jesta_main_activity.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.*
 
-class JestaCardReviewFragment : Fragment() {
+class CardReviewFragment : Fragment() {
     companion object {
-        private val TAG = JestaCardReviewFragment::class.java.simpleName
+        private val TAG = CardReviewFragment::class.java.simpleName
 
         @JvmStatic
-        fun newInstance(mission: Mission) = JestaCardReviewFragment().apply {
+        fun newInstance(mission: Mission) = CardReviewFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(BUNDLE_MISSION, mission)
             }
@@ -85,7 +83,13 @@ class JestaCardReviewFragment : Fragment() {
         view.jesta_preview_accept_button.setOnClickListener {
 
             if (mission.posterID == sysManager.currentUserFromDB.id) {
-                Toast.makeText(MainActivity.instance,"You can't do your own post!",Toast.LENGTH_LONG).show()
+                Alerter.create(MainActivity.instance)
+                    .setTitle("You are a Doer already! \uD83D\uDCAA")
+                    .setText("Check out the Status tab!")
+                    .setBackgroundColorRes(R.color.colorPrimary)
+                    .setIcon(R.drawable.ic_jesta_diamond_normal)
+                    .show()
+//                Toast.makeText(MainActivity.instance,"You can't do your own post!",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -95,7 +99,12 @@ class JestaCardReviewFragment : Fragment() {
                 val currMissionRelation = result.find { relation -> relation.missionID == mission.id }
 
                 if (currMissionRelation != null && currMissionRelation.doerID == sysManager.currentUserFromDB.id) {
-                    Toast.makeText(MainActivity.instance,"You already Assigned as a Doer",Toast.LENGTH_LONG).show()
+                    Alerter.create(MainActivity.instance)
+                        .setTitle("Don't be Silly! \uD83D\uDE1C")
+                        .setText("You can't do your own Jesta!")
+                        .setBackgroundColorRes(R.color.colorPrimary)
+                        .setIcon(R.drawable.ic_jesta_diamond_normal)
+                        .show()
                     return@addOnCompleteListener
                 }
 
@@ -122,6 +131,13 @@ class JestaCardReviewFragment : Fragment() {
                 }
                 sysManager.askTodoJestaForUser(mission)
             }
+            Alerter.create(MainActivity.instance)
+                .setTitle("Great Job! Check out the Status tab!\uD83E\uDD19")
+                .setText("You Offered to Do a Jesta! " +
+                        "The poster has been notified!")
+                .setBackgroundColorRes(R.color.colorPrimary)
+                .setIcon(R.drawable.ic_jesta_diamond_normal)
+                .show()
             MainActivity.instance.fragNavController.replaceFragment(StatusFragment())
         }
 

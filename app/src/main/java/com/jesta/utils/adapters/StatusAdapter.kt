@@ -16,6 +16,7 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.ChatFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
+import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.jesta_status.view.*
 import kotlinx.android.synthetic.main.jesta_status_doer.view.*
 import kotlinx.android.synthetic.main.jesta_status_done.view.*
@@ -107,6 +108,12 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         }
 
         holder.view.jesta_status_done_button_remove.setOnClickListener {
+            Alerter.create(MainActivity.instance)
+                .setTitle("Nice you complete a Jesta! \uD83D\uDCA0")
+                .setText("Now claim your rewards!")
+                .setBackgroundColorRes(R.color.colorPrimary)
+                .setIcon(R.drawable.ic_jesta_diamond_normal)
+                .show()
             sysManager.moveToGraveDB(status)
         }
 
@@ -166,11 +173,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         }
 
         companion object {
-
-            private val LAYOUT = R.layout.jesta_status
-
             fun buildFor(viewGroup: ViewGroup): RecyclerHolder {
-                return RecyclerHolder(LayoutInflater.from(viewGroup.context).inflate(LAYOUT, viewGroup, false))
+                return RecyclerHolder(LayoutInflater.from(viewGroup.context).inflate(R.layout.jesta_status, viewGroup, false))
             }
         }
     }

@@ -13,6 +13,7 @@ import com.jesta.gui.fragments.ChatFragment
 import com.jesta.data.chat.ChatRoom
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
+import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.jesta_doers.view.*
 import kotlin.random.Random
 
@@ -56,6 +57,12 @@ class DoersAdapter internal constructor(
 
             holder.doerBar.jesta_doers_accept.setOnClickListener {
                 if (holder.doerBar.jesta_doers_accept.isEnabled) {
+                    Alerter.create(MainActivity.instance)
+                        .setTitle("You assigned a Doer! Well Done! \uD83E\uDD70")
+                        .setText("The Doer will do you a Jesta in no time! \uD83E\uDD1E")
+                        .setBackgroundColorRes(R.color.colorPrimary)
+                        .setIcon(R.drawable.ic_jesta_accept)
+                        .show()
                     Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
                 }
                 holder.doerBar.jesta_doers_accept.isEnabled = false
@@ -65,6 +72,12 @@ class DoersAdapter internal constructor(
 
             holder.doerBar.jesta_doers_decline.setOnClickListener {
                 if (holder.doerBar.jesta_doers_accept.isEnabled) {
+                    Alerter.create(MainActivity.instance)
+                        .setTitle("You declined a Doer! \uD83E\uDD7A")
+                        .setText("No worries you will get an offer in no time! \uD83E\uDD1E")
+                        .setBackgroundColorRes(R.color.colorPrimary)
+                        .setIcon(R.drawable.ic_jesta_diamond_normal)
+                        .show()
                     Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
                 }
                 holder.doerBar.jesta_doers_accept.isEnabled = false
