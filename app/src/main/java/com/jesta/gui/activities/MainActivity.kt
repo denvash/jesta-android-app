@@ -192,24 +192,24 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 //        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val v = currentFocus
-
-        if (v != null &&
-            (ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE) &&
-            v is EditText &&
-            !v.javaClass.name.startsWith("android.webkit.")
-        ) {
-            val scrcoords = IntArray(2)
-            v.getLocationOnScreen(scrcoords)
-            val x = ev.rawX + v.left - scrcoords[0]
-            val y = ev.rawY + v.top - scrcoords[1]
-
-            if (x < v.left || x > v.right || y < v.top || y > v.bottom)
-                hideKeyboard(this)
-        }
-        return super.dispatchTouchEvent(ev)
-    }
+//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+//        val v = currentFocus
+//
+//        if (v != null &&
+//            (ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE) &&
+//            v is EditText &&
+//            !v.javaClass.name.startsWith("android.webkit.")
+//        ) {
+//            val scrcoords = IntArray(2)
+//            v.getLocationOnScreen(scrcoords)
+//            val x = ev.rawX + v.left - scrcoords[0]
+//            val y = ev.rawY + v.top - scrcoords[1]
+//
+//            if (x < v.left || x > v.right || y < v.top || y > v.bottom)
+//                hideKeyboard(this)
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
 
     fun hideKeyboard(activity: Activity?) {
         if (activity != null && activity.window != null) {

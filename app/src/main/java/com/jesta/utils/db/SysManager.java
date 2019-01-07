@@ -476,7 +476,11 @@ public class SysManager {
                             sts.getDoerIDList().add(0, i);
                         else {
                             sts.getDoerIDList().add(i);
-                            if(i.getStatus() == RELATION_STATUS_IN_PROGRESS)
+                            if(sts.getStatus() != RELATION_STATUS_DONE
+                                && i.getStatus() == RELATION_STATUS_DONE)
+                                sts.setStatus(RELATION_STATUS_DONE);
+                            else if(sts.getStatus() == RELATION_STATUS_INIT
+                                    && i.getStatus() == RELATION_STATUS_IN_PROGRESS)
                                 sts.setStatus(RELATION_STATUS_IN_PROGRESS);
                         }
                     }
