@@ -93,7 +93,6 @@ class AskJestaFragment : Fragment() {
 
         view.jesta_post_difficulty.attachDataSource(listOf(DIFFICULTY_EASY, DIFFICULTY_MEDIUM, DIFFICULTY_HARD))
 
-
         view.jesta_post_location.filters = view.jesta_post_location.filters + InputFilter.AllCaps()
         view.jesta_post_button_browse.setOnClickListener {
             requestPermission(MainActivity.instance)

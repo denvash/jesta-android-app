@@ -143,19 +143,15 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                     when (it.itemId) {
                         R.id.nav_do_jesta -> {
                             fragNavController.switchTab(INDEX_DO_JESTA)
-                            jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
                         }
                         R.id.nav_ask_jesta -> {
                             fragNavController.switchTab(INDEX_ASK_JESTA)
-                            jesta_bottom_navigation.selectedItemId = R.id.nav_ask_jesta
                         }
                         R.id.nav_status -> {
                             fragNavController.switchTab(INDEX_STATUS)
-                            jesta_bottom_navigation.selectedItemId = R.id.nav_status
                         }
                         R.id.nav_settings -> {
                             fragNavController.switchTab(INDEX_SETTINGS)
-                            jesta_bottom_navigation.selectedItemId = R.id.nav_settings
                         }
                     }
                     true
