@@ -93,8 +93,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                     sysManager.setUserOnDB(user)
                 }
 
-
-
                 KeyboardVisibilityEvent.setEventListener(this@MainActivity) { isKeyboardOpen ->
                     val containerParams = RelativeLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
