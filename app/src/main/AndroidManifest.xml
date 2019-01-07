@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name=".JestaApplication"
         android:allowBackup="true"
@@ -19,19 +18,19 @@
         tools:replace="android:label">
 
         <activity android:name=".gui.activities.MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <activity
             android:name=".gui.activities.login.LoginMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name=".gui.activities.login.LoginActivity" />
@@ -63,13 +62,7 @@
         <activity android:name=".gui.activities.login.LoginActivitiesWrapper" />
         <activity android:name=".gui.activities.login.OTPActivity" />
 
-        <!--TODO PERMISSIONS?-->
-        <service android:name=".utils.services.MessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
+        <service android:name=".utils.services.MessagingService" />
     </application>
 
 </manifest>

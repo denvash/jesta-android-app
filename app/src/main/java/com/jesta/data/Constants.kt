@@ -1,7 +1,6 @@
 package com.jesta.data
 
 import com.ncapdevi.fragnav.FragNavController
-import kotlin.collections.HashMap
 
 const val nullString = "null"
 const val nullInt = -1
@@ -27,27 +26,48 @@ const val IMAGE_DEFAULT_JESTA = "https://i.imgur.com/Vw3S47w.png"
 const val IMAGE_EMPTY = ""
 
 const val AVATAR_STUPID_DOG = "https://i.imgur.com/HyHVdRC.png"
-const val AVATAR_BEAVER   = "https://i.imgur.com/wahDm7F.png"
-const val AVATAR_DUCK     = "https://i.imgur.com/FXRwG9D.png"
+const val AVATAR_BEAVER = "https://i.imgur.com/wahDm7F.png"
+const val AVATAR_DUCK = "https://i.imgur.com/FXRwG9D.png"
 const val AVATAR_ELEPHANT = "https://i.imgur.com/8vL5cNZ.png"
-const val AVATAR_LION     = "https://i.imgur.com/QGTMABv.png"
-const val AVATAR_MONKEY   = "https://i.imgur.com/jUe1gX7.png"
-const val AVATAR_PIG      = "https://i.imgur.com/DBbhSGo.png"
-const val AVATAR_PENGUIN  = "https://i.imgur.com/7Zzi8DW.png"
-const val AVATAR_SEAL     = "https://i.imgur.com/5H4Dtwz.png"
-const val AVATAR_BEAR     = "https://i.imgur.com/zULe6CC.png"
-const val AVATAR_ZEBRA    = "https://i.imgur.com/ha8OvLA.png"
-const val AVATAR_CAT      = "https://i.imgur.com/u0dDgE0.png"
-const val AVATAR_CHICK    = "https://i.imgur.com/jNxnoBI.png"
-const val AVATAR_CHICKEN  = "https://i.imgur.com/DQrVmzU.png"
-const val AVATAR_COW      = "https://i.imgur.com/md0ASx3.png"
-const val AVATAR_DOG      = "https://i.imgur.com/aB27FR4.png"
-const val AVATAR_DONKEY   = "https://i.imgur.com/qhDPhjf.png"
+const val AVATAR_LION = "https://i.imgur.com/QGTMABv.png"
+const val AVATAR_MONKEY = "https://i.imgur.com/jUe1gX7.png"
+const val AVATAR_PIG = "https://i.imgur.com/DBbhSGo.png"
+const val AVATAR_PENGUIN = "https://i.imgur.com/7Zzi8DW.png"
+const val AVATAR_SEAL = "https://i.imgur.com/5H4Dtwz.png"
+const val AVATAR_BEAR = "https://i.imgur.com/zULe6CC.png"
+const val AVATAR_ZEBRA = "https://i.imgur.com/ha8OvLA.png"
+const val AVATAR_CAT = "https://i.imgur.com/u0dDgE0.png"
+const val AVATAR_CHICK = "https://i.imgur.com/jNxnoBI.png"
+const val AVATAR_CHICKEN = "https://i.imgur.com/DQrVmzU.png"
+const val AVATAR_COW = "https://i.imgur.com/md0ASx3.png"
+const val AVATAR_DOG = "https://i.imgur.com/aB27FR4.png"
+const val AVATAR_DONKEY = "https://i.imgur.com/qhDPhjf.png"
 
-val avatarDict: HashMap<Int, String> = hashMapOf(0 to AVATAR_BEAVER, 1 to AVATAR_DUCK,
+val avatarList = listOf(
+    AVATAR_STUPID_DOG,
+    AVATAR_BEAVER,
+    AVATAR_DUCK,
+    AVATAR_ELEPHANT,
+    AVATAR_LION,
+    AVATAR_MONKEY,
+    AVATAR_PIG,
+    AVATAR_PENGUIN,
+    AVATAR_SEAL,
+    AVATAR_BEAR,
+    AVATAR_ZEBRA,
+    AVATAR_CAT,
+    AVATAR_CHICK,
+    AVATAR_CHICKEN,
+    AVATAR_COW,
+    AVATAR_DOG,
+    AVATAR_DONKEY
+)
+val avatarDict: HashMap<Int, String> = hashMapOf(
+    0 to AVATAR_BEAVER, 1 to AVATAR_DUCK,
     2 to AVATAR_ELEPHANT, 3 to AVATAR_LION, 4 to AVATAR_MONKEY, 5 to AVATAR_PIG, 6 to AVATAR_PENGUIN,
     7 to AVATAR_SEAL, 8 to AVATAR_BEAR, 9 to AVATAR_ZEBRA, 10 to AVATAR_CAT, 11 to AVATAR_CHICK,
-    12 to AVATAR_CHICKEN, 13 to AVATAR_COW, 14 to AVATAR_DOG, 15 to AVATAR_DONKEY, 16 to AVATAR_STUPID_DOG)
+    12 to AVATAR_CHICKEN, 13 to AVATAR_COW, 14 to AVATAR_DOG, 15 to AVATAR_DONKEY, 16 to AVATAR_STUPID_DOG
+)
 
 const val INDEX_DO_JESTA = FragNavController.TAB1
 const val INDEX_ASK_JESTA = FragNavController.TAB2

@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_card.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_doers.view.*
+import kotlinx.android.synthetic.main.jesta_main_activity.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.*
 
@@ -118,12 +119,10 @@ class JestaCardReviewFragment : Fragment() {
                         // todo some error
                         return@addOnCompleteListener
                     }
-                    MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
                 }
-
                 sysManager.askTodoJestaForUser(mission)
-
             }
+            MainActivity.instance.fragNavController.replaceFragment(StatusFragment())
         }
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_preview_nested_scroll_view)

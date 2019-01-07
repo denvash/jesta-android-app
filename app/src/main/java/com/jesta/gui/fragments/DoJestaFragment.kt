@@ -34,8 +34,7 @@ class DoJestaFragment : Fragment() {
         // prevent the loss of items
         view.do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
 
-        val getAllJestas = sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
-        getAllJestas.addOnCompleteListener { task ->
+        sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener { task ->
 
             if (!task.isSuccessful) {
                 // todo error here! e.g. start ErrorActivity here

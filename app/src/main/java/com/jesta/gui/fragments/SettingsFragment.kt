@@ -31,16 +31,19 @@ class SettingsFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                // todo error
-            } else {
-                updateUserLayout(view)
-            }
+        // Reloading users on main activity.
+//        sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener { task ->
+//            if (!task.isSuccessful) {
+//                // todo error
+//            } else {
+//                updateUserLayout(view)
+//            }
+//
+//
+//        }
 
-            view.jesta_settings_profile_layout.visibility = View.VISIBLE
-
-        }
+        updateUserLayout(view)
+        view.jesta_settings_profile_layout.visibility = View.VISIBLE
 
         view.jesta_settings_button_log_out.setOnClickListener {
             sysManager.signOutUser(MainActivity.instance)

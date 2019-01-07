@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".gui.activities.MainActivity">
 
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/jesta_main_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:indicatorColor="@color/black"
+        app:indicatorName="LineScalePulseOutIndicator"/>
+
     <FrameLayout
-        android:id="@+id/container"
+        android:visibility="invisible"
+        android:id="@+id/jesta_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/jesta_main_line_view"/>
 
     <View
+        android:visibility="invisible"
         android:id="@+id/jesta_main_line_view"
         android:layout_width="match_parent"
         android:layout_height="0.75dp"
@@ -20,6 +31,7 @@
         android:layout_above="@id/jesta_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:visibility="invisible"
         android:id="@+id/jesta_bottom_navigation"
         style="@style/Widget.Jesta.BottomNavigationView"
         android:layout_width="wrap_content"
