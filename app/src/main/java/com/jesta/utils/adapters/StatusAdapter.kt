@@ -40,10 +40,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerHolder, position: Int) {
-
         val status = list[position]
         val mission = sysManager.getMissionByID(status.missionID)
-
 
         holder.bind(list[position])
         expansionsCollection.add(holder.expansionLayout)
@@ -62,7 +60,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                 val poster = sysManager.getUserByID(mission.posterID)
                 val chatRoom = ChatRoom(roomDoer, poster, mission)
 
-                MainActivity.instance.fragNavController.replaceFragment(
+                MainActivity.instance.fragNavController.pushFragment(
                     ChatFragment.newInstance(
                         chatRoom.id!!,
                         roomDoer.id,
