@@ -100,11 +100,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
 
         holder.view.jesta_status_button_complete.setOnClickListener {
-            // for now
-            sysManager.moveToGraveDB(status)
-
-            // TODO: Max
-            // sysManager.onAcceptPoster(...)
+            
+             sysManager.updateRelationsDone(status)
         }
 
         holder.view.jesta_status_done_button_remove.setOnClickListener {

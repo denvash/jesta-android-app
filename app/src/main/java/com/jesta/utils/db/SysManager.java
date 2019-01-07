@@ -504,6 +504,15 @@ public class SysManager {
         this.removeMission(mission);
     }
 
+    public void updateRelationsDone(Status sts){
+        for(Relation i : sts.getDoerIDList()){
+            if(i.getStatus() == RELATION_STATUS_IN_PROGRESS){
+                i.setStatus(RELATION_STATUS_DONE);
+                this.setRelationOnDB(i);
+            }
+        }
+    }
+
     public void onAcceptDoer(Relation rel, Mission mission) {
         if(mission.getNumOfPeople() == 0)
             return;
