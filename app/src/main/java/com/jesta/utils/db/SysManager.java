@@ -505,6 +505,7 @@ public class SysManager {
     }
 
     public void updateRelationsDone(Status sts){
+        sts.setStatus(RELATION_STATUS_DONE);
         for(Relation i : sts.getDoerIDList()){
             if(i.getStatus() == RELATION_STATUS_IN_PROGRESS){
                 i.setStatus(RELATION_STATUS_DONE);
