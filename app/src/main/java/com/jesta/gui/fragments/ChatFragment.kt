@@ -87,7 +87,7 @@ class ChatFragment : Fragment() {
                 adapter.addToEnd(messagesHistory, true)
                 chatManger.listenForIncomingMessages(adapter, chatID, messagesHistory)
 
-                view.input.setInputListener {
+                view.jesta_chat_input.setInputListener {
                     chatManger.sendMessage(context, chatID, currUser, it.toString())
                     true
                 }

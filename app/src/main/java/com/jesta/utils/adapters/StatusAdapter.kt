@@ -62,7 +62,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                 val poster = sysManager.getUserByID(mission.posterID)
                 val chatRoom = ChatRoom(roomDoer, poster, mission)
 
-                MainActivity.instance.fragNavController.pushFragment(
+                MainActivity.instance.fragNavController.replaceFragment(
                     ChatFragment.newInstance(
                         chatRoom.id!!,
                         roomDoer.id,

@@ -11,12 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="visible"
         app:indicatorColor="@color/black"
-        app:indicatorName="LineScalePulseOutIndicator"/>
+        app:indicatorName="LineScalePulseOutIndicator" />
 
     <RelativeLayout
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -24,32 +22,29 @@
             android:id="@+id/messagesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/input"
-            app:outcomingDefaultBubbleColor="@color/colorPrimary"
-            />
+            android:layout_above="@+id/jesta_chat_input"
+            app:outcomingDefaultBubbleColor="@color/colorPrimary" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_above="@+id/input"
+            android:layout_above="@+id/jesta_chat_input"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:background="@color/gray" />
 
         <com.stfalcon.chatkit.messages.MessageInput
-            android:id="@+id/input"
+            android:id="@+id/jesta_chat_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:inputHint="Type a message..."
-            app:showAttachmentButton="true"
-            app:attachmentButtonIcon="@drawable/ic_jesta_accept"
             app:attachmentButtonDefaultBgPressedColor="@color/status_pending"
-            app:inputButtonDefaultIconColor="@color/white"
+            app:attachmentButtonIcon="@drawable/ic_jesta_accept"
             app:inputButtonDefaultBgColor="@color/colorPrimary"
-            />
+            app:inputButtonDefaultIconColor="@color/white"
+            app:inputHint="Type a message..."
+            app:showAttachmentButton="true" />
     </RelativeLayout>
-
 
 
 </FrameLayout>

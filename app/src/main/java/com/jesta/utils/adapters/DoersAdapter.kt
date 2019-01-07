@@ -49,7 +49,6 @@ class DoersAdapter internal constructor(
 
             bar.jesta_doers_diamond_amount.text = Random.nextInt(1, 40000).toString()
 
-
             if (doerRelation.status != RELATION_STATUS_INIT) {
                 holder.doerBar.jesta_doers_accept.isEnabled = false
                 holder.doerBar.jesta_doers_decline.isEnabled = false
