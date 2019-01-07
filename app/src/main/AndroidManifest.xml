@@ -62,7 +62,11 @@
         <activity android:name=".gui.activities.login.LoginActivitiesWrapper" />
         <activity android:name=".gui.activities.login.OTPActivity" />
 
-        <service android:name=".utils.services.MessagingService" />
+        <service android:name=".utils.services.MessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

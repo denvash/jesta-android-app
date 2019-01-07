@@ -1,25 +1,51 @@
 package com.jesta.utils.services;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
+import com.jesta.gui.activities.MainActivity;
 
 import java.util.Random;
+
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
+import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
 
 
 public class MessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
+
+    private boolean isAppInForeground(Context context)
+    {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+        {
+            ActivityManager am = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+            ActivityManager.RunningTaskInfo foregroundTaskInfo = am.getRunningTasks(1).get(0);
+            String foregroundTaskPackageName = foregroundTaskInfo.topActivity.getPackageName();
+
+            return foregroundTaskPackageName.toLowerCase().equals(context.getPackageName().toLowerCase());
+        }
+        else
+        {
+            ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
+            ActivityManager.getMyMemoryState(appProcessInfo);
+            if (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE)
+            {
+                return true;
+            }
+
+            KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+            // App is foreground, but screen is locked, so show notification
+            return km.inKeyguardRestrictedInputMode();
+        }
+    }
 
     /**
      * Called when message is received.
@@ -29,55 +55,22 @@ public class MessagingService extends FirebaseMessagingService {
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        //todo debug
-
         super.onMessageReceived(remoteMessage);
+        String title = null, body = null, jestaId = null, sender = null;
+        try {
+            title = remoteMessage.getData().get("title");
+            body = remoteMessage.getData().get("body");
+            jestaId = remoteMessage.getData().get("jesta");
+            sender = remoteMessage.getData().get("sender");
+        }
+        catch (Exception e) {
+            // todo open error activity
+        }
 
-        return; //todo debug
-//        String title = null, body = null, jestaId = null, sender = null;
-//        try {
-//            title = remoteMessage.getData().get("title");
-//            body = remoteMessage.getData().get("body");
-//            jestaId = remoteMessage.getData().get("jesta");
-//            sender = remoteMessage.getData().get("sender");
-//        }
-//        catch (Exception e) {
-//            // todo open error activity
-//        }
-//
-//        Boolean isPrompt = false;
-//        if (title != null && (
-//                title.contains("asked to do a jesta") ||
-//                title.contains("accepted you") ||
-//                title.contains("declined you")
-//
-//        ))
-//        {
-//            isPrompt = true;
-//        }
-//
-//        if (isPrompt) {
-//            // opens a dialog
-//            Intent i = new Intent(getApplicationContext(), InboxMessageActivity.class);
-//            Bundle b = new Bundle();
-//            b.putString("statusTitle", title);
-//            b.putString("body", body);
-//            b.putString("jesta", jestaId);
-//            b.putString("sender", sender);
-//            i.putExtras(b);
-//            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(i);
-//            return;
-//        }
-//
-//         // not a promt, decide if chat message or system message
-//        if (title.equals("chatMessage")) {
-//
-//        }
-//        else {
-//            showNotification(title, body);
-//        }
-
+        // push notifications only when app in background
+        if (!isAppInForeground(this)) {
+            showNotification(title, body);
+        }
     }
 
     private void showNotification(String title, String body) {
@@ -96,15 +89,25 @@ public class MessagingService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
 
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent intent = PendingIntent.getActivity(this, 0,
+                notificationIntent, 0);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
         notificationBuilder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(title)
                 .setContentText(body)
-                .setContentInfo("Info");
+                .setContentInfo("Info")
+//                .addAction(R.drawable.ic_notification, "CHECK STATUS", intent) // todo
+                .setFullScreenIntent(intent, true);
+
+
 
         notificationManager.notify(new Random().nextInt(),notificationBuilder.build());
     }
