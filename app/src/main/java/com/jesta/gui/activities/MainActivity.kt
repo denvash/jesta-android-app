@@ -107,7 +107,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                         containerParams.addRule(RelativeLayout.ABOVE, R.id.jesta_main_line_view)
                     }
                     jesta_container.layoutParams = containerParams
-
                 }
 
                 fragNavController.apply {

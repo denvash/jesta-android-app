@@ -14,11 +14,13 @@ import com.jesta.data.BUNDLE_RELATION_ID
 import com.jesta.data.BUNDLE_ROOM_ID
 import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.Message
+import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import kotlinx.android.synthetic.main.fragment_chat.view.*
+import kotlinx.android.synthetic.main.jesta_main_activity.*
 import kotlinx.android.synthetic.main.view_message_input.view.*
 
 
@@ -44,7 +46,11 @@ class ChatFragment : Fragment() {
         super.onAttach(context)
         arguments?.getString(BUNDLE_ROOM_ID)?.let {
             chatID = it
+        }
+        arguments?.getString(BUNDLE_RELATION_ID)?.let {
             relationID = it
+        }
+        arguments?.getString(BUNDLE_MISSION_ID)?.let {
             missionID = it
         }
     }
@@ -72,7 +78,6 @@ class ChatFragment : Fragment() {
                 return@addOnCompleteListener
             }
 
-
             chatManger.getMessagesByRoomId(chatID).addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     //todo some error
@@ -96,7 +101,6 @@ class ChatFragment : Fragment() {
                     view.attachmentButton.isEnabled = false
                     sysManager.onAcceptDoer(sysManager.getRelationByID(relationID),sysManager.getMissionByID(missionID))
                 }
-
             }
         }
 
