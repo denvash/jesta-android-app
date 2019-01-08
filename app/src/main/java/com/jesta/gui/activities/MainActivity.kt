@@ -63,15 +63,15 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             if (isKeyboardOpen) hideBottomNavigation() else showBottomNavigation()
         }
 
-                fragNavController.apply {
-                    transactionListener = this@MainActivity
-                    rootFragmentListener = this@MainActivity
-                    createEager = true
-                    fragNavLogger = object : FragNavLogger {
-                        override fun error(message: String, throwable: Throwable) {
-                            Log.e(TAG, message, throwable)
-                        }
-                    }
+        fragNavController.apply {
+            transactionListener = this@MainActivity
+            rootFragmentListener = this@MainActivity
+            createEager = true
+            fragNavLogger = object : FragNavLogger {
+                override fun error(message: String, throwable: Throwable) {
+                    Log.e(TAG, message, throwable)
+                }
+            }
 
             // Animation example
 //            defaultTransactionOptions = FragNavTransactionOptions.newBuilder().customAnimations(
@@ -188,5 +188,19 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         //do fragmentary stuff. Maybe change statusTitle, I'm not going to tell you how to live your life
         // If we have a backstack, show the back button
 //        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
+    }
+
+    fun alertError(message: String? = "") {
+        Alerter.create(MainActivity.instance)
+            .setTitle("Oops! Something got wrong \uD83D\uDE35")
+            .setText(if (message == null) "Sorry \uD83D\uDE4F, we got an internal error, please try again" else "Error: $message")
+            .setBackgroundColorRes(R.color.colorPrimary)
+            .setIcon(R.drawable.ic_jesta_diamond_normal)
+            .show()
+    }
+
+    fun restart() {
+        finish()
+        startActivity(intent)
     }
 }
