@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         throw IllegalStateException("Need to send an index that we know")
     }
 
-
     val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_container)
 
     override fun onCreate(savedInstanceState: Bundle?) {

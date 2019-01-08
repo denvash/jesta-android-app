@@ -6,14 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.*
-import com.jesta.gui.activities.MainActivity
 import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.ChatRoom
+import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso
@@ -83,23 +82,20 @@ class CardReviewFragment : Fragment() {
 
         view.jesta_preview_accept_button.setOnClickListener {
 
-            if (mission.posterID == sysManager.currentUserFromDB.id) {
-                Alerter.create(MainActivity.instance)
-                    .setTitle("You are a Doer already! \uD83D\uDCAA")
-                    .setText("Check out the Status tab!")
-                    .setBackgroundColorRes(R.color.colorPrimary)
-                    .setIcon(R.drawable.ic_jesta_diamond_normal)
-                    .show()
-//                Toast.makeText(MainActivity.instance,"You can't do your own post!",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
             sysManager.getUserRelations(sysManager.currentUserFromDB.id).addOnCompleteListener { getRelationsTask ->
                 val result: List<Relation> = (getRelationsTask.result as List<*>).filterIsInstance<Relation>()
 
                 val currMissionRelation = result.find { relation -> relation.missionID == mission.id }
 
-                if (currMissionRelation != null && currMissionRelation.doerID == sysManager.currentUserFromDB.id) {
+                if (mission.posterID == sysManager.currentUserFromDB.id) {
+                    Alerter.create(MainActivity.instance)
+                        .setTitle("You are a Doer already! \uD83D\uDCAA")
+                        .setText("Check out the Status tab!")
+                        .setBackgroundColorRes(R.color.colorPrimary)
+                        .setIcon(R.drawable.ic_jesta_diamond_normal)
+                        .show()
+                    return@addOnCompleteListener
+                } else if (currMissionRelation != null && currMissionRelation.doerID == sysManager.currentUserFromDB.id) {
                     Alerter.create(MainActivity.instance)
                         .setTitle("Don't be Silly! \uD83D\uDE1C")
                         .setText("You can't do your own Jesta!")
@@ -107,40 +103,44 @@ class CardReviewFragment : Fragment() {
                         .setIcon(R.drawable.ic_jesta_diamond_normal)
                         .show()
                     return@addOnCompleteListener
-                }
+                } else {
+                    Alerter.create(MainActivity.instance)
+                        .setTitle("You Offered to Do a Jesta!\uD83E\uDD19")
+                        .setText(
+                            "Great Job! Check out the Status tab! " +
+                                    "The poster has been notified!"
+                        )
+                        .setBackgroundColorRes(R.color.colorPrimary)
+                        .setIcon(R.drawable.ic_jesta_diamond_normal)
+                        .show()
 
-                val relation = Relation(
-                    id = UUID.randomUUID().toString(),
-                    doerID = sysManager.currentUserFromDB.id,
-                    posterID = mission.posterID,
-                    missionID = mission.id,
-                    status = RELATION_STATUS_INIT
-                )
-                sysManager.setRelationOnDB(relation)
+                    val relation = Relation(
+                        id = UUID.randomUUID().toString(),
+                        doerID = sysManager.currentUserFromDB.id,
+                        posterID = mission.posterID,
+                        missionID = mission.id,
+                        status = RELATION_STATUS_INIT
+                    )
+                    sysManager.setRelationOnDB(relation)
 
 
-                // subscribe doer to chat room
-                val doer = sysManager.currentUserFromDB
-                val poster = sysManager.getUserByID(mission.posterID)
-                val chatRoom = ChatRoom(doer, poster, mission)
-                val chatManager = ChatManager()
-                chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
-                    if (!task.isSuccessful) {
-                        // todo some error
-                        return@addOnCompleteListener
+                    // subscribe doer to chat room
+                    val doer = sysManager.currentUserFromDB
+                    val poster = sysManager.getUserByID(mission.posterID)
+                    val chatRoom = ChatRoom(doer, poster, mission)
+                    val chatManager = ChatManager()
+                    chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
+                        if (!task.isSuccessful) {
+                            // todo some error
+                            return@addOnCompleteListener
+                        }
                     }
+                    sysManager.askTodoJestaForUser(mission)
                 }
-                sysManager.askTodoJestaForUser(mission)
+                MainActivity.instance.fragNavController.popFragment()
+                MainActivity.instance.fragNavController.switchTab(INDEX_STATUS)
+                MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_status
             }
-            Alerter.create(MainActivity.instance)
-                .setTitle("You Offered to Do a Jesta!\uD83E\uDD19")
-                .setText("Great Job! Check out the Status tab! " +
-                        "The poster has been notified!")
-                .setBackgroundColorRes(R.color.colorPrimary)
-                .setIcon(R.drawable.ic_jesta_diamond_normal)
-                .show()
-            MainActivity.instance.fragNavController.replaceFragment(StatusFragment())
-            MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_status
         }
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_preview_nested_scroll_view)
