@@ -52,7 +52,6 @@ class LoginEmailFragment : Fragment() {
                     MainActivity.instance.restart()
                 }
         }
-
         return view
     }
 }

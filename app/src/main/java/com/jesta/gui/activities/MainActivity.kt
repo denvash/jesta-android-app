@@ -6,14 +6,14 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.jesta.R
 import com.jesta.data.*
-import com.jesta.data.chat.ChatManager
 import com.jesta.gui.fragments.AskJestaFragment
 import com.jesta.gui.fragments.DoJestaFragment
 import com.jesta.gui.fragments.SettingsFragment
@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_main_container)
+    lateinit var sysManager: SysManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
         instance = this
 
-        val sysManager = SysManager(instance)
+        sysManager = SysManager(instance)
 
         KeyboardVisibilityEvent.setEventListener(this@MainActivity) { isKeyboardOpen ->
             if (isKeyboardOpen) hideBottomNavigation() else showBottomNavigation()
@@ -155,8 +156,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     private fun setBottomNavigationVisible(isVisible: Boolean) {
-        jesta_bottom_navigation.visibility = if(isVisible) View.VISIBLE else View.INVISIBLE
-        jesta_main_line_view.visibility = if(isVisible) View.VISIBLE else View.INVISIBLE
+        jesta_bottom_navigation.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+        jesta_main_line_view.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
     }
 
     fun hideBottomNavigation() {
@@ -216,13 +217,26 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
-//                firebaseAuthWithGoogle(account)
+
+                val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+
+                sysManager.firebaseAuth.signInWithCredential(credential)
+                    .addOnCompleteListener { googleLoginTask ->
+                        if (!googleLoginTask.isSuccessful) {
+                            MainActivity.instance.alertError(googleLoginTask.exception?.message)
+                            Log.e(LoginPathFragment::class.java.simpleName, googleLoginTask.exception?.message)
+                            return@addOnCompleteListener
+                        }
+                        MainActivity.instance.fragNavController.clearStack()
+                        MainActivity.instance.restart()
+                    }
             } catch (e: ApiException) {
                 alertError(e.message)
             }
 
         } else if (requestCode == 64206) { // facebook
-//            fbCallbackManager.onActivityResult(requestCode, resultCode, data)
+            val fbCallbackManager = CallbackManager.Factory.create()
+            fbCallbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
