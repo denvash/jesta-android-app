@@ -412,6 +412,21 @@ public class SysManager {
         return _relationsDict.get(id);
     }
 
+    public Relation getRelation(User doer, User poster, Mission jesta) {
+        if (doer == null || poster == null || jesta == null) {
+            return null;
+        }
+
+        Collection<Relation> relations = _relationsDict.values();
+        for (Relation relation : relations) {
+            if (relation.getDoerID().equals(doer.getId()) && relation.getPosterID().equals(poster.getId())
+                    && relation.getMissionID().equals(jesta.getId())) {
+                return relation;
+            }
+        }
+        return null;
+    }
+
     public void removeRelation(Relation rel){
         _relationsDatabase.child(rel.getId()).removeValue();
         _relationsDict.remove(rel.getId());
@@ -633,8 +648,11 @@ public class SysManager {
 
             String jestaId = jesta.getId();
 
-            String title = getCurrentUserFromDB().getDisplayName() + " asked to do a jesta for you!";
-            String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
+
+            String title = "You got a Doer! \uD83E\uDD29";
+            String body = getCurrentUserFromDB().getDisplayName() + " offered to do a Jesta for you! Check out the Status tab!";
+
+
             title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
             jestaId = URLEncoder.encode(jestaId, StandardCharsets.UTF_8.toString());
@@ -688,17 +706,15 @@ public class SysManager {
         String sender = getCurrentUserFromDB().getId();
         String jestaId = jesta.getId();
 
-
-
-        String title;
+        String title, body;
         if (isAccept) {
-             title = getCurrentUserFromDB().getDisplayName() + " accepted you as a doer!";
+            title = "You got a match!  \uD83E\uDD29";
+            body = getCurrentUserFromDB().getDisplayName() + " accepted you as a doer!";
         }
         else {
-            title = getCurrentUserFromDB().getDisplayName() + " declined you as a doer!";
+            title = "Bad news \uD83E\uDD7A";
+            body = getCurrentUserFromDB().getDisplayName() + " declined you as a doer!";
         }
-
-        String body = "Jesta title: " + jesta.getTitle() + "\nJesta description: " + jesta.getDescription();
 
         try {
             // TODO change to post request to avoid this shit
@@ -798,7 +814,7 @@ public class SysManager {
             @Override
             public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
 
-                HashMap dbMsg = (HashMap)ds.getValue();
+                final HashMap dbMsg = (HashMap)ds.getValue();
                 String msgKey = ds.getKey();
                 if (dbMsg == null) {
                     throw new NullPointerException("dbUser is null");
@@ -807,7 +823,7 @@ public class SysManager {
                 User sender = getUserByID(senderId);
                 Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
                 Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
-                Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
+                final Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
 
                 // delete the message we got !!!
                  DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
@@ -816,8 +832,8 @@ public class SysManager {
                      public void onComplete(@NonNull Task<Void> task) {
 
                          Alerter.create(activity)
-                                 .setTitle("You got a Doer! \uD83E\uDD29")
-                                 .setText("Someone offered to do a Jesta for you! Check out the Status tab!")
+                                 .setTitle((String)dbMsg.get("title"))
+                                 .setText(UIMessage.getText())
                                  .setBackgroundColorRes(R.color.colorPrimary)
                                  .setIcon(R.drawable.ic_jesta_diamond_normal)
                                  .setDuration(5000)
