@@ -1,12 +1,16 @@
 package com.jesta.gui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 import com.jesta.R
 import com.jesta.data.*
 import com.jesta.data.chat.ChatManager
@@ -203,5 +207,23 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     fun restart() {
         finish()
         startActivity(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 101) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+//                firebaseAuthWithGoogle(account)
+            } catch (e: ApiException) {
+                alertError(e.message)
+            }
+
+        } else if (requestCode == 64206) { // facebook
+//            fbCallbackManager.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }
