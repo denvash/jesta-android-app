@@ -1,6 +1,5 @@
 package com.jesta.gui.fragments.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,12 +12,8 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.jesta.R
-import com.jesta.data.INDEX_DO_JESTA
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_login_path.view.*
@@ -58,7 +53,7 @@ class LoginPathFragment : Fragment() {
                 override fun onCancel() {}
 
                 override fun onError(exception: FacebookException) {
-                    instance.alertError()
+                    instance.alertError(exception.message)
                     Log.e(LoginPathFragment::class.java.simpleName, exception.message)
                     return
                 }
@@ -76,7 +71,7 @@ class LoginPathFragment : Fragment() {
         sysManager.firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener {fbLoginTask ->
                 if (!fbLoginTask.isSuccessful) {
-                    MainActivity.instance.alertError()
+                    MainActivity.instance.alertError(fbLoginTask.exception!!.message)
                     Log.e(LoginPathFragment::class.java.simpleName, fbLoginTask.exception!!.message)
                     return@addOnCompleteListener
                 }

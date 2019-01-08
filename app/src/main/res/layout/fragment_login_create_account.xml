@@ -48,7 +48,7 @@
                 app:counterMaxLength="20">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/login_display_name"
+                    android:id="@+id/jesta_login_create_display_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_40dp"
@@ -69,7 +69,7 @@
                 app:boxStrokeWidth="1dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
+                    android:id="@+id/jesta_login_create_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_40dp"
@@ -88,17 +88,17 @@
                 app:boxBackgroundMode="filled"
                 app:boxStrokeWidth="1dp"
                 app:hintEnabled="true"
-                app:counterMaxLength="6"
+                app:counterMaxLength="10"
                 app:counterEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password"
+                    android:id="@+id/jesta_login_create_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_40dp"
                     android:layout_marginEnd="@dimen/_40dp"
                     android:fontFamily="@font/marvel"
-                    android:inputType="numberPassword|textPassword"/>
+                    android:maxLength="10"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 

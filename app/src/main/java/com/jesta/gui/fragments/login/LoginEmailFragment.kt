@@ -40,13 +40,11 @@ class LoginEmailFragment : Fragment() {
                     .show()
                 return@setOnClickListener
             }
-            val email = view.jesta_login_email_value.text.toString()
-            val password = view.jesta_login_email_password.text.toString()
 
-            sysManager.firebaseAuth.signInWithEmailAndPassword(email, password)
+            sysManager.firebaseAuth.signInWithEmailAndPassword(emailView.toString(), passwordView.toString())
                 .addOnCompleteListener{ emailLoginTask ->
                     if (!emailLoginTask.isSuccessful) {
-                        MainActivity.instance.alertError()
+                        MainActivity.instance.alertError(emailLoginTask.exception!!.message)
                         Log.e(LoginPathFragment::class.java.simpleName, emailLoginTask.exception!!.message)
                         return@addOnCompleteListener
                     }

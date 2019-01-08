@@ -191,10 +191,10 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 //        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
     }
 
-    fun alertError() {
+    fun alertError(message: String? = "") {
         Alerter.create(MainActivity.instance)
             .setTitle("Oops! Something got wrong \uD83D\uDE35")
-            .setText("Sorry \uD83D\uDE4F, we got an internal error, please try again")
+            .setText(if (message == null) "Sorry \uD83D\uDE4F, we got an internal error, please try again" else "Error: $message")
             .setBackgroundColorRes(R.color.colorPrimary)
             .setIcon(R.drawable.ic_jesta_diamond_normal)
             .show()
