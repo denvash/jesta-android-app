@@ -89,16 +89,16 @@ class CardReviewFragment : Fragment() {
 
                 if (mission.posterID == sysManager.currentUserFromDB.id) {
                     Alerter.create(MainActivity.instance)
-                        .setTitle("You are a Doer already! \uD83D\uDCAA")
-                        .setText("Check out the Status tab!")
+                        .setTitle("Don't be Silly! \uD83D\uDE1C")
+                        .setText("You can't do your own Jesta!")
                         .setBackgroundColorRes(R.color.colorPrimary)
                         .setIcon(R.drawable.ic_jesta_diamond_normal)
                         .show()
                     return@addOnCompleteListener
                 } else if (currMissionRelation != null && currMissionRelation.doerID == sysManager.currentUserFromDB.id) {
                     Alerter.create(MainActivity.instance)
-                        .setTitle("Don't be Silly! \uD83D\uDE1C")
-                        .setText("You can't do your own Jesta!")
+                        .setTitle("You are a Doer already! \uD83D\uDCAA")
+                        .setText("Check out the Status tab!")
                         .setBackgroundColorRes(R.color.colorPrimary)
                         .setIcon(R.drawable.ic_jesta_diamond_normal)
                         .show()

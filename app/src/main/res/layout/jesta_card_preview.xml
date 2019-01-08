@@ -332,6 +332,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_40dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/jesta_post_button_accept"
         android:textSize="15sp"
         app:backgroundTint="@color/white"
