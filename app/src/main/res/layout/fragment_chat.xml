@@ -43,7 +43,7 @@
             app:inputButtonDefaultBgColor="@color/colorPrimary"
             app:inputButtonDefaultIconColor="@color/white"
             app:inputHint="Type a message..."
-            app:showAttachmentButton="true" />
+            app:showAttachmentButton="false" />
     </RelativeLayout>
 
 

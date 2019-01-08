@@ -29,29 +29,19 @@ class ChatFragment : Fragment() {
         private val TAG = ChatFragment::class.java.simpleName
 
         @JvmStatic
-        fun newInstance(roomID: String, relationID: String, missionID: String) = ChatFragment().apply {
+        fun newInstance(roomID: String) = ChatFragment().apply {
             arguments = Bundle().apply {
                 putString(BUNDLE_ROOM_ID, roomID)
-                putString(BUNDLE_RELATION_ID, relationID)
-                putString(BUNDLE_MISSION_ID, missionID)
             }
         }
     }
 
     private lateinit var chatID: String
-    private lateinit var relationID: String
-    private lateinit var missionID: String
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         arguments?.getString(BUNDLE_ROOM_ID)?.let {
             chatID = it
-        }
-        arguments?.getString(BUNDLE_RELATION_ID)?.let {
-            relationID = it
-        }
-        arguments?.getString(BUNDLE_MISSION_ID)?.let {
-            missionID = it
         }
     }
 
@@ -99,7 +89,6 @@ class ChatFragment : Fragment() {
 
                 view.attachmentButton.setOnClickListener {
                     view.attachmentButton.isEnabled = false
-                    sysManager.onAcceptDoer(sysManager.getRelationByID(relationID),sysManager.getMissionByID(missionID))
                 }
             }
         }
