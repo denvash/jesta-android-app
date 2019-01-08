@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -13,7 +12,6 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
 import com.jesta.data.User;
 import com.jesta.gui.activities.MainActivity;
-import com.jesta.gui.fragments.ChatFragment;
 import com.jesta.utils.db.SysManager;
 
 import java.util.Random;
@@ -27,22 +25,17 @@ public class MessagingService extends FirebaseMessagingService {
     private User senderUser;
     private static final String TAG = "MyFirebaseMsgService";
 
-    private boolean isAppInForeground(Context context)
-    {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-        {
+    private boolean isAppInForeground(Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             ActivityManager am = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
             ActivityManager.RunningTaskInfo foregroundTaskInfo = am.getRunningTasks(1).get(0);
             String foregroundTaskPackageName = foregroundTaskInfo.topActivity.getPackageName();
 
             return foregroundTaskPackageName.toLowerCase().equals(context.getPackageName().toLowerCase());
-        }
-        else
-        {
+        } else {
             ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
             ActivityManager.getMyMemoryState(appProcessInfo);
-            if (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE)
-            {
+            if (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE) {
                 return true;
             }
 
@@ -73,8 +66,7 @@ public class MessagingService extends FirebaseMessagingService {
             if (senderUser == null) {
                 return;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // todo open error activity
         }
 
@@ -94,7 +86,7 @@ public class MessagingService extends FirebaseMessagingService {
             isChatMessage = true;
         }
 
-        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "com.jesta.util.test";
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -104,7 +96,7 @@ public class MessagingService extends FirebaseMessagingService {
             notificationChannel.setDescription(title);
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.BLUE);
-            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             notificationChannel.enableLights(true);
             notificationManager.createNotificationChannel(notificationChannel);
         }
@@ -119,9 +111,7 @@ public class MessagingService extends FirebaseMessagingService {
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (isChatMessage) {
-            Bundle b = new Bundle();
-            b.putString("targetFragment", "ChatFragment");
-            notificationIntent.putExtras(b);
+            notificationIntent.putExtra("targetFragment", "ChatFragment");
         }
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
@@ -134,7 +124,7 @@ public class MessagingService extends FirebaseMessagingService {
                 .setContentInfo("Info")
                 .setFullScreenIntent(intent, true);
 
-        notificationManager.notify(new Random().nextInt(),notificationBuilder.build());
+        notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
     }
     // [END receive_message]
 
@@ -180,7 +170,7 @@ public class MessagingService extends FirebaseMessagingService {
 
     /**
      * Persist token to third-party servers.
-     *
+     * <p>
      * Modify this method to associate the user's FCM InstanceID token with any server-side account
      * maintained by your application.
      *

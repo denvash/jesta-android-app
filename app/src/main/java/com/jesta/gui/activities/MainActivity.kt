@@ -50,23 +50,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
 
-
     val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_container)
-
-    // todo want to get here the extras from messagingService when clicking on notification
-//    override fun onNewIntent(intent: Intent) {
-//        var bundle :Bundle ?=intent.extras
-//        var targetFragment = bundle!!.getString("targetFragment")
-
-//        val b = intent?.extras
-//        if (b != null) {
-//            val targetFragment = b.getString("targetFragment")
-//            if (targetFragment == "ChatFragment") {
-//                instance.fragNavController.switchTab(INDEX_STATUS)
-//                MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_status
-//            }
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +65,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             val user = sysManager.currentUserFromDB
 
             if (user == null) {
-                val intent = Intent(this,LoginMainActivity::class.java)
+                val intent = Intent(this, LoginMainActivity::class.java)
                 if (!fragNavController.isRootFragment && fragNavController.size != 0) {
                     fragNavController.clearStack()
                 }
