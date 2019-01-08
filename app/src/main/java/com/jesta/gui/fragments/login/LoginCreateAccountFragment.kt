@@ -71,7 +71,10 @@ class LoginCreateAccountFragment : Fragment() {
                                 Log.e(LoginPathFragment::class.java.simpleName, userLoginTask.exception!!.message)
                                 return@addOnCompleteListener
                             }
+
+                            // TODO: PACHKA do we need it on create account?
                             sysManager.setUserOnDB(User(user!!.uid,displayNameView.toString(),email = user.email!!))
+
                             MainActivity.instance.fragNavController.clearStack()
                             MainActivity.instance.restart()
                         }
