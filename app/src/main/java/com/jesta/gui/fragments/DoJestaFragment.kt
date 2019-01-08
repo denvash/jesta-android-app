@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.jesta.R
 import com.jesta.data.Mission
+import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.adapters.CardAdapter
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_do_jesta.view.*
@@ -21,7 +22,7 @@ class DoJestaFragment : Fragment() {
         private val TAG = DoJestaFragment::class.java.simpleName
     }
 
-    private val sysManager = SysManager(this)
+    private val sysManager = SysManager(MainActivity.instance)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

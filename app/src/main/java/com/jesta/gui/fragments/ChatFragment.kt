@@ -45,7 +45,7 @@ class ChatFragment : Fragment() {
         }
     }
 
-    private val sysManager = SysManager(this)
+    private val sysManager = SysManager(MainActivity.instance)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
@@ -60,7 +60,7 @@ class ChatFragment : Fragment() {
         val adapter = MessagesListAdapter<Message>(sysManager.currentUserFromDB.id, imageLoader)
         view.messagesList.setAdapter(adapter)
 
-        val chatManger = ChatManager()
+        val chatManger = ChatManager(MainActivity.instance)
 
         chatManger.subscribeToChatRoom(chatID).addOnCompleteListener { task ->
             if (!task.isSuccessful) {

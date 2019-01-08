@@ -17,7 +17,7 @@ import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_status.view.*
 
 class StatusFragment : Fragment() {
-    private val sysManager = SysManager(this)
+    private val sysManager = SysManager(MainActivity.instance)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)

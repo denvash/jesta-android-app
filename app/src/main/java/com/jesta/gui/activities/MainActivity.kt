@@ -149,8 +149,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                 }
 
                 sysManager.listenForIncomingInboxMessages(instance)
-                val chatManager = ChatManager()
-                chatManager.listenForChatAndNotify(instance)
+                sysManager.listenForChatAndNotify(instance)
             }
         }
     }

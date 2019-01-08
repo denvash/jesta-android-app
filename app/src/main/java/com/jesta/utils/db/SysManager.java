@@ -1,23 +1,25 @@
 package com.jesta.utils.db;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import com.android.volley.*;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.*;
-import com.google.firebase.auth.*;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -25,13 +27,18 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
-import com.jesta.data.*;
+import com.jesta.data.Mission;
+import com.jesta.data.Relation;
+import com.jesta.data.Status;
+import com.jesta.data.User;
 import com.jesta.data.chat.Author;
 import com.jesta.data.chat.ChatManager;
+import com.jesta.data.chat.ChatRoom;
 import com.jesta.data.chat.Message;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
 import com.jesta.gui.activities.MainActivity;
+import com.jesta.gui.fragments.ChatFragment;
 import com.jesta.gui.fragments.StatusFragment;
 import com.tapadoo.alerter.Alerter;
 import org.json.JSONException;
@@ -82,15 +89,6 @@ public class SysManager {
     // loading animation
     private ProgressBar _pgsBar;
 
-
-    public SysManager() {
-
-    }
-
-    public SysManager(Fragment fragment) {
-
-    }
-
     public SysManager(Activity currentActivity) {
         _activity = currentActivity;
 
@@ -104,10 +102,6 @@ public class SysManager {
                 }
             });
         }
-    }
-
-    public Activity getActivity() {
-        return _activity;
     }
 
     public void startLoadingAnim() {
@@ -817,6 +811,14 @@ public class SysManager {
         roomDBRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
+                // CHAT-IMPORTANT
+                // added here so the asker would be able to receive messages from the asker
+                // on the first time asker asks to do a jesta!
+                // if will be commented, the doer wont get messages from asker until
+                // he restarts the app. see corresponding comment on cardReviewFragment
+                // todo consider changing design of 1 on 1 chats
+//                ChatManager chatManager = new ChatManager();
+//                chatManager.listenForChatAndNotify(activity);
 
                 final HashMap dbMsg = (HashMap)ds.getValue();
                 String msgKey = ds.getKey();
@@ -897,9 +899,122 @@ public class SysManager {
         });
     }
 
+    public void listenForChatAndNotify(final Activity activity) {
+        final ChatManager chatManager = new ChatManager(_activity);
+        _relationsDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
+                // IMPORTANT: RelationId used as ChatId
+                final String roomId = ds.getKey();
+                // listen for child add event; e.g. new message has arrived
+                chatManager.getMessagesByRoomId(roomId).addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (!task.isSuccessful()) {
+                            // todo
+                            return;
+                        }
+                        final List<Message> messagesHistory = (List<Message>) task.getResult();
+
+
+                        // listen for child add event; e.g. new message has arrived
+                        DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
+                        roomDBRef.addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
+                                HashMap dbMsg = (HashMap) ds.getValue();
+                                String msgKey = ds.getKey();
+                                if (dbMsg == null) {
+                                    throw new NullPointerException("dbUser is null");
+                                }
+                                String senderId = (String) dbMsg.get("sender");
+                                final User sender = getUserByID(senderId);
+                                Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
+                                Date date = new Date(Long.parseLong((String) dbMsg.get("time")));
+                                final Message UIMessage = new Message(msgKey, UIAuthor, date, (String) dbMsg.get("body"));
+
+                                // don't show message from myself
+                                if (UIMessage.getAuthor().getDbID().equals(getCurrentUserFromDB().getId())) {
+                                    return;
+                                }
+
+                                if (!messagesHistory.contains(UIMessage)) {
+                                    Alerter.create(_activity)
+                                            .setTitle(sender.getDisplayName() + " says: ")
+                                            .setText(UIMessage.getText())
+                                            .setBackgroundColorRes(R.color.colorPrimary)
+                                            .setDuration(5000)
+                                            .setIcon(R.drawable.ic_jesta_chat)
+                                            // todo go to chat room
+                                            .addButton("GO TO CHAT", R.style.AlertButton, new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    if (activity instanceof MainActivity) {
+                                                        ((MainActivity) activity)
+                                                                .getInstance()
+                                                                .getFragNavController()
+                                                                .pushFragment(new ChatFragment().newInstance(roomId));
+                                                    }
+                                                }
+                                            })
+                                            .show();
+                                }
+                            }
+
+                            @Override
+                            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     /**
      * Layout, UI and system settings and logs
      */
+
+    public String getChatRoomId (ChatRoom chatRoom){
+            Relation relation = getRelation(chatRoom.getAsker(), chatRoom.getPoster(), chatRoom.getJesta());
+            return relation.getId();
+    }
 
     public void setTitle(String title) {
         TextView pageNameTv = (TextView) _activity.findViewById(R.id.page_name);

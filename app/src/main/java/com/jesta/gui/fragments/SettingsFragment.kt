@@ -21,7 +21,7 @@ import kotlin.random.Random
 
 class SettingsFragment : Fragment() {
 
-    private val sysManager = SysManager(this)
+    private val sysManager = SysManager(MainActivity.instance)
 
     companion object {
         private val TAG = SettingsFragment::class.java.simpleName

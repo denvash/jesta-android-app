@@ -12,7 +12,6 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
 import com.jesta.data.User;
 import com.jesta.gui.activities.MainActivity;
-import com.jesta.utils.db.SysManager;
 
 import java.util.Random;
 
@@ -21,28 +20,19 @@ import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIB
 
 
 public class MessagingService extends FirebaseMessagingService {
-    private SysManager sysManager = new SysManager();
     private User senderUser;
     private static final String TAG = "MyFirebaseMsgService";
 
     private boolean isAppInForeground(Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            ActivityManager am = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
-            ActivityManager.RunningTaskInfo foregroundTaskInfo = am.getRunningTasks(1).get(0);
-            String foregroundTaskPackageName = foregroundTaskInfo.topActivity.getPackageName();
-
-            return foregroundTaskPackageName.toLowerCase().equals(context.getPackageName().toLowerCase());
-        } else {
-            ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
-            ActivityManager.getMyMemoryState(appProcessInfo);
-            if (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE) {
-                return true;
-            }
-
-            KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-            // App is foreground, but screen is locked, so show notification
-            return km.inKeyguardRestrictedInputMode();
+        ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
+        ActivityManager.getMyMemoryState(appProcessInfo);
+        if (appProcessInfo.importance == IMPORTANCE_FOREGROUND || appProcessInfo.importance == IMPORTANCE_VISIBLE) {
+            return true;
         }
+
+        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        // App is foreground, but screen is locked, so show notification
+        return km.inKeyguardRestrictedInputMode();
     }
 
     /**
@@ -60,12 +50,6 @@ public class MessagingService extends FirebaseMessagingService {
             body = remoteMessage.getData().get("body");
             jestaId = remoteMessage.getData().get("jesta");
             sender = remoteMessage.getData().get("sender");
-
-            senderUser = sysManager.getUserByID(sender);
-            // don't do anything if user isn't logged in!
-            if (senderUser == null) {
-                return;
-            }
         } catch (Exception e) {
             // todo open error activity
         }

@@ -38,7 +38,7 @@ class AskJestaFragment : Fragment() {
 
     private var filePath: Uri? = null
 
-    private val sysManager = SysManager(this)
+    private val sysManager = SysManager(MainActivity.instance)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_ask_jesta, container, false)
