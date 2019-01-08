@@ -60,15 +60,13 @@ public class RegisterActivity extends LoginActivitiesWrapper {
 
                             user.updateProfile(profileUpdates);
 
-
-
                             // user created in firebase only
                             Toast.makeText(getApplicationContext(), "User created successfully", Toast.LENGTH_SHORT).show();
                             // TODO jesta_loading-animation here
                             loginWithCredentials(email, password);
 
-//                            User newUserOnDB = new User(user.getUid(), fullName, user.getEmail(), null, null, null);
-//                            sysManager.setUserOnDB(newUserOnDB);
+                           // User newUserOnDB = new User(user.getUid(), fullName, user.getEmail(), null, null, null);
+                           // sysManager.setUserOnDB(newUserOnDB);
                         }
                     });
         }

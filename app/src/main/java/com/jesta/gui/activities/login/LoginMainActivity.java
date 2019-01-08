@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-import static com.jesta.data.ConstantsKt.USER_EMPTY_PHOTO;
 import static com.jesta.data.ConstantsKt.getAvatarDict;
 import static com.jesta.utils.db.SysManager.DBTask.*;
 
@@ -77,10 +76,10 @@ public class LoginMainActivity extends LoginActivitiesWrapper {
                 sysManager.setTitle(getString(R.string.jesta_login_welcome));
                 // sysManager.showBackButton(false);
 
-                Button facebookSignInButton = (Button) findViewById(R.id.facebook_sign_in_btn);
+                Button facebookSignInButton = (Button) findViewById(R.id.login_facebook_button);
 
-                Button googleSignInButton = (Button) findViewById(R.id.google_sign_in_btn);
-                Button emailSignInButton = (Button) findViewById(R.id.email_sign_in_btn);
+                Button googleSignInButton = (Button) findViewById(R.id.login_google_button);
+                Button emailSignInButton = (Button) findViewById(R.id.login_email_button);
 
                 // Facebook
                 fbCallbackManager = CallbackManager.Factory.create();

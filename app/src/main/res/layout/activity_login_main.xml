@@ -24,7 +24,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/google_sign_in_btn"
+            android:id="@+id/login_google_button"
             style="@style/Theme.Jesta.Login.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             android:textColor="@color/darkGray" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/facebook_sign_in_btn"
+            android:id="@+id/login_facebook_button"
             style="@style/Theme.Jesta.Login.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:textColor="@color/darkGray" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/email_sign_in_btn"
+            android:id="@+id/login_email_button"
             style="@style/Theme.Jesta.Login.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

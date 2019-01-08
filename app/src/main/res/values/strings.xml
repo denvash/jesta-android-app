@@ -9,7 +9,7 @@
     <string name="jesta_login_password_hint">Enter password</string>
     <string name="jesta_login_register">REGISTER</string>
     <string name="jesta_login_login">Login</string>
-    <string name="jesta_login_welcome">Welcome!</string>
+    <string name="jesta_login_welcome">Welcome! 👋</string>
     <string name="jesta_login_error">ERROR</string>
     <string name="jesta_login_request_otp">REQUEST OTP</string>
     <string name="jesta_login_full_name_hint">Enter full name</string>
@@ -103,5 +103,11 @@
     <string name="jesta_status_poster_no_doers_assigned_yet">no doers assigned yet</string>
     <string name="jesta_status_remove">Remove from status</string>
     <string name="jesta_status_poster_done_your_doers">Your doers</string>
+    <string name="jesta_login_lets">Let\'s Log-in</string>
+    <string name="jesta_login_button_text">Login</string>
+    <string name="jesta_login_create_account">Create an Account</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_display_name">Display Name</string>
 
 </resources>

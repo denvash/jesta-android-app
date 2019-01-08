@@ -42,6 +42,7 @@ class AskJestaFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_ask_jesta, container, false)
+        if (sysManager.currentUserFromDB == null) return view
 
         setLayoutOnLastMission(view, sysManager.currentUserFromDB.lastMission)
 

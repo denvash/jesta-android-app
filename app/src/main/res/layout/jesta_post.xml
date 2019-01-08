@@ -61,7 +61,8 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/marvel"
                 android:inputType="textCapSentences|textCapCharacters"
-                android:textAllCaps="true" />
+                android:textAllCaps="true"
+                android:maxLength="30"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -84,7 +85,8 @@
                 android:elegantTextHeight="true"
                 android:fontFamily="@font/marvel"
                 android:inputType="textCapSentences|textMultiLine"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:maxLength="100" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <co.lujun.androidtagview.TagContainerLayout
@@ -131,7 +133,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/marvel"
                     android:inputType="textCapSentences"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    android:maxLength="20"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton

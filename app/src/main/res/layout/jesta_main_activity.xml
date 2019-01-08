@@ -17,10 +17,9 @@
 
     <FrameLayout
         android:visibility="invisible"
-        android:id="@+id/jesta_container"
+        android:id="@+id/jesta_main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/jesta_main_line_view"/>
+        android:layout_height="match_parent"/>
 
     <View
         android:visibility="invisible"
