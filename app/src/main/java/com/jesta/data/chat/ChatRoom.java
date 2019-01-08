@@ -1,7 +1,9 @@
 package com.jesta.data.chat;
 
 import com.jesta.data.Mission;
+import com.jesta.data.Relation;
 import com.jesta.data.User;
+import com.jesta.utils.db.SysManager;
 
 public class ChatRoom {
     User asker;
@@ -18,9 +20,9 @@ public class ChatRoom {
     }
 
     public String getId() {
-        String sortedIds;
-        sortedIds = poster.getId().compareTo(asker.getId()) < 0 ? poster.getId() + "_" + asker.getId() : asker.getId() + "_" + poster.getId();
-        return sortedIds + "_" + jesta.getId();
+        SysManager sysManager = new SysManager();
+        Relation relation = sysManager.getRelation(asker, poster, jesta);
+        return relation.getId();
     }
 
 
