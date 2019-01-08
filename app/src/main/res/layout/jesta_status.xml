@@ -123,15 +123,15 @@
                 android:visibility="gone" />
 
             <include
-                layout="@layout/jesta_status_poster"
+                layout="@layout/jesta_status_poster_pending"
                 android:visibility="gone" />
 
             <include
-                layout="@layout/jesta_status_poster_complete"
+                layout="@layout/jesta_status_poster_in_progress"
                 android:visibility="gone" />
 
             <include
-                layout="@layout/jesta_status_done"
+                layout="@layout/jesta_status_poster_done"
                 android:visibility="gone" />
         </FrameLayout>
 

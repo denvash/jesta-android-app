@@ -118,7 +118,7 @@
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/jesta_status_doers_recycle_view"
+        android:id="@+id/jesta_status_poster_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

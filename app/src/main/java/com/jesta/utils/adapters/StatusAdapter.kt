@@ -19,10 +19,10 @@ import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.jesta_status.view.*
 import kotlinx.android.synthetic.main.jesta_status_doer.view.*
-import kotlinx.android.synthetic.main.jesta_status_done.view.*
-import kotlinx.android.synthetic.main.jesta_status_poster.view.*
-import kotlinx.android.synthetic.main.jesta_status_poster_complete.view.*
+import kotlinx.android.synthetic.main.jesta_status_poster_done.view.*
+import kotlinx.android.synthetic.main.jesta_status_poster_in_progress.view.*
 import kotlinx.android.synthetic.main.jesta_status_poster_no_doers.view.*
+import kotlinx.android.synthetic.main.jesta_status_poster_pending.view.*
 import java.util.*
 
 class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
@@ -46,55 +46,63 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         holder.bind(list[position])
         expansionsCollection.add(holder.expansionLayout)
 
-        holder.view.jesta_status_title.text = mission.title
-        holder.view.jesta_status_total_doers.text = mission.numOfPeople.toString()
+        val v = holder.view
 
-        if (status.status == RELATION_STATUS_DONE) {
-            if (status.isPoster) {
-                holder.view.jesta_status_done_complete_layout.visibility = View.VISIBLE
-                holder.view.jesta_status_done_recycle_view.layoutManager =
-                        LinearLayoutManager(MainActivity.instance)
-                holder.view.jesta_status_done_recycle_view.adapter = DoersAdapter(
-                    status.doerIDList.filter { it.status == RELATION_STATUS_DONE },
-                    status,
-                    mission
-                )
-            } else {
-                holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
-                holder.view.jesta_status_doer_layout.setOnClickListener {
+        v.jesta_status_title.text = mission.title
+        v.jesta_status_total_doers.text = mission.numOfPeople.toString()
 
-                    val roomDoer = sysManager.currentUserFromDB
-                    val poster = sysManager.getUserByID(mission.posterID)
-                    val chatRoom = ChatRoom(roomDoer, poster, mission)
-
-                    MainActivity.instance.fragNavController.pushFragment(
-                        ChatFragment.newInstance(
-                            chatRoom.id!!,
-                            roomDoer.id,
-                            mission.id
-                        )
-                    )
-
-                }
-            }
+        if (mission.numOfPeople == 0) {
+            holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
+            holder.view.jesta_status_divider.visibility = View.INVISIBLE
         }
 
-        if (status.isPoster && status.doerIDList.last().doerID == RELATION_EMPTY_DOER_ID) {
-            holder.view.jesta_status_poster_no_doers_layout.visibility = View.VISIBLE
-        } else if (status.isPoster) {
-            when {
-                status.status != RELATION_STATUS_DONE && mission.numOfPeople == 0 -> {
-                    holder.view.jesta_status_poster_complete_layout.visibility = View.VISIBLE
-                    holder.view.jesta_status_complete_doers_recycle_view.layoutManager =
+        if (!status.isPoster) {
+            v.jesta_status_doer_layout.visibility = View.VISIBLE
+            v.jesta_status_doer_chat.setOnClickListener {
+                openChat(sysManager.currentUserFromDB, mission)
+            }
+        } else {
+            when (status.status) {
+                RELATION_STATUS_INIT -> {
+                    if (status.doerIDList.last().doerID == RELATION_EMPTY_DOER_ID) {
+                        v.jesta_status_poster_no_doers_layout.visibility = View.VISIBLE
+                    } else {
+                        // Got Doers
+                        v.jesta_status_poster_layout.visibility = View.VISIBLE
+                        v.jesta_status_poster_recycle_view.layoutManager =
+                                LinearLayoutManager(MainActivity.instance)
+                        v.jesta_status_poster_recycle_view.adapter = DoersAdapter(
+                            status.doerIDList,
+                            status,
+                            mission
+                        )
+                    }
+                }
+
+                RELATION_STATUS_USER_DECLINED -> {
+                    // Doer
+                    v.jesta_status_doer_layout.visibility = View.VISIBLE
+                }
+                RELATION_STATUS_IN_PROGRESS -> {
+                    v.jesta_status_poster_in_progress_layout.visibility = View.VISIBLE
+                    v.jesta_status_poster_in_progress_recycle_view.layoutManager =
                             LinearLayoutManager(MainActivity.instance)
-                    holder.view.jesta_status_complete_doers_recycle_view.adapter = DoersAdapter(
+                    v.jesta_status_poster_in_progress_recycle_view.adapter = DoersAdapter(
                         status.doerIDList.filter { it.status == RELATION_STATUS_IN_PROGRESS },
                         status,
                         mission
                     )
                 }
-
-                else -> holder.view.jesta_status_poster_layout.visibility = View.VISIBLE
+                RELATION_STATUS_DONE -> {
+                    v.jesta_status_poster_done_layout.visibility = View.VISIBLE
+                    v.jesta_status_poster_done_recycle_view.layoutManager =
+                            LinearLayoutManager(MainActivity.instance)
+                    v.jesta_status_poster_done_recycle_view.adapter = DoersAdapter(
+                        status.doerIDList.filter { it.status == RELATION_STATUS_DONE },
+                        status,
+                        mission
+                    )
+                }
             }
         }
 
@@ -106,7 +114,6 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
             sysManager.updateRelationsDone(status)
-
             //TODO: Packha send a fucking msg
         }
 
@@ -117,11 +124,6 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
             sysManager.moveToGraveDB(status)
-        }
-
-        if (mission.numOfPeople == 0) {
-            holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
-            holder.view.jesta_status_divider.visibility = View.INVISIBLE
         }
 
         val prefix = "As a "
@@ -146,13 +148,27 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
             )
         )
 
-        holder.view.jesta_status_doers_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
-        holder.view.jesta_status_doers_recycle_view.adapter =
+        holder.view.jesta_status_poster_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
+        holder.view.jesta_status_poster_recycle_view.adapter =
                 if (status.doerIDList.size == 1) DoersAdapter(status.doerIDList, status, mission)
                 else DoersAdapter(status.doerIDList.takeLast(status.doerIDList.size - 1), status, mission)
 
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
         Picasso.get().load(posterAvatar).noFade().into(holder.view.jesta_status_avatar)
+    }
+
+    private fun openChat(currentUserFromDB: User?, mission: Mission) {
+        val roomDoer = sysManager.currentUserFromDB
+        val poster = sysManager.getUserByID(mission.posterID)
+        val chatRoom = ChatRoom(roomDoer, poster, mission)
+
+        MainActivity.instance.fragNavController.pushFragment(
+            ChatFragment.newInstance(
+                chatRoom.id!!,
+                roomDoer.id,
+                mission.id
+            )
+        )
     }
 
     override fun getItemCount(): Int {
