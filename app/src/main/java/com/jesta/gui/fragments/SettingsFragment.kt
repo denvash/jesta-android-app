@@ -13,6 +13,7 @@ import com.jesta.data.USER_EMPTY_DIAMONDS
 import com.jesta.data.User
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.activities.login.LoginMainActivity
+import com.jesta.gui.fragments.login.LoginPathFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_settings.view.*
@@ -31,28 +32,16 @@ class SettingsFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        // Reloading users on main activity.
-//        sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener { task ->
-//            if (!task.isSuccessful) {
-//                // todo error
-//            } else {
-//                updateUserLayout(view)
-//            }
-//
-//
-//        }
+        if (sysManager.currentUserFromDB == null) return view
 
         updateUserLayout(view)
         view.jesta_settings_profile_layout.visibility = View.VISIBLE
 
         view.jesta_settings_button_log_out.setOnClickListener {
             sysManager.signOutUser(MainActivity.instance)
-            MainActivity.instance.fragNavController.clearStack()
-            MainActivity.instance.finish()
-
-            val intent = Intent(context, LoginMainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            val fragNavController = MainActivity.instance.fragNavController
+            fragNavController.clearStack()
+            fragNavController.pushFragment(LoginPathFragment())
         }
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_settings_scroll_view)

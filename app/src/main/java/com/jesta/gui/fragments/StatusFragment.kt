@@ -24,6 +24,8 @@ class StatusFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_status, container, false)
 
+        if (sysManager.currentUserFromDB == null) return view
+
         sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener { reloadJestasTask ->
             sysManager.statusList.addOnCompleteListener { userRelationsTask ->
                 if (!userRelationsTask.isSuccessful || !reloadJestasTask.isSuccessful) {
