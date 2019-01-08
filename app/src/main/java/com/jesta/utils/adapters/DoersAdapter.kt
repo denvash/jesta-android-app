@@ -100,9 +100,7 @@ class DoersAdapter internal constructor(
 
                 MainActivity.instance.fragNavController.pushFragment(
                     ChatFragment.newInstance(
-                        chatRoom.id!!,
-                        doerList[position].id,
-                        mission.id
+                        chatRoom.id!!
                     )
                 )
             }

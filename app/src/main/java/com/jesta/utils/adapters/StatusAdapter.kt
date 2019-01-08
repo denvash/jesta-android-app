@@ -164,9 +164,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
 
         MainActivity.instance.fragNavController.pushFragment(
             ChatFragment.newInstance(
-                chatRoom.id!!,
-                roomDoer.id,
-                mission.id
+                chatRoom.id!!
             )
         )
     }
