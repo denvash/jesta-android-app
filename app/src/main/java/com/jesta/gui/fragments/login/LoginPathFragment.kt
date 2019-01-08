@@ -12,6 +12,7 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FacebookAuthProvider
 import com.jesta.R
 import com.jesta.gui.activities.MainActivity
@@ -39,7 +40,10 @@ class LoginPathFragment : Fragment() {
         }
 
         // Google Registration
-
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
 
         // Facebook
         val fbCallbackManager = CallbackManager.Factory.create()
