@@ -141,7 +141,7 @@ class AskJestaFragment : Fragment() {
                 }
 
             Alerter.create(MainActivity.instance)
-                .setTitle("Nice one! You posted a Jesta! \uD83E\uDD73")
+                .setTitle("Nice one! You posted a Jesta! \uD83E\uDD20")
                 .setText("Remember to refresh the Jestas list!")
                 .setBackgroundColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
