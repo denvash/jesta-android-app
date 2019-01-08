@@ -122,38 +122,14 @@ class CardReviewFragment : Fragment() {
                         status = RELATION_STATUS_INIT
                     )
                     sysManager.setRelationOnDB(relation)
-
+                    sysManager.askTodoJestaForUser(mission)
 
                     // subscribe doer to chat room
                     val doer = sysManager.currentUserFromDB
                     val poster = sysManager.getUserByID(mission.posterID)
                     val chatRoom = ChatRoom(doer, poster, mission)
                     val chatManager = ChatManager()
-                    chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
-                        if (!task.isSuccessful) {
-                            // todo some error
-                            return@addOnCompleteListener
-                        }
-                    }
-                    // note subscribeToChatRoom must be after askTodoJestaForUser as it relays on relation id
-                    // and relation set only on askTodoJesta
-                    sysManager.askTodoJestaForUser(mission).addOnCompleteListener { task ->
-                        if (!task.isSuccessful) {
-                            // todo some error
-                            return@addOnCompleteListener
-                        }
-                        // subscribe doer to chat room
-                        val doer = sysManager.currentUserFromDB
-                        val poster = sysManager.getUserByID(mission.posterID)
-                        val chatRoom = ChatRoom(doer, poster, mission)
-                        val chatManager = ChatManager()
-                        chatManager.subscribeToChatRoom(chatRoom).addOnCompleteListener { task ->
-                            if (!task.isSuccessful) {
-                                // todo some error
-                                return@addOnCompleteListener
-                            }
-                        }
-                    }
+                    chatManager.subscribeToChatRoom(chatRoom);
                 }
                 MainActivity.instance.fragNavController.popFragment()
                 MainActivity.instance.fragNavController.switchTab(INDEX_STATUS)

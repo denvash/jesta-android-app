@@ -384,14 +384,18 @@ public class SysManager {
 
     public void setUserOnDB(User user) {
         _usersDatabase.child(user.getId()).setValue(user);
+        _usersDict.put(user.getId(), user);
     }
 
     public void setMissionOnDB(Mission mission) {
         _jestasDatabase.child(mission.getId()).setValue(mission);
+        _jestasDict.put(mission.getId(), mission);
+
     }
 
     public void setRelationOnDB(Relation rel) {
         _relationsDatabase.child(rel.getId()).setValue(rel);
+        _relationsDict.put(rel.getId(), rel);
     }
 
     public User getUserByID(String id) {
