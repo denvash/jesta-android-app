@@ -49,9 +49,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         holder.view.jesta_status_title.text = mission.title
         holder.view.jesta_status_total_doers.text = mission.numOfPeople.toString()
 
-        if (status.status == RELATION_STATUS_DONE || !status.isPoster) {
-            if (status.status == RELATION_STATUS_DONE) {
-                holder.view.jesta_status_doer_layout.visibility = View.INVISIBLE
+        if (status.status == RELATION_STATUS_DONE) {
+            if (status.isPoster) {
                 holder.view.jesta_status_done_complete_layout.visibility = View.VISIBLE
                 holder.view.jesta_status_done_recycle_view.layoutManager =
                         LinearLayoutManager(MainActivity.instance)
@@ -62,11 +61,8 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                 )
             } else {
                 holder.view.jesta_status_doer_layout.visibility = View.VISIBLE
+                holder.view.jesta_status_doer_layout.setOnClickListener {
 
-                holder.view.jesta_status_total_doers.visibility = View.INVISIBLE
-                holder.view.jesta_status_divider.visibility = View.INVISIBLE
-
-                holder.view.jesta_status_doer_chat.setOnClickListener {
                     val roomDoer = sysManager.currentUserFromDB
                     val poster = sysManager.getUserByID(mission.posterID)
                     val chatRoom = ChatRoom(roomDoer, poster, mission)
@@ -78,9 +74,12 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                             mission.id
                         )
                     )
+
                 }
             }
-        } else if (status.isPoster && status.doerIDList.last().doerID == RELATION_EMPTY_DOER_ID) {
+        }
+
+        if (status.isPoster && status.doerIDList.last().doerID == RELATION_EMPTY_DOER_ID) {
             holder.view.jesta_status_poster_no_doers_layout.visibility = View.VISIBLE
         } else if (status.isPoster) {
             when {
