@@ -35,7 +35,7 @@ class CardReviewFragment : Fragment() {
         }
     }
 
-    private val sysManager = SysManager(this)
+    private val sysManager = SysManager(MainActivity.instance)
     private lateinit var mission: Mission
 
     override fun onAttach(context: Context?) {
@@ -128,8 +128,14 @@ class CardReviewFragment : Fragment() {
                     val doer = sysManager.currentUserFromDB
                     val poster = sysManager.getUserByID(mission.posterID)
                     val chatRoom = ChatRoom(doer, poster, mission)
-                    val chatManager = ChatManager()
+                    val chatManager = ChatManager(MainActivity.instance)
                     chatManager.subscribeToChatRoom(chatRoom);
+
+                    // CHAT-IMPORTANT
+                    // added here so asker would be able to receive message from poster
+                    // on the first time they want to interact. see corresponding comment
+                    // on sysManager
+//                    chatManager.listenForChatAndNotify(MainActivity.instance)
                 }
                 MainActivity.instance.fragNavController.popFragment()
                 MainActivity.instance.fragNavController.switchTab(INDEX_STATUS)

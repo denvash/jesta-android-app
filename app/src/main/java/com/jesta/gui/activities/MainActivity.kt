@@ -110,8 +110,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                     sysManager.setUserOnDB(user)
                 }
                 sysManager.listenForIncomingInboxMessages(instance)
-                val chatManager = ChatManager()
-                chatManager.listenForChatAndNotify(instance)
+                sysManager.listenForChatAndNotify(instance)
             }
 
         }

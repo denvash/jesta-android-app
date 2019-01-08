@@ -1,9 +1,7 @@
 package com.jesta.data.chat;
 
 import com.jesta.data.Mission;
-import com.jesta.data.Relation;
 import com.jesta.data.User;
-import com.jesta.utils.db.SysManager;
 
 public class ChatRoom {
     User asker;
@@ -19,11 +17,15 @@ public class ChatRoom {
         this.jesta = jesta;
     }
 
-    public String getId() {
-        SysManager sysManager = new SysManager();
-        Relation relation = sysManager.getRelation(asker, poster, jesta);
-        return relation.getId();
+    public User getAsker() {
+        return asker;
     }
 
+    public User getPoster() {
+        return poster;
+    }
 
+    public Mission getJesta() {
+        return jesta;
+    }
 }

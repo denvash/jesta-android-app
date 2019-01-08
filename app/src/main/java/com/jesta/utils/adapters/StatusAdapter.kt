@@ -162,7 +162,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         val poster = sysManager.getUserByID(mission.posterID)
         val chatRoom = ChatRoom(roomDoer, poster, mission)
 
-        MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(chatRoom.id!!))
+        MainActivity.instance.fragNavController.pushFragment(ChatFragment.newInstance(sysManager.getChatRoomId(chatRoom)!!))
     }
 
     override fun getItemCount(): Int {

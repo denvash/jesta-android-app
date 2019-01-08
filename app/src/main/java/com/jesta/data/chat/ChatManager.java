@@ -2,7 +2,6 @@ package com.jesta.data.chat;
 
 import android.app.Activity;
 import android.content.Context;
-import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.volley.Request;
@@ -16,28 +15,29 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.database.*;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.jesta.R;
-import com.jesta.data.Relation;
 import com.jesta.data.User;
-import com.jesta.gui.activities.MainActivity;
-import com.jesta.gui.fragments.ChatFragment;
 import com.jesta.utils.db.SysManager;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
-import com.tapadoo.alerter.Alerter;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class ChatManager {
+    private final Activity _activity;
     private final String SEND_MESSAGE_ENDPOINT = "https://us-central1-jesta-42.cloudfunctions.net/messaging/sendChatMessage";
-    private final SysManager sysManager = new SysManager();
+    private final SysManager sysManager;
     private static FirebaseMessaging _messaging = FirebaseMessaging.getInstance();
 //    private static DatabaseReference _chatDatabase = FirebaseDatabase.getInstance().getReference("chat");
 
+    public ChatManager(Activity activity) {
+        _activity = activity;
+        sysManager = new SysManager(_activity);
+    }
     public Task subscribeToChatRoom(ChatRoom room) {
         final TaskCompletionSource<String> source = new TaskCompletionSource<>();
-        _messaging.subscribeToTopic(room.getId()).addOnCompleteListener(new OnCompleteListener<Void>() {
+        String roomId = sysManager.getChatRoomId(room);
+        _messaging.subscribeToTopic(roomId).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -198,100 +198,4 @@ public class ChatManager {
         });
     }
 
-    public void listenForChatAndNotify(final Activity activity) {
-        final ArrayList<String> filteredChatRooms = new ArrayList<>();
-        Task userRelTask = sysManager.getUserRelations(sysManager.getCurrentUserFromDB().getId());
-        userRelTask.addOnCompleteListener(new OnCompleteListener() {
-            @Override
-            public void onComplete(@NonNull Task task) {
-                if (!task.isSuccessful()) {
-                    // todo
-                    return;
-                }
-
-                List<Relation> userRelations = (List<Relation>) task.getResult();
-                for (final Relation relation : userRelations) {
-                    final String roomId = relation.getId();
-                    filteredChatRooms.add(roomId);
-                    // todo sepereate the code below to another function
-                    getMessagesByRoomId(roomId).addOnCompleteListener(new OnCompleteListener() {
-                        @Override
-                        public void onComplete(@NonNull Task task) {
-                            if (!task.isSuccessful()) {
-                                // todo
-                                return;
-                            }
-                            final List<Message> messagesHistory = (List<Message>) task.getResult();
-
-
-                            // listen for child add event; e.g. new message has arrived
-                            DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
-                            roomDBRef.addChildEventListener(new ChildEventListener() {
-                                @Override
-                                public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
-                                    HashMap dbMsg = (HashMap) ds.getValue();
-                                    String msgKey = ds.getKey();
-                                    if (dbMsg == null) {
-                                        throw new NullPointerException("dbUser is null");
-                                    }
-                                    String senderId = (String) dbMsg.get("sender");
-                                    final User sender = sysManager.getUserByID(senderId);
-                                    Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
-                                    Date date = new Date(Long.parseLong((String) dbMsg.get("time")));
-                                    final Message UIMessage = new Message(msgKey, UIAuthor, date, (String) dbMsg.get("body"));
-
-                                    // don't show message from myself
-                                    if (UIMessage.getAuthor().getDbID().equals(sysManager.getCurrentUserFromDB().getId())) {
-                                        return;
-                                    }
-
-                                    if (!messagesHistory.contains(UIMessage)) {
-                                        Alerter.create(sysManager.getActivity())
-                                                .setTitle(sender.getDisplayName() + " says: ")
-                                                .setText(UIMessage.getText())
-                                                .setBackgroundColorRes(R.color.colorPrimary)
-                                                .setDuration(5000)
-                                                .setIcon(R.drawable.ic_jesta_chat)
-                                                // todo go to chat room
-                                                .addButton("GO TO CHAT", R.style.AlertButton, new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        if (activity instanceof MainActivity) {
-                                                            ((MainActivity) activity)
-                                                                    .getInstance()
-                                                                    .getFragNavController()
-                                                                    .pushFragment(new ChatFragment().newInstance(roomId));
-                                                        }
-                                                    }
-                                                })
-                                                .show();
-                                    }
-                                }
-
-                                @Override
-                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                                }
-
-                                @Override
-                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                                }
-
-                                @Override
-                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-                        }
-                    });
-                }
-            }
-        });
-    }
 }
