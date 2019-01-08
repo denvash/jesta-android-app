@@ -3,7 +3,6 @@ package com.jesta.gui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.*
+import com.jesta.data.chat.ChatManager
 import com.jesta.gui.activities.login.LoginMainActivity
 import com.jesta.gui.fragments.AskJestaFragment
 import com.jesta.gui.fragments.DoJestaFragment
@@ -21,14 +21,6 @@ import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import android.content.Context.INPUT_METHOD_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
-import android.app.Activity
-import android.content.Context
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-
-
 
 
 class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener,
@@ -60,6 +52,21 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
 
     val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_container)
+
+    // todo want to get here the extras from messagingService when clicking on notification
+//    override fun onNewIntent(intent: Intent) {
+//        var bundle :Bundle ?=intent.extras
+//        var targetFragment = bundle!!.getString("targetFragment")
+
+//        val b = intent?.extras
+//        if (b != null) {
+//            val targetFragment = b.getString("targetFragment")
+//            if (targetFragment == "ChatFragment") {
+//                instance.fragNavController.switchTab(INDEX_STATUS)
+//                MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_status
+//            }
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,6 +166,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                 }
 
                 sysManager.listenForIncomingInboxMessages(instance)
+                val chatManager = ChatManager()
+                chatManager.listenForChatAndNotify(instance)
             }
         }
     }

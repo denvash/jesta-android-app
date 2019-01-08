@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.google.firebase.storage.UploadTask;
 import com.jesta.R;
 import com.jesta.data.*;
 import com.jesta.data.chat.Author;
+import com.jesta.data.chat.ChatManager;
 import com.jesta.data.chat.Message;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
@@ -818,6 +820,7 @@ public class SysManager {
                                  .setText("Someone offered to do a Jesta for you! Check out the Status tab!")
                                  .setBackgroundColorRes(R.color.colorPrimary)
                                  .setIcon(R.drawable.ic_jesta_diamond_normal)
+                                 .setDuration(5000)
                                  .addButton("GO TO STATUS", R.style.AlertButton, new View.OnClickListener() {
 
                                      @Override

@@ -1,23 +1,31 @@
 package com.jesta.data.chat;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
-import com.android.volley.*;
-import com.android.volley.toolbox.*;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.database.*;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.jesta.R;
 import com.jesta.data.User;
+import com.jesta.gui.activities.MainActivity;
+import com.jesta.gui.fragments.ChatFragment;
 import com.jesta.utils.db.SysManager;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
+import com.tapadoo.alerter.Alerter;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ChatManager {
@@ -145,7 +153,7 @@ public class ChatManager {
         return source.getTask();
     }
 
-    public void listenForIncomingMessages(final MessagesListAdapter<Message> adapter, final String roomId, final List<Message> messagesHistory) {
+    public void listenForChatUpdateAdapter(final MessagesListAdapter<Message> adapter, final String roomId, final List<Message> messagesHistory) {
         // listen for child add event; e.g. new message has arrived
         DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
         roomDBRef.addChildEventListener(new ChildEventListener() {
@@ -187,5 +195,126 @@ public class ChatManager {
 
             }
         });
+    }
+
+    public void listenForChatAndNotify(final Activity activity) {
+        DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/");
+        final TaskCompletionSource<ArrayList<String>> source = new TaskCompletionSource<>();
+        roomDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> chatRooms = new ArrayList<>();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    chatRooms.add(ds.getKey());
+                }
+                source.setResult(chatRooms);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                source.setException(databaseError.toException());
+            }
+        });
+
+        source.getTask().addOnCompleteListener(new OnCompleteListener<ArrayList<String>>() {
+            @Override
+            public void onComplete(@NonNull Task<ArrayList<String>> task) {
+                if (!task.isSuccessful()) {
+                    return;
+                }
+                ArrayList<String> chatRooms = source.getTask().getResult();
+                ArrayList<String> filteredChatRooms = new ArrayList<>();
+
+                for (final String roomId : chatRooms) {
+                    if (roomId.contains(sysManager.getCurrentUserFromDB().getId())) {
+                        filteredChatRooms.add(roomId);
+
+                        getMessagesByRoomId(roomId).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (!task.isSuccessful()) {
+                                    // todo
+                                    return;
+                                }
+                                final List<Message> messagesHistory = (List<Message>)task.getResult();
+
+
+                                // listen for child add event; e.g. new message has arrived
+                                DatabaseReference roomDBRef = FirebaseDatabase.getInstance().getReference("chat/" + roomId);
+                                roomDBRef.addChildEventListener(new ChildEventListener() {
+                                    @Override
+                                    public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
+                                        HashMap dbMsg = (HashMap)ds.getValue();
+                                        String msgKey = ds.getKey();
+                                        if (dbMsg == null) {
+                                            throw new NullPointerException("dbUser is null");
+                                        }
+                                        String senderId = (String)dbMsg.get("sender");
+                                        final User sender = sysManager.getUserByID(senderId);
+                                        Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
+                                        Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
+                                        final Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
+
+                                        if (!messagesHistory.contains(UIMessage)) {
+                                            Alerter.create(sysManager.getActivity())
+                                                    .setTitle(sender.getDisplayName() + " says: ")
+                                                    .setText(UIMessage.getText())
+                                                    .setBackgroundColorRes(R.color.colorPrimary)
+                                                    .setDuration(5000)
+                                                    .setIcon(R.drawable.ic_jesta_chat)
+                                                    // todo go to chat room
+                                                    .addButton("GO TO CHAT", R.style.AlertButton, new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            if (activity instanceof MainActivity) {
+                                                                ((MainActivity) activity)
+                                                                        .getInstance()
+                                                                        .getFragNavController()
+                                                                        .pushFragment(new ChatFragment().newInstance(roomId));
+                                                            }
+                                                        }
+                                                    })
+                                                    .show();
+                                        }
+
+
+                                    }
+
+                                    @Override
+                                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                                    }
+
+                                    @Override
+                                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+                            }
+                        });
+
+
+
+                    }
+                }
+
+            }
+        });
+
+
+
     }
 }

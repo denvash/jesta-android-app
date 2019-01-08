@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -12,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
 import com.jesta.data.User;
 import com.jesta.gui.activities.MainActivity;
+import com.jesta.gui.fragments.ChatFragment;
 import com.jesta.utils.db.SysManager;
 
 import java.util.Random;
@@ -84,11 +86,12 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
     private void showNotification(String title, String body) {
-
+        boolean isChatMessage = false;
 
         // construct custom title for a chat message
         if (title.equals("chatMessage")) {
             title = senderUser.getDisplayName() + " sent you a message!";
+            isChatMessage = true;
         }
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
@@ -110,8 +113,16 @@ public class MessagingService extends FirebaseMessagingService {
         Intent notificationIntent = new Intent(this, MainActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+
         PendingIntent intent = PendingIntent.getActivity(this, 0,
-                notificationIntent, 0);
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (isChatMessage) {
+            Bundle b = new Bundle();
+            b.putString("targetFragment", "ChatFragment");
+            notificationIntent.putExtras(b);
+        }
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
         notificationBuilder.setAutoCancel(true)
@@ -121,10 +132,7 @@ public class MessagingService extends FirebaseMessagingService {
                 .setContentTitle(title)
                 .setContentText(body)
                 .setContentInfo("Info")
-//                .addAction(R.drawable.ic_notification, "CHECK STATUS", intent) // todo
                 .setFullScreenIntent(intent, true);
-
-
 
         notificationManager.notify(new Random().nextInt(),notificationBuilder.build());
     }

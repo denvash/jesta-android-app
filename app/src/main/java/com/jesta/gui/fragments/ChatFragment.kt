@@ -80,7 +80,7 @@ class ChatFragment : Fragment() {
 
                 view.chat_progress_bar.visibility = View.INVISIBLE
                 adapter.addToEnd(messagesHistory, true)
-                chatManger.listenForIncomingMessages(adapter, chatID, messagesHistory)
+                chatManger.listenForChatUpdateAdapter(adapter, chatID, messagesHistory)
 
                 view.jesta_chat_input.setInputListener {
                     chatManger.sendMessage(context, chatID, currUser, it.toString())
