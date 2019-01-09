@@ -307,7 +307,7 @@ public class SysManager {
      * @param context
      * @param previousActivity
      */
-    public void signInUser(@NonNull Task<AuthResult> task, Context context, Activity previousActivity) throws Exception {
+    public void signInUser(@NonNull Task<AuthResult> task, Context context) throws Exception {
         if (!task.isSuccessful()) {
             throw new Exception(task.getException());
         }

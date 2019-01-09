@@ -21,6 +21,10 @@ import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_login_path.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import java.util.*
+import com.google.android.gms.auth.api.Auth
+import android.content.Intent
+import com.google.android.gms.common.api.GoogleApiClient
+
 
 class LoginPathFragment : Fragment() {
 
@@ -48,26 +52,9 @@ class LoginPathFragment : Fragment() {
 
         val mGoogleSignInClient = GoogleSignIn.getClient(instance, gso)
         view.jesta_login_google_button.setOnClickListener {
-            startActivityForResult(mGoogleSignInClient.signInIntent, 101)
+            instance.startActivityForResult(mGoogleSignInClient.signInIntent, 101)
         }
 
-        // Facebook
-        val fbCallbackManager = CallbackManager.Factory.create()
-
-        LoginManager.getInstance().registerCallback(fbCallbackManager,
-            object : FacebookCallback<LoginResult> {
-                override fun onSuccess(loginResult: LoginResult) {
-                    handleFacebookToken(loginResult.accessToken)
-                }
-
-                override fun onCancel() {}
-
-                override fun onError(exception: FacebookException) {
-                    instance.alertError(exception.message)
-                    Log.e(LoginPathFragment::class.java.simpleName, exception.message)
-                    return
-                }
-            })
 
         view.jesta_login_facebook_button.setOnClickListener {
             LoginManager.getInstance().logInWithReadPermissions(instance, Arrays.asList("email", "public_profile"))
@@ -76,17 +63,4 @@ class LoginPathFragment : Fragment() {
         return view
     }
 
-    fun handleFacebookToken(accessToken: AccessToken) {
-        val credential = FacebookAuthProvider.getCredential(accessToken.token)
-        sysManager.firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener {fbLoginTask ->
-                if (!fbLoginTask.isSuccessful) {
-                    MainActivity.instance.alertError(fbLoginTask.exception!!.message)
-                    Log.e(LoginPathFragment::class.java.simpleName, fbLoginTask.exception!!.message)
-                    return@addOnCompleteListener
-                }
-                MainActivity.instance.fragNavController.clearStack()
-                MainActivity.instance.restart()
-            }
-    }
 }

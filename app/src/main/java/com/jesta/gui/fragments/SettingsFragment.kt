@@ -12,7 +12,6 @@ import com.jesta.R
 import com.jesta.data.USER_EMPTY_DIAMONDS
 import com.jesta.data.User
 import com.jesta.gui.activities.MainActivity
-import com.jesta.gui.activities.login.LoginMainActivity
 import com.jesta.gui.fragments.login.LoginPathFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso

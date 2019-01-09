@@ -8,9 +8,20 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.facebook.AccessToken
 import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import com.jesta.R
 import com.jesta.data.*
@@ -55,6 +66,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
     val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_main_container)
     lateinit var sysManager: SysManager
+    lateinit var fbCallbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +99,32 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 //            ).build()
 
             fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
+
+            // Google Registration
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+
+            // Facebook
+            fbCallbackManager = CallbackManager.Factory.create()
+
+            LoginManager.getInstance().registerCallback(fbCallbackManager,
+                object : FacebookCallback<LoginResult> {
+                    override fun onSuccess(loginResult: LoginResult) {
+                        handleFacebookToken(loginResult.accessToken)
+                    }
+
+                    override fun onCancel() {}
+
+                    override fun onError(exception: FacebookException) {
+                        instance.alertError(exception.message)
+                        Log.e(LoginPathFragment::class.java.simpleName, exception.message)
+                        return
+                    }
+                })
+
         }
 
         sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener {
@@ -112,6 +150,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                 }
                 sysManager.listenForIncomingInboxMessages(instance)
                 sysManager.listenForChatAndNotify(instance)
+                fragNavController.pushFragment(DoJestaFragment())
             }
 
         }
@@ -209,6 +248,51 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         startActivity(intent)
     }
 
+    inner class onTaskCompletion : OnCompleteListener<AuthResult> {
+        override fun onComplete(task: Task<AuthResult>) {
+            if (!task.isSuccessful) {
+//                val i = Intent(applicationContext, ErrorActivity::class.java)
+//                val b = Bundle()
+//                b.putString("exception", task.exception!!.message)
+//                i.putExtras(b)
+//                startActivity(i)
+                return
+            }
+            try {
+                sysManager.signInUser(task, applicationContext)
+
+                // redirect to main activity and clear activity stack
+                val i = Intent(applicationContext, MainActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(i)
+            } catch (e: Exception) {
+//                val i = Intent(applicationContext, ErrorActivity::class.java)
+//                val b = Bundle()
+//                b.putString("exception", e.message)
+//                i.putExtras(b)
+//                startActivity(i)
+            }
+
+        }
+    }
+
+    protected fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        sysManager.firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this, onTaskCompletion())
+    }
+
+    protected fun handleFacebookToken(accessToken: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(accessToken.token)
+        sysManager.firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this, onTaskCompletion())
+    }
+
+    protected fun loginWithCredentials(email: String, password: String) {
+        sysManager.firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, onTaskCompletion())
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -227,6 +311,11 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                             Log.e(LoginPathFragment::class.java.simpleName, googleLoginTask.exception?.message)
                             return@addOnCompleteListener
                         }
+                        // Google Sign In was successful, authenticate with Firebase
+                        val account = task.getResult(ApiException::class.java)
+                        if (account != null) {
+                            firebaseAuthWithGoogle(account)
+                        }
                         MainActivity.instance.fragNavController.clearStack()
                         MainActivity.instance.restart()
                     }
@@ -235,7 +324,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             }
 
         } else if (requestCode == 64206) { // facebook
-            val fbCallbackManager = CallbackManager.Factory.create()
             fbCallbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
