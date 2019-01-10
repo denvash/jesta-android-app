@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/jesta_status"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="vertical">
+
 
     <com.github.florent37.expansionpanel.ExpansionHeader
         android:layout_width="match_parent"
@@ -63,14 +64,29 @@
                 android:layout_gravity="center|end"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/jesta_status_total_doers"
-                    style="@style/Widget.Jesta.Tag.NumOfPeople"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/marvel"
-                    android:text="@string/jesta_status_total_users" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/jesta_status_total_doers"
+                        style="@style/Widget.Jesta.Tag.NumOfPeople"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/marvel"
+                        android:text="@string/jesta_status_total_users" />
+
+                    <TextView
+                        style="@style/TextAppearance.Jesta.Type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|end"
+                        android:text="Left to Approve"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
 
                 <View
                     android:id="@+id/jesta_status_divider"
@@ -136,4 +152,5 @@
         </FrameLayout>
 
     </com.github.florent37.expansionpanel.ExpansionLayout>
+
 </LinearLayout>

@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
     val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_main_container)
     lateinit var sysManager: SysManager
-    lateinit var fbCallbackManager: CallbackManager
+    private lateinit var fbCallbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

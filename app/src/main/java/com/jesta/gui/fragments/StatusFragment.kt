@@ -15,6 +15,7 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.adapters.StatusAdapter
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_status.view.*
+import kotlinx.android.synthetic.main.jesta_status.view.*
 
 class StatusFragment : Fragment() {
     private val sysManager = SysManager(MainActivity.instance)
@@ -23,6 +24,7 @@ class StatusFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val view = inflater.inflate(R.layout.fragment_status, container, false)
+
 
         if (sysManager.currentUserFromDB == null) return view
 
@@ -62,6 +64,7 @@ class StatusFragment : Fragment() {
 
         val statusList = (statusTask.result as List<*>).filterIsInstance<Status>()
 
+        view.jesta_status_empty_page.visibility = if (statusList.isEmpty()) View.VISIBLE else View.INVISIBLE
         val adapter = StatusAdapter()
         adapter.setItems(statusList)
         view.jesta_status_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)

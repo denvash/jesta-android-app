@@ -45,9 +45,11 @@ class DoJestaFragment : Fragment() {
             // Task completed successfully
             val missionList = (task.result as List<*>).filterIsInstance<Mission>().reversed().filter { it.isAvailable }
 
+            view.do_jesta_empty_page.visibility = if (missionList.isEmpty()) View.VISIBLE else View.INVISIBLE
+
+
             // initial adapter with mission posts entries
             view?.do_jesta_recycle_view?.adapter = CardAdapter(missionList)
-            Log.d(TAG, "Reload Jestas Status = " + missionList.isNotEmpty())
 
             view.do_jesta_progress_bar.hide()
         }
@@ -60,6 +62,9 @@ class DoJestaFragment : Fragment() {
 
                 val missionListOnRefresh = (it.result as List<*>).filterIsInstance<Mission>().reversed()
                     .filter { mission -> mission.isAvailable }
+
+                view.do_jesta_empty_page.visibility = if (missionListOnRefresh.isEmpty()) View.VISIBLE else View.INVISIBLE
+
                 val refreshAdapter = CardAdapter(missionListOnRefresh)
                 view.do_jesta_recycle_view.adapter = refreshAdapter
                 view.do_jesta_swipe_refresh.isRefreshing = false
