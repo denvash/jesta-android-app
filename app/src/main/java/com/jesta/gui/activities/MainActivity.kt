@@ -16,7 +16,6 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -99,12 +98,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 //            ).build()
 
             fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
-
-            // Google Registration
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
 
 
             // Facebook
@@ -209,6 +202,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     override fun onBackPressed() {
+        if (fragNavController.currentFrag?.tag?.contains(LoginPathFragment::class.java.name) != null) {
+            return
+        }
         if (fragNavController.isRootFragment) return
         if (fragNavController.popFragment().not()) {
             super.onBackPressed()
@@ -223,14 +219,11 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     override fun onTabTransaction(fragment: Fragment?, index: Int) {
-        // If we have a backstack, show the back button
 //        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
     }
 
 
     override fun onFragmentTransaction(fragment: Fragment?, transactionType: FragNavController.TransactionType) {
-        //do fragmentary stuff. Maybe change statusTitle, I'm not going to tell you how to live your life
-        // If we have a backstack, show the back button
 //        supportActionBar?.setDisplayHomeAsUpEnabled(fragNavController.isRootFragment.not())
     }
 
@@ -248,49 +241,30 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         startActivity(intent)
     }
 
-    inner class onTaskCompletion : OnCompleteListener<AuthResult> {
+    inner class OnTaskCompletion : OnCompleteListener<AuthResult> {
         override fun onComplete(task: Task<AuthResult>) {
             if (!task.isSuccessful) {
-//                val i = Intent(applicationContext, ErrorActivity::class.java)
-//                val b = Bundle()
-//                b.putString("exception", task.exception!!.message)
-//                i.putExtras(b)
-//                startActivity(i)
+                MainActivity.instance.alertError(task.exception!!.message)
+                Log.e(LoginPathFragment::class.java.simpleName, task.exception!!.message)
                 return
             }
-            try {
-                sysManager.signInUser(task, applicationContext)
+            sysManager.signInUser(task, applicationContext)
 
-                // redirect to main activity and clear activity stack
-                val i = Intent(applicationContext, MainActivity::class.java)
-                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(i)
-            } catch (e: Exception) {
-//                val i = Intent(applicationContext, ErrorActivity::class.java)
-//                val b = Bundle()
-//                b.putString("exception", e.message)
-//                i.putExtras(b)
-//                startActivity(i)
-            }
-
+            MainActivity.instance.fragNavController.clearStack()
+            MainActivity.instance.restart()
         }
     }
 
-    protected fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         sysManager.firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this, onTaskCompletion())
+            .addOnCompleteListener(this, OnTaskCompletion())
     }
 
-    protected fun handleFacebookToken(accessToken: AccessToken) {
+    private fun handleFacebookToken(accessToken: AccessToken) {
         val credential = FacebookAuthProvider.getCredential(accessToken.token)
         sysManager.firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this, onTaskCompletion())
-    }
-
-    protected fun loginWithCredentials(email: String, password: String) {
-        sysManager.firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, onTaskCompletion())
+            .addOnCompleteListener(this, OnTaskCompletion())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -312,9 +286,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                             return@addOnCompleteListener
                         }
                         // Google Sign In was successful, authenticate with Firebase
-                        val account = task.getResult(ApiException::class.java)
-                        if (account != null) {
-                            firebaseAuthWithGoogle(account)
+                        val googleSignInAccount = task.getResult(ApiException::class.java)
+                        if (googleSignInAccount != null) {
+                            firebaseAuthWithGoogle(googleSignInAccount)
                         }
                         MainActivity.instance.fragNavController.clearStack()
                         MainActivity.instance.restart()

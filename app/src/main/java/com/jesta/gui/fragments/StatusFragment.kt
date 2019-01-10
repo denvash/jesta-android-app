@@ -29,6 +29,7 @@ class StatusFragment : Fragment() {
         sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener { reloadJestasTask ->
             sysManager.statusList.addOnCompleteListener { userRelationsTask ->
                 if (!userRelationsTask.isSuccessful || !reloadJestasTask.isSuccessful) {
+                    @Suppress("LABEL_NAME_CLASH")
                     return@addOnCompleteListener
                 }
 
@@ -43,9 +44,8 @@ class StatusFragment : Fragment() {
                             sysManager.statusList
                                 .addOnCompleteListener { refreshRelationsTask ->
 
-                                    if (!refreshRelationsTask.isSuccessful) {
-                                        return@addOnCompleteListener
-                                    }
+                                    @Suppress("LABEL_NAME_CLASH")
+                                    if (!refreshRelationsTask.isSuccessful) return@addOnCompleteListener
 
                                     setRecycleView(view,refreshRelationsTask)
                                     view.jesta_status_swipe_refresh.isRefreshing = false

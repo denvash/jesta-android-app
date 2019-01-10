@@ -1,29 +1,19 @@
 package com.jesta.gui.fragments.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
 import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FacebookAuthProvider
 import com.jesta.R
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_login_path.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import java.util.*
-import com.google.android.gms.auth.api.Auth
-import android.content.Intent
-import com.google.android.gms.common.api.GoogleApiClient
 
 
 class LoginPathFragment : Fragment() {

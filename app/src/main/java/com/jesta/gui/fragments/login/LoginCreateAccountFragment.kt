@@ -69,10 +69,10 @@ class LoginCreateAccountFragment : Fragment() {
                             if (!userLoginTask.isSuccessful) {
                                 MainActivity.instance.alertError(task.exception!!.message)
                                 Log.e(LoginPathFragment::class.java.simpleName, userLoginTask.exception!!.message)
+                                @Suppress("LABEL_NAME_CLASH")
                                 return@addOnCompleteListener
                             }
 
-                            // TODO: PACHKA do we need it on create account?
                             sysManager.setUserOnDB(User(user!!.uid,displayNameView.toString(),email = user.email!!))
 
                             MainActivity.instance.fragNavController.clearStack()

@@ -3,6 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <TextView
+            style="@style/TextAppearance.Jesta.Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_40dp"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:text="
+Jesta is a Social app where you can find people who are willing to take up your tasks (Jestas) for rewards and pleasure. Earn rewards and diamonds which given by posters, exchange them for rewards." />
+    </LinearLayout>
 
 </FrameLayout>

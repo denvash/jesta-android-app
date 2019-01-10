@@ -23,6 +23,7 @@ public class MessagingService extends FirebaseMessagingService {
     private User senderUser;
     private static final String TAG = "MyFirebaseMsgService";
 
+    @SuppressWarnings("deprecation")
     private boolean isAppInForeground(Context context) {
         ActivityManager.RunningAppProcessInfo appProcessInfo = new ActivityManager.RunningAppProcessInfo();
         ActivityManager.getMyMemoryState(appProcessInfo);

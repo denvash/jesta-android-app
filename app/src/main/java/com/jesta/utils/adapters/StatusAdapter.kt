@@ -43,7 +43,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         val status = list[position]
         val mission = sysManager.getMissionByID(status.missionID)
 
-        holder.bind(list[position])
+        holder.bind()
         expansionsCollection.add(holder.expansionLayout)
 
         val v = holder.view
@@ -59,7 +59,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         if (!status.isPoster) {
             v.jesta_status_doer_layout.visibility = View.VISIBLE
             v.jesta_status_doer_chat.setOnClickListener {
-                openChat(sysManager.currentUserFromDB, mission)
+                openChat(mission)
             }
         } else {
             when (status.status) {
@@ -157,7 +157,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         Picasso.get().load(posterAvatar).noFade().into(holder.view.jesta_status_avatar)
     }
 
-    private fun openChat(currentUserFromDB: User?, mission: Mission) {
+    private fun openChat(mission: Mission) {
         val roomDoer = sysManager.currentUserFromDB
         val poster = sysManager.getUserByID(mission.posterID)
         val chatRoom = ChatRoom(roomDoer, poster, mission)
@@ -179,7 +179,7 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
         val view = itemView.findViewById<LinearLayout>(R.id.jesta_status)!!
         val expansionLayout: ExpansionLayout = itemView.statusExpansionLayout
 
-        fun bind(`object`: Any) {
+        fun bind() {
             expansionLayout.collapse(false)
         }
 

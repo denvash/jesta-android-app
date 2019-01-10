@@ -1,15 +1,14 @@
 package com.jesta.utils.db;
+
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -91,35 +90,6 @@ public class SysManager {
 
     public SysManager(Activity currentActivity) {
         _activity = currentActivity;
-
-        // Set listener if back button is available
-        _backButtonTv = (TextView) _activity.findViewById(R.id.back_button);
-        if (_backButtonTv != null) {
-            _backButtonTv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    _activity.finish();
-                }
-            });
-        }
-    }
-
-    public void startLoadingAnim() {
-        _activity.setContentView(R.layout.jesta_loading);
-        _pgsBar = (ProgressBar) _activity.findViewById(R.id.pBar);
-        _pgsBar.setVisibility(View.VISIBLE);
-    }
-
-    public void stopLoadingAnim() {
-        _pgsBar.setVisibility(View.INVISIBLE);
-    }
-
-    public void startLoadingAnim(ProgressBar pgsBar) {
-        pgsBar.setVisibility(View.VISIBLE);
-    }
-
-    public void stopLoadingAnim(ProgressBar pgsBar) {
-        pgsBar.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -305,7 +275,6 @@ public class SysManager {
      *
      * @param task
      * @param context
-     * @param previousActivity
      */
     public void signInUser(@NonNull Task<AuthResult> task, Context context) throws Exception {
         if (!task.isSuccessful()) {
@@ -368,11 +337,11 @@ public class SysManager {
         return currentUser;
     }
 
-    public void setRelationOnGraveDB(Relation rel){
+    public void setRelationOnGraveDB(Relation rel) {
         _graveyardDatabase.child("relations").child(rel.getId()).setValue(rel);
     }
 
-    public void setMissionOnGraveDB(Mission mission){
+    public void setMissionOnGraveDB(Mission mission) {
         _graveyardDatabase.child("jestas").child(mission.getId()).setValue(mission);
     }
 
@@ -425,12 +394,12 @@ public class SysManager {
         return null;
     }
 
-    public void removeRelation(Relation rel){
+    public void removeRelation(Relation rel) {
         _relationsDatabase.child(rel.getId()).removeValue();
         _relationsDict.remove(rel.getId());
     }
 
-    public void removeMission(Mission mission){
+    public void removeMission(Mission mission) {
         _jestasDatabase.child(mission.getId()).removeValue();
         _jestasDict.remove(mission.getId());
     }
@@ -487,19 +456,18 @@ public class SysManager {
                             sts.setPoster(true);
                             statusMap.put(i.getMissionID(), sts);
                         }
-                        if(i.getDoerID().equals(RELATION_EMPTY_DOER_ID))
+                        if (i.getDoerID().equals(RELATION_EMPTY_DOER_ID))
                             sts.getDoerIDList().add(0, i);
                         else {
                             sts.getDoerIDList().add(i);
-                            if(sts.getStatus() != RELATION_STATUS_DONE
-                                && i.getStatus() == RELATION_STATUS_DONE)
+                            if (sts.getStatus() != RELATION_STATUS_DONE
+                                    && i.getStatus() == RELATION_STATUS_DONE)
                                 sts.setStatus(RELATION_STATUS_DONE);
-                            else if(sts.getStatus() == RELATION_STATUS_INIT
+                            else if (sts.getStatus() == RELATION_STATUS_INIT
                                     && i.getStatus() == RELATION_STATUS_IN_PROGRESS)
                                 sts.setStatus(RELATION_STATUS_IN_PROGRESS);
                         }
-                    }
-                    else if(i.getDoerID().equals(user)) {
+                    } else if (i.getDoerID().equals(user)) {
                         Status sts = new Status();
                         sts.setMissionID(i.getMissionID());
                         sts.setStatus(i.getStatus());
@@ -513,8 +481,8 @@ public class SysManager {
         return source.getTask();
     }
 
-    public void moveToGraveDB(Status sts){
-        for(Relation i : sts.getDoerIDList()){
+    public void moveToGraveDB(Status sts) {
+        for (Relation i : sts.getDoerIDList()) {
             this.setRelationOnGraveDB(i);
             this.removeRelation(i);
         }
@@ -523,10 +491,10 @@ public class SysManager {
         this.removeMission(mission);
     }
 
-    public void updateRelationsDone(Status sts){
+    public void updateRelationsDone(Status sts) {
         sts.setStatus(RELATION_STATUS_DONE);
-        for(Relation i : sts.getDoerIDList()){
-            if(i.getStatus() == RELATION_STATUS_IN_PROGRESS){
+        for (Relation i : sts.getDoerIDList()) {
+            if (i.getStatus() == RELATION_STATUS_IN_PROGRESS) {
                 i.setStatus(RELATION_STATUS_DONE);
                 this.setRelationOnDB(i);
             }
@@ -534,7 +502,7 @@ public class SysManager {
     }
 
     public void onAcceptDoer(Relation rel, Mission mission) {
-        if(mission.getNumOfPeople() == 0)
+        if (mission.getNumOfPeople() == 0)
             return;
         mission.setNumOfPeople(mission.getNumOfPeople() - 1);
         if (mission.getNumOfPeople() == 0)
@@ -708,8 +676,7 @@ public class SysManager {
         if (isAccept) {
             title = "You got a match!  \uD83E\uDD29";
             body = getCurrentUserFromDB().getDisplayName() + " accepted you as a doer!";
-        }
-        else {
+        } else {
             title = "Bad news \uD83E\uDD7A";
             body = getCurrentUserFromDB().getDisplayName() + " declined you as a doer!";
         }
@@ -820,59 +787,58 @@ public class SysManager {
 //                ChatManager chatManager = new ChatManager();
 //                chatManager.listenForChatAndNotify(activity);
 
-                final HashMap dbMsg = (HashMap)ds.getValue();
+                final HashMap dbMsg = (HashMap) ds.getValue();
                 String msgKey = ds.getKey();
                 if (dbMsg == null) {
                     throw new NullPointerException("dbUser is null");
                 }
-                String senderId = (String)dbMsg.get("sender");
+                String senderId = (String) dbMsg.get("sender");
                 User sender = getUserByID(senderId);
                 Author UIAuthor = new Author(sender.getId(), sender.getDisplayName(), sender.getPhotoUrl());
-                Date date = new Date(Long.parseLong((String)dbMsg.get("time")));
-                final Message UIMessage = new Message(msgKey, UIAuthor, date, (String)dbMsg.get("body"));
+                Date date = new Date(Long.parseLong((String) dbMsg.get("time")));
+                final Message UIMessage = new Message(msgKey, UIAuthor, date, (String) dbMsg.get("body"));
 
                 // delete the message we got !!!
-                 DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
-                 msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                     @Override
-                     public void onComplete(@NonNull Task<Void> task) {
+                DatabaseReference msgDBRef = FirebaseDatabase.getInstance().getReference("inbox/" + receiverInbox + "/" + msgKey);
+                msgDBRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
 
-                         Alerter.create(activity)
-                                 .setTitle((String)dbMsg.get("title"))
-                                 .setText(UIMessage.getText())
-                                 .setBackgroundColorRes(R.color.colorPrimary)
-                                 .setIcon(R.drawable.ic_jesta_diamond_normal)
-                                 .setDuration(5000)
-                                 .addButton("GO TO STATUS", R.style.AlertButton, new View.OnClickListener() {
+                        Alerter.create(activity)
+                                .setTitle((String) dbMsg.get("title"))
+                                .setText(UIMessage.getText())
+                                .setBackgroundColorRes(R.color.colorPrimary)
+                                .setIcon(R.drawable.ic_jesta_diamond_normal)
+                                .setDuration(5000)
+                                .addButton("GO TO STATUS", R.style.AlertButton, new View.OnClickListener() {
 
-                                     @Override
-                                     public void onClick(View v) {
-                                         if (activity instanceof MainActivity) {
-                                             ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
-                                         }
-                                     }
-                                 })
-                                 .show();
-                     }
-                 });
+                                    @Override
+                                    public void onClick(View v) {
+                                        if (activity instanceof MainActivity) {
+                                            ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
+                                        }
+                                    }
+                                })
+                                .show();
+                    }
+                });
 
                 // final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 // builder.setMessage(UIMessage.getText()).setTitle((String)dbMsg.get("title"));
 
                 // builder.setNeutralButton("OK", null);
 
-               // builder.setPositiveButton("GO TO STATUS", new DialogInterface.OnClickListener() {
-               //     @Override
-               //     public void onClick(DialogInterface dialog, int which) {
-               //         if (activity instanceof MainActivity) {
-               //             ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
-               //         }
-               //     }
-               // });
+                // builder.setPositiveButton("GO TO STATUS", new DialogInterface.OnClickListener() {
+                //     @Override
+                //     public void onClick(DialogInterface dialog, int which) {
+                //         if (activity instanceof MainActivity) {
+                //             ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
+                //         }
+                //     }
+                // });
 
                 // final AlertDialog dialog = builder.create();
                 // dialog.setCanceledOnTouchOutside(false);
-
 
 
             }
@@ -1011,30 +977,9 @@ public class SysManager {
      * Layout, UI and system settings and logs
      */
 
-    public String getChatRoomId (ChatRoom chatRoom){
-            Relation relation = getRelation(chatRoom.getAsker(), chatRoom.getPoster(), chatRoom.getJesta());
-            return relation.getId();
-    }
-
-    public void setTitle(String title) {
-        TextView pageNameTv = (TextView) _activity.findViewById(R.id.page_name);
-        // pageNameTv.setText(title);
-    }
-
-    // public void showBackButton(Boolean flag) {
-    //     _backButtonTv = (TextView) _activity.findViewById(R.id.back_button);
-    //     if (_backButtonTv == null)
-    //         return;
-    //     _backButtonTv.setText(flag ? _activity.getResources().getString(R.string.jesta_login_leftArrow) : "");
-    // }
-
-    public void showKeyboardAutomatically(Boolean flag) {
-        if (flag) {
-            _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
-        else {// don't show keyboard
-            _activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        }
+    public String getChatRoomId(ChatRoom chatRoom) {
+        Relation relation = getRelation(chatRoom.getAsker(), chatRoom.getPoster(), chatRoom.getJesta());
+        return relation.getId();
     }
 
 }
