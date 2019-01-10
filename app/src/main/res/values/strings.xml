@@ -64,7 +64,7 @@
     <string name="jesta_settings_default_values">Default Values</string>
     <string name="jesta_settings_diamond_amount">Diamonds Amount</string>
     <string name="jesta_settings_account">Account</string>
-    <string name="jesta_settings_chat">Chat</string>
+    <string name="jesta_settings_chat">Chat Settings</string>
     <string name="jesta_settings_button_log_out">Log Out</string>
 
     <!--Jesta Preview-->
@@ -76,7 +76,6 @@
 
     <!--Jesta Chat-->
     <string name="jesta_inbox_message">MESSAGE</string>
-    <string name="jesta_post_check_box_text">[dev] Upload to DB</string>
     <string name="jesta_post_add_tag">Add Tag</string>
     <string name="jesta_post_button_reset">Reset</string>
     <string name="jesta_post_choose_difficulty">Difficulty</string>
@@ -109,5 +108,6 @@
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
     <string name="login_display_name">Display Name</string>
+    <string name="jesta_settings_chat_content">Empty for now 😆</string>
 
 </resources>
