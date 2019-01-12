@@ -279,15 +279,19 @@
                         android:gravity="center"
                         app:boxBackgroundColor="@color/transparent"
                         app:hintAnimationEnabled="false"
+                        app:counterMaxLength="4"
+                        app:counterEnabled="true"
                         app:hintEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/jesta_post_payment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textAlignment="center"
                             android:fontFamily="@font/marvel"
                             android:inputType="numberSigned"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:maxLength="4"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -338,6 +342,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/marvel"
+                            android:textAlignment="center"
                             android:inputType="textCapCharacters"
                             android:textColor="@color/colorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -432,23 +437,43 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                        <com.xw.repo.BubbleSeekBar
+                            android:id="@+id/jesta_post_duration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            app:boxBackgroundColor="@color/transparent"
-                            app:hintAnimationEnabled="false"
-                            app:hintEnabled="false">
+                            app:bsb_hide_bubble="true"
+                            app:bsb_auto_adjust_section_mark="true"
+                            app:bsb_max="60.0"
+                            app:bsb_min="0"
+                            app:bsb_progress="0"
+                            app:bsb_second_track_color="@color/colorPrimary"
+                            app:bsb_section_count="6"
+                            app:bsb_section_text_position="bottom_sides"
+                            app:bsb_show_progress_in_float="false"
+                            app:bsb_show_section_mark="true"
+                            app:bsb_show_section_text="true"
+                            app:bsb_show_thumb_text="true"
+                            app:bsb_track_color="@color/darkGray"
+                            />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/jesta_post_duration"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/marvel"
-                                android:inputType="numberSigned"
-                                android:textColor="@color/colorPrimary" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                        <!--<com.google.android.material.textfield.TextInputLayout-->
+                            <!--style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center"-->
+                            <!--app:boxBackgroundColor="@color/transparent"-->
+                            <!--app:hintAnimationEnabled="false"-->
+                            <!--app:hintEnabled="false">-->
+
+                            <!--<com.google.android.material.textfield.TextInputEditText-->
+                                <!--android:id="@+id/jesta_post_duration"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:fontFamily="@font/marvel"-->
+                                <!--android:inputType="numberSigned"-->
+                                <!--android:textAlignment="center"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
+                        <!--</com.google.android.material.textfield.TextInputLayout>-->
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/jesta_post_time_start"
@@ -477,6 +502,8 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:orientation="vertical">
+
+
 
         <LinearLayout
             android:layout_width="wrap_content"

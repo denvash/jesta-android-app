@@ -66,6 +66,7 @@ dependencies {
     implementation 'net.codecrafted:lineartimepicker:1.0.0'
     implementation 'com.tapadoo.android:alerter:4.0.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.xw.repo:bubbleseekbar:3.19-lite'
 }
 
 apply plugin: 'com.google.gms.google-services'

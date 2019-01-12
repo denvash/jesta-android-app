@@ -115,7 +115,7 @@ class AskJestaFragment : Fragment() {
                 imageUrl = "",
                 payment = view.jesta_post_payment.text.toString().toInt(),
                 numOfPeople = view.jesta_post_num_of_people.value,
-                duration = view.jesta_post_duration.text.toString().toInt(),
+                duration = view.jesta_post_duration.progress,
                 location = view.jesta_post_location.text.toString(),
                 diamonds = view.jesta_post_fluid_slider.bubbleText?.toInt()!!,
                 tags = view.jesta_post_tag_layout.tags
@@ -152,7 +152,6 @@ class AskJestaFragment : Fragment() {
             MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
         }
 
-        // TODO: max of the users Diamonds
         val max = 10000
         val min = 100
         val total = max - min
@@ -163,6 +162,7 @@ class AskJestaFragment : Fragment() {
 //        slider.endText = "$max"
 
         OverScrollDecoratorHelper.setUpOverScroll(view.jesta_post_view_nested_scroll_view)
+
 
         return view
     }
@@ -176,7 +176,7 @@ class AskJestaFragment : Fragment() {
         view.jesta_post_payment.setText(mission.payment.toString())
         view.jesta_post_location.setText(mission.location)
         view.jesta_post_num_of_people.value = mission.numOfPeople
-        view.jesta_post_duration.setText(mission.duration.toString())
+        view.jesta_post_duration.setProgress(mission.duration.toFloat())
         view.jesta_post_difficulty.selectedIndex = when (mission.difficulty) {
             DIFFICULTY_EASY -> 0
             DIFFICULTY_MEDIUM -> 1
@@ -211,7 +211,6 @@ class AskJestaFragment : Fragment() {
                 jesta_post_difficulty.text.isNullOrEmpty() ||
                 jesta_post_description.text.isNullOrEmpty() ||
                 jesta_post_payment.text.isNullOrEmpty() ||
-                jesta_post_duration.text.isNullOrEmpty() ||
                 jesta_post_location.text.isNullOrEmpty()
     }
 
