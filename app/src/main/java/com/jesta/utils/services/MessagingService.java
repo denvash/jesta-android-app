@@ -52,7 +52,7 @@ public class MessagingService extends FirebaseMessagingService {
             jestaId = remoteMessage.getData().get("jesta");
             sender = remoteMessage.getData().get("sender");
         } catch (Exception e) {
-            // todo open error activity
+            MainActivity.Companion.getInstance().alertError(e.getMessage());
         }
 
         // push notifications only when app in background

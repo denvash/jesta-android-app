@@ -300,7 +300,7 @@ public class SysManager {
         try {
             _firebaseInstance.deleteInstanceId();
         } catch (IOException ioException) {
-            // todo activityError
+            MainActivity.Companion.getInstance().alertError(ioException.getMessage());
         }
 
         // subscribe to inbox for receiving system messages from other devices
@@ -415,7 +415,7 @@ public class SysManager {
             public void onComplete(@NonNull Task<List<Relation>> task) {
 
                 if (!task.isSuccessful()) {
-                    // todo some error
+                    MainActivity.Companion.getInstance().alertError(Objects.requireNonNull(task.getException()).getMessage());
                     return;
                 }
 
@@ -440,7 +440,7 @@ public class SysManager {
             public void onComplete(@NonNull Task<List<Relation>> task) {
 
                 if (!task.isSuccessful()) {
-                    // todo some error
+                    MainActivity.Companion.getInstance().alertError(Objects.requireNonNull(task.getException()).getMessage());
                     return;
                 }
 
@@ -532,7 +532,7 @@ public class SysManager {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (!task.isSuccessful()) {
-                    // todo
+                    MainActivity.Companion.getInstance().alertError(Objects.requireNonNull(task.getException()).getMessage());
                     return;
                 }
                 // todo something? idk
@@ -684,7 +684,7 @@ public class SysManager {
             title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
             body = URLEncoder.encode(body, StandardCharsets.UTF_8.toString());
         } catch (Exception e) {
-            // todo handle it
+            MainActivity.Companion.getInstance().alertError(e.getMessage());
         }
 
         String url = SEND_MESSAGE_ENDPOINT + "?topic=" + receiverInbox +
@@ -875,7 +875,7 @@ public class SysManager {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (!task.isSuccessful()) {
-                            // todo
+                            MainActivity.Companion.getInstance().alertError(Objects.requireNonNull(task.getException()).getMessage());
                             return;
                         }
                         final List<Message> messagesHistory = (List<Message>) task.getResult();
