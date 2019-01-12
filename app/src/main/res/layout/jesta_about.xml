@@ -1,4 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/jesta_status_poster_done_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,15 +10,78 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextAppearance.Jesta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/_40dp"
+            android:text="@string/jesta_settings_about_agenda"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/jesta_about"
+            app:riv_border_color="@color/colorPrimary"
+            app:riv_border_width="1dp"
+            app:riv_corner_radius="20dp"
+            app:riv_mutate_background="true" />
+
+        <TextView
+            style="@style/TextAppearance.Jesta.Type.Purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:text="Team"
+            android:textSize="25sp" />
 
         <TextView
             style="@style/TextAppearance.Jesta.Type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="
-Jesta is a Social app where you can find people who are willing to take up your tasks (Jestas) for rewards and pleasure. Earn rewards and diamonds which given by posters, exchange them for rewards." />
+            android:text="Maxim Chicherin, Dennis Vashevnikov and Evgeni Leonti"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <TextView
+            style="@style/TextAppearance.Jesta.Type.Purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:text="Project"
+            android:textSize="25sp" />
+
+        <TextView
+            style="@style/TextAppearance.Jesta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Jesta was made as part of Android Course at Technion Institute of Technology."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/warm_grey" />
+
+        <TextView
+            style="@style/TextAppearance.Jesta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:text="Designed in Figma, Written in Kotlin and Java on Android-Studio environment"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </FrameLayout>

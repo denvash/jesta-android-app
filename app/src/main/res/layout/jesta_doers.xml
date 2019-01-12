@@ -65,6 +65,7 @@
                 android:background="@color/transparent"
                 android:padding="@dimen/_10dp"
                 android:src="@drawable/ic_jesta_chat_icon"
+                android:foreground="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -75,6 +76,7 @@
                 android:background="@color/transparent"
                 android:padding="@dimen/_10dp"
                 android:src="@drawable/ic_jesta_decline_doer"
+                android:foreground="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -85,6 +87,7 @@
                 android:background="@color/transparent"
                 android:padding="@dimen/_10dp"
                 android:src="@drawable/ic_jesta_accept_doer"
+                android:foreground="?android:attr/selectableItemBackground"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
 

@@ -17,6 +17,7 @@
         tools:ignore="UseCompoundDrawables">
 
         <ImageView
+            android:foreground="?android:attr/selectableItemBackground"
             android:id="@+id/jesta_status_button_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

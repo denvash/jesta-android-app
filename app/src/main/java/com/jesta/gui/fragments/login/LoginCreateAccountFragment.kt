@@ -60,10 +60,6 @@ class LoginCreateAccountFragment : Fragment() {
 
                     user?.updateProfile(profileUpdates)
 
-                    // user created in firebase only
-                    Toast.makeText(instance, "User created successfully", Toast.LENGTH_SHORT)
-                        .show()
-
                     sysManager.firebaseAuth.signInWithEmailAndPassword(emailView.toString(), passwordView.toString())
                         .addOnCompleteListener { userLoginTask ->
                             if (!userLoginTask.isSuccessful) {

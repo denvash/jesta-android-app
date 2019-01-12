@@ -43,9 +43,10 @@ class DoJestaFragment : Fragment() {
             }
 
             // Task completed successfully
-            val missionList = (task.result as List<*>).filterIsInstance<Mission>().reversed().filter { it.isAvailable }
+            val missionList = (task.result as List<*>).filterIsInstance<Mission>().reversed()
+                .filter { mission -> mission.isAvailable }
 
-            view.do_jesta_empty_page.visibility = if (missionList.isEmpty()) View.VISIBLE else View.INVISIBLE
+//            view.do_jesta_empty_page.visibility = if (missionList.isEmpty()) View.VISIBLE else View.INVISIBLE
 
 
             // initial adapter with mission posts entries
@@ -58,16 +59,22 @@ class DoJestaFragment : Fragment() {
         view.do_jesta_swipe_refresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
         view.do_jesta_swipe_refresh.setOnRefreshListener {
 
+            view.do_jesta_progress_bar.show()
             sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener {
+
+                if (!it.isSuccessful) {
+                    MainActivity.instance.alertError(it.exception!!.message)
+                    return@addOnCompleteListener
+                }
 
                 val missionListOnRefresh = (it.result as List<*>).filterIsInstance<Mission>().reversed()
                     .filter { mission -> mission.isAvailable }
 
-                view.do_jesta_empty_page.visibility = if (missionListOnRefresh.isEmpty()) View.VISIBLE else View.INVISIBLE
+//                view.do_jesta_empty_page.visibility = if (missionListOnRefresh.isEmpty()) View.VISIBLE else View.INVISIBLE
 
-                val refreshAdapter = CardAdapter(missionListOnRefresh)
-                view.do_jesta_recycle_view.adapter = refreshAdapter
+                view.do_jesta_recycle_view.adapter = CardAdapter(missionListOnRefresh)
                 view.do_jesta_swipe_refresh.isRefreshing = false
+                view.do_jesta_progress_bar.hide()
             }
         }
 

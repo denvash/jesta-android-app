@@ -96,7 +96,7 @@
     <string name="jesta_status_edit_jesta">Edit jesta</string>
     <string name="jesta_status_preview">Preview</string>
     <string name="jesta_status_no_doer">No Doer Assigned Yet</string>
-    <string name="jesta_post_time_start">Set Time Start</string>
+    <string name="jesta_post_time_start">Set Start Time</string>
     <string name="jesta_status_approve_jesta">Approve Jesta Complete</string>
     <string name="jesta_status_post_complete_your_doers">Your doers</string>
     <string name="jesta_status_poster_no_doers_assigned_yet">no doers assigned yet</string>
@@ -106,8 +106,9 @@
     <string name="jesta_login_button_text">Login</string>
     <string name="jesta_login_create_account">Create an Account</string>
     <string name="login_email">Email</string>
-    <string name="login_password">Password</string>
+    <string name="login_password">Password</string>🙁
     <string name="login_display_name">Display Name</string>
-    <string name="jesta_settings_chat_content">Empty for now 😆</string>
+    <string name="jesta_settings_chat_content">Empty for now ☹️</string>
+    <string name="jesta_settings_about_agenda">Jesta is a Social app where can find people who are willing to take up your tasks (Jestas) and posting your own! Earn Cash and Diamonds, exchange them for rewards.</string>
 
 </resources>

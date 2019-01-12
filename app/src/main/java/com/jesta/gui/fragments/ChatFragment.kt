@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jesta.R
-import com.jesta.data.BUNDLE_MISSION_ID
-import com.jesta.data.BUNDLE_RELATION_ID
 import com.jesta.data.BUNDLE_ROOM_ID
 import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.Message
@@ -20,7 +18,6 @@ import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import kotlinx.android.synthetic.main.fragment_chat.view.*
-import kotlinx.android.synthetic.main.jesta_main_activity.*
 import kotlinx.android.synthetic.main.view_message_input.view.*
 
 
@@ -62,8 +59,8 @@ class ChatFragment : Fragment() {
 
         val chatManger = ChatManager(MainActivity.instance)
 
-        chatManger.subscribeToChatRoom(chatID).addOnCompleteListener { task ->
-            if (!task.isSuccessful) {
+        chatManger.subscribeToChatRoom(chatID).addOnCompleteListener { subscribeTask ->
+            if (!subscribeTask.isSuccessful) {
                 //todo some error
                 return@addOnCompleteListener
             }

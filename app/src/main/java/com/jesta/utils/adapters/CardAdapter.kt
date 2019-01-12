@@ -60,7 +60,6 @@ class CardAdapter internal constructor(
         }
 
         holder.jestaCard.setOnClickListener {
-            Toast.makeText(it.context, "Clicked card=$position", Toast.LENGTH_LONG).show()
             mainInstance.fragNavController.pushFragment(CardReviewFragment.newInstance(mission))
         }
 

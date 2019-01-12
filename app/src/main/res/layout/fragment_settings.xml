@@ -318,6 +318,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
+
                         android:layout_marginStart="@dimen/_40dp"
                         android:layout_marginEnd="@dimen/_40dp"
                         android:orientation="horizontal">
@@ -327,6 +328,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_10dp"
+                            android:layout_marginBottom="@dimen/_10dp"
                             android:text="@string/jesta_settings_chat_content" />
                     </LinearLayout>
                 </com.github.florent37.expansionpanel.ExpansionLayout>
@@ -433,7 +436,7 @@
                 </com.github.florent37.expansionpanel.ExpansionLayout>
 
 
-                <!--about TAB-->
+                <!--jesta_about TAB-->
                 <com.github.florent37.expansionpanel.ExpansionHeader
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

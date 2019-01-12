@@ -4,13 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.jesta.R
 import com.jesta.data.*
+import com.jesta.data.chat.ChatRoom
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.ChatFragment
-import com.jesta.data.chat.ChatRoom
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
@@ -53,26 +52,25 @@ class DoersAdapter internal constructor(
                 holder.doerBar.jesta_doers_accept.isEnabled = false
                 holder.doerBar.jesta_doers_decline.isEnabled = false
 
-                holder.doerBar.jesta_doers_accept.visibility = View.INVISIBLE
-                holder.doerBar.jesta_doers_decline.visibility = View.INVISIBLE
+                holder.doerBar.jesta_doers_accept.visibility = View.GONE
+                holder.doerBar.jesta_doers_decline.visibility = View.GONE
             }
 
             holder.doerBar.jesta_doers_accept.setOnClickListener {
                 if (holder.doerBar.jesta_doers_accept.isEnabled) {
                     Alerter.create(MainActivity.instance)
-                        .setTitle("You assigned a Doer! Well Done! \uD83E\uDD70")
+                        .setTitle("You assigned a Doer! Well Done! \uD83D\uDE0D")
                         .setText("The Doer will do you a Jesta in no time! \uD83E\uDD1E")
                         .setBackgroundColorRes(R.color.colorPrimary)
                         .setIcon(R.drawable.ic_jesta_accept)
                         .show()
-                    Toast.makeText(it.context,"Accept Clicked",Toast.LENGTH_LONG).show()
                 }
                 holder.doerBar.jesta_doers_accept.isEnabled = false
                 holder.doerBar.jesta_doers_decline.isEnabled = false
 
-                holder.doerBar.jesta_doers_accept.visibility = View.INVISIBLE
-                holder.doerBar.jesta_doers_decline.visibility = View.INVISIBLE
-                sysManager.onAcceptDoer(doerList[position],mission)
+                holder.doerBar.jesta_doers_accept.visibility = View.GONE
+                holder.doerBar.jesta_doers_decline.visibility = View.GONE
+                sysManager.onAcceptDoer(doerList[position], mission)
             }
 
             holder.doerBar.jesta_doers_decline.setOnClickListener {
@@ -83,13 +81,12 @@ class DoersAdapter internal constructor(
                         .setBackgroundColorRes(R.color.colorPrimary)
                         .setIcon(R.drawable.ic_remove)
                         .show()
-                    Toast.makeText(it.context,"Declined Clicked",Toast.LENGTH_LONG).show()
                 }
                 holder.doerBar.jesta_doers_accept.isEnabled = false
                 holder.doerBar.jesta_doers_decline.isEnabled = false
 
-                holder.doerBar.jesta_doers_accept.visibility = View.INVISIBLE
-                holder.doerBar.jesta_doers_decline.visibility = View.INVISIBLE
+                holder.doerBar.jesta_doers_accept.visibility = View.GONE
+                holder.doerBar.jesta_doers_decline.visibility = View.GONE
                 sysManager.onDeclineUser(doerList[position])
             }
 

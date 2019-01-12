@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/jesta_status"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="20dp"
     android:orientation="vertical">
 
@@ -64,28 +64,37 @@
                 android:layout_gravity="center|end"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/jesta_status_total_doers"
+                    style="@style/Widget.Jesta.Tag.NumOfPeople"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/marvel"
+                    android:text="@string/jesta_status_total_users" />
 
-                    <TextView
-                        android:id="@+id/jesta_status_total_doers"
-                        style="@style/Widget.Jesta.Tag.NumOfPeople"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/marvel"
-                        android:text="@string/jesta_status_total_users" />
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical">-->
 
-                    <TextView
-                        style="@style/TextAppearance.Jesta.Type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|end"
-                        android:text="Left to Approve"
-                        android:textSize="13sp" />
-                </LinearLayout>
+                    <!--<TextView-->
+                        <!--android:id="@+id/jesta_status_total_doers"-->
+                        <!--style="@style/Widget.Jesta.Tag.NumOfPeople"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:fontFamily="@font/marvel"-->
+                        <!--android:text="@string/jesta_status_total_users" />-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;style="@style/TextAppearance.Jesta.Type"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_gravity="center|end"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="Left to Approve"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="13sp" />&ndash;&gt;-->
+                <!--</LinearLayout>-->
 
 
                 <View

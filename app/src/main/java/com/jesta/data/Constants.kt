@@ -7,9 +7,6 @@ const val nullInt = -1
 
 const val BUNDLE_MISSION = "jesta-mission"
 const val BUNDLE_ROOM_ID = "jesta-chat"
-const val BUNDLE_RELATION_ID = "jesta-relation"
-const val BUNDLE_MISSION_ID = "jesta-mission-id"
-
 
 const val DIFFICULTY_EASY = "Easy"
 const val DIFFICULTY_MEDIUM = "Medium"
@@ -23,6 +20,7 @@ const val STATUS_DONE = "Done"
 const val STATUS_DECLINED = "Declined"
 
 const val IMAGE_DEFAULT_JESTA = "https://i.imgur.com/Vw3S47w.png"
+const val IMAGE_ABOUT = "https://i.imgur.com/AEHcrJ1.png"
 const val IMAGE_EMPTY = ""
 
 const val AVATAR_STUPID_DOG = "https://i.imgur.com/HyHVdRC.png"

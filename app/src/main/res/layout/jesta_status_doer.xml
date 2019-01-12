@@ -19,6 +19,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tint="@color/warm_grey"
             android:src="@drawable/ic_jesta_preview"
             tools:ignore="ContentDescription" />
 
@@ -66,6 +67,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tint="@color/warm_grey"
             android:src="@drawable/ic_jesta_settings"
             tools:ignore="ContentDescription" />
 

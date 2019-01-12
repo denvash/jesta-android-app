@@ -24,18 +24,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".gui.activities.login.LoginMainActivity" android:noHistory="true">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-
-        <activity android:name=".gui.activities.login.LoginActivity" />
-
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -57,10 +45,6 @@
                 <data android:scheme="@string/jesta_login_fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.activities.login.RegisterActivity" />
-        <activity android:name=".gui.activities.login.ErrorActivity" />
-        <activity android:name=".gui.activities.login.LoginActivitiesWrapper" />
-        <activity android:name=".gui.activities.login.OTPActivity" />
 
         <service android:name=".utils.services.MessagingService">
             <intent-filter>

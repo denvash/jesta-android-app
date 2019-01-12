@@ -288,8 +288,6 @@ public class SysManager {
             throw new NullPointerException("firebaseUser or email is null");
         }
 
-        Toast.makeText(context, "User logged in successfully", Toast.LENGTH_SHORT).show();
-
         User user = getCurrentUserFromDB();
         if (user != null) {// user exists in db
             // todo: store login time
@@ -317,7 +315,7 @@ public class SysManager {
     public void signOutUser(Context context) {
         _auth.signOut();
         _currentUser = null;
-        Toast.makeText(context, "User logged out successfully", Toast.LENGTH_LONG).show();
+
     }
 
     /**

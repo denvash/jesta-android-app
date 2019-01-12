@@ -8,14 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.Task
 import com.jesta.R
-import com.jesta.data.Mission
-import com.jesta.data.Relation
 import com.jesta.data.Status
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.adapters.StatusAdapter
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_status.view.*
-import kotlinx.android.synthetic.main.jesta_status.view.*
 
 class StatusFragment : Fragment() {
     private val sysManager = SysManager(MainActivity.instance)
@@ -49,7 +46,7 @@ class StatusFragment : Fragment() {
                                     @Suppress("LABEL_NAME_CLASH")
                                     if (!refreshRelationsTask.isSuccessful) return@addOnCompleteListener
 
-                                    setRecycleView(view,refreshRelationsTask)
+                                    setRecycleView(view, refreshRelationsTask)
                                     view.jesta_status_swipe_refresh.isRefreshing = false
                                 }
                         }
@@ -64,7 +61,7 @@ class StatusFragment : Fragment() {
 
         val statusList = (statusTask.result as List<*>).filterIsInstance<Status>()
 
-        view.jesta_status_empty_page.visibility = if (statusList.isEmpty()) View.VISIBLE else View.INVISIBLE
+//        view.jesta_status_empty_page.visibility = if (statusList.isEmpty()) View.VISIBLE else View.INVISIBLE
         val adapter = StatusAdapter()
         adapter.setItems(statusList)
         view.jesta_status_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
