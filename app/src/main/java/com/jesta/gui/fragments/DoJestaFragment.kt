@@ -38,7 +38,7 @@ class DoJestaFragment : Fragment() {
         sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener { task ->
 
             if (!task.isSuccessful) {
-                // todo error here! e.g. start ErrorActivity here
+                MainActivity.instance.alertError(task.exception!!.message)
                 return@addOnCompleteListener
             }
 

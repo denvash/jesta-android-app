@@ -61,13 +61,13 @@ class ChatFragment : Fragment() {
 
         chatManger.subscribeToChatRoom(chatID).addOnCompleteListener { subscribeTask ->
             if (!subscribeTask.isSuccessful) {
-                //todo some error
+                MainActivity.instance.alertError(subscribeTask.exception!!.message)
                 return@addOnCompleteListener
             }
 
             chatManger.getMessagesByRoomId(chatID).addOnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    //todo some error
+                    MainActivity.instance.alertError(task.exception!!.message)
                     return@addOnCompleteListener
                 }
 

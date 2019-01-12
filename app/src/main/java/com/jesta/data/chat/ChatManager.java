@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.database.*;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.jesta.data.User;
+import com.jesta.gui.activities.MainActivity;
 import com.jesta.utils.db.SysManager;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
@@ -80,7 +81,7 @@ public class ChatManager {
             senderId = URLEncoder.encode(senderId, StandardCharsets.UTF_8.toString());
         }
         catch (Exception e) {
-            // todo something
+            MainActivity.Companion.getInstance().alertError(e.getMessage());
         }
 
         String url = SEND_MESSAGE_ENDPOINT + "?topic=" + topicName + "&body=" + body + "&sender=" + senderId;

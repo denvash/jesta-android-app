@@ -114,7 +114,6 @@ class StatusAdapter : RecyclerView.Adapter<StatusAdapter.RecyclerHolder>() {
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
             sysManager.updateRelationsDone(status)
-            //TODO: Packha send a fucking msg
         }
 
         holder.view.jesta_status_done_button_remove.setOnClickListener {
