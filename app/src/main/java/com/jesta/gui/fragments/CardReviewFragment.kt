@@ -25,8 +25,6 @@ import java.util.*
 
 class CardReviewFragment : Fragment() {
     companion object {
-        private val TAG = CardReviewFragment::class.java.simpleName
-
         @JvmStatic
         fun newInstance(mission: Mission) = CardReviewFragment().apply {
             arguments = Bundle().apply {
@@ -48,9 +46,6 @@ class CardReviewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_card_preview, container, false)
-
-
-        Log.d(TAG, "Accepted mission: $mission")
 
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
         if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
@@ -129,8 +124,9 @@ class CardReviewFragment : Fragment() {
                     val poster = sysManager.getUserByID(mission.posterID)
                     val chatRoom = ChatRoom(doer, poster, mission)
                     val chatManager = ChatManager(MainActivity.instance)
-                    chatManager.subscribeToChatRoom(chatRoom);
+                    chatManager.subscribeToChatRoom(chatRoom)
 
+                    // TODO: PACKHA CHECK OR DELETE?
                     // CHAT-IMPORTANT
                     // added here so asker would be able to receive message from poster
                     // on the first time they want to interact. see corresponding comment

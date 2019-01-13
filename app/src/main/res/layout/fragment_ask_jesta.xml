@@ -5,12 +5,18 @@
     android:id="@+id/jesta_post_view_nested_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:clickable="true"
     tools:context=".gui.fragments.AskJestaFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true">
 
         <include
             android:id="@+id/jesta_ask_include_post"
