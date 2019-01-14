@@ -46,15 +46,17 @@ class CardReviewFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_card_preview, container, false)
 
         val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
-        if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
-            Picasso.get().load(posterAvatar).noFade().into(view.jesta_preview_avatar_icon)
-        }
+        Picasso.get().load(posterAvatar).noFade().into(view.jesta_preview_avatar_icon)
 
         view.jesta_preview_title.text = mission.title
         view.jesta_preview_difficulty.text = mission.difficulty
 
-        Picasso.get().load(mission.imageUrl).resize(6000, 2000)
-            .onlyScaleDown().placeholder(R.drawable.ic_jesta_default_image).into(view.jesta_card_preview_mission_image)
+        Picasso.get()
+            .load(mission.imageUrl)
+            .resize(6000, 2000)
+            .onlyScaleDown()
+            .placeholder(R.drawable.jesta_empty_default)
+            .into(view.jesta_card_preview_mission_image)
 
         view.jesta_preview_description.text = mission.description
         view.jesta_preview_payment.text = mission.payment.toString()
