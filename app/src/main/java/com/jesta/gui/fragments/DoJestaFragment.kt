@@ -28,13 +28,6 @@ class DoJestaFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_do_jesta, container, false)
 
-        // set recycle view layout
-        val column = if (resources.configuration.orientation == 2) 3 else 2
-        view.do_jesta_recycle_view.layoutManager = StaggeredGridLayoutManager(column, RecyclerView.VERTICAL)
-
-        // prevent the loss of items
-        view.do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
-
         sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener { task ->
 
             if (!task.isSuccessful) {
@@ -46,13 +39,7 @@ class DoJestaFragment : Fragment() {
             val missionList = (task.result as List<*>).filterIsInstance<Mission>().reversed()
                 .filter { mission -> mission.isAvailable }
 
-//            view.do_jesta_empty_page.visibility = if (missionList.isEmpty()) View.VISIBLE else View.INVISIBLE
-
-
-            // initial adapter with mission posts entries
-            view?.do_jesta_recycle_view?.adapter = CardAdapter(missionList)
-
-            view.do_jesta_progress_bar.hide()
+            setRecycleView(view,missionList)
         }
 
         // set refresh on swiping top
@@ -70,14 +57,25 @@ class DoJestaFragment : Fragment() {
                 val missionListOnRefresh = (it.result as List<*>).filterIsInstance<Mission>().reversed()
                     .filter { mission -> mission.isAvailable }
 
-//                view.do_jesta_empty_page.visibility = if (missionListOnRefresh.isEmpty()) View.VISIBLE else View.INVISIBLE
-
-                view.do_jesta_recycle_view.adapter = CardAdapter(missionListOnRefresh)
-                view.do_jesta_swipe_refresh.isRefreshing = false
-                view.do_jesta_progress_bar.hide()
+                setRecycleView(view,missionListOnRefresh)
             }
         }
 
         return view
+    }
+
+    private fun setRecycleView(view: View, missionList: List<Mission>) {
+
+        // set recycle view layout
+        val column = if (resources.configuration.orientation == 2) 3 else 2
+        view.do_jesta_recycle_view.layoutManager = StaggeredGridLayoutManager(column, RecyclerView.VERTICAL)
+
+        // prevent the loss of items
+        view.do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
+
+        view.do_jesta_progress_bar.hide()
+        if (missionList.isEmpty()) view.do_jesta_empty.visibility = View.VISIBLE
+        view.do_jesta_recycle_view.adapter = CardAdapter(missionList)
+        view.do_jesta_swipe_refresh.isRefreshing = false
     }
 }

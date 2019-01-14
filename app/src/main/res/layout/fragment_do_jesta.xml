@@ -6,6 +6,15 @@
     android:layout_height="wrap_content"
     tools:context=".gui.fragments.DoJestaFragment">
 
+    <ImageView
+        android:id="@+id/do_jesta_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/jesta_empty"
+        tools:ignore="ContentDescription" />
+
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/do_jesta_progress_bar"
         android:layout_width="wrap_content"

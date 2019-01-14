@@ -156,11 +156,12 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/_16dp">
 
-                    <com.android.volley.toolbox.NetworkImageView
+                    <ImageView
                         android:id="@+id/jesta_card_preview_mission_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"/>
+                        android:adjustViewBounds="true"
+                        tools:ignore="ContentDescription" />
                 </com.google.android.material.card.MaterialCardView>
             </com.google.android.material.card.MaterialCardView>
         </FrameLayout>

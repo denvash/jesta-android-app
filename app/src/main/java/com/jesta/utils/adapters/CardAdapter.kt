@@ -3,21 +3,21 @@ package com.jesta.utils.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.jesta.R
 import com.jesta.data.IMAGE_DEFAULT_JESTA
-import com.jesta.data.IMAGE_EMPTY
 import com.jesta.data.MISSION_EMPTY_AUTHOR_IMAGE
+import com.jesta.data.MISSION_EMPTY_IMAGE_URL
 import com.jesta.data.Mission
 import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.CardReviewFragment
 import com.jesta.utils.db.SysManager
-import com.jesta.utils.services.ImageReqService
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.jesta_card.view.*
+
 
 class CardAdapter internal constructor(
     private val postList: List<Mission>
@@ -44,10 +44,22 @@ class CardAdapter internal constructor(
                     ResourcesCompat.getFont(MainActivity.instance, R.font.montserrat_light_italic)
             card.jesta_card_tags_layout.tags = mission.tags
 
-            ImageReqService.setImageFromUrl(
-                card.jesta_card_image,
-                if (mission.imageUrl != IMAGE_EMPTY) mission.imageUrl else IMAGE_DEFAULT_JESTA
-            )
+            Picasso.get()
+                .load(mission.imageUrl)
+                .resize(6000, 2000)
+                .onlyScaleDown()
+                .placeholder(R.drawable.ic_jesta_default_image)
+                .into(card.jesta_card_image, object : Callback {
+
+                    override fun onSuccess() {
+                        card.jesta_card_image.alpha = 0f
+                        card.jesta_card_image.animate().setDuration(200).alpha(1f).start()
+                    }
+
+                    override fun onError(e: Exception) {
+                        MainActivity.instance.alertError(e.message)
+                    }
+                })
 
             val posterAvatar = sysManager.getUserByID(mission.posterID).photoUrl
             if (posterAvatar != MISSION_EMPTY_AUTHOR_IMAGE) {
@@ -68,8 +80,6 @@ class CardAdapter internal constructor(
     override fun getItemCount(): Int {
         return postList.size
     }
-
-
 }
 
 

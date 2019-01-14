@@ -2,7 +2,6 @@ package com.jesta.gui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.ChatRoom
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
-import com.jesta.utils.services.ImageReqService
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
@@ -55,10 +53,8 @@ class CardReviewFragment : Fragment() {
         view.jesta_preview_title.text = mission.title
         view.jesta_preview_difficulty.text = mission.difficulty
 
-        ImageReqService.setImageFromUrl(
-            view.jesta_card_preview_mission_image,
-            if (mission.imageUrl != IMAGE_EMPTY) mission.imageUrl else IMAGE_DEFAULT_JESTA
-        )
+        Picasso.get().load(mission.imageUrl).resize(6000, 2000)
+            .onlyScaleDown().placeholder(R.drawable.ic_jesta_default_image).into(view.jesta_card_preview_mission_image)
 
         view.jesta_preview_description.text = mission.description
         view.jesta_preview_payment.text = mission.payment.toString()

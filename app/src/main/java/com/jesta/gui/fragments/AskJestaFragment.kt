@@ -112,7 +112,7 @@ class AskJestaFragment : Fragment() {
                 title = view.jesta_post_title.text.toString(),
                 difficulty = view.jesta_post_difficulty.text.toString(),
                 description = view.jesta_post_description.text.toString(),
-                imageUrl = "",
+                imageUrl = IMAGE_EMPTY,
                 payment = view.jesta_post_payment.text.toString().toInt(),
                 numOfPeople = view.jesta_post_num_of_people.value,
                 duration = view.jesta_post_duration.progress,
@@ -186,6 +186,7 @@ class AskJestaFragment : Fragment() {
 
     private fun uploadMissionToDB(jesta: Mission, rel: Relation, sysManager: SysManager) {
         if (filePath == null) {
+            jesta.imageUrl = IMAGE_DEFAULT_JESTA
             sysManager.setMissionOnDB(jesta)
             sysManager.setRelationOnDB(rel)
         } else {
