@@ -15,13 +15,12 @@ import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_status.view.*
 
 class StatusFragment : Fragment() {
-    private val sysManager = SysManager(MainActivity.instance)
+    private val sysManager = MainActivity.instance.sysManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
 
         val view = inflater.inflate(R.layout.fragment_status, container, false)
-
 
         if (sysManager.currentUserFromDB == null) return view
 

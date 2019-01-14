@@ -40,9 +40,11 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener,
     FragNavController.TransactionListener {
 
-    companion object {
-        private val TAG = MainActivity::class.java.simpleName
+    val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_main_container)
+    lateinit var sysManager: SysManager
+    private lateinit var fbCallbackManager: CallbackManager
 
+    companion object {
         lateinit var instance: MainActivity
             private set
     }
@@ -63,10 +65,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         throw IllegalStateException("Need to send an index that we know")
     }
 
-    val fragNavController: FragNavController = FragNavController(supportFragmentManager, R.id.jesta_main_container)
-    lateinit var sysManager: SysManager
-    private lateinit var fbCallbackManager: CallbackManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.jesta_main_activity)
@@ -85,17 +83,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             createEager = true
             fragNavLogger = object : FragNavLogger {
                 override fun error(message: String, throwable: Throwable) {
-                    Log.e(TAG, message, throwable)
+                    alertError(message)
                 }
             }
-
-            // Animation example
-//            defaultTransactionOptions = FragNavTransactionOptions.newBuilder().customAnimations(
-//                R.anim.slide_in_from_right,
-//                R.anim.slide_out_to_left,
-//                R.anim.slide_in_from_left,
-//                R.anim.slide_out_to_right
-//            ).build()
 
             fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
 

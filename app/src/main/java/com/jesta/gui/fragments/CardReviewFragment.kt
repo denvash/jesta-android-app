@@ -31,7 +31,7 @@ class CardReviewFragment : Fragment() {
         }
     }
 
-    private val sysManager = SysManager(MainActivity.instance)
+    private val sysManager = MainActivity.instance.sysManager
     private lateinit var mission: Mission
 
     override fun onAttach(context: Context?) {

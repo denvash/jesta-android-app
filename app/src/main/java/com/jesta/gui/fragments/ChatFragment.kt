@@ -23,8 +23,6 @@ import kotlinx.android.synthetic.main.view_message_input.view.*
 
 class ChatFragment : Fragment() {
     companion object {
-        private val TAG = ChatFragment::class.java.simpleName
-
         @JvmStatic
         fun newInstance(roomID: String) = ChatFragment().apply {
             arguments = Bundle().apply {
@@ -42,7 +40,7 @@ class ChatFragment : Fragment() {
         }
     }
 
-    private val sysManager = SysManager(MainActivity.instance)
+    private val sysManager = MainActivity.instance.sysManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)

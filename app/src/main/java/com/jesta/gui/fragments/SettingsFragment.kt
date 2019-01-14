@@ -24,11 +24,7 @@ import kotlin.random.Random
 
 class SettingsFragment : Fragment() {
 
-    private val sysManager = SysManager(MainActivity.instance)
-
-    companion object {
-        private val TAG = SettingsFragment::class.java.simpleName
-    }
+    private val sysManager = MainActivity.instance.sysManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
