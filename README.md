@@ -10,7 +10,6 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   - Feeling sick and need someone to bring you medications?
   - Want someone to bring you cigarettes? 
   
---------------  
 ![askjesta-compressed](https://user-images.githubusercontent.com/34001364/51126542-1c10c700-182c-11e9-87b2-7f1d9c946747.gif)
 
 - Do a Jesta - choose a task for you.
@@ -18,9 +17,16 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   - Earn cash.
   - Earn diamonds and exchange to rewards.
   - Become the ultimate Jester.
-  
--------------  
+    
 ![ezgif-dojesta](https://user-images.githubusercontent.com/34001364/51126546-1ca95d80-182c-11e9-9005-f38d86b2f7b2.gif)
+
+- Change settings
+  - Edit your profile
+  - Report a bug
+  - See 'about'
+  - Log out
+  
+![ezgif-settings](https://user-images.githubusercontent.com/34001364/51127303-d6ed9480-182d-11e9-83a7-2ae51ca39680.gif)
   
   
 Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) for **User** and **Developer** guides.
