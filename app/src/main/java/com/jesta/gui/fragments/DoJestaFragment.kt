@@ -74,7 +74,7 @@ class DoJestaFragment : Fragment() {
         view.do_jesta_recycle_view.recycledViewPool.setMaxRecycledViews(0, 0)
 
         view.do_jesta_progress_bar.hide()
-        if (missionList.isEmpty()) view.do_jesta_empty.visibility = View.VISIBLE
+        view.do_jesta_empty.visibility = if (missionList.isEmpty()) View.VISIBLE else View.GONE
         view.do_jesta_recycle_view.adapter = CardAdapter(missionList)
         view.do_jesta_swipe_refresh.isRefreshing = false
     }

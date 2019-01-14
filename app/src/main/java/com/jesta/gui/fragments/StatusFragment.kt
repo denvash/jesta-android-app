@@ -61,7 +61,7 @@ class StatusFragment : Fragment() {
 
         val statusList = (statusTask.result as List<*>).filterIsInstance<Status>()
 
-        if (statusList.isEmpty()) view.jesta_status_empty_image.visibility = View.VISIBLE
+        view.jesta_status_empty_image.visibility = if (statusList.isEmpty())  View.VISIBLE else View.GONE
         val adapter = StatusAdapter()
         adapter.setItems(statusList)
         view.jesta_status_recycle_view.layoutManager = LinearLayoutManager(MainActivity.instance)
