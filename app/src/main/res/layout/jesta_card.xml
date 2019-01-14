@@ -25,29 +25,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/jesta_card_image"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    tools:ignore="ContentDescription" />
+                    android:id="@+id/jesta_card_image_frame">
 
-                <View
+                    <ImageView
+                        android:id="@+id/jesta_card_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        tools:ignore="ContentDescription" />
+
+                    <com.wang.avi.AVLoadingIndicatorView
+                        android:id="@+id/jesta_card_progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        app:indicatorColor="@color/black"
+                        app:indicatorName="LineScalePulseOutIndicator"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:layout_height="0.75dp"
-                    android:layout_below="@id/jesta_card_image"
-                    android:background="@color/colorPrimary" />
+                    android:layout_below="@id/jesta_card_image_frame"
+                    android:layout_marginTop="-22dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/jesta_card_avatar_icon"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_below="@id/jesta_card_image"
-                    android:layout_centerInParent="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-25dp"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="0.75dp" />
+                    <View
+                        android:id="@+id/jesta_card_separate_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.75dp"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/jesta_card_avatar_icon"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/jesta_empty_default"
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="0.75dp" />
+                </FrameLayout>
+
             </RelativeLayout>
 
             <TextView

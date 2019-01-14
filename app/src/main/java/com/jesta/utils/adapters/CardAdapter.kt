@@ -48,10 +48,10 @@ class CardAdapter internal constructor(
                 .load(mission.imageUrl)
                 .resize(6000, 2000)
                 .onlyScaleDown()
-                .placeholder(R.drawable.ic_jesta_default_image)
                 .into(card.jesta_card_image, object : Callback {
 
                     override fun onSuccess() {
+                        card.jesta_card_progress_bar.hide()
                         card.jesta_card_image.alpha = 0f
                         card.jesta_card_image.animate().setDuration(200).alpha(1f).start()
                     }
