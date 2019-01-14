@@ -17,6 +17,8 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   - Find the nearest tasks.
   - Earn diamonds exchange to rewards. 
   
+  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/34001364/51123736-52971380-1825-11e9-807e-b26caa838f86.gif)
+  
 Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) for **User** and **Developer** guides.
 
 Check out our project [Poster](https://docs.google.com/presentation/d/1aVluE97VLNI44Mfrrvv5WK2jLRCA1n6hQDu2AXtBjO4/edit?usp=sharing)
