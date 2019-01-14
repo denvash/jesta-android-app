@@ -39,12 +39,13 @@
 
                     <com.wang.avi.AVLoadingIndicatorView
                         android:id="@+id/jesta_card_progress_bar"
+                        android:layout_margin="@dimen/_40dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:visibility="visible"
-                        app:indicatorColor="@color/black"
-                        app:indicatorName="LineScalePulseOutIndicator"/>
+                        app:indicatorColor="@color/colorPrimary"
+                        app:indicatorName="PacmanIndicator"/>
                 </FrameLayout>
 
                 <FrameLayout

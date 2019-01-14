@@ -13,6 +13,7 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.adapters.CardAdapter
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_do_jesta.view.*
+import kotlinx.android.synthetic.main.jesta_card.view.*
 
 
 class DoJestaFragment : Fragment() {

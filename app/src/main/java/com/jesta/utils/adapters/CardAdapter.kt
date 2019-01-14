@@ -40,6 +40,7 @@ class CardAdapter internal constructor(
         if (position < postList.size) {
             val card = holder.jestaCard
 
+            card.jesta_card_progress_bar.show()
             card.jesta_card_tags_layout.tagTypeface =
                     ResourcesCompat.getFont(MainActivity.instance, R.font.montserrat_light_italic)
             card.jesta_card_tags_layout.tags = mission.tags
