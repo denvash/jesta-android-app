@@ -192,9 +192,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     override fun onBackPressed() {
-//        if (fragNavController.currentFrag?.tag?.contains(LoginPathFragment::class.java.name) != null) {
-//            return
-//        }
+        if (fragNavController.currentFrag?.tag?.contains(LoginPathFragment::class.java.name) != null) {
+            return
+        }
         if (fragNavController.isRootFragment) return
         if (fragNavController.popFragment().not()) {
             super.onBackPressed()
