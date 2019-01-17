@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "660934427239-mvc395iv4etc10r9fq8cn2u7mmo0hjop.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jesta",
+            "certificate_hash": "d17710d9d51920d85d785d74ce92f068ee937e24"
+          }
+        },
+        {
+          "client_id": "660934427239-mg995d251rigfm9sotdbkikus9875afg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jesta",
+            "certificate_hash": "ebe62b8ad24e7461b53cd7eacc6395bc8af238d2"
+          }
+        },
+        {
           "client_id": "660934427239-ovaa8ntao1abp902ik0lerla73e6os22.apps.googleusercontent.com",
           "client_type": 3
         }
