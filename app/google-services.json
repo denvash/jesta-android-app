@@ -39,6 +39,14 @@
           }
         },
         {
+          "client_id": "660934427239-7v1peb7lrl16s8mepcfb1pvp16h94p4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jesta",
+            "certificate_hash": "4f495b96ebe3c19d8464f51b5074bf5458a39a67"
+          }
+        },
+        {
           "client_id": "660934427239-ovaa8ntao1abp902ik0lerla73e6os22.apps.googleusercontent.com",
           "client_type": 3
         }
