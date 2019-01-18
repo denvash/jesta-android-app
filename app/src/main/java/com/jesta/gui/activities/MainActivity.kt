@@ -227,6 +227,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     fun restart() {
+        if (MainActivity.instance.fragNavController.size != numberOfRootFragments) {
+            MainActivity.instance.fragNavController.clearStack()
+        }
         finish()
         startActivity(intent)
     }
@@ -240,7 +243,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             }
             sysManager.signInUser(task, applicationContext)
 
-            MainActivity.instance.fragNavController.clearStack()
             MainActivity.instance.restart()
         }
     }
