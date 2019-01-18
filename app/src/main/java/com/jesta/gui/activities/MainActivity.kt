@@ -242,7 +242,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                 return
             }
             sysManager.signInUser(task, applicationContext)
-
             MainActivity.instance.restart()
         }
     }
@@ -282,8 +281,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                         if (googleSignInAccount != null) {
                             firebaseAuthWithGoogle(googleSignInAccount)
                         }
-                        MainActivity.instance.fragNavController.clearStack()
-                        MainActivity.instance.restart()
                     }
             } catch (e: ApiException) {
                 alertError(e.message)
