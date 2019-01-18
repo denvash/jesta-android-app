@@ -9,7 +9,7 @@ android {
         config {
             keyAlias 'jesta-key'
             keyPassword '236503Jesta'
-            storeFile file('./jesta-key.jks')
+            storeFile file('/home/denva/dev/projects/AndroidStudioProjects/2019a-Jesta/jesta-key.jks')
             storePassword 'dvmcjl503$'
         }
     }

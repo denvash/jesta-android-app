@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     fun restart() {
-        if (MainActivity.instance.fragNavController.size != numberOfRootFragments) {
+        if (MainActivity.instance.fragNavController.currentStack?.isNotEmpty()!!) {
             MainActivity.instance.fragNavController.clearStack()
         }
         finish()
