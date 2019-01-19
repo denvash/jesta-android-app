@@ -33,6 +33,8 @@ import com.jesta.utils.db.SysManager
 import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
 import com.tapadoo.alerter.Alerter
+import kotlinx.android.synthetic.main.fragment_login_path.*
+import kotlinx.android.synthetic.main.fragment_login_path.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
@@ -288,6 +290,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
         } else if (requestCode == 64206) { // facebook
             fbCallbackManager.onActivityResult(requestCode, resultCode, data)
+            jesta_login_facebook_button.isEnabled = true
         }
     }
 }

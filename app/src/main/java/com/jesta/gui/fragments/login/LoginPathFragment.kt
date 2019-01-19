@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.jesta.R
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
+import kotlinx.android.synthetic.main.fragment_login_path.*
 import kotlinx.android.synthetic.main.fragment_login_path.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import java.util.*
@@ -19,6 +20,12 @@ import java.util.*
 class LoginPathFragment : Fragment() {
 
     val sysManager = SysManager(MainActivity.instance)
+
+    override fun onResume() {
+        super.onResume()
+        jesta_login_facebook_button.isEnabled = true
+        jesta_login_google_button.isEnabled = true
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -42,15 +49,18 @@ class LoginPathFragment : Fragment() {
 
         val mGoogleSignInClient = GoogleSignIn.getClient(instance, gso)
         view.jesta_login_google_button.setOnClickListener {
+            view.jesta_login_google_button.isEnabled = false
             instance.startActivityForResult(mGoogleSignInClient.signInIntent, 101)
         }
 
 
         view.jesta_login_facebook_button.setOnClickListener {
+            view.jesta_login_facebook_button.isEnabled = false
             LoginManager.getInstance().logInWithReadPermissions(instance, Arrays.asList("email", "public_profile"))
         }
 
         return view
     }
+
 
 }
