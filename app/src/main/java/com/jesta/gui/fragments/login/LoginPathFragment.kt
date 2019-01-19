@@ -20,11 +20,12 @@ import java.util.*
 class LoginPathFragment : Fragment() {
 
     val sysManager = SysManager(MainActivity.instance)
+    lateinit var currView: View
 
     override fun onResume() {
         super.onResume()
-        jesta_login_facebook_button.isEnabled = true
-        jesta_login_google_button.isEnabled = true
+        currView.jesta_login_facebook_button.isEnabled = true
+        currView.jesta_login_google_button.isEnabled = true
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,6 +60,7 @@ class LoginPathFragment : Fragment() {
             LoginManager.getInstance().logInWithReadPermissions(instance, Arrays.asList("email", "public_profile"))
         }
 
+        currView = view
         return view
     }
 
