@@ -31,10 +31,10 @@
         android:layout_above="@id/jesta_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:visibility="invisible"
+        android:visibility="visible"
         android:id="@+id/jesta_bottom_navigation"
         style="@style/Widget.Jesta.BottomNavigationView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         app:itemTextAppearanceActive="@style/TextAppearance.Jesta.Type.BottomNavigation"
