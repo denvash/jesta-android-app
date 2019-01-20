@@ -1,5 +1,4 @@
 package com.jesta.utils.db;
-
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
@@ -795,6 +794,13 @@ public class SysManager {
             public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
                 // IMPORTANT: RelationId used as ChatId
                 final String roomId = ds.getKey();
+
+                // don't show message that don't belong to you!
+                Relation relation = ds.getValue(Relation.class);
+                if (!relation.getDoerID().equals(getCurrentUserFromDB().getId()) && !relation.getPosterID().equals(getCurrentUserFromDB().getId())) {
+                    return;
+                }
+
                 // listen for child add event; e.g. new message has arrived
                 chatManager.getMessagesByRoomId(roomId).addOnCompleteListener(new OnCompleteListener() {
                     @Override
