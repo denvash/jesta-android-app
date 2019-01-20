@@ -79,6 +79,46 @@ public class SysManager {
 
     public SysManager(Activity currentActivity) {
         _activity = currentActivity;
+
+        // 20190120 listener added following bug when a new user X created during user Y running the app,
+        // and not doing RELOAD_USERS, so new user X wasn't in _usersDict and app was crashing on a new message received
+        // from user X
+        DatabaseReference usersDBRef = FirebaseDatabase.getInstance().getReference("users");
+        usersDBRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
+                User dbUser = ds.getValue(User.class);
+                String userId = ds.getKey();
+                if (dbUser == null) {
+                    throw new NullPointerException("dbUser is null");
+                }
+
+                // new user added while app is running
+                if (!_usersDict.containsKey(userId)) {
+                    _usersDict.put(userId, dbUser);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public enum DBTask {
