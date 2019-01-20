@@ -13,13 +13,11 @@ import com.jesta.data.BUNDLE_ROOM_ID
 import com.jesta.data.chat.ChatManager
 import com.jesta.data.chat.Message
 import com.jesta.gui.activities.MainActivity
-import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import kotlinx.android.synthetic.main.fragment_chat.view.*
-import kotlinx.android.synthetic.main.view_message_input.view.*
-
+import kotlinx.android.synthetic.main.jesta_main_activity.*
 
 class ChatFragment : Fragment() {
     companion object {
@@ -69,8 +67,6 @@ class ChatFragment : Fragment() {
                     return@addOnCompleteListener
                 }
 
-                view.attachmentButton.isEnabled = false
-
                 val messagesHistory = (task.result as MutableList<*>).filterIsInstance<Message>()
 
                 view.chat_progress_bar.visibility = View.INVISIBLE
@@ -80,10 +76,6 @@ class ChatFragment : Fragment() {
                 view.jesta_chat_input.setInputListener {
                     chatManger.sendMessage(context, chatID, currUser, it.toString())
                     true
-                }
-
-                view.attachmentButton.setOnClickListener {
-                    view.attachmentButton.isEnabled = false
                 }
             }
         }

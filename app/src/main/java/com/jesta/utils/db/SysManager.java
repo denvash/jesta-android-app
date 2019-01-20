@@ -721,15 +721,6 @@ public class SysManager {
                                 .setBackgroundColorRes(R.color.colorPrimary)
                                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                                 .setDuration(5000)
-                                .addButton("GO TO STATUS", R.style.AlertButton, new View.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(View v) {
-                                        if (activity instanceof MainActivity) {
-                                            ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
-                                        }
-                                    }
-                                })
                                 .show();
                     }
                 });
@@ -803,7 +794,7 @@ public class SysManager {
                                             .setBackgroundColorRes(R.color.colorPrimary)
                                             .setDuration(5000)
                                             .setIcon(R.drawable.ic_jesta_chat)
-                                            .addButton("GO TO CHAT", R.style.AlertButton, new View.OnClickListener() {
+                                            .addButton("Go to Chat", R.style.AlertButton, new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
                                                     if (activity instanceof MainActivity) {
