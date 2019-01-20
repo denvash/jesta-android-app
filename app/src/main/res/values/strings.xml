@@ -110,12 +110,13 @@
     <string name="login_display_name">Display Name</string>🤝
     <string name="jesta_settings_chat_content">Empty for now ☹️</string>
     <string name="jesta_settings_about_agenda">"Tase li Jesta" - Typical Israeli asking for a favor. 😇 \n Jesta is a Social app where people doing Jestas (Favors) one to each other, for rewards and pleasure! 😉</string>
-    <string name="jesta_about_agenda_title">Agenda</string>
-    <string name="jesta_about_agenda">We believe that there is a good in each one of us, we encourage action by earning rewards 🤩!</string>
+    <string name="jesta_about_agenda_title">What we trying to solve?</string>
+    <string name="jesta_about_agenda">Nowadays it is hard to find help for everyday tasks beyond your social circle. Jesta is trying to meet the need with creation of a cooperative community.</string>
     <string name="jesta_about_what_is_jesta_title">What is Jesta?</string>
     <string name="jesta_about_team_title">Team</string>
     <string name="jesta_about_project_title">Project</string>
     <string name="jesta_about_text_1">Jesta was made as part of Android Course at Technion Institute of Technology.</string>
-    <string name="jesta_about_text_2">Designed in Figma, Written in Kotlin and Java on Android-Studio environment</string>
+    <string name="jesta_about_text_2">jesta.io</string>
+    <string name="jesta_about_github_icon">Github icon</string>
 
 </resources>

@@ -17,26 +17,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10dp"
-            android:text="@string/jesta_about_what_is_jesta_title"
-            android:textSize="25sp" />
-
-        <TextView
-            style="@style/TextAppearance.Jesta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:text="@string/jesta_settings_about_agenda"
-            android:textAlignment="center"
-            android:textAllCaps="false" />
-
-        <TextView
-            style="@style/TextAppearance.Jesta.Type.Purple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10dp"
             android:text="@string/jesta_about_agenda_title"
             android:textSize="25sp" />
 
@@ -48,6 +28,26 @@
             android:layout_marginTop="@dimen/_10dp"
             android:layout_marginBottom="@dimen/_10dp"
             android:text="@string/jesta_about_agenda"
+            android:textAlignment="center"
+            android:textAllCaps="false" />
+
+        <TextView
+            style="@style/TextAppearance.Jesta.Type.Purple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:text="@string/jesta_about_what_is_jesta_title"
+            android:textSize="25sp" />
+
+        <TextView
+            style="@style/TextAppearance.Jesta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:text="@string/jesta_settings_about_agenda"
             android:textAlignment="center"
             android:textAllCaps="false" />
 
@@ -99,17 +99,49 @@
             android:textAlignment="center"
             android:textAllCaps="false" />
 
-        <TextView
-            style="@style/TextAppearance.Jesta"
+        <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:text="@string/jesta_about_text_2"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/darkGray" />
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextAppearance.Jesta.Type.Purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:text="Visit us"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_github"
+                android:layout_marginStart="@dimen/_10dp"
+                android:contentDescription="@string/jesta_about_github_icon"
+                android:tint="@color/colorPrimary"
+                android:layout_marginEnd="@dimen/_10dp"/>
+
+            <TextView
+                style="@style/TextAppearance.Jesta.Type.Purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:text="@string/jesta_about_text_2"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
 </FrameLayout>
