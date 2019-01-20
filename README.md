@@ -1,6 +1,13 @@
-# ![jesta banner](https://user-images.githubusercontent.com/27515937/50377070-4c938580-061f-11e9-980f-10ad8cfede1a.png)
+# ![banner with sub](https://user-images.githubusercontent.com/27515937/51442872-13b40280-1cea-11e9-869e-05e8752e6888.png)
 
 *"Tase li Jesta"* - Typical Israeli **asking for a favor**
+
+## What we trying to solve? 
+
+Nowadays it is hard to find help for everyday tasks beyond your social circle.
+Jesta is trying to meet the need with creation of a cooperative community.  
+
+## What is Jesta?
 
 Jesta is a Social app where can find people who are willing to take up your tasks (*Jestas*) for money and pleasure.
 Earn **Cash** and **Diamonds** exchange them for rewards.
