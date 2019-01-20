@@ -34,7 +34,7 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
 - Project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) with **User** and **Developer** guides.
 - [UI Presentation](https://www.figma.com/proto/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=55%3A458&scaling=scale-down&redirected=1).
 - Project [UI Figma Page](https://www.figma.com/file/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=0%3A1).
-
+- Current [Website](https://denvash.github.io/Jesta/)
 
 ## Contributors
 
