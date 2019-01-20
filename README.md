@@ -1,7 +1,5 @@
 # ![banner with sub](https://user-images.githubusercontent.com/27515937/51442872-13b40280-1cea-11e9-869e-05e8752e6888.png)
 
-*"Tase li Jesta"* - Typical Israeli **asking for a favor**
-
 ## What we trying to solve? 
 
 Nowadays it is hard to find help for everyday tasks beyond your social circle.
@@ -27,17 +25,12 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   - Chat with users
   - Approve/Decline users for your jestas
   - Close jestas  
-  
-Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) for **User** and **Developer** guides.
 
-Check out our project [Poster](https://docs.google.com/presentation/d/1aVluE97VLNI44Mfrrvv5WK2jLRCA1n6hQDu2AXtBjO4/edit?usp=sharing)
+![jesta-poster](https://user-images.githubusercontent.com/27515937/51442984-9b4e4100-1ceb-11e9-95c1-3ec2ccc21862.png)
 
-## Project Managment
+## Resources
 
-This projects uses [Zen Hub](https://www.zenhub.com/) _Agile Project Managment_, download [chrome-extension](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) and check **ZenHub tab**.
-
-## UI Design
-
-- Designed with [Figma](http://figma.com/).
-- [Presentation](https://www.figma.com/proto/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=55%3A458&scaling=scale-down&redirected=1).
-- Project [Source](https://www.figma.com/file/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=0%3A1).
+- Editable Project [Poster](https://docs.google.com/presentation/d/1aVluE97VLNI44Mfrrvv5WK2jLRCA1n6hQDu2AXtBjO4/edit?usp=sharing)
+- Project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) with **User** and **Developer** guides.
+- [UI Presentation](https://www.figma.com/proto/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=55%3A458&scaling=scale-down&redirected=1).
+- Project [UI Figma Page](https://www.figma.com/file/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=0%3A1).
