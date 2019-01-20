@@ -5,12 +5,12 @@
         <item
             android:id="@+id/nav_do_jesta"
             android:icon="@drawable/ic_take_diamond"
-            android:title="@string/nav_ask_jesta" />
+            android:title="@string/nav_do_jesta" />
 
         <item
             android:id="@+id/nav_ask_jesta"
             android:icon="@drawable/ic_jesta_nav_ask"
-            android:title="@string/nav_do_jesta" />
+            android:title="@string/nav_ask_jesta" />
 
         <item
             android:id="@+id/nav_status"

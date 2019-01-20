@@ -49,6 +49,14 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="TextAppearance.Jesta.Type.BottomNavigation" parent="TextAppearance.Jesta.Type">
+        <item name="android:textColor">@color/darkGray</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+
+    </style>
+
     <!--Widgets-->
 
     <style name="Widget.Jesta.Toolbar" parent="Widget.AppCompat.Toolbar">

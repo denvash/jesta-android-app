@@ -25,9 +25,9 @@
     <string name="jesta_login_enter_otp">Enter the code you received</string>
 
     <!--Navigation Menu  -->
-    <string name="nav_ask_jesta">ASK</string>
-    <string name="nav_do_jesta">DO</string>
-    <string name="nav_settings">Settings</string>
+    <string name="nav_ask_jesta">Ask for a Jesta</string>
+    <string name="nav_do_jesta">Do a Jesta</string>
+    <string name="nav_settings">More</string>
     <string name="nav_status">Status</string>
     <string name="nav_bottom_sheet_profile_description">Profile Picture</string>
 
