@@ -20,13 +20,16 @@ class LoginEmailFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_login_email, container, false)
         val instance = MainActivity.instance
+        instance.hideBottomNavigation()
 
         view.jesta_login_create_account.setOnClickListener {
             instance.fragNavController.pushFragment(LoginCreateAccountFragment())
+            instance.hideBottomNavigation()
         }
 
         view.jesta_login_email_button_back.setOnClickListener {
             instance.fragNavController.popFragment()
+            instance.hideBottomNavigation()
         }
 
         view.jesta_login_email_button_login.setOnClickListener {
@@ -48,7 +51,6 @@ class LoginEmailFragment : Fragment() {
                         Log.e(LoginPathFragment::class.java.simpleName, emailLoginTask.exception!!.message)
                         return@addOnCompleteListener
                     }
-                    MainActivity.instance.fragNavController.clearStack()
                     MainActivity.instance.restart()
                 }
         }

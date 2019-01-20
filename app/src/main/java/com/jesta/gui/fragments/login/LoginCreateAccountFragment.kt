@@ -27,6 +27,7 @@ class LoginCreateAccountFragment : Fragment() {
 
         view.jesta_login_create_button_back.setOnClickListener {
             instance.fragNavController.popFragment()
+            instance.hideBottomNavigation()
         }
 
         view.jesta_login_create_account_button.setOnClickListener {
@@ -71,7 +72,6 @@ class LoginCreateAccountFragment : Fragment() {
 
                             sysManager.setUserOnDB(User(user!!.uid,displayNameView.toString(),email = user.email!!))
 
-                            MainActivity.instance.fragNavController.clearStack()
                             MainActivity.instance.restart()
                         }
                 }

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jesta.R
-import com.jesta.data.IMAGE_ABOUT
 import com.jesta.data.USER_EMPTY_DIAMONDS
 import com.jesta.data.User
 import com.jesta.gui.activities.MainActivity
@@ -17,8 +16,6 @@ import com.jesta.gui.fragments.login.LoginPathFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_settings.view.*
-import kotlinx.android.synthetic.main.jesta_about.view.*
-import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import kotlin.random.Random
 
@@ -54,7 +51,9 @@ class SettingsFragment : Fragment() {
             val displayNameEditable = view.tab_account_edit_display_name.text
             val emailEditable = view.tab_account_edit_email.text
 
-            if (!displayNameEditable.isNullOrBlank() && !emailEditable.isNullOrBlank()) {
+            if (!displayNameEditable.isNullOrBlank() && !displayNameEditable.isNullOrEmpty() &&
+                !emailEditable.isNullOrBlank() && !emailEditable.isNullOrEmpty()
+            ) {
                 changedUser.displayName = displayNameEditable.toString()
                 changedUser.email = emailEditable.toString()
             }
@@ -82,7 +81,7 @@ class SettingsFragment : Fragment() {
                 Toast.makeText(it.context, "Please fill your bug report", Toast.LENGTH_LONG).show()
             }
 
-            val to = "starikovmax@gmail.com"
+            val to = "jestaa80@gmail.com"
             val emailIntent = Intent(Intent.ACTION_SENDTO)
             emailIntent.data = Uri.parse("mailto:$to")
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Jesta Bug Report")

@@ -34,7 +34,6 @@ import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavLogger
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.fragment_login_path.*
-import kotlinx.android.synthetic.main.fragment_login_path.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
@@ -76,7 +75,11 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         sysManager = SysManager(instance)
 
         KeyboardVisibilityEvent.setEventListener(this@MainActivity) { isKeyboardOpen ->
-            if (isKeyboardOpen) hideBottomNavigation() else showBottomNavigation()
+            when {
+                fragNavController.currentFrag!!.tag!!.contains("Login") -> return@setEventListener
+                isKeyboardOpen -> hideBottomNavigation()
+                else -> showBottomNavigation()
+            }
         }
 
         fragNavController.apply {
@@ -113,17 +116,16 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         }
 
         sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS).addOnCompleteListener {
-
             fragNavController.initialize(INDEX_DO_JESTA, savedInstanceState)
-
             val user = sysManager.currentUserFromDB
             if (user == null) {
                 if (!fragNavController.isRootFragment && fragNavController.size != 0) {
                     fragNavController.clearStack()
                 }
                 fragNavController.pushFragment(LoginPathFragment())
+                jesta_main_line_view.visibility = View.INVISIBLE
+                jesta_bottom_navigation.visibility = View.INVISIBLE
             } else {
-
                 jesta_main_progress_bar.visibility = View.INVISIBLE
                 jesta_main_container.visibility = View.VISIBLE
                 jesta_main_line_view.visibility = View.VISIBLE
@@ -135,12 +137,11 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                 }
                 sysManager.listenForIncomingInboxMessages(instance)
                 sysManager.listenForChatAndNotify(instance)
-                fragNavController.pushFragment(DoJestaFragment())
             }
-
         }
 
         jesta_bottom_navigation.setOnNavigationItemSelectedListener {
+            fragNavController.clearStack()
             if (!fragNavController.isRootFragment) {
                 fragNavController.popFragment()
             }
@@ -161,12 +162,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             }
             true
         }
-
-        jesta_bottom_navigation.setOnNavigationItemReselectedListener {
-            fragNavController.clearStack()
-        }
-
-
     }
 
     fun showBottomNavigation() {
@@ -229,11 +224,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     fun restart() {
-        if (MainActivity.instance.fragNavController.currentStack?.isNotEmpty()!!) {
-            MainActivity.instance.fragNavController.clearStack()
-        }
         finish()
-        startActivity(intent)
+        startActivity(Intent.makeRestartActivityTask(intent.component))
     }
 
     inner class OnTaskCompletion : OnCompleteListener<AuthResult> {
@@ -241,9 +233,11 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             if (!task.isSuccessful) {
                 MainActivity.instance.alertError(task.exception!!.message)
                 Log.e(LoginPathFragment::class.java.simpleName, task.exception!!.message)
+                jesta_login_facebook_button.isEnabled = true
+                jesta_login_google_button.isEnabled = true
                 return
             }
-            sysManager.signInUser(task, applicationContext)
+            sysManager.signInUser(task, this@MainActivity)
             MainActivity.instance.restart()
         }
     }
@@ -290,7 +284,6 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
         } else if (requestCode == 64206) { // facebook
             fbCallbackManager.onActivityResult(requestCode, resultCode, data)
-            jesta_login_facebook_button.isEnabled = true
         }
     }
 }
