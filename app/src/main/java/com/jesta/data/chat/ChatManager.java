@@ -70,8 +70,6 @@ public class ChatManager {
         final TaskCompletionSource<String> source = new TaskCompletionSource<>();
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        // TODO add authorization header
-
         String topicName = roomId;
         String body = message;
         String senderId = sender.getId();

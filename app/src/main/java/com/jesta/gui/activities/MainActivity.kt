@@ -75,11 +75,13 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         sysManager = SysManager(instance)
 
         KeyboardVisibilityEvent.setEventListener(this@MainActivity) { isKeyboardOpen ->
-            when {
-                fragNavController.currentFrag!!.tag!!.contains("Login") -> return@setEventListener
-                isKeyboardOpen -> hideBottomNavigation()
-                else -> showBottomNavigation()
-            }
+
+            // Use when FocusableEditText enabled.
+            // if (fragNavController.currentFrag?.tag?.contains("Login") != null) {
+            //     return@setEventListener
+            // }
+
+            if (isKeyboardOpen) hideBottomNavigation() else showBottomNavigation()
         }
 
         fragNavController.apply {
@@ -285,5 +287,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
         } else if (requestCode == 64206) { // facebook
             fbCallbackManager.onActivityResult(requestCode, resultCode, data)
         }
+
+        jesta_login_facebook_button.isEnabled = true
+        jesta_login_google_button.isEnabled = true
     }
 }

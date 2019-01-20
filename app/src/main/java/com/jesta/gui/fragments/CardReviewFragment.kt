@@ -123,13 +123,6 @@ class CardReviewFragment : Fragment() {
                     val chatRoom = ChatRoom(doer, poster, mission)
                     val chatManager = ChatManager(MainActivity.instance)
                     chatManager.subscribeToChatRoom(chatRoom)
-
-                    // TODO: PACKHA CHECK OR DELETE?
-                    // CHAT-IMPORTANT
-                    // added here so asker would be able to receive message from poster
-                    // on the first time they want to interact. see corresponding comment
-                    // on sysManager
-//                    chatManager.listenForChatAndNotify(MainActivity.instance)
                 }
                 MainActivity.instance.fragNavController.popFragment()
                 MainActivity.instance.fragNavController.switchTab(INDEX_STATUS)

@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.volley.Request;
@@ -51,10 +49,6 @@ import java.util.*;
 import static com.jesta.data.ConstantsKt.*;
 import static com.jesta.utils.db.SysManager.DBTask.*;
 
-
-/**
- * System manager
- */
 public class SysManager {
     private static final String ACCESS_TOKEN = "AIzaSyDsS65FgkAHOS-eeb8iiYN1mF6bLqt_3rE";
     // authentication
@@ -82,19 +76,10 @@ public class SysManager {
 
     // layout and _activity
     private static Activity _activity;
-    private TextView _backButtonTv;
-
-    // loading animation
-    private ProgressBar _pgsBar;
 
     public SysManager(Activity currentActivity) {
         _activity = currentActivity;
     }
-
-    /**
-     * User authentication
-     * TODO-MAX: implement updateUserInDB etc'...
-     */
 
     public enum DBTask {
         RELOAD_USERS, // update _usersDict
@@ -129,37 +114,19 @@ public class SysManager {
                             source.setException(e);
                         }
                     });
-//                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//                        @Override
-//                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-//                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-//                                    .getTotalByteCount());
-//                        }
-//                    });
             return source.getTask();
         }
         return null;
     }
 
     public Task createDBTask(DBTask taskName) {
-        // todo firebase realtime db - change permission from public to private (only for app)
         if (taskName == RELOAD_USERS) {
             final TaskCompletionSource<List<User>> source = new TaskCompletionSource<>();
             _usersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<User> usersList = new ArrayList<>();
-                    // for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    //     HashMap dbUser = (HashMap)ds.getValue();
-                    //     if (dbUser == null) {
-                    //         throw new NullPointerException("dbUser is null");
-                    //     }
-                    //     User user = new User(dbUser);
-                    //     _usersDict.put((String)dbUser.get("id"), user);
-                    //     usersList.add(user);
-                    // }
 
-                    // TODO: FIXED BY DENNIS
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         User dbUser = ds.getValue(User.class);
                         if (dbUser == null) {
@@ -189,19 +156,6 @@ public class SysManager {
                         if (dbJesta == null) {
                             throw new NullPointerException("dbJesta is null");
                         }
-                        // todo: use randomUUID() when storing jestas in db
-                        // here: use (String)dbJesta.get("id")
-
-                        // TODO: pACHKA LOX WONT READ IT ANYWAYS
-                        // I FIXED FOR U
-                        // if ((String)dbJesta.get("id") != null) {
-                        //     _jestasDict.put((String)dbJesta.get("id"), jesta);
-                        // }
-                        // else {
-                        //     _jestasDict.put(UUID.randomUUID().toString(), jesta);
-                        // }
-                        // jestasList.add(jesta);
-
                         _jestasDict.put(dbJesta.getId(), dbJesta);
                         jestasList.add(dbJesta);
                     }
@@ -223,22 +177,6 @@ public class SysManager {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     List<Relation> relationsList = new ArrayList<>();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                        //TODO: fixed by Dennis
-                        //     HashMap dbRelUserJesta = (HashMap)ds.getValue();
-                        //     if (dbRelUserJesta == null) {
-                        //         throw new NullPointerException("dbRelUserJesta is null");
-                        //     }
-                        //     Relation rel = new Relation(dbRelUserJesta);
-                        //     // here: use (String)dbJesta.get("id")
-                        //     if ((String)dbRelUserJesta.get("id") != null) {
-                        //         _relationsDict.put((String)dbRelUserJesta.get("id"), rel);
-                        //     }
-                        //     else {
-                        //         _relationsDict.put(UUID.randomUUID().toString(), rel);
-                        //     }
-                        //     reluserjestaList.add(rel);
-                        // }
                         Relation dbRelation = ds.getValue(Relation.class);
                         if (dbRelation == null) {
                             throw new NullPointerException("dbRelUserJesta is null");
@@ -303,7 +241,6 @@ public class SysManager {
         }
 
         // subscribe to inbox for receiving system messages from other devices
-        // todo wait for task
         subscribeToTopic(new Topic(TopicDescriptor.USER_INBOX, user, null));
 
         // update the current user in the system
@@ -513,13 +450,10 @@ public class SysManager {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (!task.isSuccessful()) {
-                    // todo
-                    return;
+                    MainActivity.Companion.getInstance().alertError(Objects.requireNonNull(task.getException()).getMessage());
                 }
-                // todo something? idk
             }
         });
-        // TODO: send notification to accepted user rel.doer_id
     }
 
     public void onDeclineUser(Relation rel) {
@@ -534,10 +468,8 @@ public class SysManager {
                     MainActivity.Companion.getInstance().alertError(Objects.requireNonNull(task.getException()).getMessage());
                     return;
                 }
-                // todo something? idk
             }
         });
-        // TODO: send notification to declined user rel.doer_id
     }
 
     /**
@@ -726,7 +658,7 @@ public class SysManager {
         String topicName = topic.topicName();
 
         if (title == null || body == null) {
-            // TODO throw exception
+            MainActivity.Companion.getInstance().alertError(null);
         } else {
             // TODO change to post request to avoid this shit
             title = URLEncoder.encode(title, StandardCharsets.UTF_8.toString());
@@ -751,15 +683,6 @@ public class SysManager {
                         System.out.println(error.getMessage());
                     }
                 }) {
-//            /** Passing some request headers* */
-//            @Override
-//            public Map getHeaders() throws AuthFailureError {
-//                HashMap headers = new HashMap();
-//                String serverToken = "AAAAmeLDAmc:APA91bGuE2bU4eLT-uLnEVSUpp2eGhxzeKZ0rzK-uGRiGm2hUQmsnFvRc888uPTL9JLKl5t4qU9kGvWycfFs503FHhufWHWswHkLf2Wz7QtdRPwSvztk4XH38fXIBHXFUc_AeSY4mM8B";
-//                headers.put("Content-Type", "application/json; UTF-8");
-//                headers.put("Authorization", "Bearer " + serverToken);
-//                return headers;
-//            }
         };
 
 // Add the request to the RequestQueue.
@@ -775,15 +698,6 @@ public class SysManager {
         roomDBRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot ds, @Nullable String s) {
-                // CHAT-IMPORTANT
-                // added here so the asker would be able to receive messages from the asker
-                // on the first time asker asks to do a jesta!
-                // if will be commented, the doer wont get messages from asker until
-                // he restarts the app. see corresponding comment on cardReviewFragment
-                // todo consider changing design of 1 on 1 chats
-//                ChatManager chatManager = new ChatManager();
-//                chatManager.listenForChatAndNotify(activity);
-
                 final HashMap dbMsg = (HashMap) ds.getValue();
                 String msgKey = ds.getKey();
                 if (dbMsg == null) {
@@ -819,25 +733,6 @@ public class SysManager {
                                 .show();
                     }
                 });
-
-                // final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                // builder.setMessage(UIMessage.getText()).setTitle((String)dbMsg.get("title"));
-
-                // builder.setNeutralButton("OK", null);
-
-                // builder.setPositiveButton("GO TO STATUS", new DialogInterface.OnClickListener() {
-                //     @Override
-                //     public void onClick(DialogInterface dialog, int which) {
-                //         if (activity instanceof MainActivity) {
-                //             ((MainActivity) activity).getInstance().getFragNavController().replaceFragment(new StatusFragment());
-                //         }
-                //     }
-                // });
-
-                // final AlertDialog dialog = builder.create();
-                // dialog.setCanceledOnTouchOutside(false);
-
-
             }
 
             @Override
@@ -908,7 +803,6 @@ public class SysManager {
                                             .setBackgroundColorRes(R.color.colorPrimary)
                                             .setDuration(5000)
                                             .setIcon(R.drawable.ic_jesta_chat)
-                                            // todo go to chat room
                                             .addButton("GO TO CHAT", R.style.AlertButton, new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
