@@ -18,7 +18,8 @@
         tools:replace="android:label">
 
         <activity android:name=".gui.activities.MainActivity"
-                  android:configChanges="orientation">
+                  android:configChanges="screenLayout|screenSize|orientation"
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

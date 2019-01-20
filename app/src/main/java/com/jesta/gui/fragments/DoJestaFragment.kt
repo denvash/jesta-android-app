@@ -14,9 +14,12 @@ import com.jesta.utils.adapters.CardAdapter
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_do_jesta.view.*
 import kotlinx.android.synthetic.main.jesta_card.view.*
+import android.R.attr.orientation
+import android.content.res.Configuration
 
 
 class DoJestaFragment : Fragment() {
+    lateinit var frag_view: View
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_do_jesta, container, false)
         setJestas(view)
@@ -25,6 +28,7 @@ class DoJestaFragment : Fragment() {
         view.do_jesta_swipe_refresh.setOnRefreshListener {
             setJestas(view)
         }
+        frag_view = view
         return view
     }
 
@@ -55,5 +59,16 @@ class DoJestaFragment : Fragment() {
         view.do_jesta_empty.visibility = if (missionList.isEmpty()) View.VISIBLE else View.GONE
         view.do_jesta_recycle_view.adapter = CardAdapter(missionList)
         view.do_jesta_swipe_refresh.isRefreshing = false
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE || newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            try {
+                setJestas(frag_view)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
