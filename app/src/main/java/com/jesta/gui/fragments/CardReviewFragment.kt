@@ -16,6 +16,7 @@ import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
+import kotlinx.android.synthetic.main.fragment_status.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
@@ -126,6 +127,25 @@ class CardReviewFragment : Fragment() {
                 }
                 MainActivity.instance.fragNavController.popFragment()
                 MainActivity.instance.fragNavController.switchTab(INDEX_STATUS)
+                val statusFragment = MainActivity.instance.fragNavController.currentFrag as StatusFragment
+
+                sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS)
+                    .addOnCompleteListener {
+
+                        sysManager.statusList
+                            .addOnCompleteListener { refreshRelationsTask ->
+
+                                @Suppress("LABEL_NAME_CLASH")
+                                if (!refreshRelationsTask.isSuccessful) {
+                                    MainActivity.instance.alertError(refreshRelationsTask.exception!!.message)
+                                    return@addOnCompleteListener
+                                }
+                                statusFragment.updateStatus(statusFragment.fragView , refreshRelationsTask)
+                            }
+                    }
+
+
+
                 MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_status
             }
         }

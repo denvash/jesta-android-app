@@ -54,7 +54,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
-
+        <item name="textAllCaps">true</item>
     </style>
 
     <!--Widgets-->

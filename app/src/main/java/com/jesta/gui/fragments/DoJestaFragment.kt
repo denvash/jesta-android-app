@@ -1,5 +1,6 @@
 package com.jesta.gui.fragments
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +14,10 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.adapters.CardAdapter
 import com.jesta.utils.db.SysManager
 import kotlinx.android.synthetic.main.fragment_do_jesta.view.*
-import kotlinx.android.synthetic.main.jesta_card.view.*
-import android.R.attr.orientation
-import android.content.res.Configuration
 
 
 class DoJestaFragment : Fragment() {
-    lateinit var frag_view: View
+    lateinit var fragView: View
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_do_jesta, container, false)
         setJestas(view)
@@ -28,11 +26,11 @@ class DoJestaFragment : Fragment() {
         view.do_jesta_swipe_refresh.setOnRefreshListener {
             setJestas(view)
         }
-        frag_view = view
+        fragView = view
         return view
     }
 
-    private fun setJestas(view: View) {
+    fun setJestas(view: View) {
         view.do_jesta_progress_bar.show()
         MainActivity.instance.sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -65,9 +63,9 @@ class DoJestaFragment : Fragment() {
         super.onConfigurationChanged(newConfig)
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE || newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             try {
-                setJestas(frag_view)
+                setJestas(fragView)
             } catch (e: Exception) {
-                e.printStackTrace()
+                MainActivity.instance.alertError(e.message)
             }
         }
     }

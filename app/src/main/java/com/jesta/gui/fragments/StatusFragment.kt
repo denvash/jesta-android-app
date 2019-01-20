@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.fragment_status.view.*
 class StatusFragment : Fragment() {
     private val sysManager = MainActivity.instance.sysManager
 
+    lateinit var fragView: View
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
 
@@ -27,11 +29,11 @@ class StatusFragment : Fragment() {
         sysManager.createDBTask(SysManager.DBTask.RELOAD_JESTAS).addOnCompleteListener { reloadJestasTask ->
             sysManager.statusList.addOnCompleteListener { userRelationsTask ->
                 if (!userRelationsTask.isSuccessful || !reloadJestasTask.isSuccessful) {
+                    MainActivity.instance.alertError(userRelationsTask.exception!!.message)
                     @Suppress("LABEL_NAME_CLASH")
                     return@addOnCompleteListener
                 }
-
-                setRecycleView(view!!, userRelationsTask)
+                updateStatus(view!!, userRelationsTask)
 
                 view.jesta_status_swipe_refresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary)
                 view.jesta_status_swipe_refresh.setOnRefreshListener {
@@ -42,10 +44,14 @@ class StatusFragment : Fragment() {
                             sysManager.statusList
                                 .addOnCompleteListener { refreshRelationsTask ->
 
-                                    @Suppress("LABEL_NAME_CLASH")
-                                    if (!refreshRelationsTask.isSuccessful) return@addOnCompleteListener
+                                    if (!refreshRelationsTask.isSuccessful) {
+                                        MainActivity.instance.alertError(refreshRelationsTask.exception!!.message)
 
-                                    setRecycleView(view, refreshRelationsTask)
+                                        @Suppress("LABEL_NAME_CLASH")
+                                        return@addOnCompleteListener
+                                    }
+
+                                    updateStatus(view, refreshRelationsTask)
                                     view.jesta_status_swipe_refresh.isRefreshing = false
                                 }
                         }
@@ -53,10 +59,13 @@ class StatusFragment : Fragment() {
             }
 
         }
+
+        fragView = view
+
         return view
     }
 
-    private fun setRecycleView(view: View, statusTask: Task<Any>) {
+    fun updateStatus(view: View, statusTask: Task<Any>) {
 
         val statusList = (statusTask.result as List<*>).filterIsInstance<Status>()
 
