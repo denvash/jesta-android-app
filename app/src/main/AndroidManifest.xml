@@ -17,7 +17,8 @@
         android:theme="@style/Theme.Jesta"
         tools:replace="android:label">
 
-        <activity android:name=".gui.activities.MainActivity">
+        <activity android:name=".gui.activities.MainActivity"
+                  android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
