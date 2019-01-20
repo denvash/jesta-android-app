@@ -19,20 +19,7 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
 - Check your related jestas Status
   - Chat with users
   - Approve/Decline users for your jestas
-  - Close jestas
-
-- Change settings
-  - Edit your profile
-  - Report a bug
-  - See 'about'
-  - Log out
-  
-
-- Log in - there is three different ways to log in
-  - Facebook
-  - Google
-  - email and password (by creating account)
-  
+  - Close jestas  
   
 Check out project [Wiki Page](https://github.com/Technion236503/2019a-Jesta/wiki) for **User** and **Developer** guides.
 
