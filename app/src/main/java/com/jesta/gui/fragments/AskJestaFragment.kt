@@ -144,6 +144,8 @@ class AskJestaFragment : Fragment() {
                 .show()
 
             MainActivity.instance.fragNavController.switchTab(INDEX_DO_JESTA)
+            val doJestaFrag = MainActivity.instance.fragNavController.currentFrag as DoJestaFragment
+            doJestaFrag.setJestas(doJestaFrag.fragView)
             MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_do_jesta
         }
 
