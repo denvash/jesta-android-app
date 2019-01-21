@@ -138,7 +138,7 @@ class AskJestaFragment : Fragment() {
 
             Alerter.create(MainActivity.instance)
                 .setTitle("Nice one! You posted a Jesta! \uD83E\uDD20")
-                .setText("Check out the `Do` tab, it will appear shortly!")
+                .setText("Check out your Status! \uD83E\uDDD0\nNow wait for someone to do you a Jesta \uD83D\uDE0E")
                 .setBackgroundColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
