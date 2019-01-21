@@ -191,12 +191,15 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     override fun onBackPressed() {
-        if (fragNavController.currentFrag?.tag?.contains(LoginPathFragment::class.java.name) != null) {
-            return
-        }
-        if (fragNavController.isRootFragment) return
-        if (fragNavController.popFragment().not()) {
-            super.onBackPressed()
+
+        val isLoginFragment = fragNavController.currentFrag?.tag?.contains(LoginPathFragment::class.java.name)
+
+        if (isLoginFragment != null) {
+            when {
+                isLoginFragment -> return
+                fragNavController.isRootFragment -> return
+                else -> fragNavController.popFragment()
+            }
         }
     }
 
@@ -256,6 +259,7 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
             .addOnCompleteListener(this, OnTaskCompletion())
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -279,6 +283,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
                         if (googleSignInAccount != null) {
                             firebaseAuthWithGoogle(googleSignInAccount)
                         }
+                        jesta_login_facebook_button.isEnabled = true
+                        jesta_login_google_button.isEnabled = true
                     }
             } catch (e: ApiException) {
                 alertError(e.message)
@@ -286,9 +292,8 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
 
         } else if (requestCode == 64206) { // facebook
             fbCallbackManager.onActivityResult(requestCode, resultCode, data)
+            jesta_login_facebook_button.isEnabled = true
+            jesta_login_google_button.isEnabled = true
         }
-
-        jesta_login_facebook_button.isEnabled = true
-        jesta_login_google_button.isEnabled = true
     }
 }

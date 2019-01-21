@@ -9,14 +9,13 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.*
-import com.jesta.data.chat.ChatManager
+import com.jesta.utils.db.ChatManager
 import com.jesta.data.chat.ChatRoom
 import com.jesta.gui.activities.MainActivity
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.fragment_card_preview.view.*
-import kotlinx.android.synthetic.main.fragment_status.view.*
 import kotlinx.android.synthetic.main.jesta_card_preview.view.*
 import kotlinx.android.synthetic.main.jesta_main_activity.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
@@ -143,9 +142,6 @@ class CardReviewFragment : Fragment() {
                                 statusFragment.updateStatus(statusFragment.fragView , refreshRelationsTask)
                             }
                     }
-
-
-
                 MainActivity.instance.jesta_bottom_navigation.selectedItemId = R.id.nav_status
             }
         }

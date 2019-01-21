@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/jesta_status_poster_done_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -46,27 +47,40 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10dp"
-            android:layout_marginBottom="@dimen/_10dp"
             android:text="@string/jesta_settings_about_agenda"
             android:textAlignment="center"
             android:textAllCaps="false" />
 
-        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imageView1"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/jesta_about"
-            app:riv_border_color="@color/colorPrimary"
-            app:riv_border_width="1dp"
-            app:riv_corner_radius="20dp"
-            app:riv_mutate_background="true" />
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:contentPadding="0.75dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_16dp">
+
+                <ImageView
+                    android:id="@+id/jesta_about_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/jesta_about"
+                    tools:ignore="ContentDescription" />
+            </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             style="@style/TextAppearance.Jesta.Type.Purple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10dp"
             android:layout_marginBottom="@dimen/_10dp"
             android:text="@string/jesta_about_team_title"
             android:textSize="25sp" />
@@ -76,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Maxim Chicherin, Dennis Vashevnikov and Evgeni Leonti"
+            android:text="@string/jesta_about_team"
             android:textAlignment="center"
             android:textAllCaps="false" />
 
@@ -99,49 +113,23 @@
             android:textAlignment="center"
             android:textAllCaps="false" />
 
-        <LinearLayout
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/jesta_about_github"
             android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            style="@style/Widget.Jesta.Button.Special"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/TextAppearance.Jesta.Type.Purple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:text="Visit us"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textColor="@color/black"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_github"
-                android:layout_marginStart="@dimen/_10dp"
-                android:contentDescription="@string/jesta_about_github_icon"
-                android:tint="@color/colorPrimary"
-                android:layout_marginEnd="@dimen/_10dp"/>
-
-            <TextView
-                style="@style/TextAppearance.Jesta.Type.Purple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_marginBottom="@dimen/_10dp"
-                android:text="@string/jesta_about_text_2"
-                android:textAlignment="center"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
-        </LinearLayout>
-
-
-
+            android:text="@string/jesta_about_text_2"
+            app:icon="@drawable/ic_github"
+            app:iconTint="@color/black"
+            app:iconGravity="textStart"
+            app:iconSize="20dp"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="5dp"
+            app:rippleColor="@color/colorPrimaryLight"
+            app:strokeColor="@color/black"
+            app:strokeWidth="1dp" />
     </LinearLayout>
 
 </FrameLayout>

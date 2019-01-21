@@ -2,6 +2,8 @@ package com.jesta.data
 
 import com.ncapdevi.fragnav.FragNavController
 
+const val JESTA_WEBSITE = "https://denvash.github.io/Jesta/"
+
 const val nullString = "null"
 const val nullInt = -1
 

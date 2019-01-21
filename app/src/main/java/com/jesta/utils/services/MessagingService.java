@@ -12,6 +12,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.jesta.R;
 import com.jesta.data.User;
 import com.jesta.gui.activities.MainActivity;
+import com.jesta.utils.db.SysManager;
 
 import java.util.Random;
 
@@ -51,6 +52,12 @@ public class MessagingService extends FirebaseMessagingService {
             body = remoteMessage.getData().get("body");
             jestaId = remoteMessage.getData().get("jesta");
             sender = remoteMessage.getData().get("sender");
+
+            senderUser = SysManager.staticGetUserByID(sender);
+            // don't do anything if user isn't logged in!
+            if (senderUser == null) {
+                return;
+            }
         } catch (Exception e) {
             MainActivity.Companion.getInstance().alertError(e.getMessage());
         }

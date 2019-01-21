@@ -10,14 +10,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.jesta.R
 import com.jesta.data.BUNDLE_ROOM_ID
-import com.jesta.data.chat.ChatManager
+import com.jesta.utils.db.ChatManager
 import com.jesta.data.chat.Message
 import com.jesta.gui.activities.MainActivity
 import com.squareup.picasso.Picasso
 import com.stfalcon.chatkit.commons.ImageLoader
 import com.stfalcon.chatkit.messages.MessagesListAdapter
 import kotlinx.android.synthetic.main.fragment_chat.view.*
-import kotlinx.android.synthetic.main.jesta_main_activity.*
 
 class ChatFragment : Fragment() {
     companion object {

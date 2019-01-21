@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jesta.R
+import com.jesta.data.IMAGE_ABOUT
+import com.jesta.data.JESTA_WEBSITE
 import com.jesta.data.USER_EMPTY_DIAMONDS
 import com.jesta.data.User
 import com.jesta.gui.activities.MainActivity
@@ -16,6 +18,7 @@ import com.jesta.gui.fragments.login.LoginPathFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_settings.view.*
+import kotlinx.android.synthetic.main.jesta_about.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import kotlin.random.Random
 
@@ -87,6 +90,12 @@ class SettingsFragment : Fragment() {
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Jesta Bug Report")
             emailIntent.putExtra(Intent.EXTRA_TEXT, view.tab_bug_edit.text)
             startActivity(emailIntent)
+        }
+
+        view.jesta_about_github.setOnClickListener {
+            val urlIntent = Intent(Intent.ACTION_VIEW)
+            urlIntent.data = Uri.parse(JESTA_WEBSITE)
+            MainActivity.instance.startActivity(urlIntent)
         }
 
         return view

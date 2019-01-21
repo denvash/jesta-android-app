@@ -27,14 +27,12 @@ import com.jesta.data.Relation;
 import com.jesta.data.Status;
 import com.jesta.data.User;
 import com.jesta.data.chat.Author;
-import com.jesta.data.chat.ChatManager;
 import com.jesta.data.chat.ChatRoom;
 import com.jesta.data.chat.Message;
 import com.jesta.data.notification.Topic;
 import com.jesta.data.notification.TopicDescriptor;
 import com.jesta.gui.activities.MainActivity;
 import com.jesta.gui.fragments.ChatFragment;
-import com.jesta.gui.fragments.StatusFragment;
 import com.tapadoo.alerter.Alerter;
 import org.json.JSONException;
 
@@ -335,6 +333,11 @@ public class SysManager {
     }
 
     public User getUserByID(String id) {
+        return _usersDict.get(id);
+    }
+
+    // used only on MessagingService!
+    public static User staticGetUserByID(String id) {
         return _usersDict.get(id);
     }
 
