@@ -2,7 +2,7 @@
 
 <a style="margin-bottom: 0;" href='https://play.google.com/store/apps/details?id=com.jesta'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80px"/></a>
 
-![release](https://img.shields.io/github/release/denvash/Jesta.svg) ![language](https://img.shields.io/github/languages/top/denvash/Jesta.svg) ![License](https://img.shields.io/github/license/denvash/Jesta.svg) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![website](https://img.shields.io/website-up-down-green-red/https/shields.io.svg?label=Website)](https://denvash.github.io/Jesta/) ![release](https://img.shields.io/github/release/denvash/Jesta.svg) ![language](https://img.shields.io/github/languages/top/denvash/Jesta.svg) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues) ![License](https://img.shields.io/github/license/denvash/Jesta.svg)
 
 
 ## What we trying to solve? 
