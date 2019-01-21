@@ -22,7 +22,7 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
 - Ask for a Jesta - post a job for people around you.
   - Post a Jesta for people around you.
   - Post an Image describing the situation
-  - Add #Tags and search options for others.
+  - Add `tags` and search options for others.
   - Private Chat with your Jesta doers!
 
 - Do a Jesta - choose a task for you.
