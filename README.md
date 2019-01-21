@@ -17,7 +17,7 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
 
 > - Moving apartment and need help? 
 > - Feeling sick and need someone to bring you medications?
-> - Want to take up some task and earn Cash?
+> - Want to take up some tasks and earn Cash?
 
 - Ask for a Jesta - post a job for people around you.
   - Post a Jesta for people around you.
@@ -32,7 +32,7 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   - Earn cash.
 
 - Check your related Jestas Status
-  - Monitor current status `Pending`,`In Progress`, `Done`...
+  - Monitor current status `Pending`,`In Progress`, `Done`
   - Approve/Decline users for your Jesta
   - Close Jestas on finish, claim rewards.
 
