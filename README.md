@@ -1,5 +1,8 @@
 # ![banner with sub](https://user-images.githubusercontent.com/27515937/51442872-13b40280-1cea-11e9-869e-05e8752e6888.png)
 
+<a style="margin-bottom: 0;" href='https://play.google.com/store/apps/details?id=com.jesta'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80px"/></a>
+
+
 ## What we trying to solve? 
 
 Nowadays it is hard to find help for everyday tasks beyond your social circle.
