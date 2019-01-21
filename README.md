@@ -36,6 +36,10 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   - Approve/Decline users for your Jesta
   - Close Jestas on finish, claim rewards.
 
+![demo-jesta](https://user-images.githubusercontent.com/27515937/51492799-b2f4fa80-1dbb-11e9-8405-4714745c99f8.gif)
+
+------------------
+
 ![jesta-poster](https://user-images.githubusercontent.com/27515937/51442984-9b4e4100-1ceb-11e9-95c1-3ec2ccc21862.png)
 
 ## Resources
