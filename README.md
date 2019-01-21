@@ -2,6 +2,8 @@
 
 <a style="margin-bottom: 0;" href='https://play.google.com/store/apps/details?id=com.jesta'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80px"/></a>
 
+![release](https://img.shields.io/github/release/denvash/Jesta.svg) ![language](https://img.shields.io/github/languages/top/denvash/Jesta.svg) ![License](https://img.shields.io/github/license/denvash/Jesta.svg) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+
 
 ## What we trying to solve? 
 
@@ -36,3 +38,9 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
 - [UI Presentation](https://www.figma.com/proto/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=55%3A458&scaling=scale-down&redirected=1).
 - Project's [UI Figma Page](https://www.figma.com/file/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=0%3A1).
 - Editable Project's [Poster](https://docs.google.com/presentation/d/1aVluE97VLNI44Mfrrvv5WK2jLRCA1n6hQDu2AXtBjO4/edit?usp=sharing).
+
+## Contributors
+
+![squad goals 1](https://user-images.githubusercontent.com/27515937/51444518-3f8eb280-1d01-11e9-881f-89dd46cc24aa.png)
+
+_Jenya Leonti, Dennis Vash, Max Chi_
