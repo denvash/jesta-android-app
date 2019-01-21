@@ -1,6 +1,6 @@
 # ![banner with sub](https://user-images.githubusercontent.com/27515937/51442872-13b40280-1cea-11e9-869e-05e8752e6888.png)
 
-<a style="margin-bottom: 0;" href='https://play.google.com/store/apps/details?id=com.jesta'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80px"/></a>
+<a style="margin-bottom: 0;" href='https://play.google.com/store/apps/details?id=com.jesta'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80px"/></a> <a style="margin-bottom: 0;" href='https://i.imgur.com/UFADZQ7.gifv'><img alt='Get it on Google Play' src='https://user-images.githubusercontent.com/27515937/51496164-68797b00-1dc7-11e9-83dd-d39370398153.png' height="80px"/></a> 
 
 [![website](https://img.shields.io/website-up-down-green-red/https/shields.io.svg?label=Website)](https://denvash.github.io/Jesta/) ![release](https://img.shields.io/github/release/denvash/Jesta.svg) ![language](https://img.shields.io/github/languages/top/denvash/Jesta.svg) ![last-commit](https://img.shields.io/github/last-commit/denvash/Jesta.svg) ![total-cont](https://img.shields.io/github/contributors/denvash/Jesta.svg) ![License](https://img.shields.io/github/license/denvash/Jesta.svg)
 
@@ -35,8 +35,6 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
   - Monitor current status `Pending`,`In Progress`, `Done`
   - Approve/Decline users for your Jesta
   - Close Jestas on finish, claim rewards.
-
-![demo-jesta](https://user-images.githubusercontent.com/27515937/51492799-b2f4fa80-1dbb-11e9-8405-4714745c99f8.gif)
 
 ------------------
 
