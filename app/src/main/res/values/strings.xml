@@ -55,11 +55,11 @@
     <string name="jesta_post_photo">Jesta Photo</string>
     <string name="jesta_post_browse">Browse</string>
     <string name="jesta_post_fill_amount">FILL AMOUNT</string>
-    <string name="jesta_post_pay">How Much You Pay?</string>
-    <string name="jesta_post_crew">How many people you need?</string>
+    <string name="jesta_post_pay">How Much Are You Willing to Pay?</string>
+    <string name="jesta_post_crew">How Many people do you need?</string>
     <string name="jesta_post_location">What is the location?</string>
     <string name="jesta_post_fill_location">FILL LOCATION</string>
-    <string name="jesta_post_duration">How long the Jesta may take?</string>
+    <string name="jesta_post_duration">How long will the Jesta take?</string>
     <string name="jesta_post_accept">Post a Jesta</string>
     <string name="jesta_post_preview">Preview</string>
     <string name="jesta_post_difficulty">Medium</string>
