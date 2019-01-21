@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.jesta.R
-import com.jesta.data.IMAGE_ABOUT
 import com.jesta.data.JESTA_WEBSITE
 import com.jesta.data.USER_EMPTY_DIAMONDS
 import com.jesta.data.User
@@ -17,6 +15,7 @@ import com.jesta.gui.activities.MainActivity
 import com.jesta.gui.fragments.login.LoginPathFragment
 import com.jesta.utils.db.SysManager
 import com.squareup.picasso.Picasso
+import com.tapadoo.alerter.Alerter
 import kotlinx.android.synthetic.main.fragment_settings.view.*
 import kotlinx.android.synthetic.main.jesta_about.view.*
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
@@ -73,7 +72,13 @@ class SettingsFragment : Fragment() {
                     view.jesta_settings_profile_layout.visibility = View.VISIBLE
                 }
             } else {
-                Toast.makeText(MainActivity.instance, "Nothing to change!", Toast.LENGTH_LONG).show()
+                Alerter.create(MainActivity.instance)
+                    .setTitle("Nothing to change!")
+                    .setText("Change display name or email \uD83D\uDD8A")
+                    .setBackgroundColorRes(R.color.colorPrimary)
+                    .setIcon(R.drawable.ic_jesta_diamond_normal)
+                    .show()
+//                Toast.makeText(MainActivity.instance, "Nothing to change!", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -81,13 +86,20 @@ class SettingsFragment : Fragment() {
 
             val bugEditable = view.tab_bug_edit.text
             if (bugEditable.isNullOrBlank() || bugEditable.isNullOrEmpty()) {
-                Toast.makeText(it.context, "Please fill your bug report", Toast.LENGTH_LONG).show()
+                Alerter.create(MainActivity.instance)
+                    .setTitle("You didn't type anything!")
+                    .setText("Don't leave it empty! \uD83D\uDE05")
+                    .setBackgroundColorRes(R.color.colorPrimary)
+                    .setIcon(R.drawable.ic_jesta_diamond_normal)
+                    .show()
+                return@setOnClickListener
+//                Toast.makeText(it.context, "Please fill your bug report", Toast.LENGTH_LONG).show()
             }
 
             val to = "jestaa80@gmail.com"
             val emailIntent = Intent(Intent.ACTION_SENDTO)
             emailIntent.data = Uri.parse("mailto:$to")
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Jesta Bug Report")
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "My feedback for Jesta-App")
             emailIntent.putExtra(Intent.EXTRA_TEXT, view.tab_bug_edit.text)
             startActivity(emailIntent)
         }

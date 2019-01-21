@@ -35,7 +35,6 @@ import java.util.*
 
 class AskJestaFragment : Fragment() {
 
-
     private var filePath: Uri? = null
 
     private val sysManager = MainActivity.instance.sysManager
@@ -75,11 +74,7 @@ class AskJestaFragment : Fragment() {
         }
 
         view.jesta_post_tag_layout.setOnTagClickListener(object : TagView.OnTagClickListener {
-            override fun onTagClick(position: Int, text: String) {
-                Toast.makeText(
-                    MainActivity.instance, "click-position:$position, text:$text",
-                    Toast.LENGTH_SHORT
-                ).show()
+            override fun onTagClick(position: Int, text: String?) {
             }
 
             override fun onTagLongClick(position: Int, text: String) {}
@@ -102,7 +97,7 @@ class AskJestaFragment : Fragment() {
         view.jesta_post_button_accept.setOnClickListener {
 
             if (isInvalidInput()) {
-                Toast.makeText(context, "Fill all fields", Toast.LENGTH_LONG).show()
+                MainActivity.instance.alertError("Please fill all fields")
                 return@setOnClickListener
             }
 
@@ -130,7 +125,7 @@ class AskJestaFragment : Fragment() {
             )
 
             uploadMissionToDB(jesta, rel, sysManager)
-            Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "Jesta Sent to DB", Toast.LENGTH_LONG).show()
 
             val userCacheMission = sysManager.currentUserFromDB
             userCacheMission.lastMission = jesta.copy()
@@ -138,12 +133,12 @@ class AskJestaFragment : Fragment() {
             sysManager.setUserOnDB(userCacheMission)
             sysManager.createDBTask(SysManager.DBTask.RELOAD_USERS)
                 .addOnCompleteListener {
-                    Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, "User Last Mission updated", Toast.LENGTH_LONG).show()
                 }
 
             Alerter.create(MainActivity.instance)
                 .setTitle("Nice one! You posted a Jesta! \uD83E\uDD20")
-                .setText("Remember to refresh the Jestas list!")
+                .setText("Check out the `Do` tab, it will appear shortly!")
                 .setBackgroundColorRes(R.color.colorPrimary)
                 .setIcon(R.drawable.ic_jesta_diamond_normal)
                 .show()
@@ -195,10 +190,10 @@ class AskJestaFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     if (!task.isSuccessful) {
                         System.err.println(task.exception)
-                        Toast.makeText(context, "Quota has been exceeded for this project.", Toast.LENGTH_LONG).show()
+                        MainActivity.instance.alertError("Quota has been exceeded for this project.")
                         return@addOnCompleteListener
                     } else {
-                        Toast.makeText(context, "Image uploaded to Storage", Toast.LENGTH_LONG).show()
+//                        Toast.makeText(context, "Image uploaded to Storage", Toast.LENGTH_LONG).show()
                         jesta.imageUrl = task.result.toString()
                     }
                     sysManager.setMissionOnDB(jesta)

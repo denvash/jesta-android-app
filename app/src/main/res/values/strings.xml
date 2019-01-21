@@ -79,7 +79,7 @@
     <string name="jesta_settings_chat">Chat Settings</string>
     <string name="jesta_settings_button_log_out">Log Out</string>
 
-    <string name="jesta_settings_bug">REPORT A BUG</string>
+    <string name="jesta_settings_bug">Send us feedback</string>
     <string name="jesta_settings_about">About</string>
     <string name="jesta_settings_total_diamonds">Total diamonds</string>
     <string name="jesta_settings_fake_total_diamonds">30000</string>
