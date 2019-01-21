@@ -15,18 +15,24 @@ Jesta is trying to meet the need with creation of a cooperative community.
 Jesta is a Social app where you can find people who are willing to take up your tasks (*Jestas*) for money and pleasure.
 Earn **Cash** and **Diamonds** exchange them for rewards.
 
+> - Moving apartment and need help? 
+> - Feeling sick and need someone to bring you medications?
+> - Want to take up some task and earn Cash?
+
 - Ask for a Jesta - post a job for people around you.
-  - Moving apartment and need help?
-  - Feeling sick and need someone to bring you medications?
-  - Want someone to bring you cigarettes? 
+  - Post a Jesta for people around you.
+  - Post an Image describing the situation
+  - Add #Tags and search options for others.
+  - Private Chat with your Jesta doers!
 
 - Do a Jesta - choose a task for you.
-  - Find job that suits you.
+  - Find a task that suits you.
+  - Search with tags and difficulty levels.
+  - Private chat with the Poster, ask questions.
   - Earn cash.
-  - Earn diamonds and exchange to rewards.
 
 - Check your related Jestas Status
-  - Private Chat with users
+  - Monitor current status `Pending`,`In Progress`, `Done`...
   - Approve/Decline users for your Jesta
   - Close Jestas on finish, claim rewards.
 
