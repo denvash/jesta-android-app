@@ -101,7 +101,7 @@
 
     <!--Jesta Status-->
     <string name="jesta_status_phase">Phase</string>
-    <string name="jesta_status_total_users">Total Users</string>
+    <string name="jesta_status_total_users">10</string>
     <string name="jesta_status_title">Jesta Title</string>
     <string name="jesta_status_job">Job</string>
     <string name="jesta_status_assign_a_doer">Assign a Doer</string>

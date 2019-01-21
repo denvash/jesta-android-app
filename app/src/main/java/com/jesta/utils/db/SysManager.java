@@ -800,7 +800,7 @@ public class SysManager {
 
                 // don't show message that don't belong to you!
                 Relation relation = ds.getValue(Relation.class);
-                if (!relation.getDoerID().equals(getCurrentUserFromDB().getId()) && !relation.getPosterID().equals(getCurrentUserFromDB().getId())) {
+                if (getCurrentUserFromDB() == null || !relation.getDoerID().equals(getCurrentUserFromDB().getId()) && !relation.getPosterID().equals(getCurrentUserFromDB().getId())) {
                     return;
                 }
 

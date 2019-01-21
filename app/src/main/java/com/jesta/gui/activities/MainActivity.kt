@@ -229,6 +229,9 @@ class MainActivity : AppCompatActivity(), FragNavController.RootFragmentListener
     }
 
     fun restart() {
+        if (!fragNavController.isRootFragment) {
+            fragNavController.clearStack()
+        }
         finish()
         startActivity(Intent.makeRestartActivityTask(intent.component))
     }
