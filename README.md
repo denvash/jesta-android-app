@@ -43,7 +43,7 @@ Earn **Cash** and **Diamonds** exchange them for rewards.
 ## Resources
 
 - Check out the [Wiki Page](https://github.com/denvash/Jesta/wiki) for [User](https://github.com/denvash/Jesta/wiki/User-Manual) and [Developer](https://github.com/denvash/Jesta/wiki/Introduction) manuals.
-- [UI Presentation](https://www.figma.com/proto/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=55%3A458&scaling=scale-down&redirected=1).
+- [UI Presentation](https://www.figma.com/proto/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=276%3A1554&scaling=scale-down).
 - Project's [UI Figma Page](https://www.figma.com/file/Hylopi77rMywtDUUuZHsLHh9/Jesta?node-id=0%3A1).
 - Editable Project's [Poster](https://docs.google.com/presentation/d/1aVluE97VLNI44Mfrrvv5WK2jLRCA1n6hQDu2AXtBjO4/edit?usp=sharing).
 
