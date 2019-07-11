@@ -1,6 +1,6 @@
 # ![banner with sub](https://user-images.githubusercontent.com/27515937/51442872-13b40280-1cea-11e9-869e-05e8752e6888.png)
 
-</a> <a style="margin-bottom: 0;" href='https://imgur.com/UFADZQ7'><img alt='Watch Demo' src='https://user-images.githubusercontent.com/27515937/51496637-484abb80-1dc9-11e9-914c-421b42a30858.png' height="80px"/></a> 
+<a style="margin-bottom: 0;" href='https://imgur.com/UFADZQ7'><img alt='Watch Demo' src='https://user-images.githubusercontent.com/27515937/51496637-484abb80-1dc9-11e9-914c-421b42a30858.png' height="80px"/>
 
 [![website](https://img.shields.io/website-up-down-green-red/https/shields.io.svg?label=Website)](https://denvash.github.io/jesta-android-app/) ![release](https://img.shields.io/github/release/denvash/Jesta.svg) ![language](https://img.shields.io/github/languages/top/denvash/Jesta.svg) ![last-commit](https://img.shields.io/github/last-commit/denvash/Jesta.svg) ![total-cont](https://img.shields.io/github/contributors/denvash/Jesta.svg) ![License](https://img.shields.io/github/license/denvash/Jesta.svg) [![HitCount](http://hits.dwyl.io/denvash/Jesta.svg)](http://hits.dwyl.io/denvash/Jesta)
 
